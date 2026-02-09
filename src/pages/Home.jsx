@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import { localClient } from '@/api/localClient';
 import { LanguageProvider, useLanguage } from '../components/ui/LanguageContext';
 import NavHeader from '../components/common/NavHeader';
 import HeroSection from '../components/home/HeroSection';
@@ -21,53 +21,53 @@ function HomeContent() {
 
   const { data: settings } = useQuery({
     queryKey: ['settings'],
-    queryFn: () => base44.entities.SiteSettings.list(),
+    queryFn: () => localClient.entities.SiteSettings.list(),
   });
 
   const { data: products, isLoading: productsLoading } = useQuery({
     queryKey: ['products'],
-    queryFn: () => base44.entities.Product.list(),
+    queryFn: () => localClient.entities.Product.list(),
     initialData: [],
   });
 
   const { data: courseContent } = useQuery({
     queryKey: ['courseContent'],
-    queryFn: () => base44.entities.CourseContent.list(),
+    queryFn: () => localClient.entities.CourseContent.list(),
   });
 
   const { data: modules } = useQuery({
     queryKey: ['modules'],
-    queryFn: () => base44.entities.CourseModule.list(),
+    queryFn: () => localClient.entities.CourseModule.list(),
     initialData: [],
   });
 
   const { data: students } = useQuery({
     queryKey: ['students'],
-    queryFn: () => base44.entities.Student.list(),
+    queryFn: () => localClient.entities.Student.list(),
     initialData: [],
   });
 
   const { data: logos } = useQuery({
     queryKey: ['logos'],
-    queryFn: () => base44.entities.ClientLogo.list(),
+    queryFn: () => localClient.entities.ClientLogo.list(),
     initialData: [],
   });
 
   const { data: testimonials } = useQuery({
     queryKey: ['testimonials'],
-    queryFn: () => base44.entities.Testimonial.list(),
+    queryFn: () => localClient.entities.Testimonial.list(),
     initialData: [],
   });
 
   const { data: faqs } = useQuery({
     queryKey: ['faqs'],
-    queryFn: () => base44.entities.FAQ.list(),
+    queryFn: () => localClient.entities.FAQ.list(),
     initialData: [],
   });
 
   const { data: beforeAfterItems } = useQuery({
     queryKey: ['beforeAfter'],
-    queryFn: () => base44.entities.BeforeAfter.list(),
+    queryFn: () => localClient.entities.BeforeAfter.list(),
     initialData: [],
   });
 

@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
-import { useNavigate } from 'react-router-dom';
-import { createPageUrl } from '@/utils';
+import { localClient } from '@/api/localClient';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -10,99 +8,68 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { 
-  Settings, Package, BookOpen, Users, MessageSquare, HelpCircle, 
-  Image, Save, Plus, Trash2, GripVertical, LogOut, Loader2
+import {
+  Settings, Package, BookOpen, Users, MessageSquare, HelpCircle,
+  Image, Save, Plus, Trash2
 } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function Admin() {
-  const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('settings');
-
-  // Check if user is admin
-  const { data: user, isLoading: userLoading } = useQuery({
-    queryKey: ['currentUser'],
-    queryFn: async () => {
-      try {
-        return await base44.auth.me();
-      } catch {
-        return null;
-      }
-    },
-  });
 
   // Fetch all data
   const { data: settings } = useQuery({
     queryKey: ['settings'],
-    queryFn: () => base44.entities.SiteSettings.list(),
+    queryFn: () => localClient.entities.SiteSettings.list(),
   });
 
   const { data: products } = useQuery({
     queryKey: ['products'],
-    queryFn: () => base44.entities.Product.list(),
+    queryFn: () => localClient.entities.Product.list(),
     initialData: [],
   });
 
   const { data: courseContent } = useQuery({
     queryKey: ['courseContent'],
-    queryFn: () => base44.entities.CourseContent.list(),
+    queryFn: () => localClient.entities.CourseContent.list(),
   });
 
   const { data: modules } = useQuery({
     queryKey: ['modules'],
-    queryFn: () => base44.entities.CourseModule.list(),
+    queryFn: () => localClient.entities.CourseModule.list(),
     initialData: [],
   });
 
   const { data: students } = useQuery({
     queryKey: ['students'],
-    queryFn: () => base44.entities.Student.list(),
+    queryFn: () => localClient.entities.Student.list(),
     initialData: [],
   });
 
   const { data: logos } = useQuery({
     queryKey: ['logos'],
-    queryFn: () => base44.entities.ClientLogo.list(),
+    queryFn: () => localClient.entities.ClientLogo.list(),
     initialData: [],
   });
 
   const { data: testimonials } = useQuery({
     queryKey: ['testimonials'],
-    queryFn: () => base44.entities.Testimonial.list(),
+    queryFn: () => localClient.entities.Testimonial.list(),
     initialData: [],
   });
 
   const { data: faqs } = useQuery({
     queryKey: ['faqs'],
-    queryFn: () => base44.entities.FAQ.list(),
+    queryFn: () => localClient.entities.FAQ.list(),
     initialData: [],
   });
 
   const { data: beforeAfter } = useQuery({
     queryKey: ['beforeAfter'],
-    queryFn: () => base44.entities.BeforeAfter.list(),
+    queryFn: () => localClient.entities.BeforeAfter.list(),
     initialData: [],
   });
 
-  useEffect(() => {
-    if (!userLoading && (!user || user.role !== 'admin')) {
-      navigate(createPageUrl('Login'));
-    }
-  }, [user, userLoading, navigate]);
-
-  if (userLoading) {
-    return (
-      <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
-      </div>
-    );
-  }
-
-  if (!user || user.role !== 'admin') {
-    return null;
-  }
 
   const tabs = [
     { id: 'settings', label: 'Configurações', icon: Settings },
@@ -123,10 +90,7 @@ export default function Admin() {
         <div className="flex items-center justify-between max-w-7xl mx-auto">
           <h1 className="text-xl font-bold">Nava Colorist - Admin</h1>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-zinc-400">{user?.email}</span>
-            <Button variant="ghost" size="sm" onClick={() => base44.auth.logout()}>
-              <LogOut className="w-4 h-4" />
-            </Button>
+            <span className="text-xs uppercase tracking-wider text-zinc-500">modo local</span>
           </div>
         </div>
       </header>
@@ -199,9 +163,9 @@ function SettingsTab({ data }) {
   const saveMutation = useMutation({
     mutationFn: async (formData) => {
       if (data?.id) {
-        return base44.entities.SiteSettings.update(data.id, formData);
+        return localClient.entities.SiteSettings.update(data.id, formData);
       }
-      return base44.entities.SiteSettings.create(formData);
+      return localClient.entities.SiteSettings.create(formData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['settings']);
@@ -265,9 +229,9 @@ function ProductsTab({ data }) {
   const saveMutation = useMutation({
     mutationFn: async (formData) => {
       if (formData.id) {
-        return base44.entities.Product.update(formData.id, formData);
+        return localClient.entities.Product.update(formData.id, formData);
       }
-      return base44.entities.Product.create(formData);
+      return localClient.entities.Product.create(formData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['products']);
@@ -278,7 +242,7 @@ function ProductsTab({ data }) {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities.Product.delete(id),
+    mutationFn: (id) => localClient.entities.Product.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries(['products']);
       toast.success('Produto deletado!');
@@ -487,9 +451,9 @@ function CourseContentTab({ data }) {
   const saveMutation = useMutation({
     mutationFn: async (formData) => {
       if (data?.id) {
-        return base44.entities.CourseContent.update(data.id, formData);
+        return localClient.entities.CourseContent.update(data.id, formData);
       }
-      return base44.entities.CourseContent.create(formData);
+      return localClient.entities.CourseContent.create(formData);
     },
     onSuccess: () => {
       queryClient.invalidateQueries(['courseContent']);
@@ -640,7 +604,8 @@ function ModulesTab({ data }) {
   return <EntityListTab 
     title="Módulos do Curso" 
     data={data} 
-    entity="CourseModule" 
+    entity="CourseModule"
+    queryKey="modules"
     fields={[
       { key: 'title_pt', label: 'Título (PT)' },
       { key: 'title_en', label: 'Título (EN)' },
@@ -658,7 +623,8 @@ function StudentsTab({ data }) {
   return <EntityListTab 
     title="Alunos em Destaque" 
     data={data} 
-    entity="Student" 
+    entity="Student"
+    queryKey="students"
     fields={[
       { key: 'name', label: 'Nome' },
       { key: 'instagram', label: 'Instagram' },
@@ -676,7 +642,8 @@ function LogosTab({ data }) {
   return <EntityListTab 
     title="Logos de Clientes" 
     data={data} 
-    entity="ClientLogo" 
+    entity="ClientLogo"
+    queryKey="logos"
     fields={[
       { key: 'name', label: 'Nome' },
       { key: 'logo_url', label: 'URL Logo' },
@@ -689,7 +656,8 @@ function TestimonialsTab({ data }) {
   return <EntityListTab 
     title="Depoimentos" 
     data={data} 
-    entity="Testimonial" 
+    entity="Testimonial"
+    queryKey="testimonials"
     fields={[
       { key: 'author_name', label: 'Nome' },
       { key: 'author_photo_url', label: 'URL Foto' },
@@ -705,7 +673,8 @@ function FAQTab({ data }) {
   return <EntityListTab 
     title="Perguntas Frequentes" 
     data={data} 
-    entity="FAQ" 
+    entity="FAQ"
+    queryKey="faqs"
     fields={[
       { key: 'question_pt', label: 'Pergunta (PT)' },
       { key: 'question_en', label: 'Pergunta (EN)' },
@@ -720,7 +689,8 @@ function BeforeAfterTab({ data }) {
   return <EntityListTab 
     title="Antes e Depois" 
     data={data} 
-    entity="BeforeAfter" 
+    entity="BeforeAfter"
+    queryKey="beforeAfter"
     fields={[
       { key: 'title_pt', label: 'Título (PT)' },
       { key: 'title_en', label: 'Título (EN)' },
@@ -733,20 +703,21 @@ function BeforeAfterTab({ data }) {
 }
 
 // Generic Entity List Tab
-function EntityListTab({ title, data, entity, fields }) {
+function EntityListTab({ title, data, entity, fields, queryKey }) {
   const queryClient = useQueryClient();
   const [editing, setEditing] = useState(null);
   const [form, setForm] = useState({});
+  const listKey = queryKey || entity.toLowerCase();
 
   const saveMutation = useMutation({
     mutationFn: async (formData) => {
       if (formData.id) {
-        return base44.entities[entity].update(formData.id, formData);
+        return localClient.entities[entity].update(formData.id, formData);
       }
-      return base44.entities[entity].create(formData);
+      return localClient.entities[entity].create(formData);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries([entity.toLowerCase()]);
+      queryClient.invalidateQueries([listKey]);
       setEditing(null);
       setForm({});
       toast.success('Salvo!');
@@ -754,9 +725,9 @@ function EntityListTab({ title, data, entity, fields }) {
   });
 
   const deleteMutation = useMutation({
-    mutationFn: (id) => base44.entities[entity].delete(id),
+    mutationFn: (id) => localClient.entities[entity].delete(id),
     onSuccess: () => {
-      queryClient.invalidateQueries([entity.toLowerCase()]);
+      queryClient.invalidateQueries([listKey]);
       toast.success('Deletado!');
     },
   });
@@ -871,3 +842,4 @@ function EntityListTab({ title, data, entity, fields }) {
     </div>
   );
 }
+

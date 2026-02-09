@@ -4,24 +4,11 @@ import { createPageUrl } from '@/utils';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLanguage } from '../ui/LanguageContext';
 import { motion } from 'framer-motion';
-import { base44 } from '@/api/base44Client';
-import { useQuery } from '@tanstack/react-query';
 import { Settings } from 'lucide-react';
 
 export default function NavHeader({ logoUrl }) {
   const { t } = useLanguage();
   const navigate = useNavigate();
-
-  const { data: user } = useQuery({
-    queryKey: ['currentUser'],
-    queryFn: async () => {
-      try {
-        return await base44.auth.me();
-      } catch {
-        return null;
-      }
-    },
-  });
 
   return (
     <motion.header 
@@ -51,15 +38,13 @@ export default function NavHeader({ logoUrl }) {
           
           <LanguageSwitcher />
 
-          {user?.role === 'admin' && (
-            <button
-              onClick={() => navigate(createPageUrl('Admin'))}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
-              title="Admin"
-            >
-              <Settings className="w-4 h-4 text-zinc-400" />
-            </button>
-          )}
+          <button
+            onClick={() => navigate(createPageUrl('Admin'))}
+            className="p-2 rounded-full hover:bg-white/10 transition-colors"
+            title="Admin"
+          >
+            <Settings className="w-4 h-4 text-zinc-400" />
+          </button>
         </div>
       </nav>
     </motion.header>

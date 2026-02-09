@@ -49,14 +49,14 @@
  */
 import Home from './pages/Home';
 import Admin from './pages/Admin';
-import ProductDetail from './pages/ProductDetail';
+import ProductDetails from './pages/ProductDetails';
 import __Layout from './Layout.jsx';
 
 
 export const PAGES = {
     "Home": Home,
     "Admin": Admin,
-    "ProductDetail": ProductDetail,
+    "ProductDetail": ProductDetails,
 }
 
 export const pagesConfig = {

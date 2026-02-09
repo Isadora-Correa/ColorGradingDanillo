@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { base44 } from '@/api/base44Client';
+import { localClient } from '@/api/localClient';
 import { useLanguage } from '../components/ui/LanguageContext';
 import { LanguageProvider } from '../components/ui/LanguageContext';
 import { Button } from '@/components/ui/button';
@@ -19,7 +19,7 @@ function ProductDetailContent() {
   const { data: product, isLoading } = useQuery({
     queryKey: ['product', productSlug],
     queryFn: async () => {
-      const products = await base44.entities.Product.list();
+      const products = await localClient.entities.Product.list();
       return products.find(p => p.slug === productSlug);
     },
     enabled: !!productSlug,
@@ -28,7 +28,7 @@ function ProductDetailContent() {
   const { data: settings } = useQuery({
     queryKey: ['siteSettings'],
     queryFn: async () => {
-      const allSettings = await base44.entities.SiteSettings.list();
+      const allSettings = await localClient.entities.SiteSettings.list();
       return allSettings[0] || {};
     },
   });
