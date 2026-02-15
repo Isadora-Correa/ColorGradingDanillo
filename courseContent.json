@@ -1,0 +1,27 @@
+[
+  {
+    "id": "main_content",
+    "hero_title_pt": "Domine a Arte da Cor",
+    "hero_title_en": "Master the Art of Color",
+    "hero_subtitle_pt": "O curso definitivo de Color Grading com DaVinci Resolve que vai transformar a qualidade dos seus vídeos.",
+    "hero_subtitle_en": "The definitive Color Grading course with DaVinci Resolve that will transform the quality of your videos.",
+    "hero_features_pt": [
+      "Acesso vitalício",
+      "Suporte direto com o instrutor",
+      "Certificado de conclusão"
+    ],
+    "hero_features_en": [
+      "Lifetime access",
+      "Direct support with the instructor",
+      "Certificate of completion"
+    ],
+    "career_description_pt": "Eleve sua carreira a um novo patamar. Coloristas profissionais são essenciais em produções de cinema, publicidade e conteúdo digital. Este curso te dá as ferramentas para se destacar.",
+    "career_description_en": "Take your career to the next level. Professional colorists are essential in film, advertising, and digital content productions. This course gives you the tools to stand out.",
+    "available_languages": ["Português (narração)", "Inglês (legendas)"],
+    "instructor_name": "Danillo Nava",
+    "instructor_photo_url": "/images/danillo-nava.jpg",
+    "instructor_bio_pt": "Com mais de 10 anos de experiência, Danillo Nava é um colorista renomado que já trabalhou com grandes marcas e produções. Sua paixão é ensinar e capacitar novos talentos no mercado audiovisual.",
+    "instructor_bio_en": "With over 10 years of experience, Danillo Nava is a renowned colorist who has worked with major brands and productions. His passion is to teach and empower new talent in the audiovisual market.",
+    "instructor_showreel_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+  }
+]

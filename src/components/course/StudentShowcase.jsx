@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useLanguage } from '../ui/LanguageContext';
 import SectionBlock from '../common/SectionBlock';
 import GlowText from '../common/GlowText';

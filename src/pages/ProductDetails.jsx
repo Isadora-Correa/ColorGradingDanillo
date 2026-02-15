@@ -1,25 +1,24 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { localClient } from '@/api/localClient';
+import { apiClient } from "../api/apiClient";
 import { useLanguage } from '../components/ui/LanguageContext';
 import { LanguageProvider } from '../components/ui/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { ExternalLink, X, ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
 import NavHeader from '../components/common/NavHeader';
 
 function ProductDetailContent() {
   const navigate = useNavigate();
   const { language, t } = useLanguage();
-  
-  const urlParams = new URLSearchParams(window.location.search);
-  const productSlug = urlParams.get('slug');
+  const [searchParams] = useSearchParams();
+  const productSlug = searchParams.get('slug');
 
   const { data: product, isLoading } = useQuery({
     queryKey: ['product', productSlug],
     queryFn: async () => {
-      const products = await localClient.entities.Product.list();
+      const products = await apiClient.get('products');
       return products.find(p => p.slug === productSlug);
     },
     enabled: !!productSlug,
@@ -27,10 +26,8 @@ function ProductDetailContent() {
 
   const { data: settings } = useQuery({
     queryKey: ['siteSettings'],
-    queryFn: async () => {
-      const allSettings = await localClient.entities.SiteSettings.list();
-      return allSettings[0] || {};
-    },
+    queryFn: () => apiClient.get('settings'),
+    select: (data) => data?.[0] || {},
   });
 
   if (isLoading) {
@@ -65,19 +62,19 @@ function ProductDetailContent() {
     <div className="min-h-screen bg-[#0a0a0a]">
       <NavHeader logoUrl={settings?.logo_url} />
       
-      <div className="pt-24 pb-16 px-4">
+      {/* Close Button - Fixed Top Right */}
+      <motion.button
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        onClick={() => navigate('/')}
+        className="fixed top-44 right-40 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300 hover:scale-110"
+        title={t('Fechar', 'Close')}
+      >
+        <X className="w-6 h-6" />
+      </motion.button>
+      
+      <div className="pt-40 pb-16 px-4 md:pr-20">
         <div className="max-w-6xl mx-auto">
-          {/* Back Button */}
-          <motion.button
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            onClick={() => navigate('/')}
-            className="flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-8"
-          >
-            <ArrowLeft className="w-5 h-5" />
-            {t('Voltar', 'Back')}
-          </motion.button>
-
           {/* Product Details */}
           <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             {/* Product Image */}
@@ -104,7 +101,7 @@ function ProductDetailContent() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="flex flex-col justify-center"
+              className="flex flex-col"
             >
               {/* Product type badge */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm text-zinc-300 mb-4 w-fit">
@@ -117,7 +114,7 @@ function ProductDetailContent() {
 
               {/* Price */}
               <div className="flex items-baseline gap-3 mb-8">
-                <span className="text-4xl md:text-5xl font-bold text-white">
+                <span className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
                   {currency}{price?.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US', { minimumFractionDigits: 2 })}
                 </span>
               </div>
@@ -125,18 +122,55 @@ function ProductDetailContent() {
               {/* Description */}
               {description && (
                 <div className="mb-8">
+                  <h2 className="text-lg font-semibold text-white mb-3">{t('Descrição', 'Description')}</h2>
                   <p className="text-zinc-300 text-base md:text-lg leading-relaxed whitespace-pre-line">
                     {description}
                   </p>
                 </div>
               )}
 
+              {/* Additional Details Section */}
+              <div className="grid grid-cols-2 gap-4 mb-8">
+                {product.product_type === 'course' && (
+                  <>
+                    {product.modules_count && (
+                      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                        <p className="text-zinc-500 text-sm mb-1">{t('Módulos', 'Modules')}</p>
+                        <p className="text-xl font-bold text-white">{product.modules_count}</p>
+                      </div>
+                    )}
+                    {product.duration && (
+                      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                        <p className="text-zinc-500 text-sm mb-1">{t('Duração', 'Duration')}</p>
+                        <p className="text-xl font-bold text-white">{product.duration}</p>
+                      </div>
+                    )}
+                  </>
+                )}
+                {product.product_type !== 'course' && (
+                  <>
+                    {product.luts_count && (
+                      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                        <p className="text-zinc-500 text-sm mb-1">{t('LUTs', 'LUTs')}</p>
+                        <p className="text-xl font-bold text-white">{product.luts_count}</p>
+                      </div>
+                    )}
+                    {product.formats && (
+                      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
+                        <p className="text-zinc-500 text-sm mb-1">{t('Formatos', 'Formats')}</p>
+                        <p className="text-xl font-bold text-white">{product.formats}</p>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+
               {/* Buy Button */}
               {buyLink ? (
                 <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                   <Button
                     asChild
-                    className="w-full md:w-auto px-12 h-14 text-lg font-semibold bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white border-0"
+                    className="w-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white border-0"
                   >
                     <a href={buyLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
                       {t('Comprar Agora', 'Buy Now')}
@@ -147,7 +181,7 @@ function ProductDetailContent() {
               ) : (
                 <Button
                   disabled
-                  className="w-full md:w-auto px-12 h-14 text-lg font-semibold"
+                  className="w-full px-8 h-14 text-lg font-semibold"
                 >
                   {t('Em breve', 'Coming soon')}
                 </Button>

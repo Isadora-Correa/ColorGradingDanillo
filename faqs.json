@@ -1,0 +1,18 @@
+[
+  {
+    "id": "faq1",
+    "question_pt": "Preciso ter o DaVinci Resolve para fazer o curso?",
+    "question_en": "Do I need to have DaVinci Resolve to take the course?",
+    "answer_pt": "Sim, o curso é focado no DaVinci Resolve. Você pode baixar a versão gratuita no site da Blackmagic Design, que é suficiente para acompanhar todas as aulas.",
+    "answer_en": "Yes, the course is focused on DaVinci Resolve. You can download the free version from the Blackmagic Design website, which is sufficient to follow all the lessons.",
+    "order": 1
+  },
+  {
+    "id": "faq2",
+    "question_pt": "O acesso ao curso é vitalício?",
+    "question_en": "Is access to the course for life?",
+    "answer_pt": "Sim! Uma vez adquirido, você terá acesso para sempre a todas as aulas e futuras atualizações.",
+    "answer_en": "Yes! Once purchased, you will have lifetime access to all classes and future updates.",
+    "order": 2
+  }
+]

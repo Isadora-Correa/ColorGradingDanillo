@@ -1,0 +1,16 @@
+[
+  {
+    "id": "mod1",
+    "title_pt": "Módulo 1: Introdução à Cor",
+    "title_en": "Module 1: Introduction to Color",
+    "description_pt": "Fundamentos da teoria da cor e da interface do DaVinci Resolve.",
+    "description_en": "Fundamentals of color theory and the DaVinci Resolve interface.",
+    "lessons_pt": [
+      "Aula 1: O que é Color Grading?",
+      "Aula 2: Conhecendo a Color Page"
+    ],
+    "lessons_en": [],
+    "order": 1,
+    "show_in_en": false
+  }
+]

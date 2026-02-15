@@ -50,10 +50,6 @@ export default function Layout({ children }) {
           background: rgba(255,255,255,0.2);
         }
         
-        body {
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-        
         .glow-text {
           text-shadow: 0 0 40px rgba(168, 85, 247, 0.5), 0 0 80px rgba(168, 85, 247, 0.3);
         }

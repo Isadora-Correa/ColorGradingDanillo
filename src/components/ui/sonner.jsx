@@ -9,7 +9,8 @@ const Toaster = ({
 
   return (
     (<Sonner
-      theme={theme}
+      // cast theme to the expected union type for sonner
+      theme={/** @type {'light'|'dark'|'system'} */ (theme)}
       className="toaster group"
       toastOptions={{
         classNames: {

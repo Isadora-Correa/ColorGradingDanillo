@@ -1,7 +1,7 @@
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClientInstance } from '@/lib/query-client';
 import { pagesConfig } from './pages.config';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 
 const { Pages, Layout, mainPage } = pagesConfig;
@@ -39,9 +39,24 @@ const AppRoutes = () => {
 function App() {
   return (
     <QueryClientProvider client={queryClientInstance}>
-      <Router>
-        <AppRoutes />
-      </Router>
+      <div className="relative w-full min-h-screen text-white antialiased">
+        {/* Background fixed to viewport */}
+        <div
+          className="fixed inset-0 -z-10"
+          style={{
+            backgroundImage: "url('/bg-4-YBg7QqJQNXuQZnnE.jpg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundAttachment: 'fixed',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
+        
+        {/* Content */}
+        <div className="relative z-10">
+          <AppRoutes />
+        </div>
+      </div>
     </QueryClientProvider>
   );
 }

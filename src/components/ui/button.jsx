@@ -34,7 +34,19 @@ const buttonVariants = cva(
   }
 )
 
-const Button = React.forwardRef(({ className, variant, size, asChild = false, ...props }, ref) => {
+/**
+ * @typedef {Object} ButtonProps
+ * @property {string} [className]
+ * @property {'default'|'destructive'|'outline'|'secondary'|'ghost'|'link'} [variant]
+ * @property {'default'|'sm'|'lg'|'icon'} [size]
+ * @property {boolean} [asChild]
+ */
+
+/**
+ * @param {ButtonProps & React.ComponentProps<any>} props
+ * @param {any} ref
+ */
+const Button = /** @type {any} */ (React.forwardRef(({ className, variant, size, asChild = false, ...props }, ref) => {
   const Comp = asChild ? Slot : "button"
   return (
     (<Comp
@@ -42,7 +54,7 @@ const Button = React.forwardRef(({ className, variant, size, asChild = false, ..
       ref={ref}
       {...props} />)
   );
-})
+}));
 Button.displayName = "Button"
 
 export { Button, buttonVariants }

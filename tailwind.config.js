@@ -1,9 +1,17 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+import animate from "tailwindcss-animate"
+
+export default {
     darkMode: ["class"],
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
   theme: {
   	extend: {
+      fontFamily: {
+        // O nome aqui será usado como font-itc, font-futura, etc.
+        itc: ['"ITC Avant Garde Pro"', 'sans-serif'],
+        futura: ['"Futura Condensed"', 'sans-serif'],
+        gesco: ['"HF Gesco"', 'sans-serif'],
+      },
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
@@ -85,5 +93,5 @@ module.exports = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [animate],
 }

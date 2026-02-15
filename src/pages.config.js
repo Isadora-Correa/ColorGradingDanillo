@@ -48,7 +48,7 @@
  * The mainPage value must match a key in the PAGES object exactly.
  */
 import Home from './pages/Home';
-import Admin from './pages/Admin';
+import Admin from './pages/Admin.tsx';
 import ProductDetails from './pages/ProductDetails';
 import __Layout from './Layout.jsx';
 

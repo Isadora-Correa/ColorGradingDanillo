@@ -16,8 +16,8 @@ export default function SectionBlock({
       className={`
         relative rounded-2xl overflow-hidden
         ${gradient 
-          ? 'bg-gradient-to-br from-zinc-900/80 via-zinc-900/60 to-zinc-800/40 border border-white/5' 
-          : 'bg-zinc-900/50 border border-white/5'
+          ? 'bg-gradient-to-br from-zinc-900/30 via-zinc-900/20 to-transparent border border-white/5' 
+          : 'bg-zinc-900/20 border border-white/5'
         }
         backdrop-blur-sm
         ${noPadding ? '' : 'p-6 md:p-10'}

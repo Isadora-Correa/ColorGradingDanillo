@@ -1,6 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
-const LanguageContext = createContext();
+const LanguageContext = createContext({
+  language: 'pt',
+  // match the Dispatch<SetStateAction<string>> signature expected by consumers
+  setLanguage: (v) => {},
+  t: (pt, en) => pt,
+});
 
 export function LanguageProvider({ children }) {
   const [language, setLanguage] = useState(() => {

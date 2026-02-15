@@ -1,0 +1,14 @@
+[
+  {
+    "id": "logo1",
+    "name": "Brand A",
+    "logo_url": "/images/client-logo-1.png",
+    "order": 1
+  },
+  {
+    "id": "logo2",
+    "name": "Brand B",
+    "logo_url": "/images/client-logo-2.png",
+    "order": 2
+  }
+]

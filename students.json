@@ -1,0 +1,13 @@
+[
+  {
+    "id": "student1",
+    "name": "João Silva",
+    "instagram": "joaosilvafilms",
+    "photo_url": "/images/student-1.jpg",
+    "showreel_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "testimonial_pt": "O curso foi um divisor de águas na minha carreira. A didática do Danillo é incrível!",
+    "testimonial_en": "The course was a game-changer in my career. Danillo's teaching method is incredible!",
+    "clients": ["Client X", "Client Y"],
+    "order": 1
+  }
+]

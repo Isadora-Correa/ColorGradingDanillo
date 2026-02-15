@@ -19,11 +19,15 @@ export default function NavHeader({ logoUrl }) {
       <nav className="max-w-7xl mx-auto flex items-center justify-between bg-zinc-900/80 backdrop-blur-xl rounded-full px-6 py-3 border border-white/10">
         <Link to={createPageUrl('Home')} className="flex items-center gap-2">
           {logoUrl ? (
-            <img src={logoUrl} alt="Nava Colorist" className="h-8 md:h-10" />
+            /* Aumentado de h-8 md:h-10 para h-12 md:h-16 */
+            <img src={logoUrl} alt="Logo" className="h-12 md:h-16 object-contain" />
           ) : (
-            <div className="flex items-center gap-1">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-cyan-400" />
-              <span className="text-xl font-bold text-white">Nava<span className="text-zinc-400 font-normal">Colorist</span></span>
+            <div className="flex items-center gap-2">
+              <img 
+                src="/logo-header.png" 
+                alt="Nava Colorist" 
+                className="h-10 md:h-14 object-contain" 
+              />
             </div>
           )}
         </Link>

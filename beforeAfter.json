@@ -1,0 +1,11 @@
+[
+  {
+    "id": "ba1",
+    "title_pt": "Transformação de Cor",
+    "title_en": "Color Transformation",
+    "before_image_url": "/images/before-1.jpg",
+    "during_image_url": "/images/during-1.jpg",
+    "after_image_url": "/images/after-1.jpg",
+    "order": 1
+  }
+]
