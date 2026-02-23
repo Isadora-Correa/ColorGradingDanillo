@@ -4,14 +4,15 @@ import { apiClient } from '@/api/apiClient';
 import { LanguageProvider, useLanguage } from '../components/ui/LanguageContext';
 import NavHeader from '../components/common/NavHeader';
 import ProductCatalog from '../components/home/ProductCatalog';
-import CourseHero from '../components/course/CourseHero';
 import BeforeAfterSlider from '../components/course/BeforeAfterSlider';
 import ClientLogos from '../components/course/ClientLogos';
+import CourseHighlightsGallery from '../components/course/CourseHighlightsGallery';
 import StudentShowcase from '../components/course/StudentShowcase';
 import InstructorSection from '../components/course/InstructorSection';
 import LanguagesSection from '../components/course/LanguagesSection';
 import CourseModules from '../components/course/CourseModules';
 import TestimonialsSection from '../components/course/TestimonialsSection';
+import CertificateSection from '../components/course/CertificateSection';
 import FAQSection from '../components/course/FAQSection';
 import { Loader2 } from 'lucide-react';
 
@@ -40,12 +41,6 @@ function HomeContent() {
     initialData: [],
   });
 
-  const { data: students } = useQuery({
-    queryKey: ['students'],
-    queryFn: () => apiClient.get('students'),
-    initialData: [],
-  });
-
   const { data: logos } = useQuery({
     queryKey: ['logos'],
     queryFn: () => apiClient.get('logos'),
@@ -58,12 +53,6 @@ function HomeContent() {
     initialData: [],
   });
 
-  const { data: faqs } = useQuery({
-    queryKey: ['faqs'],
-    queryFn: () => apiClient.get('faqs'),
-    initialData: [],
-  });
-
   const { data: beforeAfterItems } = useQuery({
     queryKey: ['beforeAfter'],
     queryFn: () => apiClient.get('beforeAfter'),
@@ -73,7 +62,6 @@ function HomeContent() {
   const siteSettings = settings?.[0] || {};
   const content = courseContent?.[0] || {}; // Se courseContent for um array
   const courseProduct = products?.find(p => p.product_type === 'course');
-  const lutsProduct = products?.find(p => p.product_type === 'luts');
 
   return (
     <div>
@@ -81,55 +69,58 @@ function HomeContent() {
       
       <main className="max-w-6xl mx-auto px-4 pb-20 space-y-12 pt-32">
         {productsLoading ? (
-          <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
+          <div className="min-h-[1700px] space-y-6 py-10">
+            <div className="flex items-center justify-center py-8">
+              <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
+            </div>
+            <div className="h-56 rounded-xl border border-white/10 bg-zinc-900/35" />
+            <div className="h-[420px] rounded-xl border border-white/10 bg-zinc-900/30" />
+            <div className="h-[320px] rounded-xl border border-white/10 bg-zinc-900/25" />
+            <div className="h-[380px] rounded-xl border border-white/10 bg-zinc-900/20" />
           </div>
         ) : (
           <>
             {/* 1. Products Catalog - FIRST */}
             <ProductCatalog products={products} />
 
-            {/* 2. Course Hero - with product details and purchase */}
-            {courseProduct && <CourseHero content={content} product={courseProduct} lutsProduct={lutsProduct} />}
-
-            {/* 3. Course Details Section - Reorganized per design spec */}
+            {/* 2. Course Details Section - Reorganized per design spec */}
             {courseProduct && (
               <div id="course-details" className="space-y-12">
                 {/* 1. Before/After Slider */}
-                {beforeAfterItems.length > 0 && (
-                  <BeforeAfterSlider items={beforeAfterItems} />
-                )}
+                <BeforeAfterSlider items={beforeAfterItems} />
                 
-                {/* 2. Client Logos */}
-                {logos.length > 0 && (
-                  <ClientLogos logos={logos} />
-                )}
+                {/* 2. Course Highlights Gallery */}
+                <CourseHighlightsGallery />
 
                 {/* 3. Student Showcase */}
-                {students.length > 0 && (
-                  <StudentShowcase students={students} />
-                )}
+                <StudentShowcase />
 
                 {/* 4. Instructor Section */}
                 <InstructorSection content={content} />
+
+                {/* 5. Client Logos */}
+                {logos.length > 0 && (
+                  <ClientLogos logos={logos} />
+                )}
                 
-                {/* 5. Languages Section */}
+                {/* 6. Languages Section */}
                 <LanguagesSection languages={content.available_languages} />
                 
-                {/* 6. Course Modules */}
+                {/* 7. Course Modules */}
                 {modules.length > 0 && (
                   <CourseModules modules={modules} />
                 )}
 
-                {/* 7. Testimonials */}
+                {/* 8. Testimonials */}
                 {testimonials.length > 0 && (
                   <TestimonialsSection testimonials={testimonials} />
                 )}
 
-                {/* 8. FAQ */}
-                {faqs.length > 0 && (
-                  <FAQSection faqs={faqs} />
-                )}
+                {/* 9. Certificate */}
+                <CertificateSection />
+
+                {/* 10. FAQ */}
+                <FAQSection />
               </div>
             )}
           </>

@@ -17,7 +17,10 @@
     ],
     "career_description_pt": "Eleve sua carreira a um novo patamar. Coloristas profissionais são essenciais em produções de cinema, publicidade e conteúdo digital. Este curso te dá as ferramentas para se destacar.",
     "career_description_en": "Take your career to the next level. Professional colorists are essential in film, advertising, and digital content productions. This course gives you the tools to stand out.",
-    "available_languages": ["Português (narração)", "Inglês (legendas)"],
+    "available_languages": [
+      "Português (narração)",
+      "Inglês (legendas)"
+    ],
     "instructor_name": "Danillo Nava",
     "instructor_photo_url": "/images/danillo-nava.jpg",
     "instructor_bio_pt": "Com mais de 10 anos de experiência, Danillo Nava é um colorista renomado que já trabalhou com grandes marcas e produções. Sua paixão é ensinar e capacitar novos talentos no mercado audiovisual.",

@@ -99,9 +99,85 @@ body, #root {
   padding: 0;
 }
 
+html, body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
 /* Se as suas seções tiverem fundo branco, force transparência */
 section, main {
   background-color: transparent !important;
+}
+
+.cinematic-bg {
+  background:
+    radial-gradient(140% 90% at 50% -10%, rgba(0, 190, 255, 0.18), transparent 55%),
+    radial-gradient(120% 120% at 50% 120%, rgba(255, 120, 40, 0.14), transparent 55%),
+    linear-gradient(180deg, #0a0d14 0%, #090b12 40%, #07090f 100%);
+}
+
+.cinematic-bg__blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.cinematic-bg__blob--top {
+  width: 38vw;
+  height: 28vw;
+  min-width: 280px;
+  min-height: 220px;
+  top: 4%;
+  left: 8%;
+  background: radial-gradient(circle at 30% 30%, rgba(20, 210, 255, 0.9), rgba(0, 120, 255, 0.15) 70%, transparent 80%);
+}
+
+.cinematic-bg__blob--mid {
+  width: 40vw;
+  height: 28vw;
+  min-width: 300px;
+  min-height: 220px;
+  top: 42%;
+  right: 6%;
+  background: radial-gradient(circle at 60% 40%, rgba(255, 130, 45, 0.85), rgba(255, 60, 20, 0.18) 70%, transparent 82%);
+}
+
+.cinematic-bg__blob--bottom {
+  width: 46vw;
+  height: 30vw;
+  min-width: 340px;
+  min-height: 240px;
+  bottom: -2%;
+  left: 18%;
+  background: radial-gradient(circle at 50% 40%, rgba(35, 230, 180, 0.72), rgba(40, 120, 255, 0.16) 70%, transparent 84%);
+}
+
+.cinematic-bg__grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.08;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.3) 0.6px, transparent 0.6px);
+  background-size: 3px 3px;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.cinematic-bg__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 120% at 50% 50%, transparent 45%, rgba(2, 4, 8, 0.8) 100%);
+  pointer-events: none;
 }
 
 @layer base {

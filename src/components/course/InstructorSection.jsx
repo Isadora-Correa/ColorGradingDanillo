@@ -1,105 +1,115 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+﻿import React, { useState } from 'react';
 import { useLanguage } from '../ui/LanguageContext';
 import SectionBlock from '../common/SectionBlock';
 import GlowText from '../common/GlowText';
-import { Play, Award, Users, Clock } from 'lucide-react';
+import { Clock3, Users, Film } from 'lucide-react';
 
-export default function InstructorSection({ content }) {
+const SHOWREEL_EMBED = 'https://player.vimeo.com/video/944559078?title=0&byline=0&portrait=0&badge=0';
+
+const STATS = {
+  pt: [
+    { icon: Clock3, title: 'Tempo de carreira', text: 'Atuando no audiovisual em projetos internacionais.' },
+    { icon: Users, title: '+ de 150 alunos', text: 'Formando videomakers e coloristas em nivel profissional.' },
+    { icon: Film, title: '+ de 100 projetos', text: 'Comerciais, series e filmes premiados.' },
+  ],
+  en: [
+    { icon: Clock3, title: 'Career time', text: 'Working in audiovisual with international projects.' },
+    { icon: Users, title: '+150 students', text: 'Training videomakers and colorists at a professional level.' },
+    { icon: Film, title: '+100 projects', text: 'Commercials, series and award-winning films.' },
+  ],
+};
+
+const BIO = {
+  pt: [
+    'Nava e um colorista profissional que atua em grandes projetos internacionais, colaborando com diretores e fotografos em diferentes formatos, de comerciais high end a series e filmes.',
+    'Seu trabalho e focado em usar a cor como ferramenta narrativa, aplicando workflows reais do mercado para criar imagens com identidade e impacto visual. Ao longo dos anos, assinou projetos para grandes marcas globais, alem de series internacionais, documentarios, curtas e filmes premiados.',
+    'Hoje, alem de atuar como Colorista Senior, Nava tambem compartilha sua experiencia com videomakers e coloristas que querem elevar o nivel do seu trabalho e dominar o Color Grading de forma criativa, estrategica e profissional.',
+  ],
+  en: [
+    'Nava is a professional colorist working on major international projects, collaborating with directors and cinematographers across formats, from high-end commercials to series and films.',
+    'His work uses color as a narrative tool, applying real market workflows to create images with identity and visual impact. Over the years, he has delivered projects for global brands, as well as international series, documentaries, shorts and award-winning films.',
+    'Today, in addition to working as a Senior Colorist, Nava shares his experience with videomakers and colorists who want to raise the level of their work and master Color Grading creatively, strategically and professionally.',
+  ],
+};
+
+export default function InstructorSection() {
   const { language, t } = useLanguage();
+  const [photoSrc, setPhotoSrc] = useState('/nava.jpg');
 
-  if (!content) return null;
-
-  const bio = language === 'pt' ? content.instructor_bio_pt : content.instructor_bio_en;
-  const stats = content.instructor_stats || [];
-
-  const defaultStats = [
-    { icon: Users, label: t('+150 alunos', '+150 students'), value: '' },
-    { icon: Award, label: t('+100 projetos', '+100 projects'), value: '' },
-    { icon: Clock, label: t('15 anos', '15 years'), value: '' },
-  ];
+  const isPt = language === 'pt';
+  const stats = isPt ? STATS.pt : STATS.en;
+  const bioParagraphs = isPt ? BIO.pt : BIO.en;
+  const instructorName = 'Danilo Navarro';
 
   return (
-    <SectionBlock gradient>
-      <div className="text-center mb-8">
-        <p className="text-purple-400 uppercase tracking-wider text-sm mb-2">
-          {t('Conheça seu professor', 'Meet your instructor')}
-        </p>
-        <h2 className="text-3xl md:text-4xl font-bold text-white">
-          <GlowText>{content.instructor_name || 'Nava'}</GlowText>
-        </h2>
+    <SectionBlock gradient noPadding className="overflow-hidden">
+      <div className="relative h-[280px] w-full md:h-[360px] lg:h-[420px]">
+        <img
+          src={photoSrc}
+          alt={instructorName}
+          className="h-full w-full object-cover"
+          loading="lazy"
+          decoding="async"
+          onError={() => setPhotoSrc('/nava.jpg')}
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-[#080b13] via-[#080b13]/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#080b13]/75 via-transparent to-transparent" />
+
+        <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8">
+          <p className="mb-2 text-xs uppercase tracking-[0.16em] text-zinc-300">
+            {t('Conheca seu professor', 'Meet your instructor')}
+          </p>
+          <h2 className="text-3xl font-extrabold leading-tight text-white md:text-5xl">
+            <GlowText
+              className="font-extrabold"
+              gradient="from-[#ff3d77] via-[#9be15d] via-[#00e5ff] to-[#7b61ff]"
+              glowColor="rgba(120,220,255,0.35)"
+            >
+              {instructorName}
+            </GlowText>
+          </h2>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-        {/* Photo and Showreel */}
-        <div className="space-y-4">
-          {content.instructor_photo_url && (
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              className="relative rounded-2xl overflow-hidden"
-            >
-              <img 
-                src={content.instructor_photo_url}
-                alt={content.instructor_name}
-                className="w-full aspect-[4/5] object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent" />
-              
-              {/* Glow effects */}
-              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-64 h-64 bg-purple-500/20 rounded-full blur-[80px]" />
-            </motion.div>
-          )}
-
-          {content.instructor_showreel_url && (
-            <a 
-              href={content.instructor_showreel_url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 py-4 bg-zinc-800/50 rounded-xl border border-white/10 hover:border-purple-500/50 transition-all group"
-            >
-              <div className="w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-cyan-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Play className="w-4 h-4 text-white fill-white" />
-              </div>
-              <span className="text-white font-medium">{t('Ver Showreel', 'View Showreel')}</span>
-            </a>
-          )}
+      <div className="grid grid-cols-1 gap-6 p-5 md:p-8 lg:grid-cols-12">
+        <div className="space-y-4 text-zinc-200 lg:col-span-7">
+          {bioParagraphs.map((paragraph, idx) => (
+            <p key={idx} className="leading-relaxed">
+              {paragraph}
+            </p>
+          ))}
         </div>
 
-        {/* Bio and Stats */}
-        <div className="space-y-6">
-          {bio && (
-            <p className="text-zinc-300 leading-relaxed">
-              {bio}
-            </p>
-          )}
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3 lg:col-span-5 lg:grid-cols-1">
+          {stats.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div
+                key={item.title}
+                className="rounded-xl border border-white/10 bg-black/25 p-4"
+              >
+                <div className="mb-2 flex items-center gap-2">
+                  <Icon className="h-4 w-4 text-cyan-300" />
+                  <p className="font-semibold text-white">{item.title}</p>
+                </div>
+                <p className="text-sm text-zinc-300">{item.text}</p>
+              </div>
+            );
+          })}
+        </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-4">
-            {(stats.length > 0 ? stats : defaultStats).map((stat, idx) => {
-              const Icon = stat.icon || Award;
-              return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="text-center p-4 bg-zinc-800/50 rounded-xl border border-white/5"
-                >
-                  {stat.icon && <Icon className="w-6 h-6 text-purple-400 mx-auto mb-2" />}
-                  <div className="text-lg font-bold text-white">
-                    {stat.value || (language === 'pt' ? stat.label_pt : stat.label_en)}
-                  </div>
-                  {stat.value && (
-                    <div className="text-xs text-zinc-500">
-                      {language === 'pt' ? stat.label_pt : stat.label_en}
-                    </div>
-                  )}
-                </motion.div>
-              );
-            })}
+        <div className="lg:col-span-12">
+          <div className="overflow-hidden rounded-xl border border-white/10 bg-zinc-950/60">
+            <div className="aspect-video w-full">
+              <iframe
+                src={SHOWREEL_EMBED}
+                className="h-full w-full"
+                allow="autoplay; fullscreen; picture-in-picture"
+                loading="lazy"
+                title={t('Showreel do Danilo Navarro', 'Danilo Navarro showreel')}
+              />
+            </div>
           </div>
         </div>
       </div>

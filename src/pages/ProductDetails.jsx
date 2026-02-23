@@ -1,11 +1,11 @@
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { apiClient } from "../api/apiClient";
+import { apiClient } from '../api/apiClient';
 import { useLanguage } from '../components/ui/LanguageContext';
 import { LanguageProvider } from '../components/ui/LanguageContext';
 import { Button } from '@/components/ui/button';
-import { ExternalLink, X, ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Check } from 'lucide-react';
 import { motion } from 'framer-motion';
 import NavHeader from '../components/common/NavHeader';
 
@@ -19,7 +19,7 @@ function ProductDetailContent() {
     queryKey: ['product', productSlug],
     queryFn: async () => {
       const products = await apiClient.get('products');
-      return products.find(p => p.slug === productSlug);
+      return products.find((p) => p.slug === productSlug);
     },
     enabled: !!productSlug,
   });
@@ -32,17 +32,17 @@ function ProductDetailContent() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
-        <div className="w-8 h-8 border-2 border-purple-500 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-[#050608] flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center">
+      <div className="min-h-screen bg-[#050608] flex items-center justify-center">
         <div className="text-center">
-          <p className="text-zinc-400 mb-4">{t('Produto não encontrado', 'Product not found')}</p>
+          <p className="text-zinc-400 mb-4">{t('Produto nao encontrado', 'Product not found')}</p>
           <Button onClick={() => navigate('/')} variant="outline">
             <ArrowLeft className="w-4 h-4 mr-2" />
             {t('Voltar', 'Back')}
@@ -52,140 +52,133 @@ function ProductDetailContent() {
     );
   }
 
-  const name = language === 'pt' ? product.name_pt : product.name_en;
-  const description = language === 'pt' ? product.description_pt : product.description_en;
+  const name = language === 'pt'
+    ? (product.name_pt || product.name_en)
+    : (product.name_en || product.name_pt);
+  const description = language === 'pt'
+    ? (product.description_pt || product.description_en)
+    : (product.description_en || product.description_pt);
   const price = language === 'pt' ? product.price_brl : product.price_usd;
+  const comparePrice = language === 'pt' ? product.compare_at_price_brl : product.compare_at_price_usd;
   const currency = language === 'pt' ? 'R$' : '$';
-  const buyLink = language === 'pt' ? product.buy_link_brl : product.buy_link_usd;
+  const buyLink = language === 'pt'
+    ? (product.buy_link_brl || product.buy_link_usd)
+    : (product.buy_link_usd || product.buy_link_brl);
+  const features =
+    (language === 'pt' ? product.features_pt : product.features_en) ||
+    (language === 'pt' ? product.highlights_pt : product.highlights_en) ||
+    (language === 'pt' ? product.course_highlights_pt : product.course_highlights_en) ||
+    [];
+  const featureList = Array.isArray(features) ? features : [];
+  const fallbackFeatureList = (description || '')
+    .split('.')
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .slice(0, 4)
+    .map((item) => `${item}.`);
+  const detailImage = product.image_url || product.detail_image_url || '/produto1.png';
+  const hasComparePrice = Number.isFinite(comparePrice) && comparePrice > price;
+  const savingsPercent = hasComparePrice
+    ? Math.round(((comparePrice - price) / comparePrice) * 100)
+    : null;
+  const featureItems = (featureList.length ? featureList : fallbackFeatureList).slice(0, 4);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className="relative min-h-screen overflow-hidden bg-[#050608] text-white">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(250,120,40,0.22),transparent_40%),radial-gradient(circle_at_82%_22%,rgba(103,232,249,0.2),transparent_36%),radial-gradient(circle_at_50%_85%,rgba(244,63,94,0.18),transparent_42%)]" />
+      </div>
+
       <NavHeader logoUrl={settings?.logo_url} />
-      
-      {/* Close Button - Fixed Top Right */}
-      <motion.button
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        onClick={() => navigate('/')}
-        className="fixed top-44 right-40 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all duration-300 hover:scale-110"
-        title={t('Fechar', 'Close')}
-      >
-        <X className="w-6 h-6" />
-      </motion.button>
-      
-      <div className="pt-40 pb-16 px-4 md:pr-20">
-        <div className="max-w-6xl mx-auto">
-          {/* Product Details */}
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
-            {/* Product Image */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="relative aspect-square rounded-2xl overflow-hidden bg-zinc-900 border border-white/10"
-            >
-              {product.image_url ? (
-                <img 
-                  src={product.image_url} 
-                  alt={name}
-                  className="w-full h-full object-cover"
-                />
-              ) : (
-                <div className="w-full h-full bg-gradient-to-br from-purple-900/30 to-cyan-900/30 flex items-center justify-center">
-                  <div className="w-32 h-32 rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 opacity-50" />
-                </div>
-              )}
-            </motion.div>
 
-            {/* Product Info */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+      <div className="relative px-4 pb-6 pt-32 md:px-8 lg:px-12">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-4 flex justify-end">
+            <Button
+              onClick={() => navigate('/')}
+              variant="ghost"
+              className="rounded-full border border-white/20 bg-transparent px-4 text-zinc-300 hover:bg-white/10 hover:text-white"
+            >
+              <ArrowLeft className="w-5 h-5 mr-2" />
+              {t('Voltar', 'Back')}
+            </Button>
+          </div>
+
+          <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-8">
+            <motion.img
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              src={detailImage}
+              alt={name}
+              className="h-auto max-h-[66vh] w-full max-w-[900px] object-contain lg:col-span-6"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 }}
-              className="flex flex-col"
+              className="lg:col-span-6"
             >
-              {/* Product type badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-sm text-zinc-300 mb-4 w-fit">
-                {product.product_type === 'course' ? t('Curso Digital', 'Digital Course') : 'LUTs Pack'}
-              </div>
+              <span className="mb-3 inline-flex w-fit text-xs font-semibold uppercase tracking-[0.22em] text-zinc-400">
+                {product.product_type === 'course' ? t('Curso', 'Course') : t('Bundle', 'Bundle')}
+              </span>
 
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+              <h1 className="mb-3 text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl">
                 {name}
               </h1>
 
-              {/* Price */}
-              <div className="flex items-baseline gap-3 mb-8">
-                <span className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                  {currency}{price?.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US', { minimumFractionDigits: 2 })}
+              <div className="mb-4 flex w-fit flex-wrap items-end gap-3">
+                <span className="text-3xl font-bold text-white lg:text-4xl">
+                  {currency}
+                  {price?.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US', {
+                    minimumFractionDigits: 2,
+                  })}
                 </span>
+                {hasComparePrice && (
+                  <span className="text-lg text-zinc-500 line-through">
+                    {currency}
+                    {comparePrice?.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US', {
+                      minimumFractionDigits: 2,
+                    })}
+                  </span>
+                )}
+                {savingsPercent ? (
+                  <span className="rounded-full border border-emerald-400/30 bg-emerald-400/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-200">
+                    {t('Economize', 'Save')} {savingsPercent}%
+                  </span>
+                ) : null}
               </div>
 
-              {/* Description */}
               {description && (
-                <div className="mb-8">
-                  <h2 className="text-lg font-semibold text-white mb-3">{t('Descrição', 'Description')}</h2>
-                  <p className="text-zinc-300 text-base md:text-lg leading-relaxed whitespace-pre-line">
-                    {description}
-                  </p>
-                </div>
+                <p className="mb-5 max-w-xl text-sm leading-relaxed text-zinc-300 md:text-base">
+                  {description}
+                </p>
               )}
 
-              {/* Additional Details Section */}
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                {product.product_type === 'course' && (
-                  <>
-                    {product.modules_count && (
-                      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                        <p className="text-zinc-500 text-sm mb-1">{t('Módulos', 'Modules')}</p>
-                        <p className="text-xl font-bold text-white">{product.modules_count}</p>
-                      </div>
-                    )}
-                    {product.duration && (
-                      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                        <p className="text-zinc-500 text-sm mb-1">{t('Duração', 'Duration')}</p>
-                        <p className="text-xl font-bold text-white">{product.duration}</p>
-                      </div>
-                    )}
-                  </>
-                )}
-                {product.product_type !== 'course' && (
-                  <>
-                    {product.luts_count && (
-                      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                        <p className="text-zinc-500 text-sm mb-1">{t('LUTs', 'LUTs')}</p>
-                        <p className="text-xl font-bold text-white">{product.luts_count}</p>
-                      </div>
-                    )}
-                    {product.formats && (
-                      <div className="p-4 rounded-lg bg-white/5 border border-white/10">
-                        <p className="text-zinc-500 text-sm mb-1">{t('Formatos', 'Formats')}</p>
-                        <p className="text-xl font-bold text-white">{product.formats}</p>
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
+              {featureItems.length > 0 && (
+                <ul className="mb-6 grid gap-2 sm:grid-cols-2">
+                  {featureItems.map((item, idx) => (
+                    <li key={`${item}-${idx}`} className="flex items-start gap-2">
+                      <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#39e09b]" />
+                      <span className="text-xs text-zinc-200 md:text-sm">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
 
-              {/* Buy Button */}
-              {buyLink ? (
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                  <Button
-                    asChild
-                    className="w-full px-8 h-14 text-lg font-semibold bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 text-white border-0"
-                  >
-                    <a href={buyLink} target="_blank" rel="noopener noreferrer" className="flex items-center justify-center gap-2">
-                      {t('Comprar Agora', 'Buy Now')}
-                      <ExternalLink className="w-5 h-5" />
-                    </a>
-                  </Button>
-                </motion.div>
-              ) : (
+              <div className="flex items-start">
                 <Button
-                  disabled
-                  className="w-full px-8 h-14 text-lg font-semibold"
+                  onClick={() => buyLink && window.open(buyLink, '_blank')}
+                  className="h-12 rounded-full bg-black/40 px-10 text-base font-bold text-white shadow-[0_10px_35px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-[1.02] hover:bg-black/55 active:scale-[0.98]"
                 >
-                  {t('Em breve', 'Coming soon')}
+                  <span className="relative inline-flex items-center px-1 py-0.5 leading-none">
+                    <span className="absolute -inset-1 rounded-md bg-[linear-gradient(90deg,#ff2f6d_0%,#ff8f1f_20%,#d8ff3a_40%,#31f2a7_60%,#26d8ff_78%,#7a6dff_90%,#ff38bd_100%)] opacity-65 blur-md" />
+                    <span className="relative text-white">
+                      {t('Comprar agora', 'Buy now')}
+                    </span>
+                  </span>
                 </Button>
-              )}
+              </div>
             </motion.div>
           </div>
         </div>

@@ -1,16 +1,255 @@
 [
   {
-    "id": "mod1",
-    "title_pt": "Módulo 1: Introdução à Cor",
-    "title_en": "Module 1: Introduction to Color",
-    "description_pt": "Fundamentos da teoria da cor e da interface do DaVinci Resolve.",
-    "description_en": "Fundamentals of color theory and the DaVinci Resolve interface.",
-    "lessons_pt": [
-      "Aula 1: O que é Color Grading?",
-      "Aula 2: Conhecendo a Color Page"
+    "id": "module-seed-1",
+    "title_pt": "Apresentacao",
+    "title_en": "Introduction",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 3,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m1t1", "title": "Visao geral do curso e da jornada de aprendizado" },
+      { "id": "m1t2", "title": "Metodologia pratica e progressiva" },
+      { "id": "m1t3", "title": "O que esperar ao longo dos modulos" }
     ],
-    "lessons_en": [],
-    "order": 1,
-    "show_in_en": false
+    "order": 0
+  },
+  {
+    "id": "module-seed-2",
+    "title_pt": "Project Manager",
+    "title_en": "Project Manager",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m2t1", "title": "Estrutura profissional de organizacao no DaVinci" },
+      { "id": "m2t2", "title": "Configuracao da Biblioteca e Database" },
+      { "id": "m2t3", "title": "Protecao contra perda de dados" },
+      { "id": "m2t4", "title": "Fluxo de trabalho escalavel e limpo" }
+    ],
+    "order": 1
+  },
+  {
+    "id": "module-seed-3",
+    "title_pt": "Conform",
+    "title_en": "Conform",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 3,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m3t1", "title": "Importacao correta do projeto de outros softwares" },
+      { "id": "m3t2", "title": "Preparacao de timeline para grading" },
+      { "id": "m3t3", "title": "Conform com Adobe Premiere" }
+    ],
+    "order": 2
+  },
+  {
+    "id": "module-seed-4",
+    "title_pt": "Personalizacoes e Atalhos",
+    "title_en": "Customizations and Shortcuts",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m4t1", "title": "Atalhos essenciais para agilidade" },
+      { "id": "m4t2", "title": "Configuracoes personalizadas" },
+      { "id": "m4t3", "title": "Otimizacao de performance" },
+      { "id": "m4t4", "title": "Fluidez no dia a dia de pos-producao" }
+    ],
+    "order": 3
+  },
+  {
+    "id": "module-seed-5",
+    "title_pt": "Interface do Resolve",
+    "title_en": "Resolve Interface",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m5t1", "title": "Tour pela aba Color" },
+      { "id": "m5t2", "title": "Ferramentas essenciais do colorista" },
+      { "id": "m5t3", "title": "Navegacao eficiente" },
+      { "id": "m5t4", "title": "Aba Edit: o essencial para um colorista" }
+    ],
+    "order": 4
+  },
+  {
+    "id": "module-seed-6",
+    "title_pt": "Gerenciamento de Cor Basico",
+    "title_en": "Basic Color Management",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 3,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m6t1", "title": "Uma breve introducao ao gerenciamento de cor" },
+      { "id": "m6t2", "title": "Diferentes espacos de cor" },
+      { "id": "m6t3", "title": "Utilizando transformacoes de maneira eficiente" }
+    ],
+    "order": 5
+  },
+  {
+    "id": "module-seed-7",
+    "title_pt": "Primaries, Scopes e Color Matching",
+    "title_en": "Primaries, Scopes and Color Matching",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 6,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m7t1", "title": "Conceitos do Color Balance" },
+      { "id": "m7t2", "title": "Entendendo as ferramentas primarias" },
+      { "id": "m7t3", "title": "Como interpretar os Scopes" },
+      { "id": "m7t4", "title": "Printer Lights" },
+      { "id": "m7t5", "title": "HDR Color Wheels" },
+      { "id": "m7t6", "title": "Color Matching" }
+    ],
+    "order": 6
+  },
+  {
+    "id": "module-seed-8",
+    "title_pt": "Gerenciamento de Cor Avancado",
+    "title_en": "Advanced Color Management",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 3,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m8t1", "title": "DaVinci YRGB, ACES e DWG" },
+      { "id": "m8t2", "title": "Entendendo o Camera Raw" },
+      { "id": "m8t3", "title": "Gerenciamento a nivel de Nodes" }
+    ],
+    "order": 7
+  },
+  {
+    "id": "module-seed-9",
+    "title_pt": "Nodes e Workflow",
+    "title_en": "Nodes and Workflow",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 3,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m9t1", "title": "Tipos de nodes e aplicacoes estrategicas" },
+      { "id": "m9t2", "title": "Construcao de Node Tree profissional" },
+      { "id": "m9t3", "title": "Workflow escalavel e organizado" }
+    ],
+    "order": 8
+  },
+  {
+    "id": "module-seed-10",
+    "title_pt": "Ferramentas Secundarias",
+    "title_en": "Secondary Tools",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m10t1", "title": "Uso avancado de Power Windows e Qualifiers" },
+      { "id": "m10t2", "title": "Curves, Warper e Noise Reduction" },
+      { "id": "m10t3", "title": "Magic Mask e Color Slice" },
+      { "id": "m10t4", "title": "Refino tecnico e estetico da imagem" }
+    ],
+    "order": 9
+  },
+  {
+    "id": "module-seed-11",
+    "title_pt": "Skin Tones",
+    "title_en": "Skin Tones",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m11t1", "title": "Correcao de diferentes tipos de pele" },
+      { "id": "m11t2", "title": "Uso do Vectorscope para precisao" },
+      { "id": "m11t3", "title": "Tecnicas de realce com Glow e Beauty" },
+      { "id": "m11t4", "title": "Resultados cinematograficos e naturais" }
+    ],
+    "order": 10
+  },
+  {
+    "id": "module-seed-12",
+    "title_pt": "Pratica - Color Balance & Matching",
+    "title_en": "Practice - Color Balance & Matching",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m12t1", "title": "Exercicio pratico com multiplos takes" },
+      { "id": "m12t2", "title": "Consistencia entre diferentes cameras e luzes" },
+      { "id": "m12t3", "title": "Ajuste fino de contraste e exposicao" },
+      { "id": "m12t4", "title": "Desenvolvimento do olhar tecnico" }
+    ],
+    "order": 11
+  },
+  {
+    "id": "module-seed-13",
+    "title_pt": "Criacao de Look",
+    "title_en": "Look Creation",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 5,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m13t1", "title": "Uso de LUTs tecnicos e criativos" },
+      { "id": "m13t2", "title": "Introducao a FPE e workflows com Cineon" },
+      { "id": "m13t3", "title": "Entendendo a utilizacao do Grao Analogico" },
+      { "id": "m13t4", "title": "Halation: Tecnicas avancadas" },
+      { "id": "m13t5", "title": "Construcao de looks com identidade visual" }
+    ],
+    "order": 12
+  },
+  {
+    "id": "module-seed-14",
+    "title_pt": "Projeto Pratico 01",
+    "title_en": "Practical Project 01",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m14t1", "title": "Grading completo do inicio ao fim" },
+      { "id": "m14t2", "title": "Correcao primaria, secundaria e look" },
+      { "id": "m14t3", "title": "Consolidacao do workflow" },
+      { "id": "m14t4", "title": "Projeto guiado com aplicacao real" }
+    ],
+    "order": 13
+  },
+  {
+    "id": "module-seed-15",
+    "title_pt": "Projeto Pratico 02",
+    "title_en": "Practical Project 02",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m15t1", "title": "Continuacao da timeline do Modulo 03" },
+      { "id": "m15t2", "title": "Grading completo de um novo material" },
+      { "id": "m15t3", "title": "Exercicio de autonomia e tomada de decisao" },
+      { "id": "m15t4", "title": "Experiencia de projeto real completo" }
+    ],
+    "order": 14
+  },
+  {
+    "id": "module-seed-16",
+    "title_pt": "Deliver e Conform Final",
+    "title_en": "Final Deliver and Conform",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 3,
+    "duration_hours": 1,
+    "topics": [
+      { "id": "m16t1", "title": "Diferentes metodos de Render" },
+      { "id": "m16t2", "title": "Como usar Individual Clips e Handles" },
+      { "id": "m16t3", "title": "Entregas profissionais e organizadas" }
+    ],
+    "order": 15
   }
 ]

@@ -1,8 +1,8 @@
-import React from 'react';
+﻿import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../ui/LanguageContext';
 import SectionBlock from '../common/SectionBlock';
-import GlowText from '../common/GlowText';
+import SectionTitle from '../common/SectionTitle';
 import { Play, Quote } from 'lucide-react';
 
 export default function TestimonialsSection({ testimonials }) {
@@ -12,14 +12,11 @@ export default function TestimonialsSection({ testimonials }) {
 
   return (
     <div>
-      <div className="text-center mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-          <GlowText>{t('Depoimentos', 'Testimonials')}</GlowText>
-        </h2>
-        <p className="text-zinc-400">
-          {t('O que nossos alunos dizem', 'What our students say')}
-        </p>
-      </div>
+      <SectionTitle
+        line1={t('Depoimentos', 'Testimonials')}
+        line2Prefix={t('O que nossos', 'What our')}
+        highlight={t('alunos dizem', 'students say')}
+      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {testimonials.sort((a, b) => (a.order || 0) - (b.order || 0)).map((testimonial, index) => (
@@ -32,7 +29,7 @@ export default function TestimonialsSection({ testimonials }) {
           >
             <SectionBlock className="h-full">
               {testimonial.video_url ? (
-                <a 
+                <a
                   href={testimonial.video_url}
                   target="_blank"
                   rel="noopener noreferrer"
@@ -58,7 +55,7 @@ export default function TestimonialsSection({ testimonials }) {
 
               <div className="flex items-center gap-3 mt-auto">
                 {testimonial.author_photo_url && (
-                  <img 
+                  <img
                     src={testimonial.author_photo_url}
                     alt={testimonial.author_name}
                     className="w-10 h-10 rounded-full object-cover"

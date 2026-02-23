@@ -1,70 +1,57 @@
-import React from 'react';
+﻿import React from 'react';
 import { useLanguage } from '../ui/LanguageContext';
 import SectionBlock from '../common/SectionBlock';
-import GlowText from '../common/GlowText';
-import { Check, Volume2, Subtitles, Bot } from 'lucide-react';
+import SectionTitle from '../common/SectionTitle';
+import { Check } from 'lucide-react';
 
-const defaultLanguages = [
-  { language: 'English', flag: '🇺🇸', audio: true, subtitles: true, ai_generated: false },
-  { language: 'Português', flag: '🇧🇷', audio: true, subtitles: true, ai_generated: false },
-  { language: 'Español', flag: '🇪🇸', audio: true, subtitles: true, ai_generated: true },
-  { language: 'Français', flag: '🇫🇷', audio: true, subtitles: true, ai_generated: true },
-  { language: 'العربية', flag: '🇸🇦', audio: true, subtitles: true, ai_generated: true },
+const AVAILABLE_LANGUAGES = [
+  { flag: 'PT', namePt: 'Portugues', nameEn: 'Portuguese', dub: true, subtitles: true },
+  { flag: 'EN', namePt: 'Ingles', nameEn: 'English', dub: true, subtitles: true },
+  { flag: 'ES', namePt: 'Espanhol', nameEn: 'Spanish', dub: true, subtitles: true },
+  { flag: 'FR', namePt: 'Frances', nameEn: 'French', dub: true, subtitles: true },
+  { flag: 'AR', namePt: 'Arabe', nameEn: 'Arabic', dub: true, subtitles: true },
 ];
 
-export default function LanguagesSection({ languages }) {
-  const { t } = useLanguage();
-  
-  const langs = languages && languages.length > 0 ? languages : defaultLanguages;
+export default function LanguagesSection() {
+  const { t, language } = useLanguage();
+  const langs = AVAILABLE_LANGUAGES;
 
   return (
     <SectionBlock gradient>
-      <div className="text-center mb-8">
-        <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
-          {t('Idiomas ', 'Languages ')}
-          <GlowText>{t('Disponíveis', 'Available')}</GlowText>
-        </h2>
-      </div>
+      <SectionTitle
+        line1={t('Idiomas', 'Languages')}
+        highlight={t('Disponiveis', 'Available')}
+      />
 
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[500px]">
+      <div className="overflow-x-auto rounded-xl border border-white/15 bg-transparent">
+        <table className="w-full min-w-full bg-transparent table-fixed">
           <thead>
-            <tr className="border-b border-white/10">
-              <th className="text-left py-4 text-zinc-400 font-medium">{t('Idioma', 'Language')}</th>
-              <th className="text-center py-4 text-zinc-400 font-medium">
-                <div className="flex items-center justify-center gap-2">
-                  <Volume2 className="w-4 h-4" />
-                  {t('Áudio', 'Audio')}
-                </div>
+            <tr className="border-b border-white/15">
+              <th className="px-2 py-3 text-left text-[11px] font-semibold uppercase tracking-[0.08em] text-zinc-200 md:px-4 md:text-sm md:tracking-[0.12em]">
+                {t('Idioma', 'Language')}
               </th>
-              <th className="text-center py-4 text-zinc-400 font-medium">
-                <div className="flex items-center justify-center gap-2">
-                  <Subtitles className="w-4 h-4" />
-                  {t('Legendas', 'Subtitles')}
-                </div>
+              <th className="w-[88px] px-2 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.08em] text-zinc-200 md:w-auto md:px-4 md:text-sm md:tracking-[0.12em]">
+                {t('Idiomas', 'Languages')}
+              </th>
+              <th className="w-[88px] px-2 py-3 text-center text-[11px] font-semibold uppercase tracking-[0.08em] text-zinc-200 md:w-auto md:px-4 md:text-sm md:tracking-[0.12em]">
+                {t('Legendas', 'Subtitles')}
               </th>
             </tr>
           </thead>
           <tbody>
             {langs.map((lang, idx) => (
-              <tr key={idx} className="border-b border-white/5 hover:bg-white/5 transition-colors">
-                <td className="py-4">
+              <tr key={idx} className="border-b border-white/10 transition-colors hover:bg-white/5">
+                <td className="px-2 py-3 md:px-4 md:py-4">
                   <div className="flex items-center gap-3">
-                    <span className="text-2xl">{lang.flag}</span>
-                    <span className="text-white font-medium">{lang.language}</span>
-                    {lang.ai_generated && (
-                      <span className="flex items-center gap-1 px-2 py-0.5 bg-purple-500/20 rounded text-xs text-purple-300">
-                        <Bot className="w-3 h-3" />
-                        AI
-                      </span>
-                    )}
+                    <span className="rounded bg-zinc-700/60 px-2 py-1 text-xs text-zinc-200">{lang.flag}</span>
+                    <span className="truncate text-sm font-medium text-white md:text-base">{language === 'pt' ? lang.namePt : lang.nameEn}</span>
                   </div>
                 </td>
-                <td className="text-center py-4">
-                  {lang.audio && <Check className="w-5 h-5 text-green-400 mx-auto" />}
+                <td className="px-2 py-3 text-center md:px-4 md:py-4">
+                  {lang.dub && <Check className="mx-auto h-5 w-5 text-white" />}
                 </td>
-                <td className="text-center py-4">
-                  {lang.subtitles && <Check className="w-5 h-5 text-green-400 mx-auto" />}
+                <td className="px-2 py-3 text-center md:px-4 md:py-4">
+                  {lang.subtitles && <Check className="mx-auto h-5 w-5 text-white" />}
                 </td>
               </tr>
             ))}
@@ -72,10 +59,10 @@ export default function LanguagesSection({ languages }) {
         </table>
       </div>
 
-      <p className="text-xs text-zinc-500 mt-4 text-center">
+      <p className="mt-4 text-center text-xs text-zinc-500">
         * {t(
-          'Os idiomas Espanhol, Árabe e Francês foram gerados por IA utilizando a melhor tecnologia de dublagem disponível.',
-          'Spanish, Arabic and French audio were AI-generated using the best dubbing technology available.'
+          'Espanhol, Arabe e Frances foram gerados por IA usando a melhor tecnologia de dublagem disponivel no mercado.',
+          'Spanish, Arabic and French were AI-generated using the best dubbing technology available on the market.'
         )}
       </p>
     </SectionBlock>

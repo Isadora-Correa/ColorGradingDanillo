@@ -1,89 +1,40 @@
-import React from 'react';
+﻿import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../ui/LanguageContext';
 import { ExternalLink } from 'lucide-react';
 import { createPageUrl } from '@/utils';
+import { Button } from '@/components/ui/button';
 
 export default function ProductCard({ product, index }) {
   const { language, t } = useLanguage();
   const navigate = useNavigate();
-  
-  const name = language === 'pt' ? product.name_pt : product.name_en;
-  const description = language === 'pt' ? product.description_pt : product.description_en;
+
+  const name = language === 'pt'
+    ? (product.name_pt || product.name_en)
+    : (product.name_en || product.name_pt);
+  const description = language === 'pt'
+    ? (product.description_pt || product.description_en)
+    : (product.description_en || product.description_pt);
   const price = language === 'pt' ? product.price_brl : product.price_usd;
   const currency = language === 'pt' ? 'R$' : '$';
   const externalLink = language === 'pt' ? product.external_link_pt : product.external_link_en;
+  const imageSrc = product.image_url || '/produto1.png';
 
-  const CardContent = () => (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -5, scale: 1.02 }}
-      className="group relative bg-zinc-900/80 rounded-2xl overflow-hidden border border-white/5 hover:border-white/20 transition-all duration-500 cursor-pointer"
-    >
-      {/* Glow effect on hover */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 via-transparent to-cyan-500/10" />
-      </div>
+  const features =
+    (language === 'pt' ? product.features_pt : product.features_en) ||
+    (language === 'pt' ? product.highlights_pt : product.highlights_en) ||
+    (language === 'pt' ? product.course_highlights_pt : product.course_highlights_en) ||
+    [];
 
-      {/* Product Image */}
-      <div className="relative aspect-square overflow-hidden">
-        {product.image_url ? (
-          <img 
-            src={product.image_url} 
-            alt={name}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-purple-900/30 to-cyan-900/30 flex items-center justify-center">
-            <div className="w-24 h-24 rounded-xl bg-gradient-to-br from-purple-500 to-cyan-500 opacity-50" />
-          </div>
-        )}
-        
-        {/* Overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent opacity-60" />
-        
-        {/* Product type badge */}
-        <div className="absolute top-4 left-4">
-          <span className="px-3 py-1 text-xs font-medium bg-white/10 backdrop-blur-md rounded-full text-white/80 border border-white/10">
-            {product.product_type === 'course' ? t('Curso', 'Course') : 'LUTs'}
-          </span>
-        </div>
-
-        {externalLink && (
-          <div className="absolute top-4 right-4">
-            <ExternalLink className="w-5 h-5 text-white/60" />
-          </div>
-        )}
-      </div>
-
-      {/* Product Info */}
-      <div className="relative p-6">
-        <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-purple-400 group-hover:to-cyan-400 group-hover:bg-clip-text transition-all duration-300">
-          {name}
-        </h3>
-        
-        {description && (
-          <p className="text-sm text-zinc-400 mb-4 line-clamp-2">
-            {description}
-          </p>
-        )}
-
-        <div className="flex items-center justify-between">
-          <span className="text-2xl font-bold text-white">
-            {currency} {price?.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US', { minimumFractionDigits: 2 })}
-          </span>
-          
-          <span className="text-sm text-purple-400 group-hover:text-cyan-400 transition-colors">
-            {t('Ver detalhes', 'View details')} →
-          </span>
-        </div>
-      </div>
-    </motion.div>
-  );
+  const featureList = Array.isArray(features)
+    ? features.slice(0, 3)
+    : (description || '')
+      .split('.')
+      .map((part) => part.trim())
+      .filter(Boolean)
+      .slice(0, 3)
+      .map((item) => (item.endsWith('.') ? item : `${item}.`));
 
   const handleClick = () => {
     if (externalLink) {
@@ -94,8 +45,58 @@ export default function ProductCard({ product, index }) {
   };
 
   return (
-    <div onClick={handleClick}>
-      <CardContent />
-    </div>
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.45, delay: index * 0.08 }}
+      whileHover={{ y: -2 }}
+      className="group relative h-full overflow-hidden rounded-xl border border-white/10 bg-[#0c0d12]/85"
+    >
+      <div className="relative bg-gradient-to-b from-white/5 to-transparent">
+        <img
+          src={imageSrc}
+          alt={name}
+          className="h-[280px] w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+        />
+        {externalLink ? (
+          <ExternalLink className="absolute right-3 top-3 h-5 w-5 text-white/70" />
+        ) : null}
+      </div>
+
+      <div className="p-4 md:p-5">
+        <p className="mb-2 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-400">
+          {product.product_type === 'course' ? t('Curso', 'Course') : 'LUTs'}
+        </p>
+
+        <h3 className="mb-2 text-2xl font-bold leading-tight text-white">
+          {currency} {price?.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US', { minimumFractionDigits: 2 })}
+        </h3>
+
+        {description && (
+          <p className="mb-3 line-clamp-2 text-sm leading-snug text-zinc-200">
+            {description}
+          </p>
+        )}
+
+        {featureList.length > 0 && (
+          <ul className="mb-4 space-y-1.5 text-sm text-zinc-100/95">
+            {featureList.map((item, itemIndex) => (
+              <li key={`${item}-${itemIndex}`} className="line-clamp-1 leading-snug">
+                • {item}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        <Button
+          type="button"
+          onClick={handleClick}
+          className="h-10 rounded-full border border-white/20 bg-white px-5 text-sm font-semibold text-black hover:bg-zinc-200"
+        >
+          {t('Ver detalhes', 'View details')}
+        </Button>
+      </div>
+    </motion.article>
   );
 }

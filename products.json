@@ -1,0 +1,42 @@
+[
+  {
+    "id": "product-course",
+    "name_pt": "Nava Color Academy",
+    "name_en": "Color Grading Course",
+    "slug": "course",
+    "description_pt": "Curso completo de color grading com workflow profissional no DaVinci Resolve.",
+    "description_en": "Complete color grading course with a professional workflow in DaVinci Resolve.",
+    "price_brl": 1997,
+    "price_usd": 299.99,
+    "image_url": "",
+    "product_type": "course",
+    "available": true,
+    "show_in_pt": true,
+    "show_in_en": true,
+    "buy_link_brl": "https://example.com",
+    "buy_link_usd": "https://example.com",
+    "external_link_pt": "",
+    "external_link_en": "",
+    "order": 1
+  },
+  {
+    "id": "product-luts",
+    "name_pt": "Nava LUTs",
+    "name_en": "Nava LUTs",
+    "slug": "luts",
+    "description_pt": "Pack de LUTs cinematograficos para acelerar seu processo de cor.",
+    "description_en": "Cinematic LUT pack to speed up your color workflow.",
+    "price_brl": 197,
+    "price_usd": 39,
+    "image_url": "",
+    "product_type": "luts",
+    "available": true,
+    "show_in_pt": true,
+    "show_in_en": true,
+    "buy_link_brl": "https://example.com",
+    "buy_link_usd": "https://example.com",
+    "external_link_pt": "",
+    "external_link_en": "",
+    "order": 2
+  }
+]

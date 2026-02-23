@@ -22,10 +22,11 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const dataDir = path.join(__dirname, 'public', 'data');
+const dataDir = __dirname;
 
 app.use(cors()); // Permite a comunicação entre o front e o back
-app.use(express.json({ limit: '10mb' })); // Permite que o servidor entenda JSON
+app.use(express.json({ limit: '80mb' })); // beforeAfter usa imagens base64
+app.use(express.urlencoded({ extended: true, limit: '80mb' })); // Permite que o servidor entenda JSON
 
 // --- Rota de Login ---
 app.post('/api/login', (req, res) => {
@@ -95,6 +96,16 @@ app.post('/api/:entity', verifyToken, async (req, res) => { // <-- Middleware ad
   }
 });
 
+app.use((err, req, res, next) => {
+  if (err?.type === 'entity.too.large') {
+    return res.status(413).json({
+      message: 'Payload muito grande. Reduza o tamanho das imagens ou aumente o limite do servidor.',
+    });
+  }
+  return next(err);
+});
 app.listen(PORT, () => {
   console.log(`🚀 Servidor da API rodando em http://localhost:${PORT}`);
 });
+
+
