@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLanguage } from '../ui/LanguageContext';
 import SectionBlock from '../common/SectionBlock';
 import SectionTitle from '../common/SectionTitle';
@@ -7,9 +7,9 @@ import { ChevronsUp } from 'lucide-react';
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
 const STAGE_POSITIONS = {
-  before: 0,
+  before: 16,
   during: 50,
-  after: 100,
+  after: 88,
 };
 
 const DEFAULT_COMPARE_SETS = [
@@ -17,25 +17,25 @@ const DEFAULT_COMPARE_SETS = [
     id: 'set-1',
     title_pt: 'Case 01',
     title_en: 'Case 01',
-    beforeSrc: '/beforeafter/case1-before.jpg',
-    duringSrc: '/beforeafter/case1-during.jpg',
-    afterSrc: '/beforeafter/case1-after.jpg',
+    beforeSrc: '/beforeafter/case1-before.webp',
+    duringSrc: '/beforeafter/case1-during.webp',
+    afterSrc: '/beforeafter/case1-after.webp',
   },
   {
     id: 'set-2',
     title_pt: 'Case 02',
     title_en: 'Case 02',
-    beforeSrc: '/beforeafter/case2-before.jpg',
-    duringSrc: '/beforeafter/case2-during.jpg',
-    afterSrc: '/beforeafter/case2-after.jpg',
+    beforeSrc: '/beforeafter/case2-before.webp',
+    duringSrc: '/beforeafter/case2-during.webp',
+    afterSrc: '/beforeafter/case2-after.webp',
   },
   {
     id: 'set-3',
     title_pt: 'Case 03',
     title_en: 'Case 03',
-    beforeSrc: '/beforeafter/case3-before.jpg',
-    duringSrc: '/beforeafter/case3-during.jpg',
-    afterSrc: '/beforeafter/case3-after.jpg',
+    beforeSrc: '/beforeafter/case3-before.webp',
+    duringSrc: '/beforeafter/case3-during.webp',
+    afterSrc: '/beforeafter/case3-after.webp',
   },
 ];
 
@@ -45,44 +45,41 @@ const normalizeUrl = (value) => {
   return s;
 };
 
-function getStageFromSlider(value) {
+const stageFromValue = (value) => {
   if (value <= 33.333) return 'before';
   if (value <= 66.666) return 'during';
   return 'after';
-}
+};
 
 function ComparePanel({ item, tabs }) {
   const [activeTab, setActiveTab] = useState('before');
   const [sliderX, setSliderX] = useState(STAGE_POSITIONS.before);
   const [isDragging, setIsDragging] = useState(false);
   const trackRef = useRef(null);
+  const pointerIdRef = useRef(null);
+  const startPointRef = useRef({ x: 0, y: 0 });
+  const dragLockedRef = useRef(false);
 
-  const imageByTab = {
-    before: item.beforeSrc,
-    during: item.duringSrc,
-    after: item.afterSrc,
-  };
-  const fallbackByTab = {
-    before: item.fallbackBeforeSrc || item.beforeSrc,
-    during: item.fallbackDuringSrc || item.duringSrc,
-    after: item.fallbackAfterSrc || item.afterSrc,
-  };
-  const [forceFallback, setForceFallback] = useState({
-    before: false,
-    during: false,
-    after: false,
-  });
-  const currentImageSrc = forceFallback[activeTab]
-    ? fallbackByTab[activeTab]
-    : imageByTab[activeTab] || fallbackByTab[activeTab];
+  const sources = useMemo(() => ({
+    before: item.beforeSrc || item.duringSrc || item.afterSrc || '',
+    during: item.duringSrc || item.beforeSrc || item.afterSrc || '',
+    after: item.afterSrc || item.duringSrc || item.beforeSrc || '',
+  }), [item.afterSrc, item.beforeSrc, item.duringSrc]);
+  const currentImage = sources[activeTab] || sources.before;
+
+  useEffect(() => {
+    setActiveTab('before');
+    setSliderX(STAGE_POSITIONS.before);
+  }, [item.id]);
 
   const updateFromClientX = (clientX) => {
     if (!trackRef.current) return;
     const rect = trackRef.current.getBoundingClientRect();
     const next = ((clientX - rect.left) / rect.width) * 100;
     const clamped = clamp(next, 0, 100);
+    const stage = stageFromValue(clamped);
     setSliderX(clamped);
-    setActiveTab(getStageFromSlider(clamped));
+    setActiveTab(stage);
   };
 
   const setStage = (stageId) => {
@@ -92,53 +89,81 @@ function ComparePanel({ item, tabs }) {
 
   const startDrag = (e) => {
     if (e.pointerType === 'mouse' && e.button !== 0) return;
-    e.preventDefault();
-    e.currentTarget.setPointerCapture?.(e.pointerId);
-    setIsDragging(true);
-    updateFromClientX(e.clientX);
-  };
-
-  const moveDrag = (e) => {
-    if (!isDragging) return;
-    updateFromClientX(e.clientX);
-  };
-
-  const endDrag = (e) => {
-    e.currentTarget.releasePointerCapture?.(e.pointerId);
+    pointerIdRef.current = e.pointerId;
+    startPointRef.current = { x: e.clientX, y: e.clientY };
+    dragLockedRef.current = e.pointerType === 'mouse';
+    if (e.pointerType === 'mouse') {
+      setIsDragging(true);
+      updateFromClientX(e.clientX);
+      return;
+    }
     setIsDragging(false);
   };
+
+  useEffect(() => {
+    const onMove = (e) => {
+      if (pointerIdRef.current === null) return;
+      if (pointerIdRef.current !== null && e.pointerId !== pointerIdRef.current) return;
+      if (!dragLockedRef.current) {
+        const dx = Math.abs(e.clientX - startPointRef.current.x);
+        const dy = Math.abs(e.clientY - startPointRef.current.y);
+        if (dx < 8 && dy < 8) return;
+        if (dy > dx) {
+          pointerIdRef.current = null;
+          dragLockedRef.current = false;
+          setIsDragging(false);
+          return;
+        }
+        dragLockedRef.current = true;
+        setIsDragging(true);
+      }
+      updateFromClientX(e.clientX);
+    };
+
+    const onEnd = (e) => {
+      if (pointerIdRef.current === null) return;
+      if (pointerIdRef.current !== null && e.pointerId !== pointerIdRef.current) return;
+      pointerIdRef.current = null;
+      dragLockedRef.current = false;
+      setIsDragging(false);
+    };
+
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('pointerup', onEnd);
+    window.addEventListener('pointercancel', onEnd);
+
+    return () => {
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onEnd);
+      window.removeEventListener('pointercancel', onEnd);
+    };
+  }, []);
 
   return (
     <div className="mb-8 last:mb-0">
       <div
         ref={trackRef}
-        className="relative aspect-video overflow-hidden rounded-xl bg-zinc-900"
+        className="relative aspect-video overflow-hidden rounded-xl bg-zinc-900 select-none touch-pan-y"
         onPointerDown={startDrag}
-        onPointerMove={moveDrag}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
-        onPointerLeave={endDrag}
       >
         <img
-          src={currentImageSrc}
-          alt="Stage"
-          className="h-full w-full object-cover"
-          onError={() => {
-            setForceFallback((prev) => ({ ...prev, [activeTab]: true }));
-          }}
+          src={currentImage}
+          alt={`${activeTab} stage`}
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          loading="eager"
+          decoding="auto"
         />
 
         <div className="absolute inset-y-0 z-10" style={{ left: `${sliderX}%` }}>
           <div className="absolute -left-px top-0 h-full w-0.5 bg-white/95 shadow-[0_0_18px_rgba(255,255,255,0.6)]" />
           <button
             type="button"
-            className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-[0_0_24px_rgba(255,255,255,0.4)]"
+            className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-[0_0_24px_rgba(255,255,255,0.4)] touch-pan-y"
             aria-label="Compare slider"
-            onPointerDown={startDrag}
-            onPointerMove={moveDrag}
-            onPointerUp={endDrag}
-            onPointerCancel={endDrag}
-            onPointerLeave={endDrag}
+            onPointerDown={(e) => {
+              e.stopPropagation();
+              startDrag(e);
+            }}
           >
             <ChevronsUp className="h-6 w-6 rotate-90 text-black" />
           </button>
@@ -173,25 +198,24 @@ function ComparePanel({ item, tabs }) {
   );
 }
 
-export default function BeforeAfterSlider({ items = [] }) {
+export default function BeforeAfterSlider({ items, isLoading = false }) {
   const { t } = useLanguage();
+
   const compareSets = useMemo(() => {
+    if (isLoading && (!Array.isArray(items) || items.length === 0)) return [];
     if (!Array.isArray(items) || items.length === 0) return DEFAULT_COMPARE_SETS;
 
     const normalized = items
       .map((item, index) => {
         const fallback = DEFAULT_COMPARE_SETS[index % DEFAULT_COMPARE_SETS.length];
-        const rawBefore = normalizeUrl(item?.before_url || item?.before_image_url || item?.beforeSrc);
-        const rawDuring = normalizeUrl(item?.during_url || item?.during_image_url || item?.duringSrc);
-        const rawAfter = normalizeUrl(item?.after_url || item?.after_image_url || item?.afterSrc);
-        const beforeSrc = rawBefore || fallback.beforeSrc;
-        const duringSrc = rawDuring || beforeSrc || fallback.duringSrc;
-        const afterSrc = rawAfter || fallback.afterSrc;
+        const beforeSrc = normalizeUrl(item?.before_url || item?.before_image_url || item?.beforeSrc) || fallback.beforeSrc;
+        const duringSrc = normalizeUrl(item?.during_url || item?.during_image_url || item?.duringSrc) || beforeSrc || fallback.duringSrc;
+        const afterSrc = normalizeUrl(item?.after_url || item?.after_image_url || item?.afterSrc) || duringSrc || fallback.afterSrc;
 
         const hasAnyContent = Boolean(
-          rawBefore ||
-          rawDuring ||
-          rawAfter ||
+          normalizeUrl(item?.before_url || item?.before_image_url || item?.beforeSrc) ||
+          normalizeUrl(item?.during_url || item?.during_image_url || item?.duringSrc) ||
+          normalizeUrl(item?.after_url || item?.after_image_url || item?.afterSrc) ||
           item?.title_pt ||
           item?.title_en ||
           item?.description_pt ||
@@ -207,16 +231,13 @@ export default function BeforeAfterSlider({ items = [] }) {
           beforeSrc,
           duringSrc,
           afterSrc,
-          fallbackBeforeSrc: fallback.beforeSrc,
-          fallbackDuringSrc: fallback.duringSrc,
-          fallbackAfterSrc: fallback.afterSrc,
         };
       })
       .filter(Boolean)
       .sort((a, b) => a.order - b.order);
 
     return normalized.length > 0 ? normalized : DEFAULT_COMPARE_SETS;
-  }, [items]);
+  }, [isLoading, items]);
 
   const tabs = [
     {
@@ -247,6 +268,12 @@ export default function BeforeAfterSlider({ items = [] }) {
         titleClassName="text-[1.55rem] leading-[1.1] md:text-4xl lg:text-5xl"
       />
 
+      {isLoading && compareSets.length === 0 ? (
+        <div className="mb-8">
+          <div className="aspect-video rounded-xl border border-white/10 bg-zinc-900/40 animate-pulse" />
+        </div>
+      ) : null}
+
       {compareSets.map((item, index) => (
         <ComparePanel
           key={item.id || index}
@@ -257,4 +284,3 @@ export default function BeforeAfterSlider({ items = [] }) {
     </SectionBlock>
   );
 }
-

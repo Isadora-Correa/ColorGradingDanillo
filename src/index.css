@@ -102,6 +102,15 @@ body, #root {
 html, body {
   -ms-overflow-style: none;
   scrollbar-width: none;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 html::-webkit-scrollbar,

@@ -86,10 +86,30 @@ const DEFAULT_FAQS = [
   },
 ];
 
-export default function FAQSection() {
+const normalizeFaqs = (items = []) =>
+  (Array.isArray(items) ? items : [])
+    .map((faq, index) => {
+      const questionPt = String(faq?.question_pt || '').trim();
+      const questionEn = String(faq?.question_en || '').trim();
+      const answerPt = String(faq?.answer_pt || '').trim();
+      const answerEn = String(faq?.answer_en || '').trim();
+      return {
+        ...faq,
+        id: faq?.id || `faq-${index}`,
+        question_pt: questionPt || questionEn,
+        question_en: questionEn || questionPt,
+        answer_pt: answerPt || answerEn,
+        answer_en: answerEn || answerPt,
+        order: Number.isFinite(Number(faq?.order)) ? Number(faq.order) : index,
+      };
+    })
+    .filter((faq) => faq.question_pt && faq.answer_pt)
+    .sort((a, b) => a.order - b.order);
+
+export default function FAQSection({ faqs = [] }) {
   const { language, t } = useLanguage();
   const [expandedFaq, setExpandedFaq] = useState(null);
-  const faqItems = DEFAULT_FAQS;
+  const faqItems = normalizeFaqs(faqs).length > 0 ? normalizeFaqs(faqs) : normalizeFaqs(DEFAULT_FAQS);
 
   return (
     <SectionBlock gradient>

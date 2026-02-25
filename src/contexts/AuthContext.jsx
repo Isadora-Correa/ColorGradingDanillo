@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiClient } from '@/api/apiClient';
 
@@ -7,6 +7,16 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem('authToken'));
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const onExpired = () => {
+      localStorage.removeItem('authToken');
+      setToken(null);
+      navigate('/adm', { replace: true });
+    };
+    window.addEventListener('auth:expired', onExpired);
+    return () => window.removeEventListener('auth:expired', onExpired);
+  }, [navigate]);
 
   const login = async (username, password, redirectTo = '/adm/painel') => {
     const data = await apiClient.login({ username, password });

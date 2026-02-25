@@ -24,11 +24,30 @@ const MODULES = [
   { id: 16, order: 16, show_in_en: true, title_pt: 'Deliver e Conform Final', title_en: 'Final Deliver and Conform', lessons_pt: ['Diferentes metodos de Render', 'Como usar Individual Clips e Handles', 'Entregas profissionais e organizadas'], lessons_en: ['Different render methods', 'How to use individual clips and handles', 'Professional and organized deliveries'] },
 ];
 
-export default function CourseModules() {
+const toLessonList = (module, language) => {
+  const candidates = language === 'pt'
+    ? [module?.topics_pt, module?.lessons_pt, module?.topics]
+    : [module?.topics_en, module?.lessons_en, module?.topics_pt, module?.lessons_pt, module?.topics];
+
+  for (const list of candidates) {
+    if (!Array.isArray(list) || list.length === 0) continue;
+    const normalized = list
+      .map((x) => (typeof x === 'string' ? x : x?.title))
+      .map((x) => String(x || '').trim())
+      .filter(Boolean);
+    if (normalized.length > 0) return normalized;
+  }
+  return [];
+};
+
+export default function CourseModules({ modules = [] }) {
   const { language, t } = useLanguage();
   const [expandedModule, setExpandedModule] = useState(null);
 
-  const filteredModules = MODULES.filter((m) => language === 'pt' || m.show_in_en !== false).sort((a, b) => (a.order || 0) - (b.order || 0));
+  const sourceModules = Array.isArray(modules) && modules.length > 0 ? modules : MODULES;
+  const filteredModules = sourceModules
+    .filter((m) => language === 'pt' || m.show_in_en !== false)
+    .sort((a, b) => (a.order || 0) - (b.order || 0));
 
   return (
     <SectionBlock gradient>
@@ -41,8 +60,10 @@ export default function CourseModules() {
       <div className="space-y-3">
         {filteredModules.map((module, index) => {
           const isExpanded = expandedModule === index;
-          const title = language === 'pt' ? module.title_pt : module.title_en;
-          const lessons = language === 'pt' ? module.lessons_pt : module.lessons_en;
+          const title = language === 'pt'
+            ? (module.title_pt || module.title_en)
+            : (module.title_en || module.title_pt);
+          const lessons = toLessonList(module, language);
 
           return (
             <motion.div
@@ -101,7 +122,7 @@ export default function CourseModules() {
       <div className="text-center mt-6">
         <p className="text-sm text-zinc-500 flex items-center justify-center gap-2">
           <BookOpen className="w-4 h-4" />
-          {filteredModules.length} {t('modulos', 'modules')} - {filteredModules.reduce((acc, m) => acc + ((language === 'pt' ? m.lessons_pt : m.lessons_en)?.length || 0), 0)} {t('aulas', 'lessons')}
+          {filteredModules.length} {t('modulos', 'modules')} - {filteredModules.reduce((acc, m) => acc + toLessonList(m, language).length, 0)} {t('aulas', 'lessons')}
         </p>
       </div>
     </SectionBlock>

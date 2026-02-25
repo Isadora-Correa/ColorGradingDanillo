@@ -1,13 +1,34 @@
 [
   {
-    "id": "student1",
-    "name": "João Silva",
-    "instagram": "joaosilvafilms",
-    "photo_url": "/images/student-1.jpg",
-    "showreel_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "testimonial_pt": "O curso foi um divisor de águas na minha carreira. A didática do Danillo é incrível!",
-    "testimonial_en": "The course was a game-changer in my career. Danillo's teaching method is incredible!",
-    "clients": ["Client X", "Client Y"],
+    "id": "student-julia",
+    "name": "Julia Muniz",
+    "instagram": "juliamuniz",
+    "photo_url": "/julia/julia.webp",
+    "showreel_url": "https://player.vimeo.com/video/1167172670?h=950940ccee&title=0&byline=0&portrait=0&badge=0",
+    "logos": [
+      "/julia/Amazon-Prime-Video-Emblem.webp",
+      "/julia/farm-rio-logo-0.webp",
+      "/julia/heineken-14-logo-png-transparent.webp",
+      "/julia/melissa-logo.webp"
+    ],
+    "testimonial_pt": "\"O curso me deu clareza de processo e confianca para entregar projetos com padrao profissional.\"",
+    "testimonial_en": "\"The course gave me process clarity and confidence to deliver projects at a professional standard.\"",
+    "order": 0
+  },
+  {
+    "id": "student-clysmann",
+    "name": "Clysmann",
+    "instagram": "clysmann",
+    "photo_url": "/clys/clys.webp",
+    "showreel_url": "https://player.vimeo.com/video/1167178291?h=7f73306080&title=0&byline=0&portrait=0&badge=0",
+    "logos": [
+      "/clys/Disney Plus.webp",
+      "/clys/ESPN_wordmark.svg.webp",
+      "/clys/Logo_globo_principal-laranja.webp",
+      "/clys/prime sports.webp"
+    ],
+    "testimonial_pt": "\"Com o metodo do curso, meu workflow ficou mais rapido e minhas entregas ficaram muito mais consistentes.\"",
+    "testimonial_en": "\"With the course method, my workflow became faster and my deliveries much more consistent.\"",
     "order": 1
   }
 ]

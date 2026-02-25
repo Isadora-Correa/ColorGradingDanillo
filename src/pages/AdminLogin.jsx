@@ -47,7 +47,7 @@ export default function AdminLogin() {
       >
         <div className="mb-8 flex cursor-pointer justify-center" onClick={() => navigate('/')}>
           <img
-            src="/logo-header.png"
+            src="/logo-header.webp"
             alt="Nava Logo"
             className="h-12 w-auto object-contain"
           />

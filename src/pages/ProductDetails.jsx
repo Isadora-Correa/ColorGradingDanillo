@@ -76,7 +76,25 @@ function ProductDetailContent() {
     .filter(Boolean)
     .slice(0, 4)
     .map((item) => `${item}.`);
-  const detailImage = product.image_url || product.detail_image_url || '/produto1.png';
+  const detailImage = language === 'pt'
+    ? (
+      product.detail_image_url_pt ||
+      product.image_url_pt ||
+      product.image_pt_url ||
+      product.image_pt ||
+      product.detail_image_url ||
+      product.image_url ||
+      '/produto1.webp'
+    )
+    : (
+      product.detail_image_url_en ||
+      product.image_url_en ||
+      product.image_en_url ||
+      product.image_en ||
+      product.detail_image_url ||
+      product.image_url ||
+      '/produto1.webp'
+    );
   const hasComparePrice = Number.isFinite(comparePrice) && comparePrice > price;
   const savingsPercent = hasComparePrice
     ? Math.round(((comparePrice - price) / comparePrice) * 100)
@@ -106,11 +124,12 @@ function ProductDetailContent() {
 
           <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-8">
             <motion.img
+              key={`${language}-${product.id || product.slug || 'detail'}`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               src={detailImage}
               alt={name}
-              className="h-auto max-h-[66vh] w-full max-w-[900px] object-contain lg:col-span-6"
+              className="mx-auto h-auto max-h-[34vh] w-full max-w-[900px] object-contain sm:max-h-[46vh] lg:col-span-6 lg:max-h-[66vh]"
             />
 
             <motion.div

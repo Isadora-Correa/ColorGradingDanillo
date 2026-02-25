@@ -1,14 +1,32 @@
 [
   {
-    "id": "logo1",
-    "name": "Brand A",
-    "logo_url": "/images/client-logo-1.png",
+    "id": "logo-nike",
+    "name": "Nike",
+    "logo_url": "/logos/Imagem-Nike-Logo-PNG-1024x1024-2-white.webp",
+    "order": 0
+  },
+  {
+    "id": "logo-amazon",
+    "name": "Amazon",
+    "logo_url": "/logos/Amazon_logo.svg-white.webp",
     "order": 1
   },
   {
-    "id": "logo2",
-    "name": "Brand B",
-    "logo_url": "/images/client-logo-2.png",
+    "id": "logo-cartier",
+    "name": "Cartier",
+    "logo_url": "/logos/Cartier_logo.svg-white.webp",
     "order": 2
+  },
+  {
+    "id": "logo-hyundai",
+    "name": "Hyundai",
+    "logo_url": "/logos/hyundai-logo-white-solid.webp",
+    "order": 3
+  },
+  {
+    "id": "logo-decathlon",
+    "name": "Decathlon",
+    "logo_url": "/logos/Decathlon-Logo-white.webp",
+    "order": 4
   }
 ]

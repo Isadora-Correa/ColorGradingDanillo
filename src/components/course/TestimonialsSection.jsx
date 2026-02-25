@@ -43,7 +43,10 @@ export default function TestimonialsSection({ testimonials }) {
                 </a>
               ) : (
                 <div className="mb-4">
-                  <Quote className="w-8 h-8 text-purple-400 opacity-50" />
+                  <span className="relative block h-8 w-8">
+                    <Quote className="absolute inset-0 h-8 w-8 text-fuchsia-400/80" />
+                    <Quote className="absolute inset-0 h-8 w-8 -translate-y-[0.5px] translate-x-[0.5px] text-cyan-300/85 mix-blend-screen" />
+                  </span>
                 </div>
               )}
 

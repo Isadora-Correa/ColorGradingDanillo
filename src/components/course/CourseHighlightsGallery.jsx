@@ -6,7 +6,7 @@ import { useLanguage } from '../ui/LanguageContext';
 const FEATURE_CARDS = [
   {
     id: 'professional',
-    image: '/imagem1.jpg',
+    image: '/imagem1.webp',
     titlePt: 'Feito para tornar voce um colorista profissional com resultados',
     titleEn: 'Built to turn you into a professional colorist with real results',
     descPt: 'Um curso robusto do basico ao avancado, com tecnicas aplicadas no mercado internacional.',
@@ -14,7 +14,7 @@ const FEATURE_CARDS = [
   },
   {
     id: 'portfolio',
-    image: '/imagem2.jpg',
+    image: '/imagem2.webp',
     titlePt: 'Seu Portfolio Masterpiece Garantido',
     titleEn: 'Your Masterpiece Portfolio Guaranteed',
     descPt: 'Ao decorrer do curso, vamos colorir dois projetos inteiros do inicio ao fim.',
@@ -22,7 +22,7 @@ const FEATURE_CARDS = [
   },
   {
     id: 'material',
-    image: '/produto1.png',
+    image: '/produto1.webp',
     titlePt: 'Mais de 300GB de material bruto gratuito',
     titleEn: 'Over 300GB of free raw practice material',
     descPt: 'Incluindo B-Roll e imagens para pratica real de color grading.',
@@ -30,7 +30,7 @@ const FEATURE_CARDS = [
   },
   {
     id: 'premiere',
-    image: '/imagem3.jpg',
+    image: '/imagem3.webp',
     titlePt: 'Colorir no Premiere e mais dificil e ineficaz',
     titleEn: 'Color grading in Premiere is harder and less effective',
     descPt: 'Aqui voce aprende a extrair todo o potencial com fluxo profissional.',
@@ -59,7 +59,7 @@ export default function CourseHighlightsGallery() {
         </h3>
 
         <img
-          src="/logo-icone.png"
+          src="/logo-icone.webp"
           alt="Nava"
           className="hidden h-14 w-14 shrink-0 object-contain md:block"
           loading="lazy"

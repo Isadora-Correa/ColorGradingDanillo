@@ -3,7 +3,7 @@ import SectionBlock from '../common/SectionBlock';
 import GlowText from '../common/GlowText';
 import { useLanguage } from '../ui/LanguageContext';
 
-export default function CertificateSection({ imageSrc = '/certificado.jpeg' }) {
+export default function CertificateSection({ imageSrc = '/certificado.webp' }) {
   const { t, language } = useLanguage();
   const [tilt, setTilt] = useState({ rx: 0, ry: 0, glareX: 50, glareY: 50, active: false });
   const [isMobileDevice, setIsMobileDevice] = useState(false);
@@ -116,7 +116,7 @@ export default function CertificateSection({ imageSrc = '/certificado.jpeg' }) {
         >
           <div className="relative overflow-hidden rounded-xl">
             <img
-              src={language === 'en' ? '/certificado-ingles.jpg' : imageSrc}
+              src={language === 'en' ? '/certificado-ingles.webp' : imageSrc}
               alt={t('Certificado do curso', 'Course certificate')}
               className="h-auto w-full object-cover"
               loading="lazy"

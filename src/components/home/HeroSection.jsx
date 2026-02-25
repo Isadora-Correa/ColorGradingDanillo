@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function HeroSection({ videoUrl, imageUrl }) {
-  const bgImageUrl = '/bg-4-YBg7QqJQNXuQZnnE.jpg';
+  const bgImageUrl = '/bg-4-YBg7QqJQNXuQZnnE.webp';
   
   return (
     <section className="relative h-[200px] md:h-[220px] w-full overflow-hidden">

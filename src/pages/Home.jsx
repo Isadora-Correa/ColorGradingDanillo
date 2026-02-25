@@ -46,6 +46,11 @@ function HomeContent() {
     queryFn: () => apiClient.get('logos'),
     initialData: [],
   });
+  const { data: students } = useQuery({
+    queryKey: ['students'],
+    queryFn: () => apiClient.get('students'),
+    initialData: [],
+  });
 
   const { data: testimonials } = useQuery({
     queryKey: ['testimonials'],
@@ -53,9 +58,13 @@ function HomeContent() {
     initialData: [],
   });
 
-  const { data: beforeAfterItems } = useQuery({
+  const { data: beforeAfterItems, isLoading: beforeAfterLoading } = useQuery({
     queryKey: ['beforeAfter'],
     queryFn: () => apiClient.get('beforeAfter'),
+  });
+  const { data: faqs } = useQuery({
+    queryKey: ['faqs'],
+    queryFn: () => apiClient.get('faqs'),
     initialData: [],
   });
 
@@ -87,13 +96,13 @@ function HomeContent() {
             {courseProduct && (
               <div id="course-details" className="space-y-12">
                 {/* 1. Before/After Slider */}
-                <BeforeAfterSlider items={beforeAfterItems} />
+                <BeforeAfterSlider items={beforeAfterItems} isLoading={beforeAfterLoading} />
                 
                 {/* 2. Course Highlights Gallery */}
                 <CourseHighlightsGallery />
 
                 {/* 3. Student Showcase */}
-                <StudentShowcase />
+                <StudentShowcase students={students} />
 
                 {/* 4. Instructor Section */}
                 <InstructorSection content={content} />
@@ -120,7 +129,7 @@ function HomeContent() {
                 <CertificateSection />
 
                 {/* 10. FAQ */}
-                <FAQSection />
+                <FAQSection faqs={faqs} />
               </div>
             )}
           </>

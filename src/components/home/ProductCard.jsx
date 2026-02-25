@@ -19,7 +19,25 @@ export default function ProductCard({ product, index }) {
   const price = language === 'pt' ? product.price_brl : product.price_usd;
   const currency = language === 'pt' ? 'R$' : '$';
   const externalLink = language === 'pt' ? product.external_link_pt : product.external_link_en;
-  const imageSrc = product.image_url || '/produto1.png';
+  const imageSrc = language === 'pt'
+    ? (
+      product.image_url_pt ||
+      product.detail_image_url_pt ||
+      product.image_pt_url ||
+      product.image_pt ||
+      product.image_url ||
+      product.detail_image_url ||
+      '/produto1.webp'
+    )
+    : (
+      product.image_url_en ||
+      product.detail_image_url_en ||
+      product.image_en_url ||
+      product.image_en ||
+      product.image_url ||
+      product.detail_image_url ||
+      '/produto1.webp'
+    );
 
   const features =
     (language === 'pt' ? product.features_pt : product.features_en) ||
@@ -53,8 +71,21 @@ export default function ProductCard({ product, index }) {
       whileHover={{ y: -2 }}
       className="group relative h-full overflow-hidden rounded-xl border border-white/10 bg-[#0c0d12]/85"
     >
-      <div className="relative bg-gradient-to-b from-white/5 to-transparent">
+      <div
+        className="relative cursor-pointer bg-gradient-to-b from-white/5 to-transparent"
+        onClick={handleClick}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleClick();
+          }
+        }}
+        role="button"
+        tabIndex={0}
+        aria-label={t('Ver detalhes do produto', 'View product details')}
+      >
         <img
+          key={`${language}-${product.id || product.slug || index}`}
           src={imageSrc}
           alt={name}
           className="h-[280px] w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
