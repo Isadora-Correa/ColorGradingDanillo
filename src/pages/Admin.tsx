@@ -100,6 +100,110 @@ const DEFAULT_MODULES = [
   { id: 'module-seed-16', title_pt: 'Deliver e Conform Final', title_en: 'Final Deliver and Conform', lessons_count: 3, duration_hours: 1, topics: [{ id: id(), title: 'Diferentes metodos de Render' }, { id: id(), title: 'Como usar Individual Clips e Handles' }, { id: id(), title: 'Entregas profissionais e organizadas' }], order: 15 },
 ];
 
+const COURSE_CONTENT_FALLBACK = {
+  id: 'main_content',
+  hero_title_pt: 'Domine a Arte da Cor',
+  hero_title_en: 'Master the Art of Color',
+  hero_subtitle_pt: 'O curso definitivo de Color Grading com DaVinci Resolve que vai transformar a qualidade dos seus videos.',
+  hero_subtitle_en: 'The definitive Color Grading course with DaVinci Resolve that will transform the quality of your videos.',
+  hero_image_url: '',
+  instructor_name: 'Danilo Navarro',
+  instructor_bio_pt:
+    'Nava e um colorista profissional que atua em grandes projetos internacionais, colaborando com diretores e fotografos em diferentes formatos, de comerciais high end a series e filmes.\n\nSeu trabalho e focado em usar a cor como ferramenta narrativa, aplicando workflows reais do mercado para criar imagens com identidade e impacto visual. Ao longo dos anos, assinou projetos para grandes marcas globais, alem de series internacionais, documentarios, curtas e filmes premiados.\n\nHoje, alem de atuar como Colorista Senior, Nava tambem compartilha sua experiencia com videomakers e coloristas que querem elevar o nivel do seu trabalho e dominar o Color Grading de forma criativa, estrategica e profissional.',
+  instructor_bio_en:
+    'Nava is a professional colorist working on major international projects, collaborating with directors and cinematographers across formats, from high-end commercials to series and films.\n\nHis work uses color as a narrative tool, applying real market workflows to create images with identity and visual impact. Over the years, he has delivered projects for global brands, as well as international series, documentaries, shorts and award-winning films.\n\nToday, in addition to working as a Senior Colorist, Nava shares his experience with videomakers and colorists who want to raise the level of their work and master Color Grading creatively, strategically and professionally.',
+  instructor_photo_url: '/nava.webp',
+  instructor_showreel_url: 'https://player.vimeo.com/video/944559078?title=0&byline=0&portrait=0&badge=0',
+  instructor_career_text_pt: 'Atuando no audiovisual em projetos internacionais.',
+  instructor_career_text_en: 'Working in audiovisual with international projects.',
+  instructor_students_count_pt: '+ de 150 alunos',
+  instructor_students_count_en: '150+ students',
+  instructor_clients_count_pt: '+ de 100 comerciais, series e filmes premiados',
+  instructor_clients_count_en: '100+ award-winning commercials, series and films',
+  highlights_title_pt: 'Conheca o curso que vai trazer COR para sua carreira.',
+  highlights_title_en: 'Discover the course that brings COLOR to your career.',
+  highlights_title_line1_pt: 'Conheca o curso que vai trazer',
+  highlights_title_line1_en: 'Discover the course that brings',
+  highlights_title_line2_pt: 'para sua carreira.',
+  highlights_title_line2_en: 'to your career.',
+  highlight_1_image_url: '/1.1.1_1.1.1.jpg',
+  highlight_1_title_pt: 'Feito para tornar voce um colorista profissional com resultados',
+  highlight_1_title_en: 'Built to turn you into a professional colorist with real results',
+  highlight_1_desc_pt: 'Um curso robusto do basico ao avancado, com tecnicas aplicadas no mercado internacional.',
+  highlight_1_desc_en: 'A robust course from fundamentals to advanced, with techniques used in the international market.',
+  highlight_2_image_url: '/1.15.1_1.15.1.jpg',
+  highlight_2_title_pt: 'Seu Portfolio Masterpiece Garantido',
+  highlight_2_title_en: 'Your Masterpiece Portfolio Guaranteed',
+  highlight_2_desc_pt: 'Ao decorrer do curso, vamos colorir dois projetos inteiros do inicio ao fim.',
+  highlight_2_desc_en: 'Throughout the course, we grade two complete projects from start to finish.',
+  highlight_3_image_url: '/1.6.1_1.6.1.jpg',
+  highlight_3_title_pt: 'Mais de 300GB de material bruto gratuito',
+  highlight_3_title_en: 'Over 300GB of free raw practice material',
+  highlight_3_desc_pt: 'Incluindo B-Roll e imagens para pratica real de color grading.',
+  highlight_3_desc_en: 'Including B-roll and footage for real-world color grading practice.',
+  highlight_4_image_url: '/1.8.1_1.8.1.jpg',
+  highlight_4_title_pt: 'Colorir no Premiere e mais dificil e ineficaz',
+  highlight_4_title_en: 'Color grading in Premiere is harder and less effective',
+  highlight_4_desc_pt: 'Aqui voce aprende a extrair todo o potencial com fluxo profissional.',
+  highlight_4_desc_en: 'Here you learn to unlock full potential with a professional workflow.',
+};
+
+const normalizeCourseContent = (value) => {
+  const source = Array.isArray(value) ? (value[0] || {}) : (value || {});
+  const merged = { ...COURSE_CONTENT_FALLBACK, ...source };
+  const mergedTitlePt =
+    String(merged?.highlights_title_pt || '').trim() ||
+    [merged?.highlights_title_line1_pt, merged?.highlights_title_line2_pt].filter(Boolean).join(' ').trim();
+  const mergedTitleEn =
+    String(merged?.highlights_title_en || '').trim() ||
+    [merged?.highlights_title_line1_en, merged?.highlights_title_line2_en].filter(Boolean).join(' ').trim();
+  return {
+    id: merged?.id || 'course-content-main',
+    hero_title_pt: String(merged?.hero_title_pt || '').trim(),
+    hero_title_en: String(merged?.hero_title_en || '').trim(),
+    hero_subtitle_pt: String(merged?.hero_subtitle_pt || '').trim(),
+    hero_subtitle_en: String(merged?.hero_subtitle_en || '').trim(),
+    hero_image_url: merged?.hero_image_url || '',
+    instructor_name: String(merged?.instructor_name || '').trim(),
+    instructor_bio_pt: String(merged?.instructor_bio_pt || '').trim(),
+    instructor_bio_en: String(merged?.instructor_bio_en || '').trim(),
+    instructor_photo_url: merged?.instructor_photo_url || '',
+    instructor_showreel_url: String(merged?.instructor_showreel_url || '').trim(),
+    instructor_career_text_pt: String(merged?.instructor_career_text_pt || '').trim(),
+    instructor_career_text_en: String(merged?.instructor_career_text_en || '').trim(),
+    instructor_students_count_pt: String(merged?.instructor_students_count_pt || '').trim(),
+    instructor_students_count_en: String(merged?.instructor_students_count_en || '').trim(),
+    instructor_clients_count_pt: String(merged?.instructor_clients_count_pt || '').trim(),
+    instructor_clients_count_en: String(merged?.instructor_clients_count_en || '').trim(),
+    highlights_title_pt: mergedTitlePt,
+    highlights_title_en: mergedTitleEn,
+    highlights_title_line1_pt: String(merged?.highlights_title_line1_pt || '').trim(),
+    highlights_title_line1_en: String(merged?.highlights_title_line1_en || '').trim(),
+    highlights_title_line2_pt: String(merged?.highlights_title_line2_pt || '').trim(),
+    highlights_title_line2_en: String(merged?.highlights_title_line2_en || '').trim(),
+    highlight_1_image_url: merged?.highlight_1_image_url || '',
+    highlight_1_title_pt: String(merged?.highlight_1_title_pt || '').trim(),
+    highlight_1_title_en: String(merged?.highlight_1_title_en || '').trim(),
+    highlight_1_desc_pt: String(merged?.highlight_1_desc_pt || '').trim(),
+    highlight_1_desc_en: String(merged?.highlight_1_desc_en || '').trim(),
+    highlight_2_image_url: merged?.highlight_2_image_url || '',
+    highlight_2_title_pt: String(merged?.highlight_2_title_pt || '').trim(),
+    highlight_2_title_en: String(merged?.highlight_2_title_en || '').trim(),
+    highlight_2_desc_pt: String(merged?.highlight_2_desc_pt || '').trim(),
+    highlight_2_desc_en: String(merged?.highlight_2_desc_en || '').trim(),
+    highlight_3_image_url: merged?.highlight_3_image_url || '',
+    highlight_3_title_pt: String(merged?.highlight_3_title_pt || '').trim(),
+    highlight_3_title_en: String(merged?.highlight_3_title_en || '').trim(),
+    highlight_3_desc_pt: String(merged?.highlight_3_desc_pt || '').trim(),
+    highlight_3_desc_en: String(merged?.highlight_3_desc_en || '').trim(),
+    highlight_4_image_url: merged?.highlight_4_image_url || '',
+    highlight_4_title_pt: String(merged?.highlight_4_title_pt || '').trim(),
+    highlight_4_title_en: String(merged?.highlight_4_title_en || '').trim(),
+    highlight_4_desc_pt: String(merged?.highlight_4_desc_pt || '').trim(),
+    highlight_4_desc_en: String(merged?.highlight_4_desc_en || '').trim(),
+  };
+};
+
 const normalizeModule = (item, index = 0) => {
   const topicsPt = [
     ...(Array.isArray(item?.topics_pt) ? item.topics_pt : []),
@@ -283,6 +387,7 @@ export default function Admin() {
     ['settings', 'Configuracoes', Settings],
     ['products', 'Produtos', Package],
     ['course', 'Conteudo Curso', BookOpen],
+    ['cards', 'Cards', LayoutDashboard],
     ['modules', 'Modulos', BookOpen],
     ['students', 'Alunos', Users],
     ['logos', 'Logos', Image],
@@ -290,6 +395,7 @@ export default function Admin() {
     ['faqs', 'FAQ', HelpCircle],
     ['beforeAfter', 'Antes/Depois', LayoutDashboard],
   ], []);
+  const courseData = useMemo(() => normalizeCourseContent(q.course.data), [q.course.data]);
 
   return (
     <div className="h-screen min-h-dvh overflow-hidden bg-[#050608] text-zinc-100 flex">
@@ -319,7 +425,8 @@ export default function Admin() {
         <div className="max-w-6xl mx-auto px-4 py-6 md:px-6 space-y-6">
           {tab === 'settings' && <SettingsTab data={q.settings.data?.[0]} />}
           {tab === 'products' && <ProductsTab data={q.products.data} />}
-          {tab === 'course' && <CourseTab data={q.course.data?.[0]} />}
+          {tab === 'course' && <CourseTab data={courseData} />}
+          {tab === 'cards' && <CardsTab data={courseData} />}
           {tab === 'modules' && <ModulesTab data={q.modules.data} />}
           {tab === 'students' && <StudentsTab data={q.students.data} />}
           {tab === 'logos' && <LogosTab data={q.logos.data} />}
@@ -333,16 +440,102 @@ export default function Admin() {
 }
 
 function SettingsTab({ data }) {
+  const qc = useQueryClient();
+  const [f, setF] = useState(() => ({
+    ...(data || {}),
+    id: data?.id || 'settings-1',
+    products_heading_title_pt:
+      data?.products_heading_title_pt ||
+      [data?.products_heading_line1_pt, data?.products_heading_line2_pt].filter(Boolean).join(' ').trim() ||
+      'Conheca os produtos que trazem mais COR para sua carreira.',
+    products_heading_title_en:
+      data?.products_heading_title_en ||
+      [data?.products_heading_line1_en, data?.products_heading_line2_en].filter(Boolean).join(' ').trim() ||
+      'Discover products that bring more COLOR to your career.',
+    products_heading_line1_pt: data?.products_heading_line1_pt || 'Conheca os produtos que trazem',
+    products_heading_line1_en: data?.products_heading_line1_en || 'Discover products that bring',
+    products_heading_line2_pt: data?.products_heading_line2_pt || 'mais COR para sua carreira.',
+    products_heading_line2_en: data?.products_heading_line2_en || 'more COLOR to your career.',
+    products_heading_subtitle_pt: data?.products_heading_subtitle_pt || 'Escolha o melhor para voce',
+    products_heading_subtitle_en: data?.products_heading_subtitle_en || 'Pick what fits you best',
+  }));
+
+  useEffect(() => {
+    setF({
+      ...(data || {}),
+      id: data?.id || 'settings-1',
+      products_heading_title_pt:
+        data?.products_heading_title_pt ||
+        [data?.products_heading_line1_pt, data?.products_heading_line2_pt].filter(Boolean).join(' ').trim() ||
+        'Conheca os produtos que trazem mais COR para sua carreira.',
+      products_heading_title_en:
+        data?.products_heading_title_en ||
+        [data?.products_heading_line1_en, data?.products_heading_line2_en].filter(Boolean).join(' ').trim() ||
+        'Discover products that bring more COLOR to your career.',
+      products_heading_line1_pt: data?.products_heading_line1_pt || 'Conheca os produtos que trazem',
+      products_heading_line1_en: data?.products_heading_line1_en || 'Discover products that bring',
+      products_heading_line2_pt: data?.products_heading_line2_pt || 'mais COR para sua carreira.',
+      products_heading_line2_en: data?.products_heading_line2_en || 'more COLOR to your career.',
+      products_heading_subtitle_pt: data?.products_heading_subtitle_pt || 'Escolha o melhor para voce',
+      products_heading_subtitle_en: data?.products_heading_subtitle_en || 'Pick what fits you best',
+    });
+  }, [data]);
+
+  const m = useMutation({
+    mutationFn: (x) => apiClient.save('settings', x),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['settings'] }),
+    onError: (err) => window.alert(err?.message || 'Falha ao salvar configuracoes.'),
+  });
+
+  const onSave = () => {
+    const payload = {
+      ...(data || {}),
+      ...f,
+      id: f.id || data?.id || 'settings-1',
+      products_heading_title_pt: String(f.products_heading_title_pt || '').trim(),
+      products_heading_title_en: String(f.products_heading_title_en || '').trim(),
+      products_heading_line1_pt: String(f.products_heading_line1_pt || '').trim(),
+      products_heading_line1_en: String(f.products_heading_line1_en || '').trim(),
+      products_heading_line2_pt: String(f.products_heading_line2_pt || '').trim(),
+      products_heading_line2_en: String(f.products_heading_line2_en || '').trim(),
+      products_heading_subtitle_pt: String(f.products_heading_subtitle_pt || '').trim(),
+      products_heading_subtitle_en: String(f.products_heading_subtitle_en || '').trim(),
+    };
+    m.mutate([payload]);
+  };
+
   return (
     <Card className={panel}>
       <CardHeader>
-        <H title="Configuracoes do Site" desc="Nome e logo foram travados por padrao do projeto." icon={Settings} />
+        <H title="Configuracoes do Site" desc="Nome e logo continuam travados, mas voce pode editar textos da home." icon={Settings} />
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-6">
         <div className="rounded-xl border border-white/10 bg-zinc-900/50 p-4 text-sm text-zinc-300">
           <p>Nome do site e logo estao bloqueados para edicao.</p>
-          <p className="mt-2 text-zinc-400">Todo o restante do conteudo continua cadastravel nas demais secoes do painel.</p>
+          <p className="mt-2 text-zinc-400">Palavras em MAIUSCULA no titulo de produtos ficam destacadas automaticamente na home.</p>
         </div>
+
+        <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
+          <p className="text-sm font-semibold text-zinc-100">Inicio da pagina - Secao de Produtos</p>
+          <BI
+            label="Titulo completo (o sistema separa automaticamente em 2 linhas)"
+            pt={f.products_heading_title_pt}
+            en={f.products_heading_title_en}
+            setPt={(v) => setF({ ...f, products_heading_title_pt: v })}
+            setEn={(v) => setF({ ...f, products_heading_title_en: v })}
+          />
+          <BI
+            label="Subtitulo (1 linha)"
+            pt={f.products_heading_subtitle_pt}
+            en={f.products_heading_subtitle_en}
+            setPt={(v) => setF({ ...f, products_heading_subtitle_pt: v })}
+            setEn={(v) => setF({ ...f, products_heading_subtitle_en: v })}
+          />
+        </div>
+
+        <Button className={btnPrimary} onClick={onSave} disabled={m.isPending}>
+          {m.isPending ? 'Salvando...' : 'Salvar configuracoes'}
+        </Button>
       </CardContent>
     </Card>
   );
@@ -591,88 +784,212 @@ function ProductsTab({ data }) {
 
 function CourseTab({ data }) {
   const qc = useQueryClient();
-  const [f, setF] = useState(data || {});
+  const [f, setF] = useState(() => normalizeCourseContent(data));
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (data) setF(data);
+    setF(normalizeCourseContent(data));
+    setIsEditing(false);
   }, [data]);
 
   const m = useMutation({
     mutationFn: (x) => apiClient.save('courseContent', [x]),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['courseContent'] }),
+    onError: (err) => window.alert(err?.message || 'Falha ao salvar conteudo do curso.'),
   });
+
+  const onCancelEdit = () => {
+    setF(normalizeCourseContent(data));
+    setIsEditing(false);
+  };
+
+  const onSave = () => {
+    m.mutate(normalizeCourseContent(f), {
+      onSuccess: () => {
+        setIsEditing(false);
+      },
+    });
+  };
 
   return (
     <Card className={panel}>
       <CardHeader>
-        <H title="Conteudo do Curso" desc="Hero e secao Conheca seu professor." icon={BookOpen} />
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <H title="Conteudo do Curso" desc="Hero e secao Conheca seu professor." icon={BookOpen} />
+          {!isEditing ? (
+            <Button className={btnPrimary} onClick={() => setIsEditing(true)}>
+              Editar
+            </Button>
+          ) : (
+            <div className="flex gap-2">
+              <Button className={btnOutline} onClick={onCancelEdit} disabled={m.isPending}>
+                Cancelar
+              </Button>
+              <Button className={btnPrimary} onClick={onSave} disabled={m.isPending}>
+                {m.isPending ? 'Salvando...' : 'Salvar'}
+              </Button>
+            </div>
+          )}
+        </div>
       </CardHeader>
       <CardContent className="space-y-6">
-        <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
-          <p className="text-sm font-semibold text-zinc-100">Hero do Curso</p>
-          <BI
-            label="Titulo Hero *"
-            pt={f.hero_title_pt}
-            en={f.hero_title_en}
-            setPt={(v) => setF({ ...f, hero_title_pt: v })}
-            setEn={(v) => setF({ ...f, hero_title_en: v })}
-          />
-          <BT
-            label="Subtitulo Hero"
-            pt={f.hero_subtitle_pt}
-            en={f.hero_subtitle_en}
-            setPt={(v) => setF({ ...f, hero_subtitle_pt: v })}
-            setEn={(v) => setF({ ...f, hero_subtitle_en: v })}
-            rows={3}
-          />
-          <Upload label="Imagem Hero" value={f.hero_image_url || ''} onChange={(v) => setF({ ...f, hero_image_url: v })} />
-        </div>
+        <fieldset disabled={!isEditing} className={!isEditing ? 'opacity-95' : ''}>
+          <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
+            <p className="text-sm font-semibold text-zinc-100">Hero do Curso</p>
+            <BI
+              label="Titulo Hero *"
+              pt={f.hero_title_pt}
+              en={f.hero_title_en}
+              setPt={(v) => setF({ ...f, hero_title_pt: v })}
+              setEn={(v) => setF({ ...f, hero_title_en: v })}
+            />
+            <BT
+              label="Subtitulo Hero"
+              pt={f.hero_subtitle_pt}
+              en={f.hero_subtitle_en}
+              setPt={(v) => setF({ ...f, hero_subtitle_pt: v })}
+              setEn={(v) => setF({ ...f, hero_subtitle_en: v })}
+              rows={3}
+            />
+            <Upload label="Imagem Hero" value={f.hero_image_url || ''} onChange={(v) => setF({ ...f, hero_image_url: v })} />
+          </div>
 
-        <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
-          <p className="text-sm font-semibold text-zinc-100">Conheca seu professor</p>
-          <F label="Nome do Professor *" value={f.instructor_name || ''} onChange={(e) => setF({ ...f, instructor_name: e.target.value })} />
-          <BT
-            label="Bio do Professor"
-            pt={f.instructor_bio_pt}
-            en={f.instructor_bio_en}
-            setPt={(v) => setF({ ...f, instructor_bio_pt: v })}
-            setEn={(v) => setF({ ...f, instructor_bio_en: v })}
-            rows={5}
-          />
-          <Upload label="Foto do Professor" value={f.instructor_photo_url || ''} onChange={(v) => setF({ ...f, instructor_photo_url: v })} />
-          <F
-            label="URL do Showreel (YouTube/Vimeo)"
-            value={f.instructor_showreel_url || ''}
-            onChange={(e) => setF({ ...f, instructor_showreel_url: e.target.value })}
-            placeholder="https://www.youtube.com/watch?v=... ou https://vimeo.com/..."
-          />
-          <BI
-            label="Tempo de Carreira (card de destaque)"
-            pt={f.instructor_career_text_pt}
-            en={f.instructor_career_text_en}
-            setPt={(v) => setF({ ...f, instructor_career_text_pt: v })}
-            setEn={(v) => setF({ ...f, instructor_career_text_en: v })}
-          />
-          <BI
-            label="Alunos (card de destaque)"
-            pt={f.instructor_students_count_pt}
-            en={f.instructor_students_count_en}
-            setPt={(v) => setF({ ...f, instructor_students_count_pt: v })}
-            setEn={(v) => setF({ ...f, instructor_students_count_en: v })}
-          />
-          <BI
-            label="Clientes (card de destaque)"
-            pt={f.instructor_clients_count_pt}
-            en={f.instructor_clients_count_en}
-            setPt={(v) => setF({ ...f, instructor_clients_count_pt: v })}
-            setEn={(v) => setF({ ...f, instructor_clients_count_en: v })}
-          />
-          <p className="text-xs text-zinc-400">Aceita links de YouTube/Vimeo comuns ou de embed.</p>
-        </div>
+          <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
+            <p className="text-sm font-semibold text-zinc-100">Conheca seu professor</p>
+            <F label="Nome do Professor *" value={f.instructor_name || ''} onChange={(e) => setF({ ...f, instructor_name: e.target.value })} />
+            <BT
+              label="Bio do Professor"
+              pt={f.instructor_bio_pt}
+              en={f.instructor_bio_en}
+              setPt={(v) => setF({ ...f, instructor_bio_pt: v })}
+              setEn={(v) => setF({ ...f, instructor_bio_en: v })}
+              rows={5}
+            />
+            <Upload label="Foto do Professor" value={f.instructor_photo_url || ''} onChange={(v) => setF({ ...f, instructor_photo_url: v })} />
+            <F
+              label="URL do Showreel (YouTube/Vimeo)"
+              value={f.instructor_showreel_url || ''}
+              onChange={(e) => setF({ ...f, instructor_showreel_url: e.target.value })}
+              placeholder="https://www.youtube.com/watch?v=... ou https://vimeo.com/..."
+            />
+            <BI
+              label="Tempo de Carreira (card de destaque)"
+              pt={f.instructor_career_text_pt}
+              en={f.instructor_career_text_en}
+              setPt={(v) => setF({ ...f, instructor_career_text_pt: v })}
+              setEn={(v) => setF({ ...f, instructor_career_text_en: v })}
+            />
+            <BI
+              label="Alunos (card de destaque)"
+              pt={f.instructor_students_count_pt}
+              en={f.instructor_students_count_en}
+              setPt={(v) => setF({ ...f, instructor_students_count_pt: v })}
+              setEn={(v) => setF({ ...f, instructor_students_count_en: v })}
+            />
+            <BI
+              label="Clientes (card de destaque)"
+              pt={f.instructor_clients_count_pt}
+              en={f.instructor_clients_count_en}
+              setPt={(v) => setF({ ...f, instructor_clients_count_pt: v })}
+              setEn={(v) => setF({ ...f, instructor_clients_count_en: v })}
+            />
+            <p className="text-xs text-zinc-400">Aceita links de YouTube/Vimeo comuns ou de embed.</p>
+          </div>
 
-        <Button className={`${btnPrimary} w-full`} onClick={() => m.mutate(f)}>
-          Salvar
-        </Button>
+        </fieldset>
+      </CardContent>
+    </Card>
+  );
+}
+function CardsTab({ data }) {
+  const qc = useQueryClient();
+  const [f, setF] = useState(() => normalizeCourseContent(data));
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    setF(normalizeCourseContent(data));
+    setIsEditing(false);
+  }, [data]);
+
+  const m = useMutation({
+    mutationFn: (x) => apiClient.save('courseContent', [x]),
+    onSuccess: () => qc.invalidateQueries({ queryKey: ['courseContent'] }),
+    onError: (err) => window.alert(err?.message || 'Falha ao salvar cards.'),
+  });
+
+  const onCancelEdit = () => {
+    setF(normalizeCourseContent(data));
+    setIsEditing(false);
+  };
+
+  const onSave = () => {
+    m.mutate(normalizeCourseContent(f), {
+      onSuccess: () => {
+        setIsEditing(false);
+      },
+    });
+  };
+
+  return (
+    <Card className={panel}>
+      <CardHeader>
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+          <H title="Cards" desc="Edite titulo da secao e os 4 cards de destaque." icon={LayoutDashboard} />
+          {!isEditing ? (
+            <Button className={btnPrimary} onClick={() => setIsEditing(true)}>
+              Editar
+            </Button>
+          ) : (
+            <div className="flex gap-2">
+              <Button className={btnOutline} onClick={onCancelEdit} disabled={m.isPending}>
+                Cancelar
+              </Button>
+              <Button className={btnPrimary} onClick={onSave} disabled={m.isPending}>
+                {m.isPending ? 'Salvando...' : 'Salvar'}
+              </Button>
+            </div>
+          )}
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <fieldset disabled={!isEditing} className={!isEditing ? 'opacity-95' : ''}>
+          <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
+            <p className="text-sm font-semibold text-zinc-100">Titulo da secao</p>
+            <BI
+              label="Titulo completo (o site separa automaticamente em 2 linhas)"
+              pt={f.highlights_title_pt}
+              en={f.highlights_title_en}
+              setPt={(v) => setF({ ...f, highlights_title_pt: v })}
+              setEn={(v) => setF({ ...f, highlights_title_en: v })}
+            />
+          </div>
+
+          {[1, 2, 3, 4].map((item) => (
+            <div key={item} className="rounded-xl border border-cyan-400/25 bg-zinc-950/40 p-4 space-y-4 shadow-[0_0_0_1px_rgba(34,211,238,0.08)]">
+              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-cyan-200">Card {item}</p>
+              <Upload
+                label={`Imagem de fundo (Card ${item})`}
+                value={f[`highlight_${item}_image_url`] || ''}
+                onChange={(v) => setF({ ...f, [`highlight_${item}_image_url`]: v })}
+              />
+              <BI
+                label={`Titulo (Card ${item})`}
+                pt={f[`highlight_${item}_title_pt`]}
+                en={f[`highlight_${item}_title_en`]}
+                setPt={(v) => setF({ ...f, [`highlight_${item}_title_pt`]: v })}
+                setEn={(v) => setF({ ...f, [`highlight_${item}_title_en`]: v })}
+              />
+              <BT
+                label={`Descricao (Card ${item})`}
+                pt={f[`highlight_${item}_desc_pt`]}
+                en={f[`highlight_${item}_desc_en`]}
+                setPt={(v) => setF({ ...f, [`highlight_${item}_desc_pt`]: v })}
+                setEn={(v) => setF({ ...f, [`highlight_${item}_desc_en`]: v })}
+                rows={3}
+              />
+            </div>
+          ))}
+        </fieldset>
       </CardContent>
     </Card>
   );

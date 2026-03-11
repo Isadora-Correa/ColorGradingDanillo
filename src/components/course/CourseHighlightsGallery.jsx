@@ -6,7 +6,7 @@ import { useLanguage } from '../ui/LanguageContext';
 const FEATURE_CARDS = [
   {
     id: 'professional',
-    image: '/imagem1.webp',
+    image: '/1.1.1_1.1.1.jpg',
     titlePt: 'Feito para tornar voce um colorista profissional com resultados',
     titleEn: 'Built to turn you into a professional colorist with real results',
     descPt: 'Um curso robusto do basico ao avancado, com tecnicas aplicadas no mercado internacional.',
@@ -14,7 +14,7 @@ const FEATURE_CARDS = [
   },
   {
     id: 'portfolio',
-    image: '/imagem2.webp',
+    image: '/1.15.1_1.15.1.jpg',
     titlePt: 'Seu Portfolio Masterpiece Garantido',
     titleEn: 'Your Masterpiece Portfolio Guaranteed',
     descPt: 'Ao decorrer do curso, vamos colorir dois projetos inteiros do inicio ao fim.',
@@ -22,7 +22,7 @@ const FEATURE_CARDS = [
   },
   {
     id: 'material',
-    image: '/produto1.webp',
+    image: '/1.6.1_1.6.1.jpg',
     titlePt: 'Mais de 300GB de material bruto gratuito',
     titleEn: 'Over 300GB of free raw practice material',
     descPt: 'Incluindo B-Roll e imagens para pratica real de color grading.',
@@ -30,7 +30,7 @@ const FEATURE_CARDS = [
   },
   {
     id: 'premiere',
-    image: '/imagem3.webp',
+    image: '/1.8.1_1.8.1.jpg',
     titlePt: 'Colorir no Premiere e mais dificil e ineficaz',
     titleEn: 'Color grading in Premiere is harder and less effective',
     descPt: 'Aqui voce aprende a extrair todo o potencial com fluxo profissional.',
@@ -38,24 +38,84 @@ const FEATURE_CARDS = [
   },
 ];
 
-export default function CourseHighlightsGallery() {
+function splitTitleInTwoLines(text = '') {
+  const normalized = String(text || '').replace(/\s+/g, ' ').trim();
+  if (!normalized) return ['', ''];
+  const words = normalized.split(' ');
+  if (words.length <= 1) return [normalized, ''];
+
+  const totalLength = words.reduce((acc, w) => acc + w.length, 0);
+  let bestIndex = 1;
+  let bestDiff = Infinity;
+  let leftLen = 0;
+
+  for (let i = 1; i < words.length; i += 1) {
+    leftLen += words[i - 1].length;
+    const rightLen = totalLength - leftLen;
+    const diff = Math.abs(leftLen - rightLen);
+    if (diff < bestDiff) {
+      bestDiff = diff;
+      bestIndex = i;
+    }
+  }
+
+  return [words.slice(0, bestIndex).join(' '), words.slice(bestIndex).join(' ')];
+}
+
+function renderUppercaseHighlight(text = '') {
+  const parts = String(text || '').split(/(\s+)/);
+  return parts.map((part, index) => {
+    const clean = part.replace(/[^A-Za-zÀ-ÿ0-9]/g, '');
+    const isUpperWord =
+      clean.length > 1 &&
+      clean === clean.toUpperCase() &&
+      clean !== clean.toLowerCase();
+
+    if (!isUpperWord) return <React.Fragment key={`${part}-${index}`}>{part}</React.Fragment>;
+
+    return (
+      <GlowText
+        key={`${part}-${index}`}
+        className="font-extrabold not-italic"
+        gradient="from-[#ff4d74] via-[#9be15d] via-[#00dcff] to-[#7e5eff]"
+        glowColor="rgba(120,220,255,0.42)"
+      >
+        {part}
+      </GlowText>
+    );
+  });
+}
+
+export default function CourseHighlightsGallery({ content = {} }) {
   const { t } = useLanguage();
+  const fallbackImage = '/nava.webp';
+  const headingFull = t(
+    content.highlights_title_pt ||
+      [content.highlights_title_line1_pt, content.highlights_title_line2_pt].filter(Boolean).join(' ').trim() ||
+      'Conheca o curso que vai trazer COR para sua carreira.',
+    content.highlights_title_en ||
+      [content.highlights_title_line1_en, content.highlights_title_line2_en].filter(Boolean).join(' ').trim() ||
+      'Discover the course that brings COLOR to your career.'
+  );
+  const [headingLine1, headingLine2] = splitTitleInTwoLines(headingFull);
+  const cards = FEATURE_CARDS.map((card, index) => {
+    const item = index + 1;
+    return {
+      ...card,
+      image: content[`highlight_${item}_image_url`] || card.image,
+      titlePt: content[`highlight_${item}_title_pt`] || card.titlePt,
+      titleEn: content[`highlight_${item}_title_en`] || card.titleEn,
+      descPt: content[`highlight_${item}_desc_pt`] || card.descPt,
+      descEn: content[`highlight_${item}_desc_en`] || card.descEn,
+    };
+  });
 
   return (
     <SectionBlock gradient className="overflow-hidden">
       <div className="mb-6 flex items-start justify-between gap-4 md:mb-8">
         <h3 className="max-w-3xl text-2xl font-semibold leading-tight text-white md:text-4xl">
-          <span className="block">
-            {t('Conheca o curso que vai trazer', 'Discover the course that brings')}{' '}
-            <GlowText
-              className="font-extrabold"
-              gradient="from-[#ff4d74] via-[#9be15d] via-[#00dcff] to-[#7e5eff]"
-              glowColor="rgba(120,220,255,0.42)"
-            >
-              {t('COR', 'COLOR')}
-            </GlowText>
-          </span>
-          <span className="block">{t('para sua carreira.', 'to your career.')}</span>
+          <span className="block">{renderUppercaseHighlight(headingLine1)}</span>
+          <span className="block">{renderUppercaseHighlight(headingLine2)}</span>
         </h3>
 
         <img
@@ -68,7 +128,7 @@ export default function CourseHighlightsGallery() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {FEATURE_CARDS.map((card) => (
+        {cards.map((card) => (
           <article
             key={card.id}
             className="group relative min-h-[360px] overflow-hidden rounded-2xl border border-white/12 bg-zinc-950/40 md:min-h-[430px]"
@@ -76,6 +136,9 @@ export default function CourseHighlightsGallery() {
             <img
               src={card.image}
               alt={t(card.titlePt, card.titleEn)}
+              onError={(event) => {
+                event.currentTarget.src = fallbackImage;
+              }}
               className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
               decoding="async"

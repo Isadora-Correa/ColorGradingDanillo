@@ -90,7 +90,7 @@ function HomeContent() {
         ) : (
           <>
             {/* 1. Products Catalog - FIRST */}
-            <ProductCatalog products={products} />
+            <ProductCatalog products={products} settings={siteSettings} />
 
             {/* 2. Course Details Section - Reorganized per design spec */}
             {courseProduct && (
@@ -99,7 +99,7 @@ function HomeContent() {
                 <BeforeAfterSlider items={beforeAfterItems} isLoading={beforeAfterLoading} />
                 
                 {/* 2. Course Highlights Gallery */}
-                <CourseHighlightsGallery />
+                <CourseHighlightsGallery content={content} />
 
                 {/* 3. Student Showcase */}
                 <StudentShowcase students={students} />

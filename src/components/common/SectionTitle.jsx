@@ -6,11 +6,12 @@ export default function SectionTitle({
   line2Prefix = '',
   highlight,
   line2Suffix = '',
+  line2Content = null,
   subtitle = '',
   className = '',
   titleClassName = '',
 }) {
-  const hasSecondLine = Boolean(line2Prefix || highlight || line2Suffix);
+  const hasSecondLine = Boolean(line2Content || line2Prefix || highlight || line2Suffix);
 
   return (
     <div className={`mb-8 text-center ${className}`}>
@@ -18,15 +19,21 @@ export default function SectionTitle({
         <span className="block">{line1}</span>
         {hasSecondLine ? (
           <span className="block italic font-medium text-zinc-100">
-            {line2Prefix ? <>{line2Prefix} </> : null}
-            <GlowText
-              className="font-extrabold not-italic"
-              gradient="from-[#ff9f1c] via-[#9be15d] via-[#00d2ff] to-[#a45bff]"
-              glowColor="rgba(120, 220, 255, 0.45)"
-            >
-              {highlight}
-            </GlowText>
-            {line2Suffix ? ` ${line2Suffix}` : null}
+            {line2Content ? (
+              line2Content
+            ) : (
+              <>
+                {line2Prefix ? <>{line2Prefix} </> : null}
+                <GlowText
+                  className="font-extrabold not-italic"
+                  gradient="from-[#ff9f1c] via-[#9be15d] via-[#00d2ff] to-[#a45bff]"
+                  glowColor="rgba(120, 220, 255, 0.45)"
+                >
+                  {highlight}
+                </GlowText>
+                {line2Suffix ? ` ${line2Suffix}` : null}
+              </>
+            )}
           </span>
         ) : null}
       </h2>

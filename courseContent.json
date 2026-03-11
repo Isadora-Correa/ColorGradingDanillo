@@ -1,30 +1,15 @@
-﻿[
+[
   {
     "id": "main_content",
     "hero_title_pt": "Domine a Arte da Cor",
     "hero_title_en": "Master the Art of Color",
     "hero_subtitle_pt": "O curso definitivo de Color Grading com DaVinci Resolve que vai transformar a qualidade dos seus videos.",
     "hero_subtitle_en": "The definitive Color Grading course with DaVinci Resolve that will transform the quality of your videos.",
-    "hero_features_pt": [
-      "Acesso vitalicio",
-      "Suporte direto com o instrutor",
-      "Certificado de conclusao"
-    ],
-    "hero_features_en": [
-      "Lifetime access",
-      "Direct support with the instructor",
-      "Certificate of completion"
-    ],
-    "career_description_pt": "Eleve sua carreira a um novo patamar. Coloristas profissionais sao essenciais em producoes de cinema, publicidade e conteudo digital. Este curso te da as ferramentas para se destacar.",
-    "career_description_en": "Take your career to the next level. Professional colorists are essential in film, advertising, and digital content productions. This course gives you the tools to stand out.",
-    "available_languages": [
-      "Portugues (narracao)",
-      "Ingles (legendas)"
-    ],
+    "hero_image_url": "",
     "instructor_name": "Danilo Navarro",
-    "instructor_photo_url": "/nava.webp",
     "instructor_bio_pt": "Nava e um colorista profissional que atua em grandes projetos internacionais, colaborando com diretores e fotografos em diferentes formatos, de comerciais high end a series e filmes.\n\nSeu trabalho e focado em usar a cor como ferramenta narrativa, aplicando workflows reais do mercado para criar imagens com identidade e impacto visual. Ao longo dos anos, assinou projetos para grandes marcas globais, alem de series internacionais, documentarios, curtas e filmes premiados.\n\nHoje, alem de atuar como Colorista Senior, Nava tambem compartilha sua experiencia com videomakers e coloristas que querem elevar o nivel do seu trabalho e dominar o Color Grading de forma criativa, estrategica e profissional.",
     "instructor_bio_en": "Nava is a professional colorist working on major international projects, collaborating with directors and cinematographers across formats, from high-end commercials to series and films.\n\nHis work uses color as a narrative tool, applying real market workflows to create images with identity and visual impact. Over the years, he has delivered projects for global brands, as well as international series, documentaries, shorts and award-winning films.\n\nToday, in addition to working as a Senior Colorist, Nava shares his experience with videomakers and colorists who want to raise the level of their work and master Color Grading creatively, strategically and professionally.",
+    "instructor_photo_url": "/nava.webp",
     "instructor_showreel_url": "https://player.vimeo.com/video/944559078?title=0&byline=0&portrait=0&badge=0",
     "instructor_career_text_pt": "Atuando no audiovisual em projetos internacionais.",
     "instructor_career_text_en": "Working in audiovisual with international projects.",

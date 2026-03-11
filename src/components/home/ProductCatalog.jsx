@@ -1,9 +1,60 @@
-﻿import React from 'react';
+import React from 'react';
 import { useLanguage } from '../ui/LanguageContext';
 import ProductCard from './ProductCard';
+import GlowText from '../common/GlowText';
 import SectionTitle from '../common/SectionTitle';
 
-export default function ProductCatalog({ products = [] }) {
+function renderUppercaseHighlight(text = '') {
+  const parts = String(text || '').split(/(\s+)/);
+  return parts.map((part, index) => {
+    const clean = part.replace(/[^A-Za-zÀ-ÿ0-9]/g, '');
+    const isUpperWord =
+      clean.length > 1 &&
+      clean === clean.toUpperCase() &&
+      clean !== clean.toLowerCase();
+
+    if (!isUpperWord) {
+      return <React.Fragment key={`${part}-${index}`}>{part}</React.Fragment>;
+    }
+
+    return (
+      <GlowText
+        key={`${part}-${index}`}
+        className="font-extrabold not-italic"
+        gradient="from-[#ff9f1c] via-[#9be15d] via-[#00d2ff] to-[#a45bff]"
+        glowColor="rgba(120, 220, 255, 0.45)"
+      >
+        {part}
+      </GlowText>
+    );
+  });
+}
+
+function splitTitleInTwoLines(text = '') {
+  const normalized = String(text || '').replace(/\s+/g, ' ').trim();
+  if (!normalized) return ['', ''];
+  const words = normalized.split(' ');
+  if (words.length <= 1) return [normalized, ''];
+
+  const totalLength = words.reduce((acc, w) => acc + w.length, 0);
+  let bestIndex = 1;
+  let bestDiff = Infinity;
+  let leftLen = 0;
+
+  for (let i = 1; i < words.length; i += 1) {
+    leftLen += words[i - 1].length;
+    const rightLen = totalLength - leftLen;
+    const diff = Math.abs(leftLen - rightLen);
+    if (diff < bestDiff) {
+      bestDiff = diff;
+      bestIndex = i;
+    }
+  }
+
+  return [words.slice(0, bestIndex).join(' '), words.slice(bestIndex).join(' ')];
+}
+
+export default function ProductCatalog({ products = [], settings = {} }) {
   const { language, t } = useLanguage();
 
   const visibleProducts = products
@@ -13,41 +64,29 @@ export default function ProductCatalog({ products = [] }) {
 
   if (visibleProducts.length === 0) return null;
   const gridColsClass = visibleProducts.length === 2 ? 'lg:grid-cols-2' : 'lg:grid-cols-3';
-  const line1 = language === 'pt'
+
+  const titleFull = language === 'pt'
     ? (
-      <>
-        <span className="md:hidden">Conheca os produtos</span>
-        <span className="hidden md:inline">Conheca os produtos que trazem</span>
-      </>
+      settings?.products_heading_title_pt ||
+      [settings?.products_heading_line1_pt, settings?.products_heading_line2_pt].filter(Boolean).join(' ').trim() ||
+      'Conheca os produtos que trazem mais COR para sua carreira.'
     )
     : (
-      <>
-        <span className="md:hidden">Discover products</span>
-        <span className="hidden md:inline">Discover products that bring</span>
-      </>
+      settings?.products_heading_title_en ||
+      [settings?.products_heading_line1_en, settings?.products_heading_line2_en].filter(Boolean).join(' ').trim() ||
+      'Discover products that bring more COLOR to your career.'
     );
-  const line2Prefix = language === 'pt'
-    ? (
-      <>
-        <span className="md:hidden">que trazem mais</span>
-        <span className="hidden md:inline">mais</span>
-      </>
-    )
-    : (
-      <>
-        <span className="md:hidden">that bring more</span>
-        <span className="hidden md:inline">more</span>
-      </>
-    );
+  const [titleLine1, titleLine2] = splitTitleInTwoLines(titleFull);
+  const subtitle = language === 'pt'
+    ? (settings?.products_heading_subtitle_pt || 'Escolha o melhor para voce')
+    : (settings?.products_heading_subtitle_en || 'Pick what fits you best');
 
   return (
     <section aria-label={t('Catalogo de produtos', 'Product catalog')} className="space-y-6">
       <SectionTitle
-        line1={line1}
-        line2Prefix={line2Prefix}
-        highlight={t('COR', 'COLOR')}
-        line2Suffix={t('para sua carreira.', 'to your career.')}
-        subtitle={t('Escolha o melhor para voce', 'Pick what fits you best')}
+        line1={renderUppercaseHighlight(titleLine1)}
+        line2Content={renderUppercaseHighlight(titleLine2)}
+        subtitle={subtitle}
       />
 
       <div className="rounded-xl border border-white/10 bg-black/25 p-4 backdrop-blur-sm md:p-6">
