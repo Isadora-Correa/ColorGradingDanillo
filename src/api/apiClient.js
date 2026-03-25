@@ -1,30 +1,58 @@
 // src/api/apiClient.js
 const BASE_URL = '/api';
 
-const parseJsonSafe = async (response) => {
+const parseJsonSafe = async (response, fallbackValue = []) => {
   try {
     const data = await response.json();
-    return data || [];
+    return data ?? fallbackValue;
   } catch {
-    return [];
+    return fallbackValue;
+  }
+};
+
+const notifyAuthExpired = () => {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new Event('auth:expired'));
   }
 };
 
 const request = async (path, options = {}) => {
+  const {
+    fallbackValue = [],
+    throwOnError = false,
+    ...fetchOptions
+  } = options;
+
   try {
-    const response = await fetch(`${BASE_URL}${path}`, options);
+    const response = await fetch(`${BASE_URL}${path}`, fetchOptions);
     
     if (response.ok) {
-      return await parseJsonSafe(response);
+      return await parseJsonSafe(response, fallbackValue);
     }
 
-    // Se a API não responder (404 ou 500), retorna lista vazia para não quebrar o .find()
-    console.warn(`API: ${path} retornou status ${response.status}. Usando fallback [].`);
-    return [];
+    const errorData = await parseJsonSafe(response, null);
+    const message =
+      errorData?.message ||
+      `API: ${path} retornou status ${response.status}.`;
+
+    if (response.status === 401 || response.status === 403) {
+      notifyAuthExpired();
+    }
+
+    if (throwOnError) {
+      throw new Error(message);
+    }
+
+    console.warn(`${message} Usando fallback.`);
+    return fallbackValue;
     
   } catch (error) {
+    if (throwOnError) {
+      throw error;
+    }
+
     console.error("Erro de conexão com a API:", error);
-    return []; 
+    return fallbackValue; 
   }
 };
 
@@ -34,12 +62,14 @@ export const apiClient = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials),
+      fallbackValue: null,
+      throwOnError: true,
     });
   },
 
   get: async (entity) => {
     // Ex: get('products') busca em /api/products
-    return request(`/${entity}`, { method: 'GET' });
+    return request(`/${entity}`, { method: 'GET', fallbackValue: [] });
   },
 
   save: async (entity, data) => {
@@ -51,6 +81,8 @@ export const apiClient = {
         ...(token && { Authorization: `Bearer ${token}` }),
       },
       body: JSON.stringify(data),
+      fallbackValue: null,
+      throwOnError: true,
     });
   },
 };

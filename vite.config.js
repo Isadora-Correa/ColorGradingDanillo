@@ -6,6 +6,14 @@ import path from 'node:path'
 export default defineConfig({
   logLevel: 'error', 
   base: '/',
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3002',
+        changeOrigin: true,
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

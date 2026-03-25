@@ -5,7 +5,7 @@ import path from 'path';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({ override: true });
 
 const app = express();
 const PORT = process.env.PORT ? Number(process.env.PORT) : 3001; // Usaremos uma porta diferente para o backend
@@ -30,7 +30,8 @@ app.use(express.urlencoded({ extended: true, limit: '80mb' })); // Permite que o
 
 // --- Rota de Login ---
 app.post('/api/login', (req, res) => {
-  const { username, password } = req.body;
+  const username = String(req.body?.username || '').trim();
+  const password = String(req.body?.password || '').trim();
 
   if (username === ADMIN_USER && password === ADMIN_PASSWORD) {
     // Gera um token que expira em 8 horas
@@ -107,5 +108,3 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`🚀 Servidor da API rodando em http://localhost:${PORT}`);
 });
-
-

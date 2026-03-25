@@ -1,5 +1,6 @@
 import { readFileSync, existsSync } from 'fs';
 import path from 'path';
+import jwt from 'jsonwebtoken';
 
 export default function handler(req, res) {
   // Configuração de CORS
@@ -10,10 +11,38 @@ export default function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   const { slug } = req.query;
+  const route = Array.isArray(slug) ? slug.join('/') : slug;
 
   try {
+    if (req.method === 'POST' && route === 'login') {
+      const { username, password } = req.body || {};
+      const adminUser = process.env.ADMIN_USER;
+      const adminPassword = process.env.ADMIN_PASSWORD;
+      const jwtSecret = process.env.JWT_SECRET;
+
+      if (!adminUser || !adminPassword || !jwtSecret) {
+        return res.status(500).json({
+          message: 'Credenciais do admin nao configuradas no deploy.',
+        });
+      }
+
+      if (username !== adminUser || password !== adminPassword) {
+        return res.status(401).json({ message: 'Credenciais invalidas.' });
+      }
+
+      const token = jwt.sign({ username }, jwtSecret, { expiresIn: '8h' });
+      return res.status(200).json({ message: 'Login bem-sucedido!', token });
+    }
+
+    if (req.method === 'POST') {
+      return res.status(501).json({
+        message:
+          'Este deploy na Vercel e somente leitura. Para salvar alteracoes do admin, use um backend Node com persistencia.',
+      });
+    }
+
     // Definimos o caminho absoluto de forma que a Vercel entenda
-    const filePath = path.join(process.cwd(), `${slug}.json`);
+    const filePath = path.join(process.cwd(), `${route}.json`);
 
     if (existsSync(filePath)) {
       const fileContent = readFileSync(filePath, 'utf8');

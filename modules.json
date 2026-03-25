@@ -1,826 +1,2290 @@
 [
-    {
-        "id":  "module-seed-1",
-        "title_pt":  "Apresentacao",
-        "title_en":  "Introduction",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  3,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Visao geral do curso e da jornada de aprendizado",
-                          "Metodologia pratica e progressiva",
-                          "O que esperar ao longo dos modulos"
-                      ],
-        "topics_en":  [
-                          "Visao geral do curso e da jornada de aprendizado",
-                          "Metodologia pratica e progressiva",
-                          "O que esperar ao longo dos modulos"
-                      ],
-        "lessons_pt":  [
-                           "Visao geral do curso e da jornada de aprendizado",
-                           "Metodologia pratica e progressiva",
-                           "O que esperar ao longo dos modulos"
-                       ],
-        "lessons_en":  [
-                           "Visao geral do curso e da jornada de aprendizado",
-                           "Metodologia pratica e progressiva",
-                           "O que esperar ao longo dos modulos"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "1a3f991d-22ac-4aa3-9b45-f61080b41407",
-                           "title":  "Visao geral do curso e da jornada de aprendizado"
-                       },
-                       {
-                           "id":  "0d113c69-1e12-4eb0-a90f-daa572a22bcc",
-                           "title":  "Metodologia pratica e progressiva"
-                       },
-                       {
-                           "id":  "c23036fd-13ce-4735-8436-02f53c19023d",
-                           "title":  "O que esperar ao longo dos modulos"
-                       }
-                   ],
-        "order":  0,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-2",
-        "title_pt":  "Project Manager",
-        "title_en":  "Project Manager",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  4,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Estrutura profissional de organizacao no DaVinci",
-                          "Configuracao da Biblioteca e Database",
-                          "Protecao contra perda de dados",
-                          "Fluxo de trabalho escalavel e limpo"
-                      ],
-        "topics_en":  [
-                          "Estrutura profissional de organizacao no DaVinci",
-                          "Configuracao da Biblioteca e Database",
-                          "Protecao contra perda de dados",
-                          "Fluxo de trabalho escalavel e limpo"
-                      ],
-        "lessons_pt":  [
-                           "Estrutura profissional de organizacao no DaVinci",
-                           "Configuracao da Biblioteca e Database",
-                           "Protecao contra perda de dados",
-                           "Fluxo de trabalho escalavel e limpo"
-                       ],
-        "lessons_en":  [
-                           "Estrutura profissional de organizacao no DaVinci",
-                           "Configuracao da Biblioteca e Database",
-                           "Protecao contra perda de dados",
-                           "Fluxo de trabalho escalavel e limpo"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "83ba8c44-6c4c-40a6-bfb2-9ce748830c19",
-                           "title":  "Estrutura profissional de organizacao no DaVinci"
-                       },
-                       {
-                           "id":  "b925f428-b2b4-42f3-a6b3-dc795188c5de",
-                           "title":  "Configuracao da Biblioteca e Database"
-                       },
-                       {
-                           "id":  "2ad96ca7-5a3d-4303-aad8-bf9febee4507",
-                           "title":  "Protecao contra perda de dados"
-                       },
-                       {
-                           "id":  "8c1263c4-9f7e-46a1-8a40-4a28438ce830",
-                           "title":  "Fluxo de trabalho escalavel e limpo"
-                       }
-                   ],
-        "order":  1,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-3",
-        "title_pt":  "Conform",
-        "title_en":  "Conform",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  3,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Importacao correta do projeto de outros softwares",
-                          "Preparacao de timeline para grading",
-                          "Conform com Adobe Premiere"
-                      ],
-        "topics_en":  [
-                          "Importacao correta do projeto de outros softwares",
-                          "Preparacao de timeline para grading",
-                          "Conform com Adobe Premiere"
-                      ],
-        "lessons_pt":  [
-                           "Importacao correta do projeto de outros softwares",
-                           "Preparacao de timeline para grading",
-                           "Conform com Adobe Premiere"
-                       ],
-        "lessons_en":  [
-                           "Importacao correta do projeto de outros softwares",
-                           "Preparacao de timeline para grading",
-                           "Conform com Adobe Premiere"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "d157e3bc-dae0-4a31-9b3a-9d6f8448da11",
-                           "title":  "Importacao correta do projeto de outros softwares"
-                       },
-                       {
-                           "id":  "5078fbc5-89c5-4426-93f5-d5248b09bcff",
-                           "title":  "Preparacao de timeline para grading"
-                       },
-                       {
-                           "id":  "8cd4ab1e-814a-4fda-8099-8fcacfeac132",
-                           "title":  "Conform com Adobe Premiere"
-                       }
-                   ],
-        "order":  2,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-4",
-        "title_pt":  "Personalizacoes e Atalhos",
-        "title_en":  "Customizations and Shortcuts",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  4,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Atalhos essenciais para agilidade",
-                          "Configuracoes personalizadas",
-                          "Otimizacao de performance",
-                          "Fluidez no dia a dia de pos-producao"
-                      ],
-        "topics_en":  [
-                          "Atalhos essenciais para agilidade",
-                          "Configuracoes personalizadas",
-                          "Otimizacao de performance",
-                          "Fluidez no dia a dia de pos-producao"
-                      ],
-        "lessons_pt":  [
-                           "Atalhos essenciais para agilidade",
-                           "Configuracoes personalizadas",
-                           "Otimizacao de performance",
-                           "Fluidez no dia a dia de pos-producao"
-                       ],
-        "lessons_en":  [
-                           "Atalhos essenciais para agilidade",
-                           "Configuracoes personalizadas",
-                           "Otimizacao de performance",
-                           "Fluidez no dia a dia de pos-producao"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "e591320a-f3f5-490d-b64c-8921b59072f9",
-                           "title":  "Atalhos essenciais para agilidade"
-                       },
-                       {
-                           "id":  "b1b96e52-3376-440c-b381-fff23e084c75",
-                           "title":  "Configuracoes personalizadas"
-                       },
-                       {
-                           "id":  "67b553bf-43b0-4c46-9481-9a91db736f5b",
-                           "title":  "Otimizacao de performance"
-                       },
-                       {
-                           "id":  "96821a6a-2565-48a2-91b9-5d94155f1642",
-                           "title":  "Fluidez no dia a dia de pos-producao"
-                       }
-                   ],
-        "order":  3,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-5",
-        "title_pt":  "Interface do Resolve",
-        "title_en":  "Resolve Interface",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  4,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Tour pela aba Color",
-                          "Ferramentas essenciais do colorista",
-                          "Navegacao eficiente",
-                          "Aba Edit: o essencial para um colorista"
-                      ],
-        "topics_en":  [
-                          "Tour pela aba Color",
-                          "Ferramentas essenciais do colorista",
-                          "Navegacao eficiente",
-                          "Aba Edit: o essencial para um colorista"
-                      ],
-        "lessons_pt":  [
-                           "Tour pela aba Color",
-                           "Ferramentas essenciais do colorista",
-                           "Navegacao eficiente",
-                           "Aba Edit: o essencial para um colorista"
-                       ],
-        "lessons_en":  [
-                           "Tour pela aba Color",
-                           "Ferramentas essenciais do colorista",
-                           "Navegacao eficiente",
-                           "Aba Edit: o essencial para um colorista"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "1c430a8a-5c63-45e9-bac8-bede21698a26",
-                           "title":  "Tour pela aba Color"
-                       },
-                       {
-                           "id":  "c795b2fa-1696-4272-b5cd-344eebff4f1d",
-                           "title":  "Ferramentas essenciais do colorista"
-                       },
-                       {
-                           "id":  "9e10dd9d-3103-4dcd-8a56-3a9cf7e1ba1c",
-                           "title":  "Navegacao eficiente"
-                       },
-                       {
-                           "id":  "20714a32-8266-4243-a767-ff4c74f4b120",
-                           "title":  "Aba Edit: o essencial para um colorista"
-                       }
-                   ],
-        "order":  4,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-6",
-        "title_pt":  "Gerenciamento de Cor Basico",
-        "title_en":  "Basic Color Management",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  3,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Uma breve introducao ao gerenciamento de cor",
-                          "Diferentes espacos de cor",
-                          "Utilizando transformacoes de maneira eficiente"
-                      ],
-        "topics_en":  [
-                          "Uma breve introducao ao gerenciamento de cor",
-                          "Diferentes espacos de cor",
-                          "Utilizando transformacoes de maneira eficiente"
-                      ],
-        "lessons_pt":  [
-                           "Uma breve introducao ao gerenciamento de cor",
-                           "Diferentes espacos de cor",
-                           "Utilizando transformacoes de maneira eficiente"
-                       ],
-        "lessons_en":  [
-                           "Uma breve introducao ao gerenciamento de cor",
-                           "Diferentes espacos de cor",
-                           "Utilizando transformacoes de maneira eficiente"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "1fc82b41-6f75-409c-bf65-dc31e6786514",
-                           "title":  "Uma breve introducao ao gerenciamento de cor"
-                       },
-                       {
-                           "id":  "ce004918-3c2f-455e-a622-6143623d7be0",
-                           "title":  "Diferentes espacos de cor"
-                       },
-                       {
-                           "id":  "931d9761-939c-4199-a3f1-8943fc956711",
-                           "title":  "Utilizando transformacoes de maneira eficiente"
-                       }
-                   ],
-        "order":  5,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-7",
-        "title_pt":  "Primaries, Scopes e Color Matching",
-        "title_en":  "Primaries, Scopes and Color Matching",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  6,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Conceitos do Color Balance",
-                          "Entendendo as ferramentas primarias",
-                          "Como interpretar os Scopes",
-                          "Printer Lights",
-                          "HDR Color Wheels",
-                          "Color Matching"
-                      ],
-        "topics_en":  [
-                          "Conceitos do Color Balance",
-                          "Entendendo as ferramentas primarias",
-                          "Como interpretar os Scopes",
-                          "Printer Lights",
-                          "HDR Color Wheels",
-                          "Color Matching"
-                      ],
-        "lessons_pt":  [
-                           "Conceitos do Color Balance",
-                           "Entendendo as ferramentas primarias",
-                           "Como interpretar os Scopes",
-                           "Printer Lights",
-                           "HDR Color Wheels",
-                           "Color Matching"
-                       ],
-        "lessons_en":  [
-                           "Conceitos do Color Balance",
-                           "Entendendo as ferramentas primarias",
-                           "Como interpretar os Scopes",
-                           "Printer Lights",
-                           "HDR Color Wheels",
-                           "Color Matching"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "7d938237-ded9-41e6-9f15-9ebae84453eb",
-                           "title":  "Conceitos do Color Balance"
-                       },
-                       {
-                           "id":  "8a923e18-30c8-48d5-b21a-fd099f299580",
-                           "title":  "Entendendo as ferramentas primarias"
-                       },
-                       {
-                           "id":  "71ba414b-eef4-42e2-a0d5-8f1fcbff1236",
-                           "title":  "Como interpretar os Scopes"
-                       },
-                       {
-                           "id":  "6c7702f3-7a51-4a1a-8031-fcccd4d65024",
-                           "title":  "Printer Lights"
-                       },
-                       {
-                           "id":  "db802507-2776-41f2-b41e-fe403651d2c1",
-                           "title":  "HDR Color Wheels"
-                       },
-                       {
-                           "id":  "c570cd79-85bf-436a-8b58-63a304317aad",
-                           "title":  "Color Matching"
-                       }
-                   ],
-        "order":  6,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-8",
-        "title_pt":  "Gerenciamento de Cor Avancado",
-        "title_en":  "Advanced Color Management",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  3,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "DaVinci YRGB, ACES e DWG",
-                          "Entendendo o Camera Raw",
-                          "Gerenciamento a nivel de Nodes"
-                      ],
-        "topics_en":  [
-                          "DaVinci YRGB, ACES e DWG",
-                          "Entendendo o Camera Raw",
-                          "Gerenciamento a nivel de Nodes"
-                      ],
-        "lessons_pt":  [
-                           "DaVinci YRGB, ACES e DWG",
-                           "Entendendo o Camera Raw",
-                           "Gerenciamento a nivel de Nodes"
-                       ],
-        "lessons_en":  [
-                           "DaVinci YRGB, ACES e DWG",
-                           "Entendendo o Camera Raw",
-                           "Gerenciamento a nivel de Nodes"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "2e6321e2-a446-4bc7-9b66-0aa93532cd69",
-                           "title":  "DaVinci YRGB, ACES e DWG"
-                       },
-                       {
-                           "id":  "bc20521a-3f36-453b-87aa-640b68c83ffe",
-                           "title":  "Entendendo o Camera Raw"
-                       },
-                       {
-                           "id":  "63fd1459-f8d1-4123-b749-67bf7abf81ba",
-                           "title":  "Gerenciamento a nivel de Nodes"
-                       }
-                   ],
-        "order":  7,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-9",
-        "title_pt":  "Nodes e Workflow",
-        "title_en":  "Nodes and Workflow",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  3,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Tipos de nodes e aplicacoes estrategicas",
-                          "Construcao de Node Tree profissional",
-                          "Workflow escalavel e organizado"
-                      ],
-        "topics_en":  [
-                          "Tipos de nodes e aplicacoes estrategicas",
-                          "Construcao de Node Tree profissional",
-                          "Workflow escalavel e organizado"
-                      ],
-        "lessons_pt":  [
-                           "Tipos de nodes e aplicacoes estrategicas",
-                           "Construcao de Node Tree profissional",
-                           "Workflow escalavel e organizado"
-                       ],
-        "lessons_en":  [
-                           "Tipos de nodes e aplicacoes estrategicas",
-                           "Construcao de Node Tree profissional",
-                           "Workflow escalavel e organizado"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "5ebfe801-7c2b-4910-bbae-05d16c4ffd24",
-                           "title":  "Tipos de nodes e aplicacoes estrategicas"
-                       },
-                       {
-                           "id":  "cb7c0115-9961-45a1-96c3-dbc0468abe96",
-                           "title":  "Construcao de Node Tree profissional"
-                       },
-                       {
-                           "id":  "e341d59d-25e4-402d-9414-0af455aadfc2",
-                           "title":  "Workflow escalavel e organizado"
-                       }
-                   ],
-        "order":  8,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-10",
-        "title_pt":  "Ferramentas Secundarias",
-        "title_en":  "Secondary Tools",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  4,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Uso avancado de Power Windows e Qualifiers",
-                          "Curves, Warper e Noise Reduction",
-                          "Magic Mask e Color Slice",
-                          "Refino tecnico e estetico da imagem"
-                      ],
-        "topics_en":  [
-                          "Uso avancado de Power Windows e Qualifiers",
-                          "Curves, Warper e Noise Reduction",
-                          "Magic Mask e Color Slice",
-                          "Refino tecnico e estetico da imagem"
-                      ],
-        "lessons_pt":  [
-                           "Uso avancado de Power Windows e Qualifiers",
-                           "Curves, Warper e Noise Reduction",
-                           "Magic Mask e Color Slice",
-                           "Refino tecnico e estetico da imagem"
-                       ],
-        "lessons_en":  [
-                           "Uso avancado de Power Windows e Qualifiers",
-                           "Curves, Warper e Noise Reduction",
-                           "Magic Mask e Color Slice",
-                           "Refino tecnico e estetico da imagem"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "6c3a59de-e959-4049-b8b5-530860054e09",
-                           "title":  "Uso avancado de Power Windows e Qualifiers"
-                       },
-                       {
-                           "id":  "bb6eeb1c-9355-4b89-aa9b-4e7b6acfa9ed",
-                           "title":  "Curves, Warper e Noise Reduction"
-                       },
-                       {
-                           "id":  "decc47c6-7e5c-4f51-9a16-166f54ffcb46",
-                           "title":  "Magic Mask e Color Slice"
-                       },
-                       {
-                           "id":  "48112293-a4c9-4a86-a7ca-f320da7219eb",
-                           "title":  "Refino tecnico e estetico da imagem"
-                       }
-                   ],
-        "order":  9,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-11",
-        "title_pt":  "Skin Tones",
-        "title_en":  "Skin Tones",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  4,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Correcao de diferentes tipos de pele",
-                          "Uso do Vectorscope para precisao",
-                          "Tecnicas de realce com Glow e Beauty",
-                          "Resultados cinematograficos e naturais"
-                      ],
-        "topics_en":  [
-                          "Correcao de diferentes tipos de pele",
-                          "Uso do Vectorscope para precisao",
-                          "Tecnicas de realce com Glow e Beauty",
-                          "Resultados cinematograficos e naturais"
-                      ],
-        "lessons_pt":  [
-                           "Correcao de diferentes tipos de pele",
-                           "Uso do Vectorscope para precisao",
-                           "Tecnicas de realce com Glow e Beauty",
-                           "Resultados cinematograficos e naturais"
-                       ],
-        "lessons_en":  [
-                           "Correcao de diferentes tipos de pele",
-                           "Uso do Vectorscope para precisao",
-                           "Tecnicas de realce com Glow e Beauty",
-                           "Resultados cinematograficos e naturais"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "65f107cf-54a8-4be4-b7a8-1a692ac7b69b",
-                           "title":  "Correcao de diferentes tipos de pele"
-                       },
-                       {
-                           "id":  "0489e73e-98bd-4627-b8ec-e13c3971ca53",
-                           "title":  "Uso do Vectorscope para precisao"
-                       },
-                       {
-                           "id":  "40d9bcb8-96aa-43d9-aee8-2521550b3bbf",
-                           "title":  "Tecnicas de realce com Glow e Beauty"
-                       },
-                       {
-                           "id":  "3adae4fe-59ba-4c7c-b37b-369dffd11b8b",
-                           "title":  "Resultados cinematograficos e naturais"
-                       }
-                   ],
-        "order":  10,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-12",
-        "title_pt":  "Pratica - Color Balance \u0026 Matching",
-        "title_en":  "Practice - Color Balance \u0026 Matching",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  4,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Exercicio pratico com multiplos takes",
-                          "Consistencia entre diferentes cameras e luzes",
-                          "Ajuste fino de contraste e exposicao",
-                          "Desenvolvimento do olhar tecnico"
-                      ],
-        "topics_en":  [
-                          "Exercicio pratico com multiplos takes",
-                          "Consistencia entre diferentes cameras e luzes",
-                          "Ajuste fino de contraste e exposicao",
-                          "Desenvolvimento do olhar tecnico"
-                      ],
-        "lessons_pt":  [
-                           "Exercicio pratico com multiplos takes",
-                           "Consistencia entre diferentes cameras e luzes",
-                           "Ajuste fino de contraste e exposicao",
-                           "Desenvolvimento do olhar tecnico"
-                       ],
-        "lessons_en":  [
-                           "Exercicio pratico com multiplos takes",
-                           "Consistencia entre diferentes cameras e luzes",
-                           "Ajuste fino de contraste e exposicao",
-                           "Desenvolvimento do olhar tecnico"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "e09835a0-20be-4339-a660-5c373ef2778b",
-                           "title":  "Exercicio pratico com multiplos takes"
-                       },
-                       {
-                           "id":  "07a928f6-c323-4dad-8bb5-e5ce1a93ad01",
-                           "title":  "Consistencia entre diferentes cameras e luzes"
-                       },
-                       {
-                           "id":  "3d4027f3-0b9e-4ca4-91e7-00d6ed0d5ac0",
-                           "title":  "Ajuste fino de contraste e exposicao"
-                       },
-                       {
-                           "id":  "e8b36444-ac28-4249-80ba-643597dff1a7",
-                           "title":  "Desenvolvimento do olhar tecnico"
-                       }
-                   ],
-        "order":  11,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-13",
-        "title_pt":  "Criacao de Look",
-        "title_en":  "Look Creation",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  5,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Uso de LUTs tecnicos e criativos",
-                          "Introducao a FPE e workflows com Cineon",
-                          "Entendendo a utilizacao do Grao Analogico",
-                          "Halation: Tecnicas avancadas",
-                          "Construcao de looks com identidade visual"
-                      ],
-        "topics_en":  [
-                          "Uso de LUTs tecnicos e criativos",
-                          "Introducao a FPE e workflows com Cineon",
-                          "Entendendo a utilizacao do Grao Analogico",
-                          "Halation: Tecnicas avancadas",
-                          "Construcao de looks com identidade visual"
-                      ],
-        "lessons_pt":  [
-                           "Uso de LUTs tecnicos e criativos",
-                           "Introducao a FPE e workflows com Cineon",
-                           "Entendendo a utilizacao do Grao Analogico",
-                           "Halation: Tecnicas avancadas",
-                           "Construcao de looks com identidade visual"
-                       ],
-        "lessons_en":  [
-                           "Uso de LUTs tecnicos e criativos",
-                           "Introducao a FPE e workflows com Cineon",
-                           "Entendendo a utilizacao do Grao Analogico",
-                           "Halation: Tecnicas avancadas",
-                           "Construcao de looks com identidade visual"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "1102d3cf-afbf-46b2-93b9-9252df877d92",
-                           "title":  "Uso de LUTs tecnicos e criativos"
-                       },
-                       {
-                           "id":  "51d22b95-f1c6-4569-b37b-fa8aaa3f6d5e",
-                           "title":  "Introducao a FPE e workflows com Cineon"
-                       },
-                       {
-                           "id":  "648431aa-82a8-4210-bb10-91e949b98e4c",
-                           "title":  "Entendendo a utilizacao do Grao Analogico"
-                       },
-                       {
-                           "id":  "2dcad56d-3e4d-49e5-a233-1ff766f17a87",
-                           "title":  "Halation: Tecnicas avancadas"
-                       },
-                       {
-                           "id":  "399cbaf7-99e4-4c08-a44c-8b39b75554bb",
-                           "title":  "Construcao de looks com identidade visual"
-                       }
-                   ],
-        "order":  12,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-14",
-        "title_pt":  "Projeto Pratico 01",
-        "title_en":  "Practical Project 01",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  4,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Grading completo do inicio ao fim",
-                          "Correcao primaria, secundaria e look",
-                          "Consolidacao do workflow",
-                          "Projeto guiado com aplicacao real"
-                      ],
-        "topics_en":  [
-                          "Grading completo do inicio ao fim",
-                          "Correcao primaria, secundaria e look",
-                          "Consolidacao do workflow",
-                          "Projeto guiado com aplicacao real"
-                      ],
-        "lessons_pt":  [
-                           "Grading completo do inicio ao fim",
-                           "Correcao primaria, secundaria e look",
-                           "Consolidacao do workflow",
-                           "Projeto guiado com aplicacao real"
-                       ],
-        "lessons_en":  [
-                           "Grading completo do inicio ao fim",
-                           "Correcao primaria, secundaria e look",
-                           "Consolidacao do workflow",
-                           "Projeto guiado com aplicacao real"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "dbade46d-3d5f-4e28-b282-70ebe15fde20",
-                           "title":  "Grading completo do inicio ao fim"
-                       },
-                       {
-                           "id":  "c3d84c3a-b8ab-4a7c-a23b-518f61000e81",
-                           "title":  "Correcao primaria, secundaria e look"
-                       },
-                       {
-                           "id":  "8d6c3714-bbe6-48ac-8bd9-27cd285c3346",
-                           "title":  "Consolidacao do workflow"
-                       },
-                       {
-                           "id":  "3dcd3e72-744d-4cd8-b6ee-64563202b50b",
-                           "title":  "Projeto guiado com aplicacao real"
-                       }
-                   ],
-        "order":  13,
-        "show_in_en":  false
-    },
-    {
-        "id":  "module-seed-15",
-        "title_pt":  "Projeto Pratico 02",
-        "title_en":  "Practical Project 02",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  4,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Continuacao da timeline do Modulo 03",
-                          "Grading completo de um novo material",
-                          "Exercicio de autonomia e tomada de decisao",
-                          "Experiencia de projeto real completo"
-                      ],
-        "topics_en":  [
-                          "Continuacao da timeline do Modulo 03",
-                          "Grading completo de um novo material",
-                          "Exercicio de autonomia e tomada de decisao",
-                          "Experiencia de projeto real completo"
-                      ],
-        "lessons_pt":  [
-                           "Continuacao da timeline do Modulo 03",
-                           "Grading completo de um novo material",
-                           "Exercicio de autonomia e tomada de decisao",
-                           "Experiencia de projeto real completo"
-                       ],
-        "lessons_en":  [
-                           "Continuacao da timeline do Modulo 03",
-                           "Grading completo de um novo material",
-                           "Exercicio de autonomia e tomada de decisao",
-                           "Experiencia de projeto real completo"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "9136c554-d08f-41ca-a7bc-a69829efa6fc",
-                           "title":  "Continuacao da timeline do Modulo 03"
-                       },
-                       {
-                           "id":  "5d2d2270-1a6f-4725-9551-68ba079194f5",
-                           "title":  "Grading completo de um novo material"
-                       },
-                       {
-                           "id":  "eaec777f-7a32-41de-b860-9f458dce3f74",
-                           "title":  "Exercicio de autonomia e tomada de decisao"
-                       },
-                       {
-                           "id":  "51362c01-0fde-45f7-a884-b1a77dee8d64",
-                           "title":  "Experiencia de projeto real completo"
-                       }
-                   ],
-        "order":  14,
-        "show_in_en":  true
-    },
-    {
-        "id":  "module-seed-16",
-        "title_pt":  "Deliver e Conform Final",
-        "title_en":  "Final Deliver and Conform",
-        "description_pt":  "",
-        "description_en":  "",
-        "lessons_count":  3,
-        "duration_hours":  1,
-        "topics_pt":  [
-                          "Diferentes metodos de Render",
-                          "Como usar Individual Clips e Handles",
-                          "Entregas profissionais e organizadas"
-                      ],
-        "topics_en":  [
-                          "Diferentes metodos de Render",
-                          "Como usar Individual Clips e Handles",
-                          "Entregas profissionais e organizadas"
-                      ],
-        "lessons_pt":  [
-                           "Diferentes metodos de Render",
-                           "Como usar Individual Clips e Handles",
-                           "Entregas profissionais e organizadas"
-                       ],
-        "lessons_en":  [
-                           "Diferentes metodos de Render",
-                           "Como usar Individual Clips e Handles",
-                           "Entregas profissionais e organizadas"
-                       ],
-        "topics":  [
-                       {
-                           "id":  "82f9ffa9-8094-4c9d-a588-658602313b33",
-                           "title":  "Diferentes metodos de Render"
-                       },
-                       {
-                           "id":  "59888560-216a-4f6c-8734-d2f5a5bec9b6",
-                           "title":  "Como usar Individual Clips e Handles"
-                       },
-                       {
-                           "id":  "2786f93d-dd3a-4517-9fa8-0542e4435449",
-                           "title":  "Entregas profissionais e organizadas"
-                       }
-                   ],
-        "order":  15,
-        "show_in_en":  true
-    }
+  {
+    "id": "module-seed-1",
+    "show_in_en": true,
+    "title_pt": "Apresentacao",
+    "title_en": "Introduction",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 3,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos",
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos",
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos",
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos"
+    ],
+    "topics_en": [
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos",
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos",
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos",
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos"
+    ],
+    "lessons_pt": [
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos",
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos",
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos",
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos"
+    ],
+    "lessons_en": [
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos",
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos",
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos",
+      "Visao geral do curso e da jornada de aprendizado",
+      "Metodologia pratica e progressiva",
+      "O que esperar ao longo dos modulos"
+    ],
+    "topics": [
+      {
+        "id": "3e98c042-fa05-4c00-b213-ebbd2c61c6b7",
+        "title": "Visao geral do curso e da jornada de aprendizado"
+      },
+      {
+        "id": "c6fb27d1-27b7-4105-9c0c-fde60cb073a8",
+        "title": "Metodologia pratica e progressiva"
+      },
+      {
+        "id": "d081126b-4efe-47c6-9c63-9e304eaf3df8",
+        "title": "O que esperar ao longo dos modulos"
+      },
+      {
+        "id": "42e31a92-c1fc-436a-ad24-3a80a37ee4a2",
+        "title": "Visao geral do curso e da jornada de aprendizado"
+      },
+      {
+        "id": "ca7c3397-6f9d-43e2-9f7a-333f7deee0fa",
+        "title": "Metodologia pratica e progressiva"
+      },
+      {
+        "id": "7739a7e9-c6f2-425c-85a6-2fc3049b8d1b",
+        "title": "O que esperar ao longo dos modulos"
+      },
+      {
+        "id": "0e945e4d-eed7-4e19-87eb-930ebbc5812c",
+        "title": "Visao geral do curso e da jornada de aprendizado"
+      },
+      {
+        "id": "51cb6038-8d5f-43ab-8b9d-00bf8515e9a1",
+        "title": "Metodologia pratica e progressiva"
+      },
+      {
+        "id": "87d8a5f7-11da-44c8-ab1c-447415d4e37c",
+        "title": "O que esperar ao longo dos modulos"
+      },
+      {
+        "id": "3227a015-e258-410a-b76c-e60ebc5bbded",
+        "title": "Visao geral do curso e da jornada de aprendizado"
+      },
+      {
+        "id": "d2ef13c1-4591-442c-91e2-52d59e43dddd",
+        "title": "Metodologia pratica e progressiva"
+      },
+      {
+        "id": "0b58a0c5-d371-4118-a0e4-10ce2632c62f",
+        "title": "O que esperar ao longo dos modulos"
+      }
+    ],
+    "order": 0
+  },
+  {
+    "id": "module-seed-2",
+    "show_in_en": true,
+    "title_pt": "Project Manager",
+    "title_en": "Project Manager",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo",
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo",
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo",
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo"
+    ],
+    "topics_en": [
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo",
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo",
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo",
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo"
+    ],
+    "lessons_pt": [
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo",
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo",
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo",
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo"
+    ],
+    "lessons_en": [
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo",
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo",
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo",
+      "Estrutura profissional de organizacao no DaVinci",
+      "Configuracao da Biblioteca e Database",
+      "Protecao contra perda de dados",
+      "Fluxo de trabalho escalavel e limpo"
+    ],
+    "topics": [
+      {
+        "id": "55cae8fb-7932-462b-b09b-895c3c92a3ad",
+        "title": "Estrutura profissional de organizacao no DaVinci"
+      },
+      {
+        "id": "73698dab-faf2-49b9-a2a5-644ae0aad4ed",
+        "title": "Configuracao da Biblioteca e Database"
+      },
+      {
+        "id": "cdd631d6-a440-4f27-bc99-cca6924af604",
+        "title": "Protecao contra perda de dados"
+      },
+      {
+        "id": "e0e947f8-a09c-4ab3-bc79-6e47393ec018",
+        "title": "Fluxo de trabalho escalavel e limpo"
+      },
+      {
+        "id": "6f1e54aa-eda4-4bfd-95c0-dd5ce9da93b0",
+        "title": "Estrutura profissional de organizacao no DaVinci"
+      },
+      {
+        "id": "c5cb6bd8-0c9f-4ad7-9f89-1c22ec997297",
+        "title": "Configuracao da Biblioteca e Database"
+      },
+      {
+        "id": "2419e944-fe14-4ad8-9a49-d7791bae41b1",
+        "title": "Protecao contra perda de dados"
+      },
+      {
+        "id": "f2fbb11f-a0f2-486c-9e07-3c3534687e4b",
+        "title": "Fluxo de trabalho escalavel e limpo"
+      },
+      {
+        "id": "f1f4f64f-d360-4437-9a83-b162fff97d2d",
+        "title": "Estrutura profissional de organizacao no DaVinci"
+      },
+      {
+        "id": "9ce0324b-463e-4382-89d8-8d3f98b9e572",
+        "title": "Configuracao da Biblioteca e Database"
+      },
+      {
+        "id": "f9d35757-69bd-49ae-8d4d-bfb03cf842ce",
+        "title": "Protecao contra perda de dados"
+      },
+      {
+        "id": "3e2ef583-26c0-4453-89c4-5da0c7e28012",
+        "title": "Fluxo de trabalho escalavel e limpo"
+      },
+      {
+        "id": "394c552d-2102-4631-8fe2-f525a8a7b37a",
+        "title": "Estrutura profissional de organizacao no DaVinci"
+      },
+      {
+        "id": "41fbcce6-afcf-4b8f-8e7e-f8085a820f2c",
+        "title": "Configuracao da Biblioteca e Database"
+      },
+      {
+        "id": "5cce044d-1c3b-4eeb-a148-15236fcd438d",
+        "title": "Protecao contra perda de dados"
+      },
+      {
+        "id": "aad177a4-5d0d-4d22-abbf-20626ce25215",
+        "title": "Fluxo de trabalho escalavel e limpo"
+      }
+    ],
+    "order": 1
+  },
+  {
+    "id": "module-seed-3",
+    "show_in_en": true,
+    "title_pt": "Conform",
+    "title_en": "Conform",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 3,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere",
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere",
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere",
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere"
+    ],
+    "topics_en": [
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere",
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere",
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere",
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere"
+    ],
+    "lessons_pt": [
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere",
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere",
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere",
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere"
+    ],
+    "lessons_en": [
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere",
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere",
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere",
+      "Importacao correta do projeto de outros softwares",
+      "Preparacao de timeline para grading",
+      "Conform com Adobe Premiere"
+    ],
+    "topics": [
+      {
+        "id": "4abd2f5c-40f7-4ac2-acdd-cbb93eac526d",
+        "title": "Importacao correta do projeto de outros softwares"
+      },
+      {
+        "id": "15bdf1af-93f6-4984-9d51-4538a09fa435",
+        "title": "Preparacao de timeline para grading"
+      },
+      {
+        "id": "a3616065-e454-4620-acfc-49662708ab2e",
+        "title": "Conform com Adobe Premiere"
+      },
+      {
+        "id": "444502e1-ddd2-4c72-adc6-23d719f397fe",
+        "title": "Importacao correta do projeto de outros softwares"
+      },
+      {
+        "id": "50fedda1-8eab-4ae5-b7a9-4859efc2b1e2",
+        "title": "Preparacao de timeline para grading"
+      },
+      {
+        "id": "1d4e4a7c-9522-4aca-9a3e-a01a97288c97",
+        "title": "Conform com Adobe Premiere"
+      },
+      {
+        "id": "6ca8f00b-fafb-47f7-891b-9eabb9692a47",
+        "title": "Importacao correta do projeto de outros softwares"
+      },
+      {
+        "id": "048ae50d-19bc-405f-838c-4f115feb23a5",
+        "title": "Preparacao de timeline para grading"
+      },
+      {
+        "id": "8a9df8ef-de33-42b6-955d-47c64b1df966",
+        "title": "Conform com Adobe Premiere"
+      },
+      {
+        "id": "13472c76-5673-4207-8b40-fd28e7026ebd",
+        "title": "Importacao correta do projeto de outros softwares"
+      },
+      {
+        "id": "2819779d-2ff6-4ae6-8521-10e9c0c6e74b",
+        "title": "Preparacao de timeline para grading"
+      },
+      {
+        "id": "0f29fb48-1ef8-413c-a61b-291fa00ae0ec",
+        "title": "Conform com Adobe Premiere"
+      }
+    ],
+    "order": 2
+  },
+  {
+    "id": "module-seed-4",
+    "show_in_en": true,
+    "title_pt": "Personalizacoes e Atalhos",
+    "title_en": "Customizations and Shortcuts",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao",
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao",
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao",
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao"
+    ],
+    "topics_en": [
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao",
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao",
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao",
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao"
+    ],
+    "lessons_pt": [
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao",
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao",
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao",
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao"
+    ],
+    "lessons_en": [
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao",
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao",
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao",
+      "Atalhos essenciais para agilidade",
+      "Configuracoes personalizadas",
+      "Otimizacao de performance",
+      "Fluidez no dia a dia de pos-producao"
+    ],
+    "topics": [
+      {
+        "id": "aa0cb470-8ab6-4e01-985a-a12addc4003e",
+        "title": "Atalhos essenciais para agilidade"
+      },
+      {
+        "id": "e58bb3f7-39d5-46bd-bc59-ec810726e748",
+        "title": "Configuracoes personalizadas"
+      },
+      {
+        "id": "68499b7d-076a-4784-a558-8acb07e7217a",
+        "title": "Otimizacao de performance"
+      },
+      {
+        "id": "d199a1d5-8ab5-4cc5-aba7-46b05b65fc68",
+        "title": "Fluidez no dia a dia de pos-producao"
+      },
+      {
+        "id": "96ea6c47-deb6-4922-aa8a-882daf06203b",
+        "title": "Atalhos essenciais para agilidade"
+      },
+      {
+        "id": "4cdee97e-d8e6-4013-812d-ca049ca03fd5",
+        "title": "Configuracoes personalizadas"
+      },
+      {
+        "id": "9b0794be-8f38-4f6c-b654-5bf7aa1575bd",
+        "title": "Otimizacao de performance"
+      },
+      {
+        "id": "7580c989-aa05-41a8-afb5-2377bc7a138e",
+        "title": "Fluidez no dia a dia de pos-producao"
+      },
+      {
+        "id": "5d518258-35df-4667-91ba-517ddce14425",
+        "title": "Atalhos essenciais para agilidade"
+      },
+      {
+        "id": "102cbd15-c827-42b5-b010-0b9847bede9d",
+        "title": "Configuracoes personalizadas"
+      },
+      {
+        "id": "7fd8aadc-f0fe-48b4-b0fd-496fe39da57c",
+        "title": "Otimizacao de performance"
+      },
+      {
+        "id": "8c7d557d-9edf-4c77-98c3-4c1754c42733",
+        "title": "Fluidez no dia a dia de pos-producao"
+      },
+      {
+        "id": "b73b4702-0b65-4013-bedb-26070c50f7bc",
+        "title": "Atalhos essenciais para agilidade"
+      },
+      {
+        "id": "f224d0a8-cee4-4640-abcc-4f9ec688c5de",
+        "title": "Configuracoes personalizadas"
+      },
+      {
+        "id": "d5d5de4f-5394-4c73-8b48-1ff6b3d2c16f",
+        "title": "Otimizacao de performance"
+      },
+      {
+        "id": "2ce56ee1-6520-405a-b152-7c91cc6783c7",
+        "title": "Fluidez no dia a dia de pos-producao"
+      }
+    ],
+    "order": 3
+  },
+  {
+    "id": "module-seed-5",
+    "show_in_en": true,
+    "title_pt": "Interface do Resolve",
+    "title_en": "Resolve Interface",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista",
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista",
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista",
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista"
+    ],
+    "topics_en": [
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista",
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista",
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista",
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista"
+    ],
+    "lessons_pt": [
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista",
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista",
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista",
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista"
+    ],
+    "lessons_en": [
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista",
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista",
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista",
+      "Tour pela aba Color",
+      "Ferramentas essenciais do colorista",
+      "Navegacao eficiente",
+      "Aba Edit: o essencial para um colorista"
+    ],
+    "topics": [
+      {
+        "id": "8d8ee292-eca1-49cc-8110-ce4266be5468",
+        "title": "Tour pela aba Color"
+      },
+      {
+        "id": "51061c1e-054f-4701-810e-2f9a0cd34d75",
+        "title": "Ferramentas essenciais do colorista"
+      },
+      {
+        "id": "c8876bec-cb69-41ff-9027-098a0981c0e3",
+        "title": "Navegacao eficiente"
+      },
+      {
+        "id": "36a9e920-607f-42bd-a61d-575899d5cfcf",
+        "title": "Aba Edit: o essencial para um colorista"
+      },
+      {
+        "id": "b5a0ef69-db10-4961-a675-1d82d0dcdef8",
+        "title": "Tour pela aba Color"
+      },
+      {
+        "id": "aaf1d411-0ac0-4405-9c1b-0b19d27b407b",
+        "title": "Ferramentas essenciais do colorista"
+      },
+      {
+        "id": "1a6c6805-f244-4334-9738-c84b652dc20f",
+        "title": "Navegacao eficiente"
+      },
+      {
+        "id": "7f2f13ea-240e-43b8-a0f5-7b81675f93f3",
+        "title": "Aba Edit: o essencial para um colorista"
+      },
+      {
+        "id": "3b0e9e5d-8f00-4457-935e-2532403b2afa",
+        "title": "Tour pela aba Color"
+      },
+      {
+        "id": "74a9f2cd-1299-4679-bc82-029fce08a443",
+        "title": "Ferramentas essenciais do colorista"
+      },
+      {
+        "id": "d136fc9b-4060-4b77-8268-dc6277aa8983",
+        "title": "Navegacao eficiente"
+      },
+      {
+        "id": "f7ca68ae-c43c-4562-8f97-437a21f2790c",
+        "title": "Aba Edit: o essencial para um colorista"
+      },
+      {
+        "id": "cb614f15-3584-49a9-8c5e-770ef6bab3b1",
+        "title": "Tour pela aba Color"
+      },
+      {
+        "id": "9172c788-1fc6-40ea-b838-f662908b1152",
+        "title": "Ferramentas essenciais do colorista"
+      },
+      {
+        "id": "9bfe0aff-4f0a-4590-b0f6-956e08b865c8",
+        "title": "Navegacao eficiente"
+      },
+      {
+        "id": "d7a5134c-18cc-4a12-8c4e-f003fe29cf2b",
+        "title": "Aba Edit: o essencial para um colorista"
+      }
+    ],
+    "order": 4
+  },
+  {
+    "id": "module-seed-6",
+    "show_in_en": true,
+    "title_pt": "Gerenciamento de Cor Basico",
+    "title_en": "Basic Color Management",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 3,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente",
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente",
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente",
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente"
+    ],
+    "topics_en": [
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente",
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente",
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente",
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente"
+    ],
+    "lessons_pt": [
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente",
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente",
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente",
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente"
+    ],
+    "lessons_en": [
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente",
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente",
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente",
+      "Uma breve introducao ao gerenciamento de cor",
+      "Diferentes espacos de cor",
+      "Utilizando transformacoes de maneira eficiente"
+    ],
+    "topics": [
+      {
+        "id": "46bbc99f-21cf-4892-a284-92edad05fdd3",
+        "title": "Uma breve introducao ao gerenciamento de cor"
+      },
+      {
+        "id": "f91fa692-75e7-4617-a0c8-4da8a13b8567",
+        "title": "Diferentes espacos de cor"
+      },
+      {
+        "id": "eaaeb55f-dee0-4aba-957c-f4d96de0d454",
+        "title": "Utilizando transformacoes de maneira eficiente"
+      },
+      {
+        "id": "5a92f254-ce4d-45c9-9ad2-5d0539abfb00",
+        "title": "Uma breve introducao ao gerenciamento de cor"
+      },
+      {
+        "id": "47ee1946-8569-4170-b2b2-b76bbc9e471d",
+        "title": "Diferentes espacos de cor"
+      },
+      {
+        "id": "8dc5d5f4-4d5b-4d40-8190-cbe131b2f37d",
+        "title": "Utilizando transformacoes de maneira eficiente"
+      },
+      {
+        "id": "40216ffa-e3fd-4c8b-a985-1ef8bf21218e",
+        "title": "Uma breve introducao ao gerenciamento de cor"
+      },
+      {
+        "id": "f883aa91-871f-42bf-aba1-2bd3b0541745",
+        "title": "Diferentes espacos de cor"
+      },
+      {
+        "id": "6fe47f33-e99d-471d-a946-2be54022d96c",
+        "title": "Utilizando transformacoes de maneira eficiente"
+      },
+      {
+        "id": "7b64de8c-e67f-49ad-935b-3464ff3d31b3",
+        "title": "Uma breve introducao ao gerenciamento de cor"
+      },
+      {
+        "id": "ee11148d-3a25-49ec-a2f3-defb2fb6198f",
+        "title": "Diferentes espacos de cor"
+      },
+      {
+        "id": "3dbb89df-75e8-409c-a18c-67e759fac415",
+        "title": "Utilizando transformacoes de maneira eficiente"
+      }
+    ],
+    "order": 5
+  },
+  {
+    "id": "module-seed-7",
+    "show_in_en": true,
+    "title_pt": "Primaries, Scopes e Color Matching",
+    "title_en": "Primaries, Scopes and Color Matching",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 6,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching",
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching",
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching",
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching"
+    ],
+    "topics_en": [
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching",
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching",
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching",
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching"
+    ],
+    "lessons_pt": [
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching",
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching",
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching",
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching"
+    ],
+    "lessons_en": [
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching",
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching",
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching",
+      "Conceitos do Color Balance",
+      "Entendendo as ferramentas primarias",
+      "Como interpretar os Scopes",
+      "Printer Lights",
+      "HDR Color Wheels",
+      "Color Matching"
+    ],
+    "topics": [
+      {
+        "id": "58caee02-7484-4ecb-a5f4-b30f8a490430",
+        "title": "Conceitos do Color Balance"
+      },
+      {
+        "id": "465d7e36-ff0a-4cd6-8b89-61d9c780dfdc",
+        "title": "Entendendo as ferramentas primarias"
+      },
+      {
+        "id": "219d9a15-8d96-4650-afa0-0f87715c47c6",
+        "title": "Como interpretar os Scopes"
+      },
+      {
+        "id": "0c6551ae-5e7d-405d-b447-041d55b9158d",
+        "title": "Printer Lights"
+      },
+      {
+        "id": "397fa4a2-9000-4af3-a23c-0ee2c4ad1988",
+        "title": "HDR Color Wheels"
+      },
+      {
+        "id": "1f58d8cf-b0a9-4515-9b07-d222cedb9bb6",
+        "title": "Color Matching"
+      },
+      {
+        "id": "9ddd7592-88d6-4928-b13d-675454e70fe6",
+        "title": "Conceitos do Color Balance"
+      },
+      {
+        "id": "eba5d6df-aeb3-4640-951a-e031e6fae453",
+        "title": "Entendendo as ferramentas primarias"
+      },
+      {
+        "id": "611e9c1d-d5d9-47b1-9224-e8451b64f8fc",
+        "title": "Como interpretar os Scopes"
+      },
+      {
+        "id": "20573912-12f3-4b28-a2a1-864d2c531bc3",
+        "title": "Printer Lights"
+      },
+      {
+        "id": "5c650b97-206b-4e2e-8b52-08bbb459bec4",
+        "title": "HDR Color Wheels"
+      },
+      {
+        "id": "1f989daa-6774-40b0-8111-603efe63e70b",
+        "title": "Color Matching"
+      },
+      {
+        "id": "f7a84cea-09bd-4fb6-81f8-75cce564e75b",
+        "title": "Conceitos do Color Balance"
+      },
+      {
+        "id": "6a6539b0-8217-41dd-95a4-71aa6907bda8",
+        "title": "Entendendo as ferramentas primarias"
+      },
+      {
+        "id": "9f3b8e41-7521-4cb3-98af-52bb78e7038a",
+        "title": "Como interpretar os Scopes"
+      },
+      {
+        "id": "9a44e16d-e912-40e2-8619-411863aa809d",
+        "title": "Printer Lights"
+      },
+      {
+        "id": "467ba31b-9f69-4b0a-b318-f9f69e029546",
+        "title": "HDR Color Wheels"
+      },
+      {
+        "id": "30864d86-449c-41db-951e-8c8cda1d5732",
+        "title": "Color Matching"
+      },
+      {
+        "id": "1f2308ba-13f0-4a79-9112-c05a89237e9b",
+        "title": "Conceitos do Color Balance"
+      },
+      {
+        "id": "d40f79f5-5934-47b3-bfa0-6be3cc6cfa39",
+        "title": "Entendendo as ferramentas primarias"
+      },
+      {
+        "id": "5e978839-bf84-40dd-b058-7bdb43a16e6f",
+        "title": "Como interpretar os Scopes"
+      },
+      {
+        "id": "dd0aa20d-34db-4239-a70b-e69b0176c6da",
+        "title": "Printer Lights"
+      },
+      {
+        "id": "0d604fed-724a-42cd-8c84-8cf135ff3a4f",
+        "title": "HDR Color Wheels"
+      },
+      {
+        "id": "19ae4835-af98-4afe-926d-7f53685db0bf",
+        "title": "Color Matching"
+      }
+    ],
+    "order": 6
+  },
+  {
+    "id": "module-seed-8",
+    "show_in_en": true,
+    "title_pt": "Gerenciamento de Cor Avancado",
+    "title_en": "Advanced Color Management",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 3,
+    "duration_hours": 1,
+    "topics_pt": [
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes",
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes",
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes",
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes"
+    ],
+    "topics_en": [
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes",
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes",
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes",
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes"
+    ],
+    "lessons_pt": [
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes",
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes",
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes",
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes"
+    ],
+    "lessons_en": [
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes",
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes",
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes",
+      "DaVinci YRGB, ACES e DWG",
+      "Entendendo o Camera Raw",
+      "Gerenciamento a nivel de Nodes"
+    ],
+    "topics": [
+      {
+        "id": "1975b349-c0b2-419e-8a74-29d92b833261",
+        "title": "DaVinci YRGB, ACES e DWG"
+      },
+      {
+        "id": "bc62488e-6a41-490c-abd3-2dbc34f778ea",
+        "title": "Entendendo o Camera Raw"
+      },
+      {
+        "id": "ffaa7e02-85d4-473a-adf3-960df6441154",
+        "title": "Gerenciamento a nivel de Nodes"
+      },
+      {
+        "id": "b67303bd-9635-4927-8a38-1fdae704a708",
+        "title": "DaVinci YRGB, ACES e DWG"
+      },
+      {
+        "id": "2e693af2-1226-4957-aecf-c9197377d251",
+        "title": "Entendendo o Camera Raw"
+      },
+      {
+        "id": "1f1fc6c2-5222-4e78-a61d-e1f47815912a",
+        "title": "Gerenciamento a nivel de Nodes"
+      },
+      {
+        "id": "3680b358-800c-4b0c-94f9-c9d9b85ea09f",
+        "title": "DaVinci YRGB, ACES e DWG"
+      },
+      {
+        "id": "062a2c9a-f234-462e-a561-0fc0d7e5027d",
+        "title": "Entendendo o Camera Raw"
+      },
+      {
+        "id": "fbeabf01-ef8d-4aaa-be42-ddbe77005f6d",
+        "title": "Gerenciamento a nivel de Nodes"
+      },
+      {
+        "id": "d2f8d28d-68f8-4545-a192-95127db03dc6",
+        "title": "DaVinci YRGB, ACES e DWG"
+      },
+      {
+        "id": "071a628d-2dbc-4be4-b6cb-05fd491af4c3",
+        "title": "Entendendo o Camera Raw"
+      },
+      {
+        "id": "2caabe43-7834-4082-9e05-550a312797c7",
+        "title": "Gerenciamento a nivel de Nodes"
+      }
+    ],
+    "order": 7
+  },
+  {
+    "id": "module-seed-9",
+    "show_in_en": true,
+    "title_pt": "Nodes e Workflow",
+    "title_en": "Nodes and Workflow",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 3,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado",
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado",
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado",
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado"
+    ],
+    "topics_en": [
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado",
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado",
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado",
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado"
+    ],
+    "lessons_pt": [
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado",
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado",
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado",
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado"
+    ],
+    "lessons_en": [
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado",
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado",
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado",
+      "Tipos de nodes e aplicacoes estrategicas",
+      "Construcao de Node Tree profissional",
+      "Workflow escalavel e organizado"
+    ],
+    "topics": [
+      {
+        "id": "9e56b4e6-0391-449f-b11b-5da857beb543",
+        "title": "Tipos de nodes e aplicacoes estrategicas"
+      },
+      {
+        "id": "58b9ab05-3c53-4f08-817b-7a8d3bc8fa46",
+        "title": "Construcao de Node Tree profissional"
+      },
+      {
+        "id": "d5a3be06-c269-499d-88d3-a82e1d5a50fc",
+        "title": "Workflow escalavel e organizado"
+      },
+      {
+        "id": "42c798da-0f79-4dd5-a642-88d8dbdf5632",
+        "title": "Tipos de nodes e aplicacoes estrategicas"
+      },
+      {
+        "id": "0a5df0d2-2c05-40a9-9f3d-bc048f7e88d3",
+        "title": "Construcao de Node Tree profissional"
+      },
+      {
+        "id": "3bb3ef1c-a53c-475f-a4f3-59920ecfef11",
+        "title": "Workflow escalavel e organizado"
+      },
+      {
+        "id": "72a28658-c6e7-404e-9cc5-1de21a51bae9",
+        "title": "Tipos de nodes e aplicacoes estrategicas"
+      },
+      {
+        "id": "b283156f-62ba-4115-930c-5c0800ef3026",
+        "title": "Construcao de Node Tree profissional"
+      },
+      {
+        "id": "4862f987-5191-45fe-afd6-d911eaa177c1",
+        "title": "Workflow escalavel e organizado"
+      },
+      {
+        "id": "90b111df-9eb8-4622-828a-5c2c6d94d604",
+        "title": "Tipos de nodes e aplicacoes estrategicas"
+      },
+      {
+        "id": "3bd1969a-6e9b-4060-9791-c43fce32395b",
+        "title": "Construcao de Node Tree profissional"
+      },
+      {
+        "id": "ccf7ba13-97ef-4ac1-9b06-a914d9c49f01",
+        "title": "Workflow escalavel e organizado"
+      }
+    ],
+    "order": 8
+  },
+  {
+    "id": "module-seed-10",
+    "show_in_en": true,
+    "title_pt": "Ferramentas Secundarias",
+    "title_en": "Secondary Tools",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem",
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem",
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem",
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem"
+    ],
+    "topics_en": [
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem",
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem",
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem",
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem"
+    ],
+    "lessons_pt": [
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem",
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem",
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem",
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem"
+    ],
+    "lessons_en": [
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem",
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem",
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem",
+      "Uso avancado de Power Windows e Qualifiers",
+      "Curves, Warper e Noise Reduction",
+      "Magic Mask e Color Slice",
+      "Refino tecnico e estetico da imagem"
+    ],
+    "topics": [
+      {
+        "id": "9baaddad-e4e6-4e72-98c8-3eca7692272d",
+        "title": "Uso avancado de Power Windows e Qualifiers"
+      },
+      {
+        "id": "fbab24b3-53ff-4bd8-aa41-47831471e127",
+        "title": "Curves, Warper e Noise Reduction"
+      },
+      {
+        "id": "6f3556a4-eccd-4091-9cdb-9100ed48bc06",
+        "title": "Magic Mask e Color Slice"
+      },
+      {
+        "id": "de9cde37-9a0c-4e08-9f78-e62a3454b5a7",
+        "title": "Refino tecnico e estetico da imagem"
+      },
+      {
+        "id": "ed9bb42f-accc-4959-98c7-0963e57581f2",
+        "title": "Uso avancado de Power Windows e Qualifiers"
+      },
+      {
+        "id": "5f5fe5bc-6fa0-4b30-b02f-b987724fc153",
+        "title": "Curves, Warper e Noise Reduction"
+      },
+      {
+        "id": "70c61159-61ec-4e73-b56e-63f905729802",
+        "title": "Magic Mask e Color Slice"
+      },
+      {
+        "id": "923e624a-1b93-47d5-a381-163305ac2225",
+        "title": "Refino tecnico e estetico da imagem"
+      },
+      {
+        "id": "ac195fa9-ca78-4852-a29c-bf4564d1d036",
+        "title": "Uso avancado de Power Windows e Qualifiers"
+      },
+      {
+        "id": "c994b6f2-c026-4603-a59d-333ae003fbe9",
+        "title": "Curves, Warper e Noise Reduction"
+      },
+      {
+        "id": "594d16fb-0ccf-4aad-91b4-3362891cec00",
+        "title": "Magic Mask e Color Slice"
+      },
+      {
+        "id": "20720782-6591-4458-ad93-f0b4a707ef65",
+        "title": "Refino tecnico e estetico da imagem"
+      },
+      {
+        "id": "a072d89a-0f8c-471d-b98a-54672f372b20",
+        "title": "Uso avancado de Power Windows e Qualifiers"
+      },
+      {
+        "id": "884c40f7-179a-4037-a014-9ed1bd645c77",
+        "title": "Curves, Warper e Noise Reduction"
+      },
+      {
+        "id": "dbc26d3a-bf35-4324-85a5-ccc758a96bb5",
+        "title": "Magic Mask e Color Slice"
+      },
+      {
+        "id": "daf1d7ff-38bc-4fe2-ae80-ed12d7c1a373",
+        "title": "Refino tecnico e estetico da imagem"
+      }
+    ],
+    "order": 9
+  },
+  {
+    "id": "module-seed-11",
+    "show_in_en": true,
+    "title_pt": "Skin Tones",
+    "title_en": "Skin Tones",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais",
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais",
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais",
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais"
+    ],
+    "topics_en": [
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais",
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais",
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais",
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais"
+    ],
+    "lessons_pt": [
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais",
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais",
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais",
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais"
+    ],
+    "lessons_en": [
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais",
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais",
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais",
+      "Correcao de diferentes tipos de pele",
+      "Uso do Vectorscope para precisao",
+      "Tecnicas de realce com Glow e Beauty",
+      "Resultados cinematograficos e naturais"
+    ],
+    "topics": [
+      {
+        "id": "807cae32-d863-4c8b-9395-a74a494d40c6",
+        "title": "Correcao de diferentes tipos de pele"
+      },
+      {
+        "id": "f827a6d4-7ad2-43de-b2d2-69ba690ad116",
+        "title": "Uso do Vectorscope para precisao"
+      },
+      {
+        "id": "93e12fdb-fd30-495d-b3f9-caf652942e71",
+        "title": "Tecnicas de realce com Glow e Beauty"
+      },
+      {
+        "id": "a5d02614-d929-490e-a53e-3cc0e1197c1a",
+        "title": "Resultados cinematograficos e naturais"
+      },
+      {
+        "id": "6b8e71b5-f47b-4aa5-8cf5-af82516706cf",
+        "title": "Correcao de diferentes tipos de pele"
+      },
+      {
+        "id": "50586d02-b5f6-4ceb-b796-5f3419c3d3e5",
+        "title": "Uso do Vectorscope para precisao"
+      },
+      {
+        "id": "0c6345c2-4c90-4429-a9f3-93acf15dc3ad",
+        "title": "Tecnicas de realce com Glow e Beauty"
+      },
+      {
+        "id": "bb5f9d34-c3cb-4ff8-b461-f67c78b302f2",
+        "title": "Resultados cinematograficos e naturais"
+      },
+      {
+        "id": "c8734d88-c755-4c80-99b0-a2498b6c0aeb",
+        "title": "Correcao de diferentes tipos de pele"
+      },
+      {
+        "id": "9ed4e5c3-eb25-4a03-ac08-909c45e1b30e",
+        "title": "Uso do Vectorscope para precisao"
+      },
+      {
+        "id": "7cf514b4-c301-4b4a-abb2-80ba77835be9",
+        "title": "Tecnicas de realce com Glow e Beauty"
+      },
+      {
+        "id": "eee11cec-f4ff-46a1-a942-0d0c91f74139",
+        "title": "Resultados cinematograficos e naturais"
+      },
+      {
+        "id": "65003921-f83d-40a5-a1bf-e7aa794a6f2b",
+        "title": "Correcao de diferentes tipos de pele"
+      },
+      {
+        "id": "c8b1d793-f94f-42bb-88c5-6a44f94f9e1f",
+        "title": "Uso do Vectorscope para precisao"
+      },
+      {
+        "id": "cde1135f-b066-4986-a970-d5612f69cfc3",
+        "title": "Tecnicas de realce com Glow e Beauty"
+      },
+      {
+        "id": "129eda63-df10-401f-89b1-153f0c83e5b7",
+        "title": "Resultados cinematograficos e naturais"
+      }
+    ],
+    "order": 10
+  },
+  {
+    "id": "module-seed-12",
+    "show_in_en": true,
+    "title_pt": "Pratica - Color Balance & Matching",
+    "title_en": "Practice - Color Balance & Matching",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico",
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico",
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico",
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico"
+    ],
+    "topics_en": [
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico",
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico",
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico",
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico"
+    ],
+    "lessons_pt": [
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico",
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico",
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico",
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico"
+    ],
+    "lessons_en": [
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico",
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico",
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico",
+      "Exercicio pratico com multiplos takes",
+      "Consistencia entre diferentes cameras e luzes",
+      "Ajuste fino de contraste e exposicao",
+      "Desenvolvimento do olhar tecnico"
+    ],
+    "topics": [
+      {
+        "id": "337c3b00-62bd-4a64-ae3e-338210edb331",
+        "title": "Exercicio pratico com multiplos takes"
+      },
+      {
+        "id": "c06ad868-2bed-44bf-8985-aa6f9819f450",
+        "title": "Consistencia entre diferentes cameras e luzes"
+      },
+      {
+        "id": "929651e3-1326-4d7a-a6eb-ea2683e1d0c7",
+        "title": "Ajuste fino de contraste e exposicao"
+      },
+      {
+        "id": "577e4387-2491-423d-b578-0fdbab03a1da",
+        "title": "Desenvolvimento do olhar tecnico"
+      },
+      {
+        "id": "beb5ce84-a079-40d5-986f-38259f3a6993",
+        "title": "Exercicio pratico com multiplos takes"
+      },
+      {
+        "id": "e952b81f-aabc-44e8-ac1d-ba03057c6a23",
+        "title": "Consistencia entre diferentes cameras e luzes"
+      },
+      {
+        "id": "4ce0180f-a212-4fbd-847e-941de67daedf",
+        "title": "Ajuste fino de contraste e exposicao"
+      },
+      {
+        "id": "329e627e-a56f-4f9c-a4a7-ffa8118bc60d",
+        "title": "Desenvolvimento do olhar tecnico"
+      },
+      {
+        "id": "34407075-5803-4012-ab0b-f16cbbc58f5d",
+        "title": "Exercicio pratico com multiplos takes"
+      },
+      {
+        "id": "d2297a91-f148-485a-8f8e-6cd64793a1ec",
+        "title": "Consistencia entre diferentes cameras e luzes"
+      },
+      {
+        "id": "bde35b03-ad8b-44ec-b44e-7f242f27b4c1",
+        "title": "Ajuste fino de contraste e exposicao"
+      },
+      {
+        "id": "c43a9ab4-9dd9-4beb-be33-86f5c03aca7c",
+        "title": "Desenvolvimento do olhar tecnico"
+      },
+      {
+        "id": "efd41511-0dde-431f-8d2c-c0a3bb618ef9",
+        "title": "Exercicio pratico com multiplos takes"
+      },
+      {
+        "id": "9c138ade-df41-40be-a539-36c52430edb8",
+        "title": "Consistencia entre diferentes cameras e luzes"
+      },
+      {
+        "id": "45ef1620-8996-4956-b72e-7ca283800d0e",
+        "title": "Ajuste fino de contraste e exposicao"
+      },
+      {
+        "id": "efafb695-4a2a-4525-881a-d086309ed147",
+        "title": "Desenvolvimento do olhar tecnico"
+      }
+    ],
+    "order": 11
+  },
+  {
+    "id": "module-seed-13",
+    "show_in_en": true,
+    "title_pt": "Criacao de Look",
+    "title_en": "Look Creation",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 5,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual",
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual",
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual",
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual"
+    ],
+    "topics_en": [
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual",
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual",
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual",
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual"
+    ],
+    "lessons_pt": [
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual",
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual",
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual",
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual"
+    ],
+    "lessons_en": [
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual",
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual",
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual",
+      "Uso de LUTs tecnicos e criativos",
+      "Introducao a FPE e workflows com Cineon",
+      "Entendendo a utilizacao do Grao Analogico",
+      "Halation: Tecnicas avancadas",
+      "Construcao de looks com identidade visual"
+    ],
+    "topics": [
+      {
+        "id": "e26dfe87-ffad-4b94-8032-0f4b8fc50e0e",
+        "title": "Uso de LUTs tecnicos e criativos"
+      },
+      {
+        "id": "eaf81a65-e086-4ced-af75-373a26000e32",
+        "title": "Introducao a FPE e workflows com Cineon"
+      },
+      {
+        "id": "ec8dd17b-6853-45c9-97e1-3cba276a92dd",
+        "title": "Entendendo a utilizacao do Grao Analogico"
+      },
+      {
+        "id": "c5d5d4fa-ccb3-4555-b93f-735716d2f51c",
+        "title": "Halation: Tecnicas avancadas"
+      },
+      {
+        "id": "41ec52ff-5117-49b0-bfff-41ab963c33cf",
+        "title": "Construcao de looks com identidade visual"
+      },
+      {
+        "id": "d60444e2-96b8-478c-8b73-e9a11f7ec51c",
+        "title": "Uso de LUTs tecnicos e criativos"
+      },
+      {
+        "id": "553ef302-cbf3-4438-b86b-05f3c338c96b",
+        "title": "Introducao a FPE e workflows com Cineon"
+      },
+      {
+        "id": "b24b5300-0487-4d63-819e-f63136435fee",
+        "title": "Entendendo a utilizacao do Grao Analogico"
+      },
+      {
+        "id": "6780e159-5932-4db5-a227-78b3a063eead",
+        "title": "Halation: Tecnicas avancadas"
+      },
+      {
+        "id": "0775ab74-614b-4599-8983-549c2b9dde62",
+        "title": "Construcao de looks com identidade visual"
+      },
+      {
+        "id": "9ab182b9-a8d7-4c3f-a02e-755a0bb6756d",
+        "title": "Uso de LUTs tecnicos e criativos"
+      },
+      {
+        "id": "3c902357-fe3c-43d7-a428-187dcc5fab39",
+        "title": "Introducao a FPE e workflows com Cineon"
+      },
+      {
+        "id": "6784f03c-5ee8-4303-883f-a2f8cf136dca",
+        "title": "Entendendo a utilizacao do Grao Analogico"
+      },
+      {
+        "id": "b50d99a9-053a-4915-a686-bac875d44776",
+        "title": "Halation: Tecnicas avancadas"
+      },
+      {
+        "id": "dd513fd8-7c77-4128-a501-03726dd6d7cd",
+        "title": "Construcao de looks com identidade visual"
+      },
+      {
+        "id": "617d3db6-431c-4da2-9840-2b5de3c97b57",
+        "title": "Uso de LUTs tecnicos e criativos"
+      },
+      {
+        "id": "c027d717-739b-4576-9897-3769850e4d29",
+        "title": "Introducao a FPE e workflows com Cineon"
+      },
+      {
+        "id": "c83429fa-548d-47d3-9da3-66b276dc3c92",
+        "title": "Entendendo a utilizacao do Grao Analogico"
+      },
+      {
+        "id": "93d445b1-e9f6-40e9-bb5f-07b4d41df775",
+        "title": "Halation: Tecnicas avancadas"
+      },
+      {
+        "id": "921fb0eb-e6b2-4e38-aa34-c399675b8dd1",
+        "title": "Construcao de looks com identidade visual"
+      }
+    ],
+    "order": 12
+  },
+  {
+    "id": "module-seed-14",
+    "show_in_en": false,
+    "title_pt": "Projeto Pratico 01",
+    "title_en": "Practical Project 01",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real",
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real",
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real",
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real"
+    ],
+    "topics_en": [
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real",
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real",
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real",
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real"
+    ],
+    "lessons_pt": [
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real",
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real",
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real",
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real"
+    ],
+    "lessons_en": [
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real",
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real",
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real",
+      "Grading completo do inicio ao fim",
+      "Correcao primaria, secundaria e look",
+      "Consolidacao do workflow",
+      "Projeto guiado com aplicacao real"
+    ],
+    "topics": [
+      {
+        "id": "c9037795-4b79-40cc-b1a6-905955b59da4",
+        "title": "Grading completo do inicio ao fim"
+      },
+      {
+        "id": "511d4631-6e41-451c-bbfa-d5877ca3c602",
+        "title": "Correcao primaria, secundaria e look"
+      },
+      {
+        "id": "83916246-7a66-4c3a-86c8-f13cf6420b0f",
+        "title": "Consolidacao do workflow"
+      },
+      {
+        "id": "1cb0d5b6-0f76-4213-a9c1-d6642e9d190f",
+        "title": "Projeto guiado com aplicacao real"
+      },
+      {
+        "id": "43744f5a-6c11-4f53-8e1b-f18cf77ec81e",
+        "title": "Grading completo do inicio ao fim"
+      },
+      {
+        "id": "8549b467-df05-4014-8b28-e5999a16efd3",
+        "title": "Correcao primaria, secundaria e look"
+      },
+      {
+        "id": "b5f18980-466d-4015-bb4a-d419d1dcfce3",
+        "title": "Consolidacao do workflow"
+      },
+      {
+        "id": "9768d287-c6a8-4d91-8178-9b05053fe5e4",
+        "title": "Projeto guiado com aplicacao real"
+      },
+      {
+        "id": "4e81810a-0106-483b-b38f-828791c27586",
+        "title": "Grading completo do inicio ao fim"
+      },
+      {
+        "id": "6e258517-b651-427e-865f-8af47b21f104",
+        "title": "Correcao primaria, secundaria e look"
+      },
+      {
+        "id": "c298897c-afbd-4bb7-8a90-eb14c293c57b",
+        "title": "Consolidacao do workflow"
+      },
+      {
+        "id": "95bd931a-49c6-4cd9-9c17-97d2d03207cc",
+        "title": "Projeto guiado com aplicacao real"
+      },
+      {
+        "id": "15c5fc06-92ae-4caa-97b8-7c880179c5b4",
+        "title": "Grading completo do inicio ao fim"
+      },
+      {
+        "id": "11f4633e-6d4b-48ca-b33b-fe55787da77b",
+        "title": "Correcao primaria, secundaria e look"
+      },
+      {
+        "id": "dfa5ae7d-05fc-4514-80ce-a4e833f5d7ab",
+        "title": "Consolidacao do workflow"
+      },
+      {
+        "id": "331853ef-45ea-45aa-96f7-29920a613dce",
+        "title": "Projeto guiado com aplicacao real"
+      }
+    ],
+    "order": 13
+  },
+  {
+    "id": "module-seed-15",
+    "show_in_en": true,
+    "title_pt": "Projeto Pratico 02",
+    "title_en": "Practical Project 02",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 4,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo",
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo",
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo",
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo"
+    ],
+    "topics_en": [
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo",
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo",
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo",
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo"
+    ],
+    "lessons_pt": [
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo",
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo",
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo",
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo"
+    ],
+    "lessons_en": [
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo",
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo",
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo",
+      "Continuacao da timeline do Modulo 03",
+      "Grading completo de um novo material",
+      "Exercicio de autonomia e tomada de decisao",
+      "Experiencia de projeto real completo"
+    ],
+    "topics": [
+      {
+        "id": "62cd59ac-396f-4ec2-ba75-c24aa136ecdc",
+        "title": "Continuacao da timeline do Modulo 03"
+      },
+      {
+        "id": "0287f9c8-36b2-4c79-a924-b439f8115013",
+        "title": "Grading completo de um novo material"
+      },
+      {
+        "id": "f1cd6a13-98c6-4963-a26f-b6c4b5a1ec2b",
+        "title": "Exercicio de autonomia e tomada de decisao"
+      },
+      {
+        "id": "99ab3265-88eb-4b4a-a1ff-eb46a6500b6b",
+        "title": "Experiencia de projeto real completo"
+      },
+      {
+        "id": "9a95d051-da1e-430d-99e5-7a65975da52d",
+        "title": "Continuacao da timeline do Modulo 03"
+      },
+      {
+        "id": "fea70f21-0af6-4667-829e-4d0c1eaee40b",
+        "title": "Grading completo de um novo material"
+      },
+      {
+        "id": "1e7b1b7d-bb74-42c8-b1f4-2c0253da9317",
+        "title": "Exercicio de autonomia e tomada de decisao"
+      },
+      {
+        "id": "699e1765-64e6-4a40-8853-1895be318e95",
+        "title": "Experiencia de projeto real completo"
+      },
+      {
+        "id": "c0b7bfee-702e-4826-800a-a216260e61a6",
+        "title": "Continuacao da timeline do Modulo 03"
+      },
+      {
+        "id": "cbe57efe-fbde-4a25-af75-a3dc5252165e",
+        "title": "Grading completo de um novo material"
+      },
+      {
+        "id": "21f4cae3-b95b-46d6-bce9-4a8d4650a3c0",
+        "title": "Exercicio de autonomia e tomada de decisao"
+      },
+      {
+        "id": "3d1f2398-8327-49a4-93dc-f7c2603d9b84",
+        "title": "Experiencia de projeto real completo"
+      },
+      {
+        "id": "32013b7d-91b2-4833-8c7c-a2de2cf82dff",
+        "title": "Continuacao da timeline do Modulo 03"
+      },
+      {
+        "id": "05767e1b-12f6-42d0-96f1-7ffaabbabf6e",
+        "title": "Grading completo de um novo material"
+      },
+      {
+        "id": "b1f60feb-e15a-4bb5-9dae-edaaed0f8125",
+        "title": "Exercicio de autonomia e tomada de decisao"
+      },
+      {
+        "id": "6272857b-5a16-4522-b96e-eb8cba095ea0",
+        "title": "Experiencia de projeto real completo"
+      }
+    ],
+    "order": 14
+  },
+  {
+    "id": "module-seed-16",
+    "show_in_en": true,
+    "title_pt": "Deliver e Conform Final",
+    "title_en": "Final Deliver and Conform",
+    "description_pt": "",
+    "description_en": "",
+    "lessons_count": 3,
+    "duration_hours": 1,
+    "topics_pt": [
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas",
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas",
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas",
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas"
+    ],
+    "topics_en": [
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas",
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas",
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas",
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas"
+    ],
+    "lessons_pt": [
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas",
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas",
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas",
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas"
+    ],
+    "lessons_en": [
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas",
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas",
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas",
+      "Diferentes metodos de Render",
+      "Como usar Individual Clips e Handles",
+      "Entregas profissionais e organizadas"
+    ],
+    "topics": [
+      {
+        "id": "b4d3e5fd-62db-4d3b-b420-7c08dc065dcc",
+        "title": "Diferentes metodos de Render"
+      },
+      {
+        "id": "3eca1c79-aacd-4826-ace1-e1a799f669d0",
+        "title": "Como usar Individual Clips e Handles"
+      },
+      {
+        "id": "6cdd8cbf-ced6-44cd-973f-759c1f3a75fe",
+        "title": "Entregas profissionais e organizadas"
+      },
+      {
+        "id": "409150c9-4717-409c-a01f-a54131e0f809",
+        "title": "Diferentes metodos de Render"
+      },
+      {
+        "id": "6f1f13a8-1183-45f3-b899-d9c1f7a1ce01",
+        "title": "Como usar Individual Clips e Handles"
+      },
+      {
+        "id": "85e95eb9-c9eb-482e-909d-5f859807f32f",
+        "title": "Entregas profissionais e organizadas"
+      },
+      {
+        "id": "28440c54-f056-42bd-b584-d86058719c51",
+        "title": "Diferentes metodos de Render"
+      },
+      {
+        "id": "49b4ef3f-61aa-4073-982e-e231a1e2b04b",
+        "title": "Como usar Individual Clips e Handles"
+      },
+      {
+        "id": "f42a1628-ff53-47d7-ab0e-ee6920e5e99e",
+        "title": "Entregas profissionais e organizadas"
+      },
+      {
+        "id": "e5b4c36f-fd6f-4306-b419-bbefc73874aa",
+        "title": "Diferentes metodos de Render"
+      },
+      {
+        "id": "796e98b1-d97b-4e15-95b6-e1d9d81f097b",
+        "title": "Como usar Individual Clips e Handles"
+      },
+      {
+        "id": "a293adce-9c24-4082-a03a-391bd50caddc",
+        "title": "Entregas profissionais e organizadas"
+      }
+    ],
+    "order": 15
+  }
 ]
