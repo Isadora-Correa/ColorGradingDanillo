@@ -1,78 +1,35 @@
-const configuredBaseUrl = import.meta.env.VITE_API_BASE_URL;
-const dynamicHostname =
-  typeof window !== 'undefined' && window.location?.hostname
-    ? window.location.hostname
-    : null;
-const dynamicProtocol =
-  typeof window !== 'undefined' && window.location?.protocol
-    ? window.location.protocol
-    : 'http:';
-const dynamicApiPort = import.meta.env.VITE_API_PORT || '3002';
-const dynamicBaseUrl = dynamicHostname
-  ? `${dynamicProtocol}//${dynamicHostname}:${dynamicApiPort}/api`
-  : null;
-
-const candidateBaseUrls = Array.from(
-  new Set(
-    [
-      dynamicBaseUrl,
-      configuredBaseUrl,
-      'http://localhost:3002/api',
-      'http://localhost:3001/api',
-    ].filter(Boolean)
-  )
-);
+// src/api/apiClient.js
+const BASE_URL = '/api'; 
 
 const parseJsonSafe = async (response) => {
   try {
-    return await response.json();
+    const data = await response.json();
+    return data;
   } catch {
     return {};
   }
 };
 
-const shouldFallbackByStatus = (status) => status === 404 || status === 405;
-const isAuthError = (status) => status === 401 || status === 403;
-
-const requestWithFallback = async (path, options) => {
-  let lastNetworkError = null;
-  const hasAuthHeader = Boolean(options?.headers?.Authorization);
-
-  for (const baseUrl of candidateBaseUrls) {
-    try {
-      const response = await fetch(`${baseUrl}${path}`, options);
-      if (response.ok) {
-        return parseJsonSafe(response);
-      }
-
-      if (shouldFallbackByStatus(response.status)) {
-        continue;
-      }
-
-      const errorData = await parseJsonSafe(response);
-
-      if (hasAuthHeader && isAuthError(response.status) && typeof window !== 'undefined') {
-        window.localStorage.removeItem('authToken');
-        window.dispatchEvent(new CustomEvent('auth:expired'));
-      }
-
-      const httpError = new Error(errorData.message || `Falha na requisicao: ${response.status}`);
-      httpError.isHttpError = true;
-      throw httpError;
-    } catch (error) {
-      if (error?.isHttpError) {
-        throw error;
-      }
-      lastNetworkError = error;
+const request = async (path, options = {}) => {
+  try {
+    // Na Vercel, o fetch relativo (/api/...) já sabe que deve olhar para o próprio domínio
+    const response = await fetch(`${BASE_URL}${path}`, options);
+    
+    if (response.ok) {
+      return parseJsonSafe(response);
     }
-  }
 
-  throw lastNetworkError || new Error('Nao foi possivel conectar com a API.');
+    const errorData = await parseJsonSafe(response);
+    throw new Error(errorData.message || `Erro HTTP: ${response.status}`);
+  } catch (error) {
+    console.error("Erro na requisição:", error);
+    throw error;
+  }
 };
 
 export const apiClient = {
   login: async (credentials) => {
-    return requestWithFallback('/login', {
+    return request('/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(credentials),
@@ -80,14 +37,13 @@ export const apiClient = {
   },
 
   get: async (entity) => {
-    return requestWithFallback(`/${entity}`, {
-      method: 'GET',
-    });
+    // Se chamar get('products'), ele vai buscar em /api/products
+    return request(`/${entity}`, { method: 'GET' });
   },
 
   save: async (entity, data) => {
     const token = localStorage.getItem('authToken');
-    return requestWithFallback(`/${entity}`, {
+    return request(`/${entity}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -4,16 +4,14 @@ import path from 'node:path'
 
 // https://vite.dev/config/
 export default defineConfig({
-  logLevel: 'error', // Suppress warnings, only show errors
+  logLevel: 'error', 
   base: '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
-  server: {  
-    host: true  
-  },
+  // O bloco 'server' com o proxy foi removido daqui
   plugins: [
     react(),
   ]
