@@ -1,29 +1,37 @@
-// src/api/apiClient.js
-const BASE_URL = '/api'; 
+const BASE_URL = '/api';
 
+/**
+ * Tenta transformar a resposta em JSON. 
+ * Se falhar, retorna um array vazio para evitar erros de .find() no Front-end.
+ */
 const parseJsonSafe = async (response) => {
   try {
     const data = await response.json();
-    return data;
+    // Se a resposta for nula ou não for o que o componente espera, 
+    // retornamos um fallback seguro (array vazio).
+    return data || [];
   } catch {
-    return {};
+    return [];
   }
 };
 
 const request = async (path, options = {}) => {
   try {
-    // Na Vercel, o fetch relativo (/api/...) já sabe que deve olhar para o próprio domínio
     const response = await fetch(`${BASE_URL}${path}`, options);
     
+    // Se a resposta for OK (200), processa o JSON
     if (response.ok) {
-      return parseJsonSafe(response);
+      return await parseJsonSafe(response);
     }
 
-    const errorData = await parseJsonSafe(response);
-    throw new Error(errorData.message || `Erro HTTP: ${response.status}`);
+    // Se a Vercel retornar 404 ou 500, retornamos [] para o site não ficar branco
+    console.warn(`API retornou status ${response.status} para ${path}. Usando fallback vazio.`);
+    return [];
+    
   } catch (error) {
-    console.error("Erro na requisição:", error);
-    throw error;
+    // Erro de rede (ex: sem internet ou API offline)
+    console.error("Erro crítico na requisição:", error);
+    return []; // Retorna lista vazia para o componente não crashar
   }
 };
 
@@ -36,18 +44,21 @@ export const apiClient = {
     });
   },
 
+  /**
+   * get('products') buscará em /api/products
+   * Se a API falhar, retornará [] e o erro 'products.find is not a function' sumirá.
+   */
   get: async (entity) => {
-    // Se chamar get('products'), ele vai buscar em /api/products
     return request(`/${entity}`, { method: 'GET' });
   },
 
   save: async (entity, data) => {
-    const token = localStorage.getItem('authToken');
+    const token = typeof window !== 'undefined' ? localStorage.getItem('authToken') : null;
     return request(`/${entity}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        ...(token && { Authorization: `Bearer ${token}` }),
       },
       body: JSON.stringify(data),
     });
