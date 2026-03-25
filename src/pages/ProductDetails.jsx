@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { apiClient } from '../../api/apiClient';
+import { apiClient } from "@/api/apiClient";
 import { useLanguage } from '../components/ui/LanguageContext';
 import { LanguageProvider } from '../components/ui/LanguageContext';
 import { Button } from '@/components/ui/button';
