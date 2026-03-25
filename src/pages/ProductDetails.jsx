@@ -1,8 +1,7 @@
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-// Import corrigido para o alias @
-import { apiClient } from '@/api/apiClient'; 
+import { apiClient } from '../../api/apiClient';
 import { useLanguage } from '../components/ui/LanguageContext';
 import { LanguageProvider } from '../components/ui/LanguageContext';
 import { Button } from '@/components/ui/button';
@@ -20,9 +19,7 @@ function ProductDetailContent() {
     queryKey: ['product', productSlug],
     queryFn: async () => {
       const products = await apiClient.get('products');
-      // Proteção para garantir que products seja um array
-      const productList = Array.isArray(products) ? products : [];
-      return productList.find((p) => p.slug === productSlug);
+      return products.find((p) => p.slug === productSlug);
     },
     enabled: !!productSlug,
   });
@@ -30,7 +27,7 @@ function ProductDetailContent() {
   const { data: settings } = useQuery({
     queryKey: ['siteSettings'],
     queryFn: () => apiClient.get('settings'),
-    select: (data) => (Array.isArray(data) ? data[0] : data) || {},
+    select: (data) => data?.[0] || {},
   });
 
   if (isLoading) {
@@ -55,23 +52,54 @@ function ProductDetailContent() {
     );
   }
 
-  // Lógica de dados do produto (Igual ao seu original)
-  const name = language === 'pt' ? (product.name_pt || product.name_en) : (product.name_en || product.name_pt);
-  const description = language === 'pt' ? (product.description_pt || product.description_en) : (product.description_en || product.description_pt);
+  const name = language === 'pt'
+    ? (product.name_pt || product.name_en)
+    : (product.name_en || product.name_pt);
+  const description = language === 'pt'
+    ? (product.description_pt || product.description_en)
+    : (product.description_en || product.description_pt);
   const price = language === 'pt' ? product.price_brl : product.price_usd;
   const comparePrice = language === 'pt' ? product.compare_at_price_brl : product.compare_at_price_usd;
   const currency = language === 'pt' ? 'R$' : '$';
-  const buyLink = language === 'pt' ? (product.buy_link_brl || product.buy_link_usd) : (product.buy_link_usd || product.buy_link_brl);
-  
-  const features = (language === 'pt' ? product.features_pt : product.features_en) || [];
-  const featureItems = (Array.isArray(features) ? features : []).slice(0, 4);
-
+  const buyLink = language === 'pt'
+    ? (product.buy_link_brl || product.buy_link_usd)
+    : (product.buy_link_usd || product.buy_link_brl);
+  const features =
+    (language === 'pt' ? product.features_pt : product.features_en) ||
+    (language === 'pt' ? product.highlights_pt : product.highlights_en) ||
+    (language === 'pt' ? product.course_highlights_pt : product.course_highlights_en) ||
+    [];
+  const featureList = Array.isArray(features) ? features : [];
+  const fallbackFeatureList = (description || '')
+    .split('.')
+    .map((part) => part.trim())
+    .filter(Boolean)
+    .slice(0, 4)
+    .map((item) => `${item}.`);
   const detailImage = language === 'pt'
-    ? (product.detail_image_url_pt || product.image_url || '/produto1.webp')
-    : (product.detail_image_url_en || product.image_url || '/produto1.webp');
-
+    ? (
+      product.detail_image_url_pt ||
+      product.image_url_pt ||
+      product.image_pt_url ||
+      product.image_pt ||
+      product.detail_image_url ||
+      product.image_url ||
+      '/produto1.webp'
+    )
+    : (
+      product.detail_image_url_en ||
+      product.image_url_en ||
+      product.image_en_url ||
+      product.image_en ||
+      product.detail_image_url ||
+      product.image_url ||
+      '/produto1.webp'
+    );
   const hasComparePrice = Number.isFinite(comparePrice) && comparePrice > price;
-  const savingsPercent = hasComparePrice ? Math.round(((comparePrice - price) / comparePrice) * 100) : null;
+  const savingsPercent = hasComparePrice
+    ? Math.round(((comparePrice - price) / comparePrice) * 100)
+    : null;
+  const featureItems = (featureList.length ? featureList : fallbackFeatureList).slice(0, 4);
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#050608] text-white">
@@ -96,6 +124,7 @@ function ProductDetailContent() {
 
           <div className="grid items-center gap-6 lg:grid-cols-12 lg:gap-8">
             <motion.img
+              key={`${language}-${product.id || product.slug || 'detail'}`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               src={detailImage}
@@ -119,28 +148,36 @@ function ProductDetailContent() {
 
               <div className="mb-4 flex w-fit flex-wrap items-end gap-3">
                 <span className="text-3xl font-bold text-white lg:text-4xl">
-                  {currency}{price?.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US', { minimumFractionDigits: 2 })}
+                  {currency}
+                  {price?.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US', {
+                    minimumFractionDigits: 2,
+                  })}
                 </span>
                 {hasComparePrice && (
                   <span className="text-lg text-zinc-500 line-through">
-                    {currency}{comparePrice?.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US', { minimumFractionDigits: 2 })}
+                    {currency}
+                    {comparePrice?.toLocaleString(language === 'pt' ? 'pt-BR' : 'en-US', {
+                      minimumFractionDigits: 2,
+                    })}
                   </span>
                 )}
-                {savingsPercent && (
+                {savingsPercent ? (
                   <span className="rounded-full border border-emerald-400/30 bg-emerald-400/15 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-emerald-200">
                     {t('Economize', 'Save')} {savingsPercent}%
                   </span>
-                )}
+                ) : null}
               </div>
 
-              <p className="mb-5 max-w-xl text-sm leading-relaxed text-zinc-300 md:text-base">
-                {description}
-              </p>
+              {description && (
+                <p className="mb-5 max-w-xl text-sm leading-relaxed text-zinc-300 md:text-base">
+                  {description}
+                </p>
+              )}
 
               {featureItems.length > 0 && (
                 <ul className="mb-6 grid gap-2 sm:grid-cols-2">
                   {featureItems.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
+                    <li key={`${item}-${idx}`} className="flex items-start gap-2">
                       <Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-[#39e09b]" />
                       <span className="text-xs text-zinc-200 md:text-sm">{item}</span>
                     </li>
@@ -154,7 +191,6 @@ function ProductDetailContent() {
                   className="h-12 rounded-full bg-black/40 px-10 text-base font-bold text-white shadow-[0_10px_35px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-[1.02] hover:bg-black/55 active:scale-[0.98]"
                 >
                   <span className="relative inline-flex items-center px-1 py-0.5 leading-none">
-                    {/* O EFEITO DE BRILHO VOLTOU AQUI: */}
                     <span className="absolute -inset-1 rounded-md bg-[linear-gradient(90deg,#ff2f6d_0%,#ff8f1f_20%,#d8ff3a_40%,#31f2a7_60%,#26d8ff_78%,#7a6dff_90%,#ff38bd_100%)] opacity-65 blur-md" />
                     <span className="relative text-white">
                       {t('Comprar agora', 'Buy now')}
