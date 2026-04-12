@@ -33,9 +33,9 @@ const BIO = {
     'Hoje, além de atuar como Colorista Senior, Nava também compartilha sua experiência com videomakers e coloristas que querem elevar o nível do seu trabalho e dominar o Color Grading de forma criativa, estratégica e profissional.',
   ],
   en: [
-    'Nava is a professional colorist working on major international projects, collaborating with directors and cinematographers across formats, from high-end commercials to series and films.',
-    'His work uses color as a narrative tool, applying real market workflows to create images with identity and visual impact. Over the years, he has delivered projects for global brands, as well as international series, documentaries, shorts and award-winning films.',
-    'Today, in addition to working as a Senior Colorist, Nava shares his experience with videomakers and colorists who want to raise the level of their work and master Color Grading creatively, strategically and professionally.',
+    'Nava is a professional colorist working on major international projects, collaborating with directors and DPs across a wide range of formats, from high-end commercials to TV series and feature films.',
+    'His work uses color as a narrative tool, applying real-world workflows to create images with strong identity and visual impact. Over the years, he has delivered projects for global brands, as well as international series, documentaries, short films, and award-winning productions.',
+    'Today, alongside his work as a Senior Colorist, Nava shares his experience with filmmakers and colorists around the world who want to elevate their craft and master color grading creatively, strategically, and professionally.',
   ],
 };
 

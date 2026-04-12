@@ -92,9 +92,14 @@
   }
 }
 
-/* Garante que o corpo do site seja transparente para mostrar o fundo padrão do App */
-body, #root {
-  background-color: transparent !important;
+/* Usa o mesmo gradiente base do início em todas as páginas */
+html,
+body,
+#root {
+  background:
+    radial-gradient(140% 90% at 50% -10%, rgba(0, 190, 255, 0.18), transparent 55%),
+    radial-gradient(120% 120% at 50% 120%, rgba(255, 120, 40, 0.14), transparent 55%),
+    linear-gradient(180deg, #0a0d14 0%, #090b12 40%, #07090f 100%) !important;
   margin: 0;
   padding: 0;
 }
@@ -195,7 +200,7 @@ section, main {
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
     font-family: 'ITC Avant Garde Pro', 'Futura Condensed', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 }
