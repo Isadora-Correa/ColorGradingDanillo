@@ -69,20 +69,20 @@ export default function ProductCatalog({ products = [], settings = {} }) {
     ? (
       settings?.products_heading_title_pt ||
       [settings?.products_heading_line1_pt, settings?.products_heading_line2_pt].filter(Boolean).join(' ').trim() ||
-      'Conheca os produtos que trazem mais COR para sua carreira.'
+      'Conheça os produtos que trazem mais COR para sua carreira.'
     )
     : (
       settings?.products_heading_title_en ||
       [settings?.products_heading_line1_en, settings?.products_heading_line2_en].filter(Boolean).join(' ').trim() ||
-      'Discover products that bring more COLOR to your career.'
+      'Discover tools that bring more COLOR to your career.'
     );
   const [titleLine1, titleLine2] = splitTitleInTwoLines(titleFull);
   const subtitle = language === 'pt'
-    ? (settings?.products_heading_subtitle_pt || 'Escolha o melhor para voce')
-    : (settings?.products_heading_subtitle_en || 'Pick what fits you best');
+    ? (settings?.products_heading_subtitle_pt || 'Escolha o melhor para você')
+    : (settings?.products_heading_subtitle_en || 'Choose what fits you best.');
 
   return (
-    <section aria-label={t('Catalogo de produtos', 'Product catalog')} className="space-y-6">
+    <section aria-label={t('Catálogo de produtos', 'Product catalog')} className="space-y-6">
       <SectionTitle
         line1={renderUppercaseHighlight(titleLine1)}
         line2Content={renderUppercaseHighlight(titleLine2)}

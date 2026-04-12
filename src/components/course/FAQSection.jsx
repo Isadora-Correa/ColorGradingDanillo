@@ -69,20 +69,12 @@ const DEFAULT_FAQS = [
       'No. You do not need extra equipment beyond a good computer and monitor or notebook. The entire content was designed for keyboard and mouse workflow.',
   },
   {
-    question_pt: 'O curso contempla módulos de prospecção e venda no mercado internacional?',
+    question_pt: 'Terei acesso a futuras atualizações do curso?',
     answer_pt:
-      'Em breve lançaremos um curso separado voltado para prospecção e atendimento de clientes internacionais. O curso atual contempla apenas a parte técnica.',
-    question_en: 'Does the course include prospecting and sales modules for the international market?',
+      'Você terá acesso a todas as atualizações e conteúdos adicionais incluídos neste curso, sem custo extra. Novos cursos e formações avançadas poderão ser oferecidos separadamente.',
+    question_en: 'Will I have access to future course updates?',
     answer_en:
-      'Soon we will launch a separate course focused on prospecting and serving international clients. The current course focuses only on the technical side.',
-  },
-  {
-    question_pt: 'A edição de Black Friday inclui atualizações futuras do curso?',
-    answer_pt:
-      'Na edição especial de Black Friday, você recebe acesso vitalício aos módulos atuais do curso. Algumas atualizações, novidades e novos módulos futuros poderão ser adquiridos separadamente.',
-    question_en: 'Does the Black Friday edition include future course updates?',
-    answer_en:
-      'In the Black Friday special edition, you get lifetime access to the current modules. Some future updates and new modules may be purchased separately.',
+      'You will have access to all updates and additional content included in this course at no extra cost. New courses and advanced training programs may be offered separately.',
   },
 ];
 

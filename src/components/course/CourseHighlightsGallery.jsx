@@ -7,17 +7,17 @@ const FEATURE_CARDS = [
   {
     id: 'professional',
     image: '/1.1.1_1.1.1.jpg',
-    titlePt: 'Feito para tornar voce um colorista profissional com resultados',
+    titlePt: 'Feito para tornar você um colorista profissional com resultados',
     titleEn: 'Built to turn you into a professional colorist with real results',
-    descPt: 'Um curso robusto do basico ao avancado, com tecnicas aplicadas no mercado internacional.',
+    descPt: 'Um curso robusto do básico ao avançado, com técnicas aplicadas no mercado internacional.',
     descEn: 'A robust course from fundamentals to advanced, with techniques used in the international market.',
   },
   {
     id: 'portfolio',
     image: '/1.15.1_1.15.1.jpg',
-    titlePt: 'Seu Portfolio Masterpiece Garantido',
+    titlePt: 'Seu Portfólio Masterpiece Garantido',
     titleEn: 'Your Masterpiece Portfolio Guaranteed',
-    descPt: 'Ao decorrer do curso, vamos colorir dois projetos inteiros do inicio ao fim.',
+    descPt: 'Ao decorrer do curso, vamos colorir dois projetos inteiros do início ao fim.',
     descEn: 'Throughout the course, we grade two complete projects from start to finish.',
   },
   {
@@ -25,16 +25,16 @@ const FEATURE_CARDS = [
     image: '/1.6.1_1.6.1.jpg',
     titlePt: 'Mais de 300GB de material bruto gratuito',
     titleEn: 'Over 300GB of free raw practice material',
-    descPt: 'Incluindo B-Roll e imagens para pratica real de color grading.',
+    descPt: 'Incluindo B-Roll e imagens para prática real de color grading.',
     descEn: 'Including B-roll and footage for real-world color grading practice.',
   },
   {
     id: 'premiere',
     image: '/1.8.1_1.8.1.jpg',
-    titlePt: 'Colorir no Premiere e mais dificil e ineficaz',
-    titleEn: 'Color grading in Premiere is harder and less effective',
-    descPt: 'Aqui voce aprende a extrair todo o potencial com fluxo profissional.',
-    descEn: 'Here you learn to unlock full potential with a professional workflow.',
+    titlePt: 'Acesso Vitalício',
+    titleEn: 'Lifetime Access',
+    descPt: 'Uma vez seu, sempre seu. Seu guia de color grading disponível sempre que você precisar.',
+    descEn: 'Once it is yours, it is always yours. Your color grading guide is available whenever you need it.',
   },
 ];
 
@@ -92,7 +92,7 @@ export default function CourseHighlightsGallery({ content = {} }) {
   const headingFull = t(
     content.highlights_title_pt ||
       [content.highlights_title_line1_pt, content.highlights_title_line2_pt].filter(Boolean).join(' ').trim() ||
-      'Conheca o curso que vai trazer COR para sua carreira.',
+      'Conheça o curso que vai trazer COR para sua carreira.',
     content.highlights_title_en ||
       [content.highlights_title_line1_en, content.highlights_title_line2_en].filter(Boolean).join(' ').trim() ||
       'Discover the course that brings COLOR to your career.'
@@ -139,7 +139,9 @@ export default function CourseHighlightsGallery({ content = {} }) {
               onError={(event) => {
                 event.currentTarget.src = fallbackImage;
               }}
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className={`absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+                card.id === 'professional' ? 'object-[center_12%] md:object-[center_6%] lg:object-[center_0%]' : 'object-center'
+              }`}
               loading="lazy"
               decoding="async"
             />

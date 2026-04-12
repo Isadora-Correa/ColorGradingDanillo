@@ -1,11 +1,92 @@
 [
   {
-    "id": "test1",
-    "author_name": "Maria Oliveira",
-    "author_photo_url": "/logo-icone.webp",
-    "video_url": null,
-    "text_pt": "Didática impecável e conteúdo muito rico. Recomendo a todos que querem entrar no mundo do color grading.",
-    "text_en": "Impeccable teaching and very rich content. I recommend it to everyone who wants to enter the world of color grading.",
+    "id": "testimonial-1",
+    "author_name": "William Almeida",
+    "author_photo_url": "",
+    "video_url": "",
+    "text_pt": "Muito obrigado por dividir esse conhecimento com seus alunos! Aprendendo demais com vc! Parabéns 👏🏽✨️",
+    "text_en": "Thank you so much for sharing this knowledge with your students! I’m learning a lot from you! Congrats 👏🏽✨️",
+    "order": 0
+  },
+  {
+    "id": "testimonial-2",
+    "author_name": "Opeu",
+    "author_photo_url": "",
+    "video_url": "",
+    "text_pt": "Quase terminando seu curso, continua sendo o melhor que já comprei!",
+    "text_en": "Almost finishing your course, still the best one I’ve ever bought!",
     "order": 1
+  },
+  {
+    "id": "testimonial-3",
+    "author_name": "Guilherme Shimojo",
+    "author_photo_url": "",
+    "video_url": "",
+    "text_pt": "Melhor curso! Já terminei e vou revisar tudo. Cara, foi o único curso que assisti inteiro!",
+    "text_en": "Best course! I’ve already finished it and I’m going to review everything. Honestly, it’s the only course I’ve watched all the way through!",
+    "order": 2
+  },
+  {
+    "id": "testimonial-4",
+    "author_name": "Eduardo Kunioshi",
+    "author_photo_url": "",
+    "video_url": "",
+    "text_pt": "Eu tô fazendo o curso e cara, QUE CURSO BOM, eu não era iniciante, tinha conhecimento de várias coisas no davinci, mas vc entrou em detalhes que eu nunca tinha visto, parabéns pela qualidade",
+    "text_en": "I’m taking the course and man, WHAT A GREAT COURSE. I wasn’t a beginner, I already knew a lot in DaVinci, but you went into details I had never seen before. Congrats on the quality.",
+    "order": 3
+  },
+  {
+    "id": "testimonial-5",
+    "author_name": "Clysmann",
+    "author_photo_url": "",
+    "video_url": "",
+    "text_pt": "Cheguei em um resultado muito legal, com o estudo do curso.",
+    "text_en": "I achieved a really great result after studying the course.",
+    "order": 4
+  },
+  {
+    "id": "testimonial-6",
+    "author_name": "Gustavo Watanab",
+    "author_photo_url": "",
+    "video_url": "",
+    "text_pt": "Sou aluno do curso e sinto que evolui bastante de um tempo pra cá, criei até coragem de começar a postar algumas coisas aqui no insta.",
+    "text_en": "I’m a student of the course and I feel like I’ve improved a lot recently. I even gained the confidence to start posting some work on Instagram.",
+    "order": 5
+  },
+  {
+    "id": "testimonial-7",
+    "author_name": "Victor Hugo",
+    "author_photo_url": "",
+    "video_url": "",
+    "text_pt": "E parabéns pelo curso, tá muito completo! Ajudando demais!",
+    "text_en": "And congrats on the course, it’s very complete. Helping me a lot!",
+    "order": 6
+  },
+  {
+    "id": "testimonial-8",
+    "author_name": "Igor Angelo",
+    "author_photo_url": "",
+    "video_url": "",
+    "text_pt": "Material de alta qualidade hein. O curso tá bem completo.",
+    "text_en": "High-quality material. The course is really complete.",
+    "order": 7
+  },
+  {
+    "id": "testimonial-9",
+    "author_name": "João Vitor",
+    "author_photo_url": "",
+    "video_url": "",
+    "text_pt": "Curso muito bem organizado, lindo demais de se ver, realmente diferenciado, parabéns!",
+    "text_en": "Very well organized course, beautiful to watch, truly outstanding. Congrats!",
+    "order": 8
+  },
+  {
+    "id": "testimonial-10",
+    "author_name": "George Fonseca",
+    "author_photo_url": "",
+    "video_url": "",
+    "text_pt": "Já estou no time. Adquiri o curso e estou devorando o conhecimento que vc disponibilizou",
+    "text_en": "I’m already in. I got the course and I’m devouring all the knowledge you shared.",
+    "order": 9
   }
 ]

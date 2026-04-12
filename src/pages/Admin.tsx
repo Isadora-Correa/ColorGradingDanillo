@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Settings, Package, BookOpen, Users, MessageSquare, HelpCircle, Image, LayoutDashboard, LogOut, Plus, Trash2, Save, GripVertical, ArrowUp, ArrowDown } from 'lucide-react';
+import { Settings, Package, BookOpen, Users, MessageSquare, HelpCircle, Image, LayoutDashboard, LogOut, Plus, Trash2, Save, GripVertical, ArrowUp, ArrowDown, X } from 'lucide-react';
 
 const panel = 'bg-[#0d1117] border-white/10 text-zinc-100';
 const input = 'bg-zinc-900 border-white/15 text-zinc-100 placeholder:text-zinc-500 h-11';
@@ -19,6 +19,60 @@ const fromLines = (v) => String(v || '').split('\n').map((s) => s.trim()).filter
 const num = (v, d = 0) => Number.isFinite(Number(v)) ? Number(v) : d;
 const id = () => crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`;
 const toDataUrl = (file) => new Promise((resolve, reject) => { const r = new FileReader(); r.onload = () => resolve(r.result); r.onerror = reject; r.readAsDataURL(file); });
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+const CROP_PRESETS = [
+  { value: 'original', label: 'Original', aspect: null },
+  { value: 'landscape', label: '16:9', aspect: 16 / 9 },
+  { value: 'square', label: '1:1', aspect: 1 },
+  { value: 'portrait', label: '4:5', aspect: 4 / 5 },
+];
+
+const loadImageElement = (src) =>
+  new Promise((resolve, reject) => {
+    const image = new window.Image();
+    image.onload = () => resolve(image);
+    image.onerror = reject;
+    image.src = src;
+  });
+
+async function cropImageToDataUrl(src, options = {}) {
+  const image = await loadImageElement(src);
+  const sourceAspect = image.width / image.height;
+  const targetAspect = options.aspect || sourceAspect;
+  const zoom = clamp(Number(options.zoom) || 1, 1, 3);
+  const offsetX = clamp(Number(options.offsetX) || 0, -100, 100) / 100;
+  const offsetY = clamp(Number(options.offsetY) || 0, -100, 100) / 100;
+
+  let cropWidth = image.width;
+  let cropHeight = image.height;
+
+  if (sourceAspect > targetAspect) {
+    cropHeight = image.height / zoom;
+    cropWidth = cropHeight * targetAspect;
+  } else {
+    cropWidth = image.width / zoom;
+    cropHeight = cropWidth / targetAspect;
+  }
+
+  const maxX = Math.max(0, (image.width - cropWidth) / 2);
+  const maxY = Math.max(0, (image.height - cropHeight) / 2);
+  const sx = clamp((image.width - cropWidth) / 2 + offsetX * maxX, 0, image.width - cropWidth);
+  const sy = clamp((image.height - cropHeight) / 2 + offsetY * maxY, 0, image.height - cropHeight);
+
+  const longEdge = 1600;
+  const outputWidth = cropWidth >= cropHeight ? longEdge : Math.round(longEdge * targetAspect);
+  const outputHeight = cropWidth >= cropHeight ? Math.round(longEdge / targetAspect) : longEdge;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = outputWidth;
+  canvas.height = outputHeight;
+
+  const context = canvas.getContext('2d');
+  if (!context) throw new Error('Nao foi possivel preparar o recorte da imagem.');
+
+  context.drawImage(image, sx, sy, cropWidth, cropHeight, 0, 0, outputWidth, outputHeight);
+  return canvas.toDataURL('image/jpeg', 0.92);
+}
 
 const DEFAULT_BEFORE_AFTER = [
   {
@@ -28,9 +82,9 @@ const DEFAULT_BEFORE_AFTER = [
     description_pt: '',
     description_en: '',
     order: 0,
-    before_url: '/beforeafter/case1-before.webp',
-    during_url: '/beforeafter/case1-during.webp',
-    after_url: '/beforeafter/case1-after.webp',
+    before_url: '/beforeafter/1.ANTES.jpg',
+    during_url: '/beforeafter/1.DURANTE.jpg',
+    after_url: '/beforeafter/1.DEPOIS.jpg',
   },
   {
     id: 'default-case-2',
@@ -39,9 +93,9 @@ const DEFAULT_BEFORE_AFTER = [
     description_pt: '',
     description_en: '',
     order: 1,
-    before_url: '/beforeafter/case2-before.webp',
-    during_url: '/beforeafter/case2-during.webp',
-    after_url: '/beforeafter/case2-after.webp',
+    before_url: '/beforeafter/3.ANTES.jpg',
+    during_url: '/beforeafter/3.DURANTE.jpg',
+    after_url: '/beforeafter/3.DEPOIS.jpg',
   },
   {
     id: 'default-case-3',
@@ -50,9 +104,9 @@ const DEFAULT_BEFORE_AFTER = [
     description_pt: '',
     description_en: '',
     order: 2,
-    before_url: '/beforeafter/case3-before.webp',
-    during_url: '/beforeafter/case3-during.webp',
-    after_url: '/beforeafter/case3-after.webp',
+    before_url: '/beforeafter/4.ANTES.jpg',
+    during_url: '/beforeafter/4.DURANTE.jpg',
+    after_url: '/beforeafter/4.DEPOIS.jpg',
   },
 ];
 
@@ -82,70 +136,71 @@ const toBeforeAfterPayload = (item) => ({
 });
 
 const DEFAULT_MODULES = [
-  { id: 'module-seed-1', title_pt: 'Apresentacao', title_en: 'Introduction', lessons_count: 3, duration_hours: 1, topics: [{ id: id(), title: 'Visao geral do curso e da jornada de aprendizado' }, { id: id(), title: 'Metodologia pratica e progressiva' }, { id: id(), title: 'O que esperar ao longo dos modulos' }], order: 0 },
-  { id: 'module-seed-2', title_pt: 'Project Manager', title_en: 'Project Manager', lessons_count: 4, duration_hours: 1, topics: [{ id: id(), title: 'Estrutura profissional de organizacao no DaVinci' }, { id: id(), title: 'Configuracao da Biblioteca e Database' }, { id: id(), title: 'Protecao contra perda de dados' }, { id: id(), title: 'Fluxo de trabalho escalavel e limpo' }], order: 1 },
-  { id: 'module-seed-3', title_pt: 'Conform', title_en: 'Conform', lessons_count: 3, duration_hours: 1, topics: [{ id: id(), title: 'Importacao correta do projeto de outros softwares' }, { id: id(), title: 'Preparacao de timeline para grading' }, { id: id(), title: 'Conform com Adobe Premiere' }], order: 2 },
-  { id: 'module-seed-4', title_pt: 'Personalizacoes e Atalhos', title_en: 'Customizations and Shortcuts', lessons_count: 4, duration_hours: 1, topics: [{ id: id(), title: 'Atalhos essenciais para agilidade' }, { id: id(), title: 'Configuracoes personalizadas' }, { id: id(), title: 'Otimizacao de performance' }, { id: id(), title: 'Fluidez no dia a dia de pos-producao' }], order: 3 },
-  { id: 'module-seed-5', title_pt: 'Interface do Resolve', title_en: 'Resolve Interface', lessons_count: 4, duration_hours: 1, topics: [{ id: id(), title: 'Tour pela aba Color' }, { id: id(), title: 'Ferramentas essenciais do colorista' }, { id: id(), title: 'Navegacao eficiente' }, { id: id(), title: 'Aba Edit: o essencial para um colorista' }], order: 4 },
-  { id: 'module-seed-6', title_pt: 'Gerenciamento de Cor Basico', title_en: 'Basic Color Management', lessons_count: 3, duration_hours: 1, topics: [{ id: id(), title: 'Uma breve introducao ao gerenciamento de cor' }, { id: id(), title: 'Diferentes espacos de cor' }, { id: id(), title: 'Utilizando transformacoes de maneira eficiente' }], order: 5 },
-  { id: 'module-seed-7', title_pt: 'Primaries, Scopes e Color Matching', title_en: 'Primaries, Scopes and Color Matching', lessons_count: 6, duration_hours: 1, topics: [{ id: id(), title: 'Conceitos do Color Balance' }, { id: id(), title: 'Entendendo as ferramentas primarias' }, { id: id(), title: 'Como interpretar os Scopes' }, { id: id(), title: 'Printer Lights' }, { id: id(), title: 'HDR Color Wheels' }, { id: id(), title: 'Color Matching' }], order: 6 },
-  { id: 'module-seed-8', title_pt: 'Gerenciamento de Cor Avancado', title_en: 'Advanced Color Management', lessons_count: 3, duration_hours: 1, topics: [{ id: id(), title: 'DaVinci YRGB, ACES e DWG' }, { id: id(), title: 'Entendendo o Camera Raw' }, { id: id(), title: 'Gerenciamento a nivel de Nodes' }], order: 7 },
-  { id: 'module-seed-9', title_pt: 'Nodes e Workflow', title_en: 'Nodes and Workflow', lessons_count: 3, duration_hours: 1, topics: [{ id: id(), title: 'Tipos de nodes e aplicacoes estrategicas' }, { id: id(), title: 'Construcao de Node Tree profissional' }, { id: id(), title: 'Workflow escalavel e organizado' }], order: 8 },
-  { id: 'module-seed-10', title_pt: 'Ferramentas Secundarias', title_en: 'Secondary Tools', lessons_count: 4, duration_hours: 1, topics: [{ id: id(), title: 'Uso avancado de Power Windows e Qualifiers' }, { id: id(), title: 'Curves, Warper e Noise Reduction' }, { id: id(), title: 'Magic Mask e Color Slice' }, { id: id(), title: 'Refino tecnico e estetico da imagem' }], order: 9 },
-  { id: 'module-seed-11', title_pt: 'Skin Tones', title_en: 'Skin Tones', lessons_count: 4, duration_hours: 1, topics: [{ id: id(), title: 'Correcao de diferentes tipos de pele' }, { id: id(), title: 'Uso do Vectorscope para precisao' }, { id: id(), title: 'Tecnicas de realce com Glow e Beauty' }, { id: id(), title: 'Resultados cinematograficos e naturais' }], order: 10 },
-  { id: 'module-seed-12', title_pt: 'Pratica - Color Balance & Matching', title_en: 'Practice - Color Balance & Matching', lessons_count: 4, duration_hours: 1, topics: [{ id: id(), title: 'Exercicio pratico com multiplos takes' }, { id: id(), title: 'Consistencia entre diferentes cameras e luzes' }, { id: id(), title: 'Ajuste fino de contraste e exposicao' }, { id: id(), title: 'Desenvolvimento do olhar tecnico' }], order: 11 },
-  { id: 'module-seed-13', title_pt: 'Criacao de Look', title_en: 'Look Creation', lessons_count: 5, duration_hours: 1, topics: [{ id: id(), title: 'Uso de LUTs tecnicos e criativos' }, { id: id(), title: 'Introducao a FPE e workflows com Cineon' }, { id: id(), title: 'Entendendo a utilizacao do Grao Analogico' }, { id: id(), title: 'Halation: Tecnicas avancadas' }, { id: id(), title: 'Construcao de looks com identidade visual' }], order: 12 },
-  { id: 'module-seed-14', title_pt: 'Projeto Pratico 01', title_en: 'Practical Project 01', lessons_count: 4, duration_hours: 1, topics: [{ id: id(), title: 'Grading completo do inicio ao fim' }, { id: id(), title: 'Correcao primaria, secundaria e look' }, { id: id(), title: 'Consolidacao do workflow' }, { id: id(), title: 'Projeto guiado com aplicacao real' }], order: 13 },
-  { id: 'module-seed-15', title_pt: 'Projeto Pratico 02', title_en: 'Practical Project 02', lessons_count: 4, duration_hours: 1, topics: [{ id: id(), title: 'Continuacao da timeline do Modulo 03' }, { id: id(), title: 'Grading completo de um novo material' }, { id: id(), title: 'Exercicio de autonomia e tomada de decisao' }, { id: id(), title: 'Experiencia de projeto real completo' }], order: 14 },
-  { id: 'module-seed-16', title_pt: 'Deliver e Conform Final', title_en: 'Final Deliver and Conform', lessons_count: 3, duration_hours: 1, topics: [{ id: id(), title: 'Diferentes metodos de Render' }, { id: id(), title: 'Como usar Individual Clips e Handles' }, { id: id(), title: 'Entregas profissionais e organizadas' }], order: 15 },
+  { id: 'module-seed-1', title_pt: 'Apresentação', title_en: 'Introduction', lessons_count: 3, duration_hours: 1, topics: [{ id: id(), title: 'Visão geral do curso e da jornada de aprendizado' }, { id: id(), title: 'Acesso ao Material do Curso' }, { id: id(), title: 'Grupo no Discord' }], order: 0 },
+  { id: 'module-seed-2', title_pt: 'Project Manager', title_en: 'Project Manager', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'Como baixar o DaVinci Resolve' }, { id: id(), title: 'Configuração da Biblioteca e Database' }], order: 1 },
+  { id: 'module-seed-3', title_pt: 'Conform', title_en: 'Conform', lessons_count: 6, duration_hours: 1, topics: [{ id: id(), title: 'O que é Conform?' }, { id: id(), title: 'AAF' }, { id: id(), title: 'EDL' }, { id: id(), title: 'XML' }, { id: id(), title: 'Scene Detection' }, { id: id(), title: 'Conselhos Gerais' }], order: 2 },
+  { id: 'module-seed-4', title_pt: 'Personalização e Atalhos', title_en: 'Customization and Shortcuts', lessons_count: 1, duration_hours: 1, topics: [{ id: id(), title: 'Configurações essenciais antes de colorir' }], order: 3 },
+  { id: 'module-seed-5', title_pt: 'Interface do DaVinci Resolve', title_en: 'DaVinci Resolve Interface', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'O essencial da aba Edit para Color Grading' }, { id: id(), title: 'O essencial da Aba Color' }], order: 4 },
+  { id: 'module-seed-6', title_pt: 'Gerenciamento de Cor: Básico', title_en: 'Color Management: Basic', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'Fundamentos do Gerenciamento de Cor' }, { id: id(), title: 'Gerenciamento de Cor na Prática' }], order: 5 },
+  { id: 'module-seed-7', title_pt: 'Ferramentas Fundamentais do Color Grading', title_en: 'Fundamental Color Grading Tools', lessons_count: 7, duration_hours: 1, topics: [{ id: id(), title: 'Color Balance: Conceitos' }, { id: id(), title: 'Primaries' }, { id: id(), title: 'Scopes' }, { id: id(), title: 'Printer Lights' }, { id: id(), title: 'HDR Color Wheels' }, { id: id(), title: 'Color Matching com Parade' }, { id: id(), title: 'Color Matching com Vectorscope' }], order: 6 },
+  { id: 'module-seed-8', title_pt: 'Gerenciamento de Cor: Avançado', title_en: 'Color Management: Advanced', lessons_count: 5, duration_hours: 1, topics: [{ id: id(), title: 'Gerenciamento de Cor' }, { id: id(), title: 'ACES' }, { id: id(), title: 'Camera RAW' }, { id: id(), title: 'RCM' }, { id: id(), title: 'Gerenciamento de Cor a Nível de Nodes' }], order: 7 },
+  { id: 'module-seed-9', title_pt: 'Nodes e Workflow Avançado', title_en: 'Advanced Nodes and Workflow', lessons_count: 1, duration_hours: 1, topics: [{ id: id(), title: 'Nodes e Workflow Avançado na Prática' }], order: 8 },
+  { id: 'module-seed-10', title_pt: 'Ferramentas Secundárias', title_en: 'Secondary Tools', lessons_count: 9, duration_hours: 1, topics: [{ id: id(), title: 'Curves' }, { id: id(), title: 'Color Warper' }, { id: id(), title: 'Color Slice' }, { id: id(), title: 'Power Window' }, { id: id(), title: 'Qualifiers' }, { id: id(), title: 'Magic Mask' }, { id: id(), title: 'Keyframes' }, { id: id(), title: 'Noise Reduction' }, { id: id(), title: 'Color Checker' }], order: 9 },
+  { id: 'module-seed-11', title_pt: 'Tratamento de Pele / Skin Tones', title_en: 'Skin Treatment / Skin Tones', lessons_count: 8, duration_hours: 1, topics: [{ id: id(), title: 'Vectorscope: Revisão' }, { id: id(), title: 'Correção de Pele com Cor Subtrativa' }, { id: id(), title: 'Tratamento de Pele' }, { id: id(), title: 'Redução de Ruído' }, { id: id(), title: 'Glow' }, { id: id(), title: 'Tratamento de Pele e Face Refinement' }, { id: id(), title: 'Patch Replacer' }, { id: id(), title: 'Beauty' }], order: 10 },
+  { id: 'module-seed-12', title_pt: 'Color Balance e Color Matching', title_en: 'Color Balance and Color Matching', lessons_count: 1, duration_hours: 1, topics: [{ id: id(), title: 'Color Balance: Consolidação do Aprendizado' }], order: 11 },
+  { id: 'module-seed-13', title_pt: 'Criação de Look', title_en: 'Look Creation', lessons_count: 6, duration_hours: 1, topics: [{ id: id(), title: 'O que são LUTS?' }, { id: id(), title: 'Film Print Emulation (FPE)' }, { id: id(), title: 'Cineon Film Log' }, { id: id(), title: 'Grão de película' }, { id: id(), title: 'O que é Halation' }, { id: id(), title: 'Aplicação de Look com “Nava LUTS”' }], order: 12 },
+  { id: 'module-seed-14', title_pt: 'Projeto Prático 01', title_en: 'Practical Project 01', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'Grading completo do início ao fim' }, { id: id(), title: 'Correção primária, secundária e look' }], order: 13 },
+  { id: 'module-seed-15', title_pt: 'Projeto Prático 02', title_en: 'Practical Project 02', lessons_count: 3, duration_hours: 1, topics: [{ id: id(), title: 'Continuação da timeline do Módulo 03' }, { id: id(), title: 'Grading completo de um novo material' }, { id: id(), title: 'Exercício de autonomia e tomada de decisão' }], order: 14 },
+  { id: 'module-seed-16', title_pt: 'Deliver e Conform Final', title_en: 'Final Deliver and Conform', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'Exportação de Timeline: Formatos e Métodos' }, { id: id(), title: 'Handles e Exportação de Clips Individuais' }], order: 15 },
+  { id: 'module-seed-17', show_in_en: false, title_pt: 'Bônus: DaVinci Resolve 20', title_en: 'Bonus: DaVinci Resolve 20', lessons_count: 8, duration_hours: 1, topics: [{ id: id(), title: 'Atualizando o DaVinci Resolve' }, { id: id(), title: 'Chroma Warp: Introdução' }, { id: id(), title: 'Chroma Warp' }, { id: id(), title: 'Depth Map' }, { id: id(), title: 'Magic Mask com IA (V2)' }, { id: id(), title: 'Node Stack Layer' }, { id: id(), title: 'ProRes no Windows' }, { id: id(), title: 'ACES 2.0' }], order: 16 },
 ];
 
 const COURSE_CONTENT_FALLBACK = {
   id: 'main_content',
-  hero_title_pt: 'Domine a Arte da Cor',
-  hero_title_en: 'Master the Art of Color',
+  hero_title_pt: 'Domine o Color Grading',
+  hero_title_en: 'Master Color Grading',
   hero_subtitle_pt: 'O curso definitivo de Color Grading com DaVinci Resolve que vai transformar a qualidade dos seus videos.',
   hero_subtitle_en: 'The definitive Color Grading course with DaVinci Resolve that will transform the quality of your videos.',
   hero_image_url: '',
   instructor_name: 'Danilo Navarro',
   instructor_bio_pt:
-    'Nava e um colorista profissional que atua em grandes projetos internacionais, colaborando com diretores e fotografos em diferentes formatos, de comerciais high end a series e filmes.\n\nSeu trabalho e focado em usar a cor como ferramenta narrativa, aplicando workflows reais do mercado para criar imagens com identidade e impacto visual. Ao longo dos anos, assinou projetos para grandes marcas globais, alem de series internacionais, documentarios, curtas e filmes premiados.\n\nHoje, alem de atuar como Colorista Senior, Nava tambem compartilha sua experiencia com videomakers e coloristas que querem elevar o nivel do seu trabalho e dominar o Color Grading de forma criativa, estrategica e profissional.',
+    'Nava e um colorista profissional que atua em grandes projetos internacionais, colaborando com diretores e fotografos em diferentes formatos, de comerciais a series e filmes.\n\nSeu trabalho e focado em usar a cor como ferramenta narrativa, aplicando workflows reais do mercado para criar imagens com identidade e impacto visual. Ao longo dos anos, assinou projetos para grandes marcas globais, alem de series internacionais, documentarios, curtas e filmes premiados.\n\nHoje, alem de atuar como Colorista Senior, Nava tambem compartilha sua experiencia com videomakers e coloristas que querem elevar o nivel do seu trabalho e dominar o Color Grading de forma criativa, estrategica e profissional.',
   instructor_bio_en:
     'Nava is a professional colorist working on major international projects, collaborating with directors and cinematographers across formats, from high-end commercials to series and films.\n\nHis work uses color as a narrative tool, applying real market workflows to create images with identity and visual impact. Over the years, he has delivered projects for global brands, as well as international series, documentaries, shorts and award-winning films.\n\nToday, in addition to working as a Senior Colorist, Nava shares his experience with videomakers and colorists who want to raise the level of their work and master Color Grading creatively, strategically and professionally.',
   instructor_photo_url: '/nava.webp',
   instructor_showreel_url: 'https://player.vimeo.com/video/944559078?title=0&byline=0&portrait=0&badge=0',
-  instructor_career_text_pt: 'Atuando no audiovisual em projetos internacionais.',
+  instructor_career_text_pt: '+10 anos atuando no audiovisual em projetos internacionais',
   instructor_career_text_en: 'Working in audiovisual with international projects.',
   instructor_students_count_pt: '+ de 150 alunos',
   instructor_students_count_en: '150+ students',
   instructor_clients_count_pt: '+ de 100 comerciais, series e filmes premiados',
   instructor_clients_count_en: '100+ award-winning commercials, series and films',
-  highlights_title_pt: 'Conheca o curso que vai trazer COR para sua carreira.',
+  highlights_title_pt: 'Conheça o curso que vai trazer COR para sua carreira.',
   highlights_title_en: 'Discover the course that brings COLOR to your career.',
-  highlights_title_line1_pt: 'Conheca o curso que vai trazer',
+  highlights_title_line1_pt: 'Conheça o curso que vai trazer',
   highlights_title_line1_en: 'Discover the course that brings',
   highlights_title_line2_pt: 'para sua carreira.',
   highlights_title_line2_en: 'to your career.',
   highlight_1_image_url: '/1.1.1_1.1.1.jpg',
-  highlight_1_title_pt: 'Feito para tornar voce um colorista profissional com resultados',
+  highlight_1_title_pt: 'Feito para tornar você um colorista profissional com resultados',
   highlight_1_title_en: 'Built to turn you into a professional colorist with real results',
-  highlight_1_desc_pt: 'Um curso robusto do basico ao avancado, com tecnicas aplicadas no mercado internacional.',
+  highlight_1_desc_pt: 'Um curso robusto do básico ao avançado, com técnicas aplicadas no mercado internacional.',
   highlight_1_desc_en: 'A robust course from fundamentals to advanced, with techniques used in the international market.',
   highlight_2_image_url: '/1.15.1_1.15.1.jpg',
-  highlight_2_title_pt: 'Seu Portfolio Masterpiece Garantido',
+  highlight_2_title_pt: 'Seu Portfólio Masterpiece Garantido',
   highlight_2_title_en: 'Your Masterpiece Portfolio Guaranteed',
-  highlight_2_desc_pt: 'Ao decorrer do curso, vamos colorir dois projetos inteiros do inicio ao fim.',
+  highlight_2_desc_pt: 'Ao decorrer do curso, vamos colorir dois projetos inteiros do início ao fim.',
   highlight_2_desc_en: 'Throughout the course, we grade two complete projects from start to finish.',
   highlight_3_image_url: '/1.6.1_1.6.1.jpg',
   highlight_3_title_pt: 'Mais de 300GB de material bruto gratuito',
   highlight_3_title_en: 'Over 300GB of free raw practice material',
-  highlight_3_desc_pt: 'Incluindo B-Roll e imagens para pratica real de color grading.',
+  highlight_3_desc_pt: 'Incluindo B-Roll e imagens para prática real de color grading.',
   highlight_3_desc_en: 'Including B-roll and footage for real-world color grading practice.',
   highlight_4_image_url: '/1.8.1_1.8.1.jpg',
-  highlight_4_title_pt: 'Colorir no Premiere e mais dificil e ineficaz',
-  highlight_4_title_en: 'Color grading in Premiere is harder and less effective',
-  highlight_4_desc_pt: 'Aqui voce aprende a extrair todo o potencial com fluxo profissional.',
-  highlight_4_desc_en: 'Here you learn to unlock full potential with a professional workflow.',
+  highlight_4_title_pt: 'Acesso Vitalício',
+  highlight_4_title_en: 'Lifetime Access',
+  highlight_4_desc_pt: 'Uma vez seu, sempre seu. Seu guia de color grading disponível sempre que você precisar.',
+  highlight_4_desc_en: 'Once it is yours, it is always yours. Your color grading guide is available whenever you need it.',
 };
 
 const normalizeCourseContent = (value) => {
@@ -311,18 +366,190 @@ function BT({ label, pt, en, setPt, setEn, rows = 3 }) {
   return <div className="space-y-2"><Label className="text-zinc-300">{label}</Label><div className="grid grid-cols-1 md:grid-cols-2 gap-4"><T label="PT" value={pt || ''} onChange={(e) => setPt(e.target.value)} rows={rows} /><T label="EN" value={en || ''} onChange={(e) => setEn(e.target.value)} rows={rows} /></div></div>;
 }
 
-function Upload({ label, value, onChange, helper = 'PNG/JPG recomendado.' }) {
-  const [busy, setBusy] = useState(false);
-  const onFile = async (e) => { const f = e.target.files?.[0]; if (!f) return; setBusy(true); try { onChange(await toDataUrl(f)); } finally { setBusy(false); e.target.value = ''; } };
+function ImageCropModal({ open, source, label, cropOptions, onClose, onConfirm }) {
+  const availablePresets = Array.isArray(cropOptions?.presets) && cropOptions.presets.length > 0
+    ? cropOptions.presets
+    : CROP_PRESETS;
+  const initialPreset = cropOptions?.defaultPreset || availablePresets[0]?.value || CROP_PRESETS[0].value;
+  const [preset, setPreset] = useState(initialPreset);
+  const [zoom, setZoom] = useState(1);
+  const [offsetX, setOffsetX] = useState(0);
+  const [offsetY, setOffsetY] = useState(0);
+  const [saving, setSaving] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    setPreset(initialPreset);
+    setZoom(1);
+    setOffsetX(0);
+    setOffsetY(0);
+    setSaving(false);
+  }, [initialPreset, open, source]);
+
+  if (!open || !source) return null;
+
+  const currentPreset = availablePresets.find((item) => item.value === preset) || availablePresets[0] || CROP_PRESETS[0];
+  const previewAspect = currentPreset.aspect || 16 / 9;
+
+  const handleConfirm = async () => {
+    setSaving(true);
+    try {
+      const cropped = await cropImageToDataUrl(source, {
+        aspect: currentPreset.aspect,
+        zoom,
+        offsetX,
+        offsetY,
+      });
+      onConfirm(cropped);
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return (
-    <div className="space-y-2">
-      <Label className="text-zinc-300">{label}</Label>
-      <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-3">
-        <Input type="file" accept="image/*" className={`${input} h-auto py-2`} onChange={onFile} />
-        <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center"><Button type="button" className={btnOutline} onClick={() => onChange('')} disabled={!value}>Remover</Button><span className="text-xs text-zinc-400">{busy ? 'Carregando...' : helper}</span></div>
-        {value ? <div className="rounded-lg border border-white/10 bg-[#111418] p-2"><img src={value} alt={label} className="max-h-32 object-contain" /></div> : null}
+    <div className="fixed inset-0 z-[120] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
+      <div className="w-full max-w-4xl rounded-2xl border border-white/10 bg-[#0b1016] shadow-2xl">
+        <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+          <div>
+            <h3 className="text-lg font-semibold text-white">Recortar imagem</h3>
+            <p className="text-sm text-zinc-400">{label}</p>
+          </div>
+          <Button type="button" className={`${btnOutline} h-10 px-3`} onClick={onClose}>
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
+
+        <div className="grid gap-5 p-5 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <div className="space-y-3">
+            <div className="overflow-hidden rounded-2xl border border-white/10 bg-zinc-950">
+              <div
+                className="relative mx-auto w-full max-w-3xl overflow-hidden bg-black"
+                style={{ aspectRatio: String(previewAspect) }}
+              >
+                <img
+                  src={source}
+                  alt={label}
+                  className="h-full w-full object-cover"
+                  style={{
+                    transform: `scale(${zoom}) translate(${offsetX / zoom}%, ${offsetY / zoom}%)`,
+                    transformOrigin: 'center center',
+                  }}
+                />
+                <div className="pointer-events-none absolute inset-0 border border-white/15 ring-1 ring-inset ring-white/10" />
+              </div>
+            </div>
+            <p className="text-xs text-zinc-500">
+              Ajuste o enquadramento antes de salvar. Esse recorte sera salvo exatamente no formato usado por essa imagem no site.
+            </p>
+          </div>
+
+          <div className="space-y-4 rounded-2xl border border-white/10 bg-zinc-900/40 p-4">
+            {cropOptions?.lockPreset ? (
+              <div className="space-y-2">
+                <Label className="text-zinc-300">Proporção</Label>
+                <div className="rounded-lg border border-white/10 bg-zinc-950/70 px-3 py-2 text-sm text-zinc-200">
+                  {currentPreset.label}
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                <Label className="text-zinc-300">Proporção</Label>
+                <div className="grid grid-cols-2 gap-2">
+                  {availablePresets.map((item) => (
+                    <Button
+                      key={item.value}
+                      type="button"
+                      className={preset === item.value ? `${btnPrimary} h-10` : `${btnOutline} h-10`}
+                      onClick={() => setPreset(item.value)}
+                    >
+                      {item.label}
+                    </Button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="space-y-2">
+              <Label className="text-zinc-300">Zoom</Label>
+              <input type="range" min="1" max="3" step="0.01" value={zoom} onChange={(e) => setZoom(Number(e.target.value))} className="w-full accent-white" />
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-zinc-300">Posição horizontal</Label>
+              <input type="range" min="-100" max="100" step="1" value={offsetX} onChange={(e) => setOffsetX(Number(e.target.value))} className="w-full accent-white" />
+            </div>
+
+            <div className="space-y-2">
+              <Label className="text-zinc-300">Posição vertical</Label>
+              <input type="range" min="-100" max="100" step="1" value={offsetY} onChange={(e) => setOffsetY(Number(e.target.value))} className="w-full accent-white" />
+            </div>
+
+            <div className="flex flex-col gap-2 pt-2 sm:flex-row">
+              <Button type="button" className={`${btnOutline} flex-1`} onClick={onClose}>
+                Cancelar
+              </Button>
+              <Button type="button" className={`${btnPrimary} flex-1`} onClick={handleConfirm} disabled={saving}>
+                {saving ? 'Salvando...' : 'Recortar e usar'}
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  );
+}
+
+function Upload({ label, value, onChange, helper = 'PNG/JPG recomendado.', cropOptions = null }) {
+  const [busy, setBusy] = useState(false);
+  const [pendingSrc, setPendingSrc] = useState('');
+  const [showCrop, setShowCrop] = useState(false);
+
+  const onFile = async (e) => {
+    const f = e.target.files?.[0];
+    if (!f) return;
+    setBusy(true);
+    try {
+      const dataUrl = await toDataUrl(f);
+      setPendingSrc(dataUrl);
+      setShowCrop(true);
+    } finally {
+      setBusy(false);
+      e.target.value = '';
+    }
+  };
+
+  return (
+    <>
+      <div className="space-y-2">
+        <Label className="text-zinc-300">{label}</Label>
+        <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-3">
+          <Input type="file" accept="image/*" className={`${input} h-auto py-2`} onChange={onFile} />
+          <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center">
+            <Button type="button" className={btnOutline} onClick={() => onChange('')} disabled={!value}>
+              Remover
+            </Button>
+            <span className="text-xs text-zinc-400">{busy ? 'Carregando...' : `${helper} O crop abre antes de salvar.`}</span>
+          </div>
+          {value ? <div className="rounded-lg border border-white/10 bg-[#111418] p-2"><img src={value} alt={label} className="max-h-32 object-contain" /></div> : null}
+        </div>
+      </div>
+
+      <ImageCropModal
+        open={showCrop}
+        source={pendingSrc}
+        label={label}
+        cropOptions={cropOptions}
+        onClose={() => {
+          setShowCrop(false);
+          setPendingSrc('');
+        }}
+        onConfirm={(croppedValue) => {
+          onChange(croppedValue);
+          setShowCrop(false);
+          setPendingSrc('');
+        }}
+      />
+    </>
   );
 }
 
@@ -447,16 +674,16 @@ function SettingsTab({ data }) {
     products_heading_title_pt:
       data?.products_heading_title_pt ||
       [data?.products_heading_line1_pt, data?.products_heading_line2_pt].filter(Boolean).join(' ').trim() ||
-      'Conheca os produtos que trazem mais COR para sua carreira.',
+      'Conheça os produtos que trazem mais COR para sua carreira.',
     products_heading_title_en:
       data?.products_heading_title_en ||
       [data?.products_heading_line1_en, data?.products_heading_line2_en].filter(Boolean).join(' ').trim() ||
       'Discover products that bring more COLOR to your career.',
-    products_heading_line1_pt: data?.products_heading_line1_pt || 'Conheca os produtos que trazem',
+    products_heading_line1_pt: data?.products_heading_line1_pt || 'Conheça os produtos que trazem',
     products_heading_line1_en: data?.products_heading_line1_en || 'Discover products that bring',
     products_heading_line2_pt: data?.products_heading_line2_pt || 'mais COR para sua carreira.',
     products_heading_line2_en: data?.products_heading_line2_en || 'more COLOR to your career.',
-    products_heading_subtitle_pt: data?.products_heading_subtitle_pt || 'Escolha o melhor para voce',
+    products_heading_subtitle_pt: data?.products_heading_subtitle_pt || 'Escolha o melhor para você',
     products_heading_subtitle_en: data?.products_heading_subtitle_en || 'Pick what fits you best',
   }));
 
@@ -467,16 +694,16 @@ function SettingsTab({ data }) {
       products_heading_title_pt:
         data?.products_heading_title_pt ||
         [data?.products_heading_line1_pt, data?.products_heading_line2_pt].filter(Boolean).join(' ').trim() ||
-        'Conheca os produtos que trazem mais COR para sua carreira.',
+        'Conheça os produtos que trazem mais COR para sua carreira.',
       products_heading_title_en:
         data?.products_heading_title_en ||
         [data?.products_heading_line1_en, data?.products_heading_line2_en].filter(Boolean).join(' ').trim() ||
         'Discover products that bring more COLOR to your career.',
-      products_heading_line1_pt: data?.products_heading_line1_pt || 'Conheca os produtos que trazem',
+      products_heading_line1_pt: data?.products_heading_line1_pt || 'Conheça os produtos que trazem',
       products_heading_line1_en: data?.products_heading_line1_en || 'Discover products that bring',
       products_heading_line2_pt: data?.products_heading_line2_pt || 'mais COR para sua carreira.',
       products_heading_line2_en: data?.products_heading_line2_en || 'more COLOR to your career.',
-      products_heading_subtitle_pt: data?.products_heading_subtitle_pt || 'Escolha o melhor para voce',
+      products_heading_subtitle_pt: data?.products_heading_subtitle_pt || 'Escolha o melhor para você',
       products_heading_subtitle_en: data?.products_heading_subtitle_en || 'Pick what fits you best',
     });
   }, [data]);
@@ -851,7 +1078,16 @@ function CourseTab({ data }) {
               setEn={(v) => setF({ ...f, hero_subtitle_en: v })}
               rows={3}
             />
-            <Upload label="Imagem Hero" value={f.hero_image_url || ''} onChange={(v) => setF({ ...f, hero_image_url: v })} />
+            <Upload
+              label="Imagem Hero"
+              value={f.hero_image_url || ''}
+              onChange={(v) => setF({ ...f, hero_image_url: v })}
+              cropOptions={{
+                presets: [{ value: 'hero', label: 'Hero 16:9', aspect: 16 / 9 }],
+                defaultPreset: 'hero',
+                lockPreset: true,
+              }}
+            />
           </div>
 
           <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
@@ -865,7 +1101,16 @@ function CourseTab({ data }) {
               setEn={(v) => setF({ ...f, instructor_bio_en: v })}
               rows={5}
             />
-            <Upload label="Foto do Professor" value={f.instructor_photo_url || ''} onChange={(v) => setF({ ...f, instructor_photo_url: v })} />
+            <Upload
+              label="Foto do Professor"
+              value={f.instructor_photo_url || ''}
+              onChange={(v) => setF({ ...f, instructor_photo_url: v })}
+              cropOptions={{
+                presets: [{ value: 'instructor', label: 'Professor 16:9', aspect: 16 / 9 }],
+                defaultPreset: 'instructor',
+                lockPreset: true,
+              }}
+            />
             <F
               label="URL do Showreel (YouTube/Vimeo)"
               value={f.instructor_showreel_url || ''}
@@ -971,6 +1216,11 @@ function CardsTab({ data }) {
                 label={`Imagem de fundo (Card ${item})`}
                 value={f[`highlight_${item}_image_url`] || ''}
                 onChange={(v) => setF({ ...f, [`highlight_${item}_image_url`]: v })}
+                cropOptions={{
+                  presets: [{ value: 'home-card', label: 'Card da home 6:5', aspect: 6 / 5 }],
+                  defaultPreset: 'home-card',
+                  lockPreset: true,
+                }}
               />
               <BI
                 label={`Titulo (Card ${item})`}
@@ -1398,7 +1648,16 @@ function StudentsTab({ data }) {
     <Card className={panel}>
       <CardContent className="p-4 sm:p-6 space-y-4">
         <F label="Nome *" value={f.name || ''} onChange={(e) => setF({ ...f, name: e.target.value })} />
-        <Upload label="Foto do Aluno" value={f.photo_url || ''} onChange={(v) => setF({ ...f, photo_url: v })} />
+        <Upload
+          label="Foto do Aluno"
+          value={f.photo_url || ''}
+          onChange={(v) => setF({ ...f, photo_url: v })}
+          cropOptions={{
+            presets: [{ value: 'student', label: 'Foto quadrada 1:1', aspect: 1 }],
+            defaultPreset: 'student',
+            lockPreset: true,
+          }}
+        />
         <F label="URL do Showreel (YouTube/Vimeo embed)" value={f.showreel_url || ''} onChange={(e) => setF({ ...f, showreel_url: e.target.value })} />
         <StudentLogosUpload logos={f.logos || []} onChange={(logos) => setF({ ...f, logos })} />
         <BT label="Depoimento *" pt={f.testimonial_pt} en={f.testimonial_en} setPt={(v) => setF({ ...f, testimonial_pt: v })} setEn={(v) => setF({ ...f, testimonial_en: v })} rows={4} />
@@ -1465,7 +1724,7 @@ function StudentsTab({ data }) {
   );
 }
 
-function LogosTab({ data }) { return <GenericSimple title="Logos" icon={Image} desc="Marcas e parceiros." keyName="logos" data={data} template={{ name: '', logo_url: '' }} fields={(f, setF) => <><F label="Nome da Marca *" value={f.name || ''} onChange={(e) => setF({ ...f, name: e.target.value })} /><Upload label="Logo *" value={f.logo_url || ''} onChange={(v) => setF({ ...f, logo_url: v })} /></>} subtitle={() => ''} />; }
+function LogosTab({ data }) { return <GenericSimple title="Logos" icon={Image} desc="Marcas e parceiros." keyName="logos" data={data} template={{ name: '', logo_url: '' }} fields={(f, setF) => <><F label="Nome da Marca *" value={f.name || ''} onChange={(e) => setF({ ...f, name: e.target.value })} /><Upload label="Logo *" value={f.logo_url || ''} onChange={(v) => setF({ ...f, logo_url: v })} cropOptions={{ presets: [{ value: 'logo', label: 'Logo horizontal 16:9', aspect: 16 / 9 }, { value: 'original', label: 'Original', aspect: null }], defaultPreset: 'logo' }} /></>} subtitle={() => ''} />; }
 
 function TestimonialsTab({ data }) {
   const qc = useQueryClient();
@@ -1475,7 +1734,6 @@ function TestimonialsTab({ data }) {
   const [savingForm, setSavingForm] = useState(false);
   const [f, setF] = useState({
     author_name: '',
-    author_photo_url: '',
     text_pt: '',
     text_en: '',
   });
@@ -1492,7 +1750,6 @@ function TestimonialsTab({ data }) {
         .map((x, index) => ({
           id: x?.id || id(),
           author_name: String(x?.author_name || x?.student_name || '').trim(),
-          author_photo_url: x?.author_photo_url || x?.avatar_url || '',
           text_pt: String(x?.text_pt || x?.testimonial_pt || '').trim(),
           text_en: String(x?.text_en || x?.testimonial_en || '').trim(),
           order: Number.isFinite(Number(x?.order)) ? Number(x.order) : index,
@@ -1505,7 +1762,7 @@ function TestimonialsTab({ data }) {
     const payload = nextItems.map((x, index) => ({
       id: x?.id || id(),
       author_name: String(x?.author_name || '').trim(),
-      author_photo_url: x?.author_photo_url || '',
+      author_photo_url: '',
       video_url: '',
       text_pt: String(x?.text_pt || '').trim(),
       text_en: String(x?.text_en || '').trim(),
@@ -1517,7 +1774,7 @@ function TestimonialsTab({ data }) {
   const onNew = () => {
     setOpen(true);
     setEditingId('');
-    setF({ author_name: '', author_photo_url: '', text_pt: '', text_en: '' });
+    setF({ author_name: '', text_pt: '', text_en: '' });
   };
 
   const onEdit = (x) => {
@@ -1526,7 +1783,6 @@ function TestimonialsTab({ data }) {
     setF({
       id: x.id,
       author_name: x.author_name || '',
-      author_photo_url: x.author_photo_url || '',
       text_pt: x.text_pt || '',
       text_en: x.text_en || '',
     });
@@ -1537,7 +1793,7 @@ function TestimonialsTab({ data }) {
     const item = {
       id: f.id || id(),
       author_name: String(f.author_name || '').trim(),
-      author_photo_url: f.author_photo_url || '',
+      author_photo_url: '',
       video_url: '',
       text_pt: String(f.text_pt || '').trim(),
       text_en: String(f.text_en || '').trim(),
@@ -1548,7 +1804,7 @@ function TestimonialsTab({ data }) {
       await persist(next);
       setOpen(false);
       setEditingId('');
-      setF({ author_name: '', author_photo_url: '', text_pt: '', text_en: '' });
+      setF({ author_name: '', text_pt: '', text_en: '' });
     } finally {
       setSavingForm(false);
     }
@@ -1582,7 +1838,6 @@ function TestimonialsTab({ data }) {
     <Card className={panel}>
       <CardContent className="p-4 sm:p-6 space-y-4">
         <F label="Nome do Autor *" value={f.author_name || ''} onChange={(e) => setF({ ...f, author_name: e.target.value })} />
-        <Upload label="Foto do Autor" value={f.author_photo_url || ''} onChange={(v) => setF({ ...f, author_photo_url: v })} />
         <BT label="Texto do Depoimento *" pt={f.text_pt} en={f.text_en} setPt={(v) => setF({ ...f, text_pt: v })} setEn={(v) => setF({ ...f, text_en: v })} rows={4} />
         <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
           <Button className={btnOutline} onClick={() => { setOpen(false); setEditingId(''); }}>Cancelar</Button>
@@ -1616,12 +1871,9 @@ function TestimonialsTab({ data }) {
             >
               <div className="flex items-center gap-3 min-w-0">
                 <GripVertical className="w-4 h-4 text-zinc-400 shrink-0" />
-                <div className="flex items-center gap-3 min-w-0">
-                  {x.author_photo_url ? <img src={x.author_photo_url} alt={x.author_name} className="h-10 w-10 rounded-full object-cover border border-white/10" /> : null}
-                  <div>
-                    <p className="font-medium truncate">{x.author_name || 'Depoimento'}</p>
-                    <p className="text-xs text-zinc-400 line-clamp-1">{x.text_pt || x.text_en || ''}</p>
-                  </div>
+                <div>
+                  <p className="font-medium truncate">{x.author_name || 'Depoimento'}</p>
+                  <p className="text-xs text-zinc-400 line-clamp-1">{x.text_pt || x.text_en || ''}</p>
                 </div>
               </div>
               <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-end">
@@ -1951,9 +2203,36 @@ function BeforeAfterTab({ data }) {
               setEn={(v) => setF({ ...f, description_en: v })}
               rows={3}
             />
-            <Upload label="Imagem Antes *" value={f.before_url || ''} onChange={(v) => setF({ ...f, before_url: v })} />
-            <Upload label="Imagem Durante *" value={f.during_url || ''} onChange={(v) => setF({ ...f, during_url: v })} />
-            <Upload label="Imagem Depois *" value={f.after_url || ''} onChange={(v) => setF({ ...f, after_url: v })} />
+            <Upload
+              label="Imagem Antes *"
+              value={f.before_url || ''}
+              onChange={(v) => setF({ ...f, before_url: v })}
+              cropOptions={{
+                presets: [{ value: 'before-after', label: 'Antes/Depois 16:9', aspect: 16 / 9 }],
+                defaultPreset: 'before-after',
+                lockPreset: true,
+              }}
+            />
+            <Upload
+              label="Imagem Durante *"
+              value={f.during_url || ''}
+              onChange={(v) => setF({ ...f, during_url: v })}
+              cropOptions={{
+                presets: [{ value: 'before-after', label: 'Antes/Depois 16:9', aspect: 16 / 9 }],
+                defaultPreset: 'before-after',
+                lockPreset: true,
+              }}
+            />
+            <Upload
+              label="Imagem Depois *"
+              value={f.after_url || ''}
+              onChange={(v) => setF({ ...f, after_url: v })}
+              cropOptions={{
+                presets: [{ value: 'before-after', label: 'Antes/Depois 16:9', aspect: 16 / 9 }],
+                defaultPreset: 'before-after',
+                lockPreset: true,
+              }}
+            />
             <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
               <Button className={btnOutline} onClick={() => setOpen(false)}>
                 Cancelar
@@ -1979,6 +2258,3 @@ function GenericSimple({ title, icon, desc, keyName, data, template, fields, sub
   const del = (xid) => m.mutate((data || []).filter((x) => x.id !== xid));
   return <div className="space-y-6"><CrudList title={title} desc={desc} icon={icon} data={data} onNew={() => { setOpen(true); setF(template); }} onEdit={edit} onDelete={del} subtitle={subtitle} />{open ? <Card className={panel}><CardContent className="p-4 sm:p-6 space-y-4">{fields(f, setF)}<div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end"><Button className={btnOutline} onClick={() => setOpen(false)}>Cancelar</Button><Button className={btnPrimary} onClick={save}>Salvar</Button></div></CardContent></Card> : null}</div>;
 }
-
-
-

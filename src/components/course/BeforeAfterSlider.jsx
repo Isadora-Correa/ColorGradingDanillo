@@ -17,25 +17,25 @@ const DEFAULT_COMPARE_SETS = [
     id: 'set-1',
     title_pt: 'Case 01',
     title_en: 'Case 01',
-    beforeSrc: '/beforeafter/case1-before.webp',
-    duringSrc: '/beforeafter/case1-during.webp',
-    afterSrc: '/beforeafter/case1-after.webp',
+    beforeSrc: '/beforeafter/1.ANTES.jpg',
+    duringSrc: '/beforeafter/1.DURANTE.jpg',
+    afterSrc: '/beforeafter/1.DEPOIS.jpg',
   },
   {
     id: 'set-2',
     title_pt: 'Case 02',
     title_en: 'Case 02',
-    beforeSrc: '/beforeafter/case2-before.webp',
-    duringSrc: '/beforeafter/case2-during.webp',
-    afterSrc: '/beforeafter/case2-after.webp',
+    beforeSrc: '/beforeafter/3.ANTES.jpg',
+    duringSrc: '/beforeafter/3.DURANTE.jpg',
+    afterSrc: '/beforeafter/3.DEPOIS.jpg',
   },
   {
     id: 'set-3',
     title_pt: 'Case 03',
     title_en: 'Case 03',
-    beforeSrc: '/beforeafter/case3-before.webp',
-    duringSrc: '/beforeafter/case3-during.webp',
-    afterSrc: '/beforeafter/case3-after.webp',
+    beforeSrc: '/beforeafter/4.ANTES.jpg',
+    duringSrc: '/beforeafter/4.DURANTE.jpg',
+    afterSrc: '/beforeafter/4.DEPOIS.jpg',
   },
 ];
 
@@ -158,25 +158,25 @@ function ComparePanel({ item, tabs }) {
           <div className="absolute -left-px top-0 h-full w-0.5 bg-white/95 shadow-[0_0_18px_rgba(255,255,255,0.6)]" />
           <button
             type="button"
-            className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-[0_0_24px_rgba(255,255,255,0.4)] touch-pan-y"
+            className="absolute left-1/2 top-1/2 flex h-6 w-6 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-black shadow-[0_0_16px_rgba(255,255,255,0.28)] touch-pan-y md:h-10 md:w-10"
             aria-label="Compare slider"
             onPointerDown={(e) => {
               e.stopPropagation();
               startDrag(e);
             }}
           >
-            <ChevronsUp className="h-6 w-6 rotate-90 text-black" />
+            <ChevronsUp className="h-3.5 w-3.5 rotate-90 text-black md:h-6 md:w-6" />
           </button>
         </div>
 
-        <div className="absolute left-1/2 top-3 z-20 flex -translate-x-1/2 gap-2">
+        <div className="absolute left-1/2 top-1 z-20 flex -translate-x-1/2 gap-1 md:top-3 md:gap-2">
           {tabs.map((tab) => (
             <button
               key={tab.id}
               type="button"
               onClick={() => setStage(tab.id)}
               onPointerDown={(e) => e.stopPropagation()}
-              className={`relative min-w-[92px] overflow-hidden rounded-full px-3 py-2.5 text-[11px] font-semibold leading-tight transition-all md:min-w-0 md:px-4 md:py-2 md:text-xs ${
+              className={`relative min-w-[56px] overflow-hidden rounded-full px-1.5 py-1.5 text-[8px] font-semibold leading-tight transition-all md:min-w-0 md:px-4 md:py-2 md:text-xs ${
                 activeTab === tab.id
                   ? 'bg-black/55 text-white shadow-[0_10px_28px_rgba(0,0,0,0.4)]'
                   : 'bg-black/40 text-zinc-300 hover:bg-black/55 hover:text-white'
@@ -198,7 +198,17 @@ function ComparePanel({ item, tabs }) {
   );
 }
 
-export default function BeforeAfterSlider({ items, isLoading = false }) {
+export default function BeforeAfterSlider({
+  items,
+  isLoading = false,
+  maxItems,
+  titleLine1,
+  titleHighlight,
+  titleLine2Prefix,
+  titleLine2Suffix,
+  titleSubtitle,
+  labels,
+}) {
   const { t } = useLanguage();
 
   const compareSets = useMemo(() => {
@@ -236,10 +246,14 @@ export default function BeforeAfterSlider({ items, isLoading = false }) {
       .filter(Boolean)
       .sort((a, b) => a.order - b.order);
 
-    return normalized.length > 0 ? normalized : DEFAULT_COMPARE_SETS;
-  }, [isLoading, items]);
+    const finalSets = normalized.length > 0 ? normalized : DEFAULT_COMPARE_SETS;
+    if (Number.isFinite(Number(maxItems)) && Number(maxItems) > 0) {
+      return finalSets.slice(0, Number(maxItems));
+    }
+    return finalSets;
+  }, [isLoading, items, maxItems]);
 
-  const tabs = [
+  const tabs = labels || [
     {
       id: 'before',
       label: t('Antes do Curso', 'Before Course'),
@@ -263,8 +277,11 @@ export default function BeforeAfterSlider({ items, isLoading = false }) {
   return (
     <SectionBlock gradient>
       <SectionTitle
-        line1={t('Aprenda Color Grading', 'Learn Color Grading')}
-        highlight={t('de iniciante ao profissional', 'from Beginner to Pro')}
+        line1={titleLine1 || t('Domine o Color Grading', 'Master Color Grading')}
+        line2Prefix={titleLine2Prefix}
+        line2Suffix={titleLine2Suffix}
+        highlight={titleHighlight || t('do iniciante ao profissional', 'from beginner to professional')}
+        subtitle={titleSubtitle}
         titleClassName="text-[1.55rem] leading-[1.1] md:text-4xl lg:text-5xl"
       />
 

@@ -5,22 +5,25 @@ import SectionTitle from '../common/SectionTitle';
 import { Check } from 'lucide-react';
 
 const AVAILABLE_LANGUAGES = [
-  { flag: 'PT', namePt: 'Portugues', nameEn: 'Portuguese', dub: true, subtitles: true },
-  { flag: 'EN', namePt: 'Ingles', nameEn: 'English', dub: true, subtitles: true },
-  { flag: 'ES', namePt: 'Espanhol', nameEn: 'Spanish', dub: true, subtitles: true },
-  { flag: 'FR', namePt: 'Frances', nameEn: 'French', dub: true, subtitles: true },
-  { flag: 'AR', namePt: 'Arabe', nameEn: 'Arabic', dub: true, subtitles: true },
+  { flag: 'PT', namePt: 'Português', nameEn: 'Portuguese' },
+  { flag: 'EN', namePt: 'Inglês', nameEn: 'English' },
+  { flag: 'ES', namePt: 'Espanhol', nameEn: 'Spanish' },
+  { flag: 'FR', namePt: 'Francês', nameEn: 'French' },
+  { flag: 'AR', namePt: 'Árabe', nameEn: 'Arabic' },
 ];
 
 export default function LanguagesSection() {
   const { t, language } = useLanguage();
-  const langs = AVAILABLE_LANGUAGES;
+  const isPt = language === 'pt';
+  const langs = isPt
+    ? AVAILABLE_LANGUAGES
+    : AVAILABLE_LANGUAGES.filter((lang) => lang.flag !== 'PT');
 
   return (
     <SectionBlock gradient>
       <SectionTitle
         line1={t('Idiomas', 'Languages')}
-        highlight={t('Disponiveis', 'Available')}
+        highlight={t('Disponíveis', 'Available')}
       />
 
       <div className="overflow-x-auto rounded-xl border border-white/15 bg-transparent">
@@ -48,10 +51,14 @@ export default function LanguagesSection() {
                   </div>
                 </td>
                 <td className="px-2 py-3 text-center md:px-4 md:py-4">
-                  {lang.dub && <Check className="mx-auto h-5 w-5 text-white" />}
+                  {(isPt ? lang.flag === 'PT' : true) && (
+                    <Check className="mx-auto h-5 w-5 text-white" />
+                  )}
                 </td>
                 <td className="px-2 py-3 text-center md:px-4 md:py-4">
-                  {lang.subtitles && <Check className="mx-auto h-5 w-5 text-white" />}
+                  {(isPt ? lang.flag === 'PT' : true) && (
+                    <Check className="mx-auto h-5 w-5 text-white" />
+                  )}
                 </td>
               </tr>
             ))}
@@ -59,12 +66,14 @@ export default function LanguagesSection() {
         </table>
       </div>
 
-      <p className="mt-4 text-center text-xs text-zinc-500">
-        * {t(
-          'Espanhol, Arabe e Frances foram gerados por IA usando a melhor tecnologia de dublagem disponivel no mercado.',
-          'Spanish, Arabic and French were AI-generated using the best dubbing technology available on the market.'
-        )}
-      </p>
+      {!isPt ? (
+        <p className="mt-4 text-center text-xs text-zinc-500">
+          * {t(
+            'Narração em português. Inglês com revisão profissional. Demais idiomas com dublagem em IA utilizando tecnologia líder de mercado.',
+            'English voiceover professionally reviewed. Spanish, Arabic, and French are provided using industry-leading AI dubbing technology.'
+          )}
+        </p>
+      ) : null}
     </SectionBlock>
   );
 }

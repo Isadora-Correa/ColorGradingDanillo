@@ -1,23 +1,41 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import { apiClient } from '@/api/apiClient';
 import { LanguageProvider, useLanguage } from '../components/ui/LanguageContext';
 import NavHeader from '../components/common/NavHeader';
 import ProductCatalog from '../components/home/ProductCatalog';
 import BeforeAfterSlider from '../components/course/BeforeAfterSlider';
 import ClientLogos from '../components/course/ClientLogos';
-import CourseHighlightsGallery from '../components/course/CourseHighlightsGallery';
 import StudentShowcase from '../components/course/StudentShowcase';
 import InstructorSection from '../components/course/InstructorSection';
 import LanguagesSection from '../components/course/LanguagesSection';
-import CourseModules from '../components/course/CourseModules';
 import TestimonialsSection from '../components/course/TestimonialsSection';
-import CertificateSection from '../components/course/CertificateSection';
-import FAQSection from '../components/course/FAQSection';
+import { Button } from '@/components/ui/button';
+import { createPageUrl } from '@/utils';
 import { Loader2 } from 'lucide-react';
 
+function BuyNowSection({ label }) {
+  const navigate = useNavigate();
+
+  return (
+    <div className="flex justify-center">
+      <Button
+        type="button"
+        onClick={() => navigate(`${createPageUrl('ProductDetail')}?slug=course`)}
+        className="h-12 rounded-full bg-black/40 px-10 text-sm font-bold tracking-[0.18em] text-white shadow-[0_10px_35px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-[1.02] hover:bg-black/55 active:scale-[0.98]"
+      >
+        <span className="relative inline-flex items-center px-1 py-0.5 leading-none">
+          <span className="absolute -inset-1 rounded-md bg-[linear-gradient(90deg,#ff2f6d_0%,#ff8f1f_20%,#d8ff3a_40%,#31f2a7_60%,#26d8ff_78%,#7a6dff_90%,#ff38bd_100%)] opacity-65 blur-md" />
+          <span className="relative text-white">{label}</span>
+        </span>
+      </Button>
+    </div>
+  );
+}
+
 function HomeContent() {
-  const { language } = useLanguage();
+  const { t } = useLanguage();
 
   const { data: settings } = useQuery({
     queryKey: ['settings'],
@@ -33,12 +51,6 @@ function HomeContent() {
   const { data: courseContent } = useQuery({
     queryKey: ['courseContent'],
     queryFn: () => apiClient.get('courseContent'),
-  });
-
-  const { data: modules } = useQuery({
-    queryKey: ['modules'],
-    queryFn: () => apiClient.get('modules'),
-    initialData: [],
   });
 
   const { data: logos } = useQuery({
@@ -62,14 +74,8 @@ function HomeContent() {
     queryKey: ['beforeAfter'],
     queryFn: () => apiClient.get('beforeAfter'),
   });
-  const { data: faqs } = useQuery({
-    queryKey: ['faqs'],
-    queryFn: () => apiClient.get('faqs'),
-    initialData: [],
-  });
-
   const siteSettings = settings?.[0] || {};
-  const content = courseContent?.[0] || {}; // Se courseContent for um array
+  const content = courseContent?.[0] || {};
   const courseProduct = products?.find(p => p.product_type === 'course');
 
   return (
@@ -95,41 +101,34 @@ function HomeContent() {
             {/* 2. Course Details Section - Reorganized per design spec */}
             {courseProduct && (
               <div id="course-details" className="space-y-12">
-                {/* 1. Before/After Slider */}
-                <BeforeAfterSlider items={beforeAfterItems} isLoading={beforeAfterLoading} />
-                
-                {/* 2. Course Highlights Gallery */}
-                <CourseHighlightsGallery content={content} />
+                <BeforeAfterSlider
+                  items={beforeAfterItems}
+                  isLoading={beforeAfterLoading}
+                  maxItems={2}
+                  titleLine1={t('Antes e depois', 'Before and after')}
+                  titleSubtitle={t(
+                    'Veja na prática a evolução visual aplicada nos projetos.',
+                    'See the visual transformation applied in real projects.'
+                  )}
+                />
 
-                {/* 3. Student Showcase */}
-                <StudentShowcase students={students} />
+                <BuyNowSection label={t('COMPRE AGORA', 'BUY NOW')} />
 
-                {/* 4. Instructor Section */}
                 <InstructorSection content={content} />
 
-                {/* 5. Client Logos */}
                 {logos.length > 0 && (
                   <ClientLogos logos={logos} />
                 )}
-                
-                {/* 6. Languages Section */}
-                <LanguagesSection languages={content.available_languages} />
-                
-                {/* 7. Course Modules */}
-                {modules.length > 0 && (
-                  <CourseModules modules={modules} />
-                )}
 
-                {/* 8. Testimonials */}
+                <StudentShowcase students={students} />
+
+                <LanguagesSection languages={content.available_languages} />
+
+                <BuyNowSection label={t('COMPRE AGORA', 'BUY NOW')} />
+
                 {testimonials.length > 0 && (
                   <TestimonialsSection testimonials={testimonials} />
                 )}
-
-                {/* 9. Certificate */}
-                <CertificateSection />
-
-                {/* 10. FAQ */}
-                <FAQSection faqs={faqs} />
               </div>
             )}
           </>

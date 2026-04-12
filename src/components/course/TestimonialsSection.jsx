@@ -3,12 +3,31 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '../ui/LanguageContext';
 import SectionBlock from '../common/SectionBlock';
 import SectionTitle from '../common/SectionTitle';
-import { Play, Quote } from 'lucide-react';
+import { Quote } from 'lucide-react';
 
 export default function TestimonialsSection({ testimonials }) {
   const { language, t } = useLanguage();
 
   if (!testimonials || testimonials.length === 0) return null;
+
+  const orderedTestimonials = [...testimonials].sort((a, b) => (a.order || 0) - (b.order || 0));
+  const getCardClassName = (index) => {
+    const isLast = index === orderedTestimonials.length - 1;
+    if (isLast) return 'md:col-span-2 xl:col-span-3';
+    return 'xl:col-span-1';
+  };
+  const getNameClassName = (name = '') => {
+    const length = String(name).trim().length;
+    if (length > 18) return 'text-[1.45rem] md:text-[1.6rem] leading-[0.96]';
+    if (length > 12) return 'text-[1.58rem] md:text-[1.72rem] leading-[0.96]';
+    return 'text-[1.72rem] md:text-[1.88rem] leading-[0.95]';
+  };
+  const getTextClassName = (text = '') => {
+    const length = String(text).trim().length;
+    if (length > 140) return 'text-[0.88rem] md:text-[0.93rem] leading-6';
+    if (length > 95) return 'text-[0.9rem] md:text-[0.96rem] leading-6';
+    return 'text-[0.93rem] md:text-[0.99rem] leading-6';
+  };
 
   return (
     <div>
@@ -18,57 +37,52 @@ export default function TestimonialsSection({ testimonials }) {
         highlight={t('alunos dizem', 'students say')}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {testimonials.sort((a, b) => (a.order || 0) - (b.order || 0)).map((testimonial, index) => (
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+        {orderedTestimonials.map((testimonial, index) => {
+          const isLast = index === orderedTestimonials.length - 1;
+
+          return (
           <motion.div
             key={testimonial.id}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
+            className={getCardClassName(index)}
           >
-            <SectionBlock className="h-full">
-              {testimonial.video_url ? (
-                <a
-                  href={testimonial.video_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block aspect-video rounded-xl overflow-hidden bg-zinc-800 mb-4 group relative"
-                >
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-900/50 to-cyan-900/50">
-                    <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center group-hover:scale-110 transition-transform">
-                      <Play className="w-5 h-5 text-white fill-white" />
-                    </div>
+            <SectionBlock className="relative h-full overflow-hidden border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-0">
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent" />
+              <div className="absolute -left-10 top-8 h-24 w-24 rounded-full bg-cyan-400/10 blur-3xl" />
+              <div className="absolute -right-8 bottom-0 h-24 w-24 rounded-full bg-fuchsia-500/10 blur-3xl" />
+
+              <div className="relative flex h-full flex-col gap-4 p-4 md:p-5">
+                <div className="flex min-h-[92px] items-start justify-between gap-3 md:min-h-[100px]">
+                  <div className="flex min-h-[76px] flex-col justify-between space-y-2">
+                    <span className="block text-[11px] font-semibold uppercase tracking-[0.22em] text-zinc-500">
+                      {t('Depoimento', 'Testimonial')}
+                    </span>
+                    <p
+                      className={`font-semibold tracking-[-0.03em] text-white ${
+                        isLast ? 'max-w-none whitespace-nowrap' : 'max-w-[10ch] text-balance'
+                      } ${getNameClassName(testimonial.author_name)}`}
+                    >
+                      {testimonial.author_name}
+                    </p>
                   </div>
-                </a>
-              ) : (
-                <div className="mb-4">
-                  <span className="relative block h-8 w-8">
+                  <span className="relative mt-1 block h-8 w-8 shrink-0">
                     <Quote className="absolute inset-0 h-8 w-8 text-fuchsia-400/80" />
                     <Quote className="absolute inset-0 h-8 w-8 -translate-y-[0.5px] translate-x-[0.5px] text-cyan-300/85 mix-blend-screen" />
                   </span>
                 </div>
-              )}
 
-              {(testimonial.text_pt || testimonial.text_en) && (
-                <p className="text-sm text-zinc-300 mb-4 line-clamp-4">
+                <p className={`max-w-4xl text-zinc-200 ${getTextClassName(language === 'pt' ? testimonial.text_pt : testimonial.text_en)}`}>
                   "{language === 'pt' ? testimonial.text_pt : testimonial.text_en}"
                 </p>
-              )}
-
-              <div className="flex items-center gap-3 mt-auto">
-                {testimonial.author_photo_url && (
-                  <img
-                    src={testimonial.author_photo_url}
-                    alt={testimonial.author_name}
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                )}
-                <span className="text-white font-medium">{testimonial.author_name}</span>
               </div>
             </SectionBlock>
           </motion.div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

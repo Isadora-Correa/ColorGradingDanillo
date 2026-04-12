@@ -1,13 +1,14 @@
 ﻿import React from 'react';
 import SectionBlock from '../common/SectionBlock';
 import GlowText from '../common/GlowText';
+import { useLanguage } from '../ui/LanguageContext';
 
 const STRATEGIC_LOGOS = [
   {
     id: 'nike',
     name: 'Nike',
     src: '/logos/Imagem-Nike-Logo-PNG-1024x1024-2-white.webp',
-    sizeClass: 'h-10 md:h-16',
+    sizeClass: 'h-24 md:h-36 lg:h-44',
   },
   {
     id: 'amazon',
@@ -29,7 +30,7 @@ const STRATEGIC_LOGOS = [
     id: 'decathlon',
     name: 'Decathlon',
     src: '/logos/Decathlon-Logo-white.webp',
-    sizeClass: 'h-10 md:h-16',
+    sizeClass: 'h-24 md:h-36 lg:h-44',
   },
 ];
 
@@ -45,6 +46,7 @@ const normalizeLogos = (logos = []) =>
     .sort((a, b) => a.order - b.order);
 
 export default function ClientLogos({ title, logos = [] }) {
+  const { t } = useLanguage();
   const hasCustomTitle = Boolean(title);
   const dynamicLogos = normalizeLogos(logos);
   const list = dynamicLogos.length > 0 ? dynamicLogos : STRATEGIC_LOGOS;
@@ -58,22 +60,34 @@ export default function ClientLogos({ title, logos = [] }) {
             title
           ) : (
             <>
-              Acesse o conhecimento profundo de quem atua com marcas globais como{' '}
+              {t(
+                'Acesse o conhecimento profundo de quem atua com marcas globais como',
+                'Learn from a professional working with global brands like'
+              )}{' '}
               <GlowText
                 className="font-extrabold"
                 gradient="from-[#ff3d77] via-[#9be15d] via-[#00e5ff] to-[#7b61ff]"
                 glowColor="rgba(120, 220, 255, 0.42)"
               >
-                {highlightedBrands || 'Nike, Amazon e Cartier'}
+                {highlightedBrands || t('Nike, Amazon e Cartier', 'Nike, Amazon, and Cartier')}
               </GlowText>
             </>
           )}
         </h2>
       </div>
 
-      <div className="mx-auto flex w-full max-w-5xl flex-wrap items-center justify-center gap-4 pb-2 md:gap-10 md:pb-0">
+      <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-center gap-4 pb-2 md:gap-10 md:pb-0">
         {list.map((logo) => (
-          <div key={logo.id || logo.name} className="flex h-14 items-center justify-center opacity-90 transition-opacity hover:opacity-100 md:h-16">
+          <div
+            key={logo.id || logo.name}
+            className={`flex items-center justify-center opacity-90 transition-opacity hover:opacity-100 ${
+              logo.id === 'nike'
+                ? 'min-w-[160px] md:min-w-[220px] lg:min-w-[280px] min-h-[110px] md:min-h-[150px] lg:min-h-[180px]'
+                : logo.id === 'decathlon'
+                  ? 'min-w-[180px] md:min-w-[260px] lg:min-w-[320px] min-h-[110px] md:min-h-[150px] lg:min-h-[180px]'
+                  : 'h-14 md:h-16'
+            }`}
+          >
             <img
               src={logo.src}
               alt={logo.name}

@@ -6,8 +6,8 @@ import SectionTitle from '../common/SectionTitle';
 const STUDENT_RESULTS = [
   {
     id: 'seed-julia',
-    name: 'Julia Muniz',
-    photo_url: '/julia/julia.webp',
+    name: 'Júlia Muniz',
+    photo_url: '/julia/julia.png',
     showreel_url: 'https://player.vimeo.com/video/1167172670?h=950940ccee&title=0&byline=0&portrait=0&badge=0',
     logos: [
       '/julia/Amazon-Prime-Video-Emblem.webp',
@@ -16,7 +16,7 @@ const STUDENT_RESULTS = [
       '/julia/melissa-logo.webp',
     ],
     testimonial_pt:
-      '"O curso me deu clareza de processo e confianca para entregar projetos com padrao profissional."',
+      '"O curso me deu clareza de processo e confiança para entregar projetos com padrão profissional."',
     testimonial_en:
       '"The course gave me process clarity and confidence to deliver projects at a professional standard."',
     order: 1,
@@ -33,7 +33,7 @@ const STUDENT_RESULTS = [
       '/clys/prime sports.webp',
     ],
     testimonial_pt:
-      '"Com o metodo do curso, meu workflow ficou mais rapido e minhas entregas ficaram muito mais consistentes."',
+      '"Com o método do curso, meu workflow ficou mais rápido e minhas entregas ficaram muito mais consistentes."',
     testimonial_en:
       '"With the course method, my workflow became faster and my deliveries much more consistent."',
     order: 2,
@@ -95,7 +95,7 @@ export default function StudentShowcase({ students = [] }) {
                     />
                   ) : (
                     <div className="absolute inset-0 grid place-items-center text-zinc-500 text-sm">
-                      {t('Showreel nao informado', 'Showreel not provided')}
+                      {t('Showreel não informado', 'Showreel not provided')}
                     </div>
                   )}
                 </div>
@@ -103,7 +103,7 @@ export default function StudentShowcase({ students = [] }) {
 
               <div className="mt-4 w-full">
                 <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-zinc-400">
-                  {t('Marcas que o aluno trabalhou', 'Brands this student has worked with')}
+                  {t('Marcas em que o aluno trabalhou', 'Brands this student has worked with')}
                 </p>
 
                 {student.logos.length > 0 ? (
@@ -112,7 +112,7 @@ export default function StudentShowcase({ students = [] }) {
                       <img
                         key={logo}
                         src={logo}
-                        alt="Marca"
+                        alt={t('Marca', 'Brand')}
                         className="max-h-8 w-auto object-contain brightness-0 invert"
                         loading="lazy"
                         decoding="async"

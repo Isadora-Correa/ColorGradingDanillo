@@ -88,7 +88,7 @@ export default function ProductCard({ product, index }) {
           key={`${language}-${product.id || product.slug || index}`}
           src={imageSrc}
           alt={name}
-          className="h-[280px] w-full object-contain p-4 transition-transform duration-500 group-hover:scale-105"
+          className="h-[340px] w-full object-contain p-3 transition-transform duration-500 group-hover:scale-105 md:h-[390px] lg:h-[430px]"
         />
         {externalLink ? (
           <ExternalLink className="absolute right-3 top-3 h-5 w-5 text-white/70" />

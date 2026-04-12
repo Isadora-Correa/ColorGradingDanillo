@@ -1,9 +1,9 @@
 [
   {
     "id": "student-julia",
-    "name": "Julia Muniz",
+    "name": "Júlia Muniz",
     "instagram": "juliamuniz",
-    "photo_url": "/julia/julia.webp",
+    "photo_url": "/julia/julia.png",
     "showreel_url": "https://player.vimeo.com/video/1167172670?h=950940ccee&title=0&byline=0&portrait=0&badge=0",
     "logos": [
       "/julia/Amazon-Prime-Video-Emblem.webp",
@@ -11,7 +11,7 @@
       "/julia/heineken-14-logo-png-transparent.webp",
       "/julia/melissa-logo.webp"
     ],
-    "testimonial_pt": "\"O curso me deu clareza de processo e confianca para entregar projetos com padrao profissional.\"",
+    "testimonial_pt": "\"O curso me deu clareza de processo e confiança para entregar projetos com padrão profissional.\"",
     "testimonial_en": "\"The course gave me process clarity and confidence to deliver projects at a professional standard.\"",
     "order": 0
   },
@@ -27,7 +27,7 @@
       "/clys/Logo_globo_principal-laranja.webp",
       "/clys/prime sports.webp"
     ],
-    "testimonial_pt": "\"Com o metodo do curso, meu workflow ficou mais rapido e minhas entregas ficaram muito mais consistentes.\"",
+    "testimonial_pt": "\"Com o método do curso, meu workflow ficou mais rápido e minhas entregas ficaram muito mais consistentes.\"",
     "testimonial_en": "\"With the course method, my workflow became faster and my deliveries much more consistent.\"",
     "order": 1
   }

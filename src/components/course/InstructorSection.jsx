@@ -28,9 +28,9 @@ const SOCIALS = [
 
 const BIO = {
   pt: [
-    'Nava e um colorista profissional que atua em grandes projetos internacionais, colaborando com diretores e fotografos em diferentes formatos, de comerciais high end a series e filmes.',
-    'Seu trabalho e focado em usar a cor como ferramenta narrativa, aplicando workflows reais do mercado para criar imagens com identidade e impacto visual. Ao longo dos anos, assinou projetos para grandes marcas globais, alem de series internacionais, documentarios, curtas e filmes premiados.',
-    'Hoje, alem de atuar como Colorista Senior, Nava tambem compartilha sua experiencia com videomakers e coloristas que querem elevar o nivel do seu trabalho e dominar o Color Grading de forma criativa, estrategica e profissional.',
+    'Nava é um colorista profissional que atua em grandes projetos internacionais, colaborando com diretores e fotógrafos em diferentes formatos, de comerciais a séries e filmes.',
+    'Seu trabalho é focado em usar a cor como ferramenta narrativa, aplicando workflows reais do mercado para criar imagens com identidade e impacto visual. Ao longo dos anos, assinou projetos para grandes marcas globais, além de séries internacionais, documentários, curtas e filmes premiados.',
+    'Hoje, além de atuar como Colorista Senior, Nava também compartilha sua experiência com videomakers e coloristas que querem elevar o nível do seu trabalho e dominar o Color Grading de forma criativa, estratégica e profissional.',
   ],
   en: [
     'Nava is a professional colorist working on major international projects, collaborating with directors and cinematographers across formats, from high-end commercials to series and films.',
@@ -51,7 +51,7 @@ const DEFAULT_HIGHLIGHTS = {
     },
     {
       title: 'Clientes',
-      value: '+ de 100 comerciais, series e filmes premiados',
+      value: '+ de 100 comerciais, séries e filmes premiados',
     },
   ],
   en: [
@@ -96,7 +96,7 @@ function splitBio(rawText) {
 
 function splitHighlightValue(text) {
   const raw = String(text || '').trim();
-  const match = raw.match(/(\+\s*de\s*\d+|\d+\+|\+\s*\d+)/i);
+  const match = raw.match(/(\+\s*de\s*\d+\s*anos?|\+\s*de\s*\d+|\+\s*\d+\s*anos?|\d+\+\s*years?|\+\s*\d+|\d+\+)/i);
   if (!match) return { number: '', detail: raw };
   const number = match[0].replace(/\s+/g, ' ').trim();
   const detail = raw.replace(match[0], '').replace(/^[\s,.-]+/, '').trim();
@@ -199,7 +199,7 @@ export default function InstructorSection({ content = {} }) {
         <img
           src={photoSrc}
           alt={instructorName}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover object-center md:object-[center_22%] lg:object-[center_24%]"
           loading="lazy"
           decoding="async"
           onError={() => {
@@ -212,7 +212,7 @@ export default function InstructorSection({ content = {} }) {
 
         <div className="absolute bottom-0 left-0 right-0 p-5 md:p-8">
           <p className="mb-2 text-xs uppercase tracking-[0.16em] text-zinc-300">
-            {t('Conheca seu professor', 'Meet your instructor')}
+            {t('Conheça o seu professor', 'Meet your instructor')}
           </p>
           <h2 className="text-3xl font-extrabold leading-tight text-white md:text-5xl">
             <GlowText
