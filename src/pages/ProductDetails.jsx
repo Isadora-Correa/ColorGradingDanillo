@@ -118,7 +118,12 @@ const LUTS_COMPARE_ITEMS = [
   },
 ];
 
-function ProductHero({ product, settings, onBack, buyLink, featureItems }) {
+function scrollToPurchaseTop() {
+  const anchor = document.getElementById('purchase-top');
+  if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function ProductHero({ product, settings, onBack, featureItems, buyLink }) {
   const { language, t } = useLanguage();
   const name = language === 'pt' ? (product.name_pt || product.name_en) : (product.name_en || product.name_pt);
   const price = language === 'pt' ? product.price_brl : product.price_usd;
@@ -126,14 +131,12 @@ function ProductHero({ product, settings, onBack, buyLink, featureItems }) {
   const detailImage = language === 'pt'
     ? (product.detail_image_url_pt || product.image_url_pt || product.detail_image_url || product.image_url)
     : (product.detail_image_url_en || product.image_url_en || product.detail_image_url || product.image_url);
-
   const openCheckout = () => {
     if (buyLink) {
       window.open(buyLink, '_blank');
       return;
     }
-    const anchor = document.getElementById('purchase-top');
-    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToPurchaseTop();
   };
 
   return (
@@ -239,23 +242,14 @@ function TrailerSection() {
   );
 }
 
-function MidPageBuyButton({ buyLink }) {
+function MidPageBuyButton() {
   const { t } = useLanguage();
-
-  const handleClick = () => {
-    if (buyLink) {
-      window.open(buyLink, '_blank');
-      return;
-    }
-    const anchor = document.getElementById('purchase-top');
-    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
 
   return (
     <div className="flex justify-center">
       <Button
         type="button"
-        onClick={handleClick}
+        onClick={scrollToPurchaseTop}
         className="h-12 rounded-full bg-black/40 px-10 text-sm font-bold tracking-[0.18em] text-white shadow-[0_10px_35px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-[1.02] hover:bg-black/55 active:scale-[0.98]"
       >
         <span className="relative inline-flex items-center px-1 py-0.5 leading-none">
@@ -300,7 +294,9 @@ function LutsInfoSection() {
   return (
     <SectionBlock gradient>
       <SectionTitle
-        line1={t('Tudo o que você recebe', 'What you will get')}
+        line1={t('Tudo o que você', 'What you will')}
+        highlight={t('recebe', 'get')}
+        singleLine
         subtitle={t(
           'Uma ferramenta profissional pensada para acelerar seu workflow e ampliar sua liberdade criativa.',
           'A professional tool designed to speed up your workflow and expand your creative freedom.'
@@ -350,17 +346,13 @@ function CourseDetailPage({ product, settings, courseContent, modules, logos, st
   const featureItems = language === 'pt' ? COURSE_HERO_FEATURES.pt : COURSE_HERO_FEATURES.en;
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#050608] text-white">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(250,120,40,0.22),transparent_40%),radial-gradient(circle_at_82%_22%,rgba(103,232,249,0.2),transparent_36%),radial-gradient(circle_at_50%_85%,rgba(244,63,94,0.18),transparent_42%)]" />
-      </div>
-
+    <div className="relative min-h-screen overflow-x-hidden text-white">
       <ProductHero
         product={product}
         settings={settings}
         onBack={() => window.history.back()}
-        buyLink={buyLink}
         featureItems={featureItems}
+        buyLink={buyLink}
       />
 
       <main className="relative mx-auto max-w-6xl space-y-12 px-4 pb-20 md:px-8">
@@ -376,11 +368,12 @@ function CourseDetailPage({ product, settings, courseContent, modules, logos, st
         <StudentShowcase students={students} />
         <InstructorSection content={courseContent} />
         {logos.length > 0 ? <ClientLogos logos={logos} /> : null}
-        <MidPageBuyButton buyLink={buyLink} />
+        <MidPageBuyButton />
         <SingleBeforeAfterSection />
         <CourseModules modules={modules} />
         <ExclusiveAdditionalContentSection />
         {testimonials.length > 0 ? <TestimonialsSection testimonials={testimonials} /> : null}
+        {language === 'en' ? <MidPageBuyButton /> : null}
         <CertificateSection />
         <FAQSection faqs={faqs} />
       </main>
@@ -393,17 +386,13 @@ function LutsDetailPage({ product, settings, buyLink }) {
   const featureItems = language === 'pt' ? LUTS_HERO_FEATURES.pt : LUTS_HERO_FEATURES.en;
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#050608] text-white">
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(250,120,40,0.22),transparent_40%),radial-gradient(circle_at_82%_22%,rgba(103,232,249,0.2),transparent_36%),radial-gradient(circle_at_50%_85%,rgba(244,63,94,0.18),transparent_42%)]" />
-      </div>
-
+    <div className="relative min-h-screen overflow-x-hidden text-white">
       <ProductHero
         product={product}
         settings={settings}
         onBack={() => window.history.back()}
-        buyLink={buyLink}
         featureItems={featureItems}
+        buyLink={buyLink}
       />
 
       <main className="relative mx-auto max-w-6xl space-y-12 px-4 pb-20 md:px-8">
@@ -441,7 +430,7 @@ function LutsDetailPage({ product, settings, buyLink }) {
               )}
             </p>
             <div className="mt-6">
-              <MidPageBuyButton buyLink={buyLink} />
+              <MidPageBuyButton />
             </div>
           </div>
         </SectionBlock>
@@ -535,11 +524,10 @@ function ProductDetailContent() {
     );
   }
 
-  const buyLink = language === 'pt'
-    ? (product.buy_link_brl || product.buy_link_usd)
-    : (product.buy_link_usd || product.buy_link_brl);
-
   if (product.product_type === 'course') {
+    const buyLink = language === 'pt'
+      ? (product.buy_link_brl || product.buy_link_usd)
+      : (product.buy_link_usd || product.buy_link_brl);
     return (
       <CourseDetailPage
         product={product}
@@ -556,6 +544,10 @@ function ProductDetailContent() {
       />
     );
   }
+
+  const buyLink = language === 'pt'
+    ? (product.buy_link_brl || product.buy_link_usd)
+    : (product.buy_link_usd || product.buy_link_brl);
 
   return <LutsDetailPage product={product} settings={settings} buyLink={buyLink} />;
 }

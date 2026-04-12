@@ -114,6 +114,7 @@ export default function CourseModules({ modules = [] }) {
       <SectionTitle
         line1={t('Grade do', 'Course')}
         highlight={t('Curso', 'Curriculum')}
+        singleLine
         subtitle={t('Tudo o que você vai aprender', 'Everything you will learn')}
       />
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
 import { apiClient } from '@/api/apiClient';
 import { LanguageProvider, useLanguage } from '../components/ui/LanguageContext';
 import NavHeader from '../components/common/NavHeader';
@@ -12,17 +11,19 @@ import InstructorSection from '../components/course/InstructorSection';
 import LanguagesSection from '../components/course/LanguagesSection';
 import TestimonialsSection from '../components/course/TestimonialsSection';
 import { Button } from '@/components/ui/button';
-import { createPageUrl } from '@/utils';
 import { Loader2 } from 'lucide-react';
 
 function BuyNowSection({ label }) {
-  const navigate = useNavigate();
+  const scrollToProducts = () => {
+    const anchor = document.getElementById('products-top');
+    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   return (
     <div className="flex justify-center">
       <Button
         type="button"
-        onClick={() => navigate(`${createPageUrl('ProductDetail')}?slug=course`)}
+        onClick={scrollToProducts}
         className="h-12 rounded-full bg-black/40 px-10 text-sm font-bold tracking-[0.18em] text-white shadow-[0_10px_35px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-[1.02] hover:bg-black/55 active:scale-[0.98]"
       >
         <span className="relative inline-flex items-center px-1 py-0.5 leading-none">
@@ -96,7 +97,9 @@ function HomeContent() {
         ) : (
           <>
             {/* 1. Products Catalog - FIRST */}
-            <ProductCatalog products={products} settings={siteSettings} />
+            <div id="products-top">
+              <ProductCatalog products={products} settings={siteSettings} />
+            </div>
 
             {/* 2. Course Details Section - Reorganized per design spec */}
             {courseProduct && (

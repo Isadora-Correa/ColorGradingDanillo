@@ -92,7 +92,7 @@
   }
 }
 
-/* Garante que o corpo do site seja transparente para mostrar o fundo do App */
+/* Garante que o corpo do site seja transparente para mostrar o fundo padrão do App */
 body, #root {
   background-color: transparent !important;
   margin: 0;

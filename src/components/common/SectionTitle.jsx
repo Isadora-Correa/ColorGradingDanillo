@@ -10,14 +10,32 @@ export default function SectionTitle({
   subtitle = '',
   className = '',
   titleClassName = '',
+  singleLine = false,
 }) {
   const hasSecondLine = Boolean(line2Content || line2Prefix || highlight || line2Suffix);
 
   return (
     <div className={`mb-8 text-center ${className}`}>
       <h2 className={`mx-auto max-w-4xl text-3xl font-semibold leading-[1.14] tracking-tight text-white md:text-4xl lg:text-5xl ${titleClassName}`}>
-        <span className="block">{line1}</span>
-        {hasSecondLine ? (
+        {singleLine ? (
+          <span className="block">
+            {line1}
+            {highlight ? ' ' : null}
+            {highlight ? (
+              <GlowText
+                className="font-extrabold not-italic"
+                gradient="from-[#ff9f1c] via-[#9be15d] via-[#00d2ff] to-[#a45bff]"
+                glowColor="rgba(120, 220, 255, 0.45)"
+              >
+                {highlight}
+              </GlowText>
+            ) : null}
+            {line2Suffix ? ` ${line2Suffix}` : null}
+          </span>
+        ) : (
+          <span className="block">{line1}</span>
+        )}
+        {!singleLine && hasSecondLine ? (
           <span className="block italic font-medium text-zinc-100">
             {line2Content ? (
               line2Content

@@ -62,7 +62,9 @@ export default function StudentShowcase({ students = [] }) {
   return (
     <div className="space-y-6">
       <SectionTitle
-        line1={t('Resultados dos Alunos', 'Student Results')}
+        line1={t('Resultados dos', 'Student')}
+        highlight={t('Alunos', 'Results')}
+        singleLine
         subtitle={t('Veja o que nossos alunos conquistaram', 'See what our students have achieved')}
       />
 

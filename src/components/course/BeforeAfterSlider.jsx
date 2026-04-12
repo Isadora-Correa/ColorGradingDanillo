@@ -282,6 +282,7 @@ export default function BeforeAfterSlider({
         line2Suffix={titleLine2Suffix}
         highlight={titleHighlight || t('do iniciante ao profissional', 'from beginner to professional')}
         subtitle={titleSubtitle}
+        singleLine={Boolean(titleLine1 && titleHighlight)}
         titleClassName="text-[1.55rem] leading-[1.1] md:text-4xl lg:text-5xl"
       />
 

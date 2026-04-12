@@ -16,7 +16,7 @@ export default function LanguagesSection() {
   const { t, language } = useLanguage();
   const isPt = language === 'pt';
   const langs = isPt
-    ? AVAILABLE_LANGUAGES
+    ? AVAILABLE_LANGUAGES.filter((lang) => lang.flag === 'PT')
     : AVAILABLE_LANGUAGES.filter((lang) => lang.flag !== 'PT');
 
   return (
