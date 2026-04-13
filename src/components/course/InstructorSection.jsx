@@ -57,7 +57,7 @@ const DEFAULT_HIGHLIGHTS = {
   en: [
     {
       title: 'Career time',
-      value: 'Working in audiovisual with international projects.',
+      value: '+10 years! Working in audiovisual in international projects.',
     },
     {
       title: 'Students',
@@ -249,9 +249,11 @@ export default function InstructorSection({ content = {} }) {
               {parts.number ? (
                 <p className="mt-1 text-2xl font-extrabold leading-none text-white">{parts.number}</p>
               ) : null}
-              <p className={`mt-1 leading-relaxed text-zinc-200 ${parts.number ? 'text-xs' : 'text-sm font-medium'}`}>
-                {parts.detail || item.value}
-              </p>
+              {parts.detail || !parts.number ? (
+                <p className={`mt-1 leading-relaxed text-zinc-200 ${parts.number ? 'text-xs' : 'text-sm font-medium'}`}>
+                  {parts.detail || item.value}
+                </p>
+              ) : null}
             </div>
           );
           })}

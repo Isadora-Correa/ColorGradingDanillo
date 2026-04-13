@@ -32,7 +32,9 @@ const EXTRA_CARDS = [
 ];
 
 export default function ExclusiveAdditionalContentSection() {
-  const { t } = useLanguage();
+  const { language, t } = useLanguage();
+
+  if (language === 'en') return null;
 
   return (
     <SectionBlock gradient className="overflow-hidden">

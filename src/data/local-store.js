@@ -77,7 +77,7 @@ const defaultData = {
       instructor_photo_url: '/nava.webp',
       instructor_showreel_url: 'https://player.vimeo.com/video/944559078?title=0&byline=0&portrait=0&badge=0',
       instructor_career_text_pt: '+10 anos atuando no audiovisual em projetos internacionais',
-      instructor_career_text_en: 'Working in audiovisual with international projects.',
+      instructor_career_text_en: '+10 years! Working in audiovisual in international projects.',
       instructor_clients_count_pt: '+ de 100 comerciais, séries e filmes premiados',
       instructor_clients_count_en: '+ 100 award-winning commercials, series and films',
       instructor_students_count_pt: '+ de 150 alunos',

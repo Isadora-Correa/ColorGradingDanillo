@@ -24,7 +24,7 @@ function BuyNowSection({ label }) {
       <Button
         type="button"
         onClick={scrollToProducts}
-        className="h-12 rounded-full bg-black/40 px-10 text-sm font-bold tracking-[0.18em] text-white shadow-[0_10px_35px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-[1.02] hover:bg-black/55 active:scale-[0.98]"
+        className="h-12 rounded-full border-2 border-white bg-black/40 px-10 text-sm font-bold tracking-[0.18em] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.28),0_10px_35px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-[1.02] hover:bg-black/55 active:scale-[0.98]"
       >
         <span className="relative inline-flex items-center px-1 py-0.5 leading-none">
           <span className="absolute -inset-1 rounded-md bg-[linear-gradient(90deg,#ff2f6d_0%,#ff8f1f_20%,#d8ff3a_40%,#31f2a7_60%,#26d8ff_78%,#7a6dff_90%,#ff38bd_100%)] opacity-65 blur-md" />
