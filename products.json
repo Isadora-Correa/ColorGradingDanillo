@@ -8,7 +8,7 @@
     "description_en": "Professional Color Grading course with international workflows, portfolio-building, and real-world application.",
     "price_brl": 1997,
     "price_usd": 399,
-    "image_url": "/course/CAPA%20PAGINA%20INICIAL%20-%20PORTUGUES%20%281%29.png",
+    "image_url": "/course/course-cover-pt.webp",
     "product_type": "course",
     "available": true,
     "show_in_pt": true,
@@ -18,7 +18,7 @@
     "external_link_pt": "",
     "external_link_en": "",
     "order": 0,
-    "detail_image_url": "/course/CAPA%20PAGINA%20PRODUTO%20-%20PORTUGUES.png",
+    "detail_image_url": "/course/course-detail-pt.webp",
     "compare_at_price_brl": 0,
     "compare_at_price_usd": 0,
     "features_pt": [
@@ -31,10 +31,10 @@
       "Portfolio ready for real-world projects",
       "Techniques used in commercials and long-form productions"
     ],
-    "image_url_pt": "/course/CAPA%20PAGINA%20INICIAL%20-%20PORTUGUES%20%281%29.png",
-    "image_url_en": "/course/CAPA%20PAGINA%20INICIAL%20-%20PORTUGUES%20%282%29.png",
-    "detail_image_url_pt": "/course/CAPA%20PAGINA%20PRODUTO%20-%20PORTUGUES.png",
-    "detail_image_url_en": "/course/CAPA%20PAGINA%20PRODUTO%20-%20INGLES.png"
+    "image_url_pt": "/course/course-cover-pt.webp",
+    "image_url_en": "/course/course-cover-en.webp",
+    "detail_image_url_pt": "/course/course-detail-pt.webp",
+    "detail_image_url_en": "/course/course-detail-en.webp"
   },
   {
     "id": "product-luts",
@@ -45,7 +45,7 @@
     "description_en": "A collection of 8 cinematic LUTs with tutorial support and lifetime updates.",
     "price_brl": 197,
     "price_usd": 39,
-    "image_url": "/course/CAPA%20PAGINA%20-%20LUTS%20%280-00-00-23%29.png",
+    "image_url": "/course/luts-cover.webp",
     "product_type": "luts",
     "available": true,
     "show_in_pt": true,
@@ -65,10 +65,10 @@
       "10 color spaces per LUT",
       "Tutorial included in English and Portuguese"
     ],
-    "detail_image_url": "/course/CAPA%20LUTS%20PRODUTO%20%280-00-01-06%29.png",
-    "image_url_pt": "/course/CAPA%20PAGINA%20-%20LUTS%20%280-00-00-23%29.png",
-    "image_url_en": "/course/CAPA%20PAGINA%20-%20LUTS%20%280-00-00-23%29.png",
-    "detail_image_url_pt": "/course/CAPA%20LUTS%20PRODUTO%20%280-00-01-06%29.png",
-    "detail_image_url_en": "/course/CAPA%20LUTS%20PRODUTO%20%280-00-01-06%29.png"
+    "detail_image_url": "/course/luts-detail.webp",
+    "image_url_pt": "/course/luts-cover.webp",
+    "image_url_en": "/course/luts-cover.webp",
+    "detail_image_url_pt": "/course/luts-detail.webp",
+    "detail_image_url_en": "/course/luts-detail.webp"
   }
 ]

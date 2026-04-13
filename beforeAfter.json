@@ -3,18 +3,18 @@
     "id": "ba-1",
     "title_pt": "Case 01",
     "title_en": "Case 01",
-    "before_url": "/beforeafter/1.ANTES.jpg",
-    "during_url": "/beforeafter/1.DURANTE.jpg",
-    "after_url": "/beforeafter/1.DEPOIS.jpg",
+    "before_url": "/beforeafter/1.ANTES.webp",
+    "during_url": "/beforeafter/1.DURANTE.webp",
+    "after_url": "/beforeafter/1.DEPOIS.webp",
     "order": 0
   },
   {
     "id": "ba-2",
     "title_pt": "Case 02",
     "title_en": "Case 02",
-    "before_url": "/beforeafter/2.ANTES.jpg",
-    "during_url": "/beforeafter/2.DURANTE.jpg",
-    "after_url": "/beforeafter/2.DEPOIS.jpg",
+    "before_url": "/beforeafter/2.ANTES.webp",
+    "during_url": "/beforeafter/2.DURANTE.webp",
+    "after_url": "/beforeafter/2.DEPOIS.webp",
     "order": 1
   }
 ]
