@@ -7,7 +7,7 @@ import SectionTitle from '../common/SectionTitle';
 const EXTRA_CARDS = [
   {
     id: 'fashion-film',
-    image: '/cards/fashionFilm.jpg',
+    image: '/cards/fashionFilm.webp',
     align: 'right',
     titlePt: 'Colorindo um Fashion Film de Londres',
     titleEn: 'Grading a London Fashion Film',
@@ -18,7 +18,7 @@ const EXTRA_CARDS = [
   },
   {
     id: 'feature-film',
-    image: '/cards/filme.jpg',
+    image: '/cards/filme.webp',
     align: 'left',
     titlePt: 'Colorindo um Filme Internacional',
     titleEn: 'Grading an International Feature Film',

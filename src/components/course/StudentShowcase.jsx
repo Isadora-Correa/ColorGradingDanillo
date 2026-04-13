@@ -7,7 +7,7 @@ const STUDENT_RESULTS = [
   {
     id: 'seed-julia',
     name: 'Júlia Muniz',
-    photo_url: '/julia/julia.png',
+    photo_url: '/julia/julia.webp',
     showreel_url: 'https://player.vimeo.com/video/1167172670?h=950940ccee&title=0&byline=0&portrait=0&badge=0',
     logos: [
       '/julia/Amazon-Prime-Video-Emblem.webp',

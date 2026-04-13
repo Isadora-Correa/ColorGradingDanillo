@@ -6,7 +6,7 @@ import { useLanguage } from '../ui/LanguageContext';
 const FEATURE_CARDS = [
   {
     id: 'professional',
-    image: '/1.1.1_1.1.1.jpg',
+    image: '/1.1.1_1.1.1.webp',
     titlePt: 'Feito para tornar você um colorista profissional com resultados',
     titleEn: 'Built to turn you into a professional colorist with real results',
     descPt: 'Um curso robusto do básico ao avançado, com técnicas aplicadas no mercado internacional.',
@@ -14,7 +14,7 @@ const FEATURE_CARDS = [
   },
   {
     id: 'portfolio',
-    image: '/1.15.1_1.15.1.jpg',
+    image: '/1.15.1_1.15.1.webp',
     titlePt: 'Seu Portfólio Masterpiece Garantido',
     titleEn: 'Your Masterpiece Portfolio Guaranteed',
     descPt: 'Ao decorrer do curso, vamos colorir dois projetos inteiros do início ao fim.',
@@ -22,7 +22,7 @@ const FEATURE_CARDS = [
   },
   {
     id: 'material',
-    image: '/1.6.1_1.6.1.jpg',
+    image: '/1.6.1_1.6.1.webp',
     titlePt: 'Mais de 300GB de material bruto gratuito',
     titleEn: 'Over 300GB of free raw practice material',
     descPt: 'Incluindo B-Roll e imagens para prática real de color grading.',
@@ -30,7 +30,7 @@ const FEATURE_CARDS = [
   },
   {
     id: 'premiere',
-    image: '/1.8.1_1.8.1.jpg',
+    image: '/1.8.1_1.8.1.webp',
     titlePt: 'Acesso Vitalício',
     titleEn: 'Lifetime Access',
     descPt: 'Uma vez seu, sempre seu. Seu guia de color grading disponível sempre que você precisar.',
