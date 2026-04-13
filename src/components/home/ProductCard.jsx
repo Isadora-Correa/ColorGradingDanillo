@@ -123,7 +123,7 @@ export default function ProductCard({ product, index }) {
         <Button
           type="button"
           onClick={handleClick}
-          className="h-10 rounded-full border border-white/20 bg-white px-5 text-sm font-semibold text-black hover:bg-zinc-200"
+          className="h-10 rounded-full border border-white/40 bg-white px-5 text-sm font-semibold text-black hover:bg-zinc-200"
         >
           {t('Ver detalhes', 'View details')}
         </Button>

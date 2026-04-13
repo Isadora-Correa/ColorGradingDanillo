@@ -147,7 +147,7 @@ export default function CourseHero({ content, product, lutsProduct }) {
             <Button 
               size="lg"
               onClick={() => window.open(addLuts && lutsBuyLink ? lutsBuyLink : buyLink, '_blank')}
-              className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white px-8 py-6 text-lg rounded-xl"
+              className="rounded-xl border border-white bg-gradient-to-r from-purple-600 to-cyan-600 px-8 py-6 text-lg text-white hover:from-purple-500 hover:to-cyan-500"
             >
               <ShoppingCart className="w-5 h-5 mr-2" />
               {t('Comprar Agora', 'Buy Now')}

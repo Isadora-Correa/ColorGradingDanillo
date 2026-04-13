@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../ui/LanguageContext';
 import SectionBlock from '../common/SectionBlock';
@@ -18,7 +18,7 @@ const MODULES = [
   { id: 10, order: 10, show_in_en: true, title_pt: 'Ferramentas Secundárias', title_en: 'Secondary Tools', lessons_pt: ['Curves', 'Color Warper', 'Color Slice', 'Power Window', 'Qualifiers', 'Magic Mask', 'Keyframes', 'Noise Reduction', 'Color Checker'], lessons_en: ['Curves', 'Color Warper', 'Color Slice', 'Power Window', 'Qualifiers', 'Magic Mask', 'Keyframes', 'Noise Reduction', 'Color Checker'] },
   { id: 11, order: 11, show_in_en: true, title_pt: 'Tratamento de Pele / Skin Tones', title_en: 'Skin Treatment / Skin Tones', lessons_pt: ['Vectorscope: Revisão', 'Correção de Pele com Cor Subtrativa', 'Tratamento de Pele', 'Redução de Ruído', 'Glow', 'Tratamento de Pele e Face Refinement', 'Patch Replacer', 'Beauty'], lessons_en: ['Vectorscope: review', 'Skin correction with subtractive color', 'Skin treatment', 'Noise reduction', 'Glow', 'Skin treatment and Face Refinement', 'Patch Replacer', 'Beauty'] },
   { id: 12, order: 12, show_in_en: true, title_pt: 'Color Balance e Color Matching', title_en: 'Color Balance and Color Matching', lessons_pt: ['Color Balance: Consolidação do Aprendizado'], lessons_en: ['Color Balance: learning consolidation'] },
-  { id: 13, order: 13, show_in_en: true, title_pt: 'Criação de Look', title_en: 'Look Creation', lessons_pt: ['O que são LUTS?', 'Film Print Emulation (FPE)', 'Cineon Film Log', 'Grão de película', 'O que é Halation', 'Aplicação de Look com “Nava LUTS”'], lessons_en: ['What are LUTs?', 'Film Print Emulation (FPE)', 'Cineon Film Log', 'Film grain', 'What is halation?', 'Applying a look with “Nava LUTS”'] },
+  { id: 13, order: 13, show_in_en: true, title_pt: 'Criação de Look', title_en: 'Look Creation', lessons_pt: ['O que são LUTS?', 'Film Print Emulation (FPE)', 'Cineon Film Log', 'Grão de película', 'O que é Halation', 'Aplicação de Look com "Nava LUTS"'], lessons_en: ['What are LUTs?', 'Film Print Emulation (FPE)', 'Cineon Film Log', 'Film grain', 'What is halation?', 'Applying a look with "Nava LUTS"'] },
   { id: 14, order: 14, show_in_en: true, title_pt: 'Projeto Prático 01', title_en: 'Practical Project 01', lessons_pt: ['Grading completo do início ao fim', 'Correção primária, secundária e look'], lessons_en: ['Full grading from start to finish', 'Primary, secondary and look correction'] },
   { id: 15, order: 15, show_in_en: true, title_pt: 'Projeto Prático 02', title_en: 'Practical Project 02', lessons_pt: ['Continuação da timeline do Módulo 03', 'Grading completo de um novo material', 'Exercício de autonomia e tomada de decisão'], lessons_en: ['Timeline continuation from Module 03', 'Full grading of new footage', 'Autonomy and decision-making exercise'] },
   { id: 16, order: 16, show_in_en: true, title_pt: 'Deliver e Conform Final', title_en: 'Final Deliver and Conform', lessons_pt: ['Exportação de Timeline: Formatos e Métodos', 'Handles e Exportação de Clips Individuais'], lessons_en: ['Timeline export: formats and methods', 'Handles and individual clip export'] },
@@ -83,9 +83,10 @@ const normalizePtText = (text = '') =>
     .replaceAll('voce', 'você');
 
 const toLessonList = (module, language) => {
-  const candidates = language === 'pt'
-    ? [module?.topics_pt, module?.lessons_pt, module?.topics]
-    : [module?.topics_en, module?.lessons_en, module?.topics_pt, module?.lessons_pt, module?.topics];
+  const candidates =
+    language === 'pt'
+      ? [module?.topics_pt, module?.lessons_pt, module?.topics]
+      : [module?.topics_en, module?.lessons_en, module?.topics_pt, module?.lessons_pt, module?.topics];
 
   for (const list of candidates) {
     if (!Array.isArray(list) || list.length === 0) continue;
@@ -104,10 +105,21 @@ export default function CourseModules({ modules = [] }) {
   const { language, t } = useLanguage();
   const [expandedModule, setExpandedModule] = useState(null);
 
-  const sourceModules = Array.isArray(modules) && modules.length > 0 ? modules : MODULES;
-  const filteredModules = sourceModules
-    .filter((m) => language === 'pt' || m.show_in_en !== false)
-    .sort((a, b) => (a.order || 0) - (b.order || 0));
+  const filteredModules = useMemo(
+    () =>
+      (Array.isArray(modules) && modules.length > 0 ? modules : MODULES)
+        .filter((m) => language === 'pt' || m.show_in_en !== false)
+        .sort((a, b) => (a.order || 0) - (b.order || 0)),
+    [modules, language]
+  );
+  const lessonsByModule = useMemo(
+    () => filteredModules.map((m) => toLessonList(m, language)),
+    [filteredModules, language]
+  );
+  const totalLessons = useMemo(
+    () => lessonsByModule.reduce((acc, lessons) => acc + lessons.length, 0),
+    [lessonsByModule]
+  );
 
   return (
     <SectionBlock gradient>
@@ -125,7 +137,7 @@ export default function CourseModules({ modules = [] }) {
             ? (module.title_pt || module.title_en)
             : (module.title_en || module.title_pt);
           const displayTitle = language === 'pt' ? normalizePtText(title) : title;
-          const lessons = toLessonList(module, language);
+          const lessons = lessonsByModule[index];
 
           return (
             <motion.div
@@ -133,7 +145,9 @@ export default function CourseModules({ modules = [] }) {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
+              transition={{
+                delay: Math.min(index * 0.04, 0.3),
+              }}
               className="bg-zinc-800/50 rounded-xl border border-white/5 overflow-hidden"
             >
               <button
@@ -157,10 +171,11 @@ export default function CourseModules({ modules = [] }) {
               <AnimatePresence>
                 {isExpanded && (
                   <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
+                    initial={{ scaleY: 0, opacity: 0 }}
+                    animate={{ scaleY: 1, opacity: 1 }}
+                    exit={{ scaleY: 0, opacity: 0 }}
                     transition={{ duration: 0.2 }}
+                    style={{ transformOrigin: 'top' }}
                     className="overflow-hidden"
                   >
                     <div className="px-6 pb-4 border-t border-white/5">
@@ -184,7 +199,7 @@ export default function CourseModules({ modules = [] }) {
       <div className="text-center mt-6">
         <p className="text-sm text-zinc-500 flex items-center justify-center gap-2">
           <BookOpen className="w-4 h-4" />
-          {filteredModules.length} {t('módulos', 'modules')} - {filteredModules.reduce((acc, m) => acc + toLessonList(m, language).length, 0)} {t('aulas', 'lessons')}
+          {filteredModules.length} {t('módulos', 'modules')} - {totalLessons} {t('aulas', 'lessons')}
         </p>
       </div>
     </SectionBlock>
