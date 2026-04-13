@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../ui/LanguageContext';
 import SectionBlock from '../common/SectionBlock';
@@ -78,6 +78,7 @@ const DEFAULT_FAQS = [
   },
 ];
 
+// ✅ Movida para fora do componente — não precisa ser recriada a cada render
 const normalizeFaqs = (items = []) =>
   (Array.isArray(items) ? items : [])
     .map((faq, index) => {
@@ -98,10 +99,18 @@ const normalizeFaqs = (items = []) =>
     .filter((faq) => faq.question_pt && faq.answer_pt)
     .sort((a, b) => a.order - b.order);
 
+// ✅ Pré-processado uma vez fora do componente — DEFAULT_FAQS nunca muda
+const NORMALIZED_DEFAULT_FAQS = normalizeFaqs(DEFAULT_FAQS);
+
 export default function FAQSection({ faqs = [] }) {
   const { language, t } = useLanguage();
   const [expandedFaq, setExpandedFaq] = useState(null);
-  const faqItems = normalizeFaqs(faqs).length > 0 ? normalizeFaqs(faqs) : normalizeFaqs(DEFAULT_FAQS);
+
+  // ✅ normalizeFaqs só roda quando a prop `faqs` mudar
+  const faqItems = useMemo(() => {
+    const normalized = normalizeFaqs(faqs);
+    return normalized.length > 0 ? normalized : NORMALIZED_DEFAULT_FAQS;
+  }, [faqs]);
 
   return (
     <SectionBlock gradient>
@@ -123,7 +132,8 @@ export default function FAQSection({ faqs = [] }) {
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
+              // ✅ Delay com teto de 300ms — igual ao CourseModules
+              transition={{ delay: Math.min(index * 0.04, 0.3) }}
               className="bg-zinc-800/50 rounded-xl overflow-hidden"
             >
               <button
@@ -144,10 +154,12 @@ export default function FAQSection({ faqs = [] }) {
               <AnimatePresence>
                 {isExpanded && (
                   <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.12, ease: 'easeOut' }}
+                    // ✅ scaleY no lugar de height auto — igual ao CourseModules
+                    initial={{ scaleY: 0, opacity: 0 }}
+                    animate={{ scaleY: 1, opacity: 1 }}
+                    exit={{ scaleY: 0, opacity: 0 }}
+                    transition={{ duration: 0.15, ease: 'easeOut' }}
+                    style={{ transformOrigin: 'top' }}
                     className="overflow-hidden"
                   >
                     <div className="px-4 pb-4 pl-[4.35rem] md:px-6 md:pl-[5.2rem]">
