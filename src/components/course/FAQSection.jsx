@@ -102,7 +102,7 @@ const normalizeFaqs = (items = []) =>
 // ✅ Pré-processado uma vez fora do componente — DEFAULT_FAQS nunca muda
 const NORMALIZED_DEFAULT_FAQS = normalizeFaqs(DEFAULT_FAQS);
 
-export default function FAQSection({ faqs = [] }) {
+export default function FAQSection({ faqs = [], content = {} }) {
   const { language, t } = useLanguage();
   const [expandedFaq, setExpandedFaq] = useState(null);
 
@@ -115,8 +115,9 @@ export default function FAQSection({ faqs = [] }) {
   return (
     <SectionBlock gradient>
       <SectionTitle
-        line1={t('Perguntas', 'Frequently Asked')}
-        highlight={t('Frequentes', 'Questions')}
+        line1={t(content.faq_title_line1_pt || 'Perguntas', content.faq_title_line1_en || 'Frequently Asked')}
+        highlight={t(content.faq_highlight_pt || 'Frequentes', content.faq_highlight_en || 'Questions')}
+        subtitle={t(content.faq_subtitle_pt || '', content.faq_subtitle_en || '') || undefined}
       />
 
       <div className="max-w-3xl mx-auto space-y-3">

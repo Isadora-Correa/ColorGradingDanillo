@@ -51,7 +51,7 @@ const normalizeStudent = (item) => ({
   order: Number.isFinite(Number(item?.order)) ? Number(item.order) : 0,
 });
 
-export default function StudentShowcase({ students = [] }) {
+export default function StudentShowcase({ students = [], content = {} }) {
   const { t, language } = useLanguage();
   const source = Array.isArray(students) && students.length > 0 ? students : STUDENT_RESULTS;
   const normalizedStudents = source
@@ -62,10 +62,13 @@ export default function StudentShowcase({ students = [] }) {
   return (
     <div className="space-y-6">
       <SectionTitle
-        line1={t('Resultados dos', 'Student')}
-        highlight={t('Alunos', 'Results')}
+        line1={t(content.student_results_title_line1_pt || 'Resultados dos', content.student_results_title_line1_en || 'Student')}
+        highlight={t(content.student_results_highlight_pt || 'Alunos', content.student_results_highlight_en || 'Results')}
         singleLine
-        subtitle={t('Veja o que nossos alunos conquistaram', 'See what our students have achieved')}
+        subtitle={t(
+          content.student_results_subtitle_pt || 'Veja o que nossos alunos conquistaram',
+          content.student_results_subtitle_en || 'See what our students have achieved'
+        )}
       />
 
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">

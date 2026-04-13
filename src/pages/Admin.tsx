@@ -136,24 +136,81 @@ const toBeforeAfterPayload = (item) => ({
 });
 
 const DEFAULT_MODULES = [
-  { id: 'module-seed-1', title_pt: 'Apresentação', title_en: 'Introduction', lessons_count: 3, duration_hours: 1, topics: [{ id: id(), title: 'Visão geral do curso e da jornada de aprendizado' }, { id: id(), title: 'Acesso ao Material do Curso' }, { id: id(), title: 'Grupo no Discord' }], order: 0 },
-  { id: 'module-seed-2', title_pt: 'Project Manager', title_en: 'Project Manager', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'Como baixar o DaVinci Resolve' }, { id: id(), title: 'Configuração da Biblioteca e Database' }], order: 1 },
-  { id: 'module-seed-3', title_pt: 'Conform', title_en: 'Conform', lessons_count: 6, duration_hours: 1, topics: [{ id: id(), title: 'O que é Conform?' }, { id: id(), title: 'AAF' }, { id: id(), title: 'EDL' }, { id: id(), title: 'XML' }, { id: id(), title: 'Scene Detection' }, { id: id(), title: 'Conselhos Gerais' }], order: 2 },
-  { id: 'module-seed-4', title_pt: 'Personalização e Atalhos', title_en: 'Customization and Shortcuts', lessons_count: 1, duration_hours: 1, topics: [{ id: id(), title: 'Configurações essenciais antes de colorir' }], order: 3 },
-  { id: 'module-seed-5', title_pt: 'Interface do DaVinci Resolve', title_en: 'DaVinci Resolve Interface', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'O essencial da aba Edit para Color Grading' }, { id: id(), title: 'O essencial da Aba Color' }], order: 4 },
-  { id: 'module-seed-6', title_pt: 'Gerenciamento de Cor: Básico', title_en: 'Color Management: Basic', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'Fundamentos do Gerenciamento de Cor' }, { id: id(), title: 'Gerenciamento de Cor na Prática' }], order: 5 },
-  { id: 'module-seed-7', title_pt: 'Ferramentas Fundamentais do Color Grading', title_en: 'Fundamental Color Grading Tools', lessons_count: 7, duration_hours: 1, topics: [{ id: id(), title: 'Color Balance: Conceitos' }, { id: id(), title: 'Primaries' }, { id: id(), title: 'Scopes' }, { id: id(), title: 'Printer Lights' }, { id: id(), title: 'HDR Color Wheels' }, { id: id(), title: 'Color Matching com Parade' }, { id: id(), title: 'Color Matching com Vectorscope' }], order: 6 },
-  { id: 'module-seed-8', title_pt: 'Gerenciamento de Cor: Avançado', title_en: 'Color Management: Advanced', lessons_count: 5, duration_hours: 1, topics: [{ id: id(), title: 'Gerenciamento de Cor' }, { id: id(), title: 'ACES' }, { id: id(), title: 'Camera RAW' }, { id: id(), title: 'RCM' }, { id: id(), title: 'Gerenciamento de Cor a Nível de Nodes' }], order: 7 },
-  { id: 'module-seed-9', title_pt: 'Nodes e Workflow Avançado', title_en: 'Advanced Nodes and Workflow', lessons_count: 1, duration_hours: 1, topics: [{ id: id(), title: 'Nodes e Workflow Avançado na Prática' }], order: 8 },
-  { id: 'module-seed-10', title_pt: 'Ferramentas Secundárias', title_en: 'Secondary Tools', lessons_count: 9, duration_hours: 1, topics: [{ id: id(), title: 'Curves' }, { id: id(), title: 'Color Warper' }, { id: id(), title: 'Color Slice' }, { id: id(), title: 'Power Window' }, { id: id(), title: 'Qualifiers' }, { id: id(), title: 'Magic Mask' }, { id: id(), title: 'Keyframes' }, { id: id(), title: 'Noise Reduction' }, { id: id(), title: 'Color Checker' }], order: 9 },
-  { id: 'module-seed-11', title_pt: 'Tratamento de Pele / Skin Tones', title_en: 'Skin Treatment / Skin Tones', lessons_count: 8, duration_hours: 1, topics: [{ id: id(), title: 'Vectorscope: Revisão' }, { id: id(), title: 'Correção de Pele com Cor Subtrativa' }, { id: id(), title: 'Tratamento de Pele' }, { id: id(), title: 'Redução de Ruído' }, { id: id(), title: 'Glow' }, { id: id(), title: 'Tratamento de Pele e Face Refinement' }, { id: id(), title: 'Patch Replacer' }, { id: id(), title: 'Beauty' }], order: 10 },
-  { id: 'module-seed-12', title_pt: 'Color Balance e Color Matching', title_en: 'Color Balance and Color Matching', lessons_count: 1, duration_hours: 1, topics: [{ id: id(), title: 'Color Balance: Consolidação do Aprendizado' }], order: 11 },
-  { id: 'module-seed-13', title_pt: 'Criação de Look', title_en: 'Look Creation', lessons_count: 6, duration_hours: 1, topics: [{ id: id(), title: 'O que são LUTS?' }, { id: id(), title: 'Film Print Emulation (FPE)' }, { id: id(), title: 'Cineon Film Log' }, { id: id(), title: 'Grão de película' }, { id: id(), title: 'O que é Halation' }, { id: id(), title: 'Aplicação de Look com “Nava LUTS”' }], order: 12 },
-  { id: 'module-seed-14', title_pt: 'Projeto Prático 01', title_en: 'Practical Project 01', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'Grading completo do início ao fim' }, { id: id(), title: 'Correção primária, secundária e look' }], order: 13 },
-  { id: 'module-seed-15', title_pt: 'Projeto Prático 02', title_en: 'Practical Project 02', lessons_count: 3, duration_hours: 1, topics: [{ id: id(), title: 'Continuação da timeline do Módulo 03' }, { id: id(), title: 'Grading completo de um novo material' }, { id: id(), title: 'Exercício de autonomia e tomada de decisão' }], order: 14 },
-  { id: 'module-seed-16', title_pt: 'Deliver e Conform Final', title_en: 'Final Deliver and Conform', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'Exportação de Timeline: Formatos e Métodos' }, { id: id(), title: 'Handles e Exportação de Clips Individuais' }], order: 15 },
-  { id: 'module-seed-17', show_in_en: false, title_pt: 'Bônus: DaVinci Resolve 20', title_en: 'Bonus: DaVinci Resolve 20', lessons_count: 8, duration_hours: 1, topics: [{ id: id(), title: 'Atualizando o DaVinci Resolve' }, { id: id(), title: 'Chroma Warp: Introdução' }, { id: id(), title: 'Chroma Warp' }, { id: id(), title: 'Depth Map' }, { id: id(), title: 'Magic Mask com IA (V2)' }, { id: id(), title: 'Node Stack Layer' }, { id: id(), title: 'ProRes no Windows' }, { id: id(), title: 'ACES 2.0' }], order: 16 },
+  { id: 'module-seed-1', show_in_course: true, show_in_luts: false, title_pt: 'Apresentação', title_en: 'Introduction', lessons_count: 3, duration_hours: 1, topics: [{ id: id(), title: 'Visão geral do curso e da jornada de aprendizado' }, { id: id(), title: 'Acesso ao Material do Curso' }, { id: id(), title: 'Grupo no Discord' }], order: 0 },
+  { id: 'module-seed-2', show_in_course: true, show_in_luts: false, title_pt: 'Project Manager', title_en: 'Project Manager', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'Como baixar o DaVinci Resolve' }, { id: id(), title: 'Configuração da Biblioteca e Database' }], order: 1 },
+  { id: 'module-seed-3', show_in_course: true, show_in_luts: false, title_pt: 'Conform', title_en: 'Conform', lessons_count: 6, duration_hours: 1, topics: [{ id: id(), title: 'O que é Conform?' }, { id: id(), title: 'AAF' }, { id: id(), title: 'EDL' }, { id: id(), title: 'XML' }, { id: id(), title: 'Scene Detection' }, { id: id(), title: 'Conselhos Gerais' }], order: 2 },
+  { id: 'module-seed-4', show_in_course: true, show_in_luts: false, title_pt: 'Personalização e Atalhos', title_en: 'Customization and Shortcuts', lessons_count: 1, duration_hours: 1, topics: [{ id: id(), title: 'Configurações essenciais antes de colorir' }], order: 3 },
+  { id: 'module-seed-5', show_in_course: true, show_in_luts: false, title_pt: 'Interface do DaVinci Resolve', title_en: 'DaVinci Resolve Interface', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'O essencial da aba Edit para Color Grading' }, { id: id(), title: 'O essencial da Aba Color' }], order: 4 },
+  { id: 'module-seed-6', show_in_course: true, show_in_luts: false, title_pt: 'Gerenciamento de Cor: Básico', title_en: 'Color Management: Basic', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'Fundamentos do Gerenciamento de Cor' }, { id: id(), title: 'Gerenciamento de Cor na Prática' }], order: 5 },
+  { id: 'module-seed-7', show_in_course: true, show_in_luts: false, title_pt: 'Ferramentas Fundamentais do Color Grading', title_en: 'Fundamental Color Grading Tools', lessons_count: 7, duration_hours: 1, topics: [{ id: id(), title: 'Color Balance: Conceitos' }, { id: id(), title: 'Primaries' }, { id: id(), title: 'Scopes' }, { id: id(), title: 'Printer Lights' }, { id: id(), title: 'HDR Color Wheels' }, { id: id(), title: 'Color Matching com Parade' }, { id: id(), title: 'Color Matching com Vectorscope' }], order: 6 },
+  { id: 'module-seed-8', show_in_course: true, show_in_luts: false, title_pt: 'Gerenciamento de Cor: Avançado', title_en: 'Color Management: Advanced', lessons_count: 5, duration_hours: 1, topics: [{ id: id(), title: 'Gerenciamento de Cor' }, { id: id(), title: 'ACES' }, { id: id(), title: 'Camera RAW' }, { id: id(), title: 'RCM' }, { id: id(), title: 'Gerenciamento de Cor a Nível de Nodes' }], order: 7 },
+  { id: 'module-seed-9', show_in_course: true, show_in_luts: false, title_pt: 'Nodes e Workflow Avançado', title_en: 'Advanced Nodes and Workflow', lessons_count: 1, duration_hours: 1, topics: [{ id: id(), title: 'Nodes e Workflow Avançado na Prática' }], order: 8 },
+  { id: 'module-seed-10', show_in_course: true, show_in_luts: false, title_pt: 'Ferramentas Secundárias', title_en: 'Secondary Tools', lessons_count: 9, duration_hours: 1, topics: [{ id: id(), title: 'Curves' }, { id: id(), title: 'Color Warper' }, { id: id(), title: 'Color Slice' }, { id: id(), title: 'Power Window' }, { id: id(), title: 'Qualifiers' }, { id: id(), title: 'Magic Mask' }, { id: id(), title: 'Keyframes' }, { id: id(), title: 'Noise Reduction' }, { id: id(), title: 'Color Checker' }], order: 9 },
+  { id: 'module-seed-11', show_in_course: true, show_in_luts: false, title_pt: 'Tratamento de Pele / Skin Tones', title_en: 'Skin Treatment / Skin Tones', lessons_count: 8, duration_hours: 1, topics: [{ id: id(), title: 'Vectorscope: Revisão' }, { id: id(), title: 'Correção de Pele com Cor Subtrativa' }, { id: id(), title: 'Tratamento de Pele' }, { id: id(), title: 'Redução de Ruído' }, { id: id(), title: 'Glow' }, { id: id(), title: 'Tratamento de Pele e Face Refinement' }, { id: id(), title: 'Patch Replacer' }, { id: id(), title: 'Beauty' }], order: 10 },
+  { id: 'module-seed-12', show_in_course: true, show_in_luts: false, title_pt: 'Color Balance e Color Matching', title_en: 'Color Balance and Color Matching', lessons_count: 1, duration_hours: 1, topics: [{ id: id(), title: 'Color Balance: Consolidação do Aprendizado' }], order: 11 },
+  { id: 'module-seed-13', show_in_course: true, show_in_luts: false, title_pt: 'Criação de Look', title_en: 'Look Creation', lessons_count: 6, duration_hours: 1, topics: [{ id: id(), title: 'O que são LUTS?' }, { id: id(), title: 'Film Print Emulation (FPE)' }, { id: id(), title: 'Cineon Film Log' }, { id: id(), title: 'Grão de película' }, { id: id(), title: 'O que é Halation' }, { id: id(), title: 'Aplicação de Look com “Nava LUTS”' }], order: 12 },
+  { id: 'module-seed-14', show_in_course: true, show_in_luts: false, title_pt: 'Projeto Prático 01', title_en: 'Practical Project 01', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'Grading completo do início ao fim' }, { id: id(), title: 'Correção primária, secundária e look' }], order: 13 },
+  { id: 'module-seed-15', show_in_course: true, show_in_luts: false, title_pt: 'Projeto Prático 02', title_en: 'Practical Project 02', lessons_count: 3, duration_hours: 1, topics: [{ id: id(), title: 'Continuação da timeline do Módulo 03' }, { id: id(), title: 'Grading completo de um novo material' }, { id: id(), title: 'Exercício de autonomia e tomada de decisão' }], order: 14 },
+  { id: 'module-seed-16', show_in_course: true, show_in_luts: false, title_pt: 'Deliver e Conform Final', title_en: 'Final Deliver and Conform', lessons_count: 2, duration_hours: 1, topics: [{ id: id(), title: 'Exportação de Timeline: Formatos e Métodos' }, { id: id(), title: 'Handles e Exportação de Clips Individuais' }], order: 15 },
+  { id: 'module-seed-17', show_in_en: false, show_in_course: true, show_in_luts: false, title_pt: 'Bônus: DaVinci Resolve 20', title_en: 'Bonus: DaVinci Resolve 20', lessons_count: 8, duration_hours: 1, topics: [{ id: id(), title: 'Atualizando o DaVinci Resolve' }, { id: id(), title: 'Chroma Warp: Introdução' }, { id: id(), title: 'Chroma Warp' }, { id: id(), title: 'Depth Map' }, { id: id(), title: 'Magic Mask com IA (V2)' }, { id: id(), title: 'Node Stack Layer' }, { id: id(), title: 'ProRes no Windows' }, { id: id(), title: 'ACES 2.0' }], order: 16 },
 ];
+
+const DEFAULT_AVAILABLE_LANGUAGES = [
+  { code: 'PT', name_pt: 'Português', name_en: 'Portuguese', available: true, hasSubtitles: true },
+  { code: 'EN', name_pt: 'Inglês', name_en: 'English', available: true, hasSubtitles: true },
+  { code: 'ES', name_pt: 'Espanhol', name_en: 'Spanish', available: true, hasSubtitles: true },
+  { code: 'FR', name_pt: 'Francês', name_en: 'French', available: true, hasSubtitles: true },
+  { code: 'AR', name_pt: 'Árabe', name_en: 'Arabic', available: true, hasSubtitles: true },
+];
+
+const DEFAULT_INSTRUCTOR_SOCIALS = [
+  { key: 'instagram', name: 'Instagram', url: 'https://www.instagram.com/navacolorist/', icon: 'https://cdn.simpleicons.org/instagram/FFFFFF' },
+  { key: 'vimeo', name: 'Vimeo', url: 'https://vimeo.com/dnava', icon: 'https://cdn.simpleicons.org/vimeo/FFFFFF' },
+  { key: 'imdb', name: 'IMDb', url: 'https://www.imdb.com/name/nm15105370/?ref_=nv_sr_srsg_0_tt_0_nm_8_in_0_q_danilo%2520navarro', icon: 'https://cdn.simpleicons.org/imdb/FFFFFF' },
+];
+
+const DEFAULT_EXTRA_CONTENT = [
+  {
+    image_url: '/cards/fashionFilm.webp',
+    title_pt: 'Colorindo um Fashion Film de Londres',
+    title_en: 'Grading a London Fashion Film',
+    desc_pt: 'Acompanhe o workflow real de um colorista em um projeto para um cliente internacional. Do material bruto ao resultado final, Nava aplica na prática as técnicas ensinadas ao longo do curso em um fashion film completo.',
+    desc_en: 'Follow a real colorist workflow on a project for an international client. From raw footage to final result, Nava applies in practice the techniques taught throughout the course in a complete fashion film.',
+    note_pt: '',
+    note_en: '',
+  },
+  {
+    image_url: '/cards/filme.webp',
+    title_pt: 'Colorindo um Filme Internacional',
+    title_en: 'Grading an International Feature Film',
+    desc_pt: 'Acompanhe as principais etapas de color grading de um filme de 2 horas, com foco em organização, narrativa e workflow profissional para projetos de longo-formato.',
+    desc_en: 'Follow the key stages of grading a 2-hour film, with a focus on organization, narrative, and professional workflow for long-form projects.',
+    note_pt: 'em desenvolvimento, com aulas já disponíveis',
+    note_en: 'in development, with lessons already available',
+  },
+];
+
+const normalizeAvailableLanguages = (items = []) =>
+  (Array.isArray(items) ? items : [])
+    .map((item, index) => ({
+      id: item?.id || `lang-${index}`,
+      code: String(item?.code || item?.flag || '').trim().toUpperCase(),
+      name_pt: String(item?.name_pt || item?.namePt || item?.name || '').trim(),
+      name_en: String(item?.name_en || item?.nameEn || item?.name || '').trim(),
+      available: item?.available !== false,
+      hasSubtitles: item?.hasSubtitles !== false,
+    }))
+    .filter((item) => item.code);
+
+const normalizeInstructorSocials = (items = []) =>
+  (Array.isArray(items) ? items : [])
+    .map((item, index) => ({
+      key: item?.key || `social-${index}`,
+      name: String(item?.name || '').trim(),
+      url: String(item?.url || '').trim(),
+      icon: String(item?.icon || '').trim(),
+    }))
+    .filter((item) => item.name && item.url);
 
 const COURSE_CONTENT_FALLBACK = {
   id: 'main_content',
@@ -175,6 +232,21 @@ const COURSE_CONTENT_FALLBACK = {
   instructor_students_count_en: '150+ students',
   instructor_clients_count_pt: '+ de 100 comerciais, series e filmes premiados',
   instructor_clients_count_en: '100+ award-winning commercials, series and films',
+  instructor_socials: DEFAULT_INSTRUCTOR_SOCIALS,
+  languages_title_pt: 'Idiomas',
+  languages_title_en: 'Languages',
+  languages_highlight_pt: 'Disponíveis',
+  languages_highlight_en: 'Available',
+  languages_note_pt: 'Narração em português. Inglês com revisão profissional. Demais idiomas com dublagem em IA utilizando tecnologia líder de mercado.',
+  languages_note_en: 'English voiceover professionally reviewed. Spanish, Arabic, and French are provided using industry-leading AI dubbing technology.',
+  available_languages: DEFAULT_AVAILABLE_LANGUAGES,
+  trailer_url: 'https://player.vimeo.com/video/1079126634?title=0&byline=0&portrait=0&badge=0',
+  trailer_title_pt: 'Trailer do curso',
+  trailer_title_en: 'Course trailer',
+  trailer_title_line1_pt: 'Domine o Color Grading',
+  trailer_title_line1_en: 'Master Color Grading',
+  trailer_highlight_pt: 'do iniciante ao profissional',
+  trailer_highlight_en: 'from beginner to professional',
   highlights_title_pt: 'Conheça o curso que vai trazer COR para sua carreira.',
   highlights_title_en: 'Discover the course that brings COLOR to your career.',
   highlights_title_line1_pt: 'Conheça o curso que vai trazer',
@@ -201,6 +273,58 @@ const COURSE_CONTENT_FALLBACK = {
   highlight_4_title_en: 'Lifetime Access',
   highlight_4_desc_pt: 'Uma vez seu, sempre seu. Seu guia de color grading disponível sempre que você precisar.',
   highlight_4_desc_en: 'Once it is yours, it is always yours. Your color grading guide is available whenever you need it.',
+  student_results_title_line1_pt: 'Resultados dos',
+  student_results_title_line1_en: 'Student',
+  student_results_highlight_pt: 'Alunos',
+  student_results_highlight_en: 'Results',
+  student_results_subtitle_pt: 'Veja o que nossos alunos conquistaram',
+  student_results_subtitle_en: 'See what our students have achieved',
+  client_logos_title_pt: '',
+  client_logos_title_en: '',
+  modules_title_line1_pt: 'Grade do',
+  modules_title_line1_en: 'Course',
+  modules_highlight_pt: 'Curso',
+  modules_highlight_en: 'Curriculum',
+  modules_subtitle_pt: 'Tudo o que você vai aprender',
+  modules_subtitle_en: 'Everything you will learn',
+  extra_content_title_line1_pt: 'Conteúdo Adicional',
+  extra_content_title_line1_en: 'Additional Content',
+  extra_content_highlight_pt: 'Exclusivo',
+  extra_content_highlight_en: 'Exclusive',
+  extra_content_subtitle_pt: 'Módulos extras com workflows de projetos reais.',
+  extra_content_subtitle_en: 'Extra modules with real-project workflows.',
+  extra_card_1_image_url: DEFAULT_EXTRA_CONTENT[0].image_url,
+  extra_card_1_title_pt: DEFAULT_EXTRA_CONTENT[0].title_pt,
+  extra_card_1_title_en: DEFAULT_EXTRA_CONTENT[0].title_en,
+  extra_card_1_desc_pt: DEFAULT_EXTRA_CONTENT[0].desc_pt,
+  extra_card_1_desc_en: DEFAULT_EXTRA_CONTENT[0].desc_en,
+  extra_card_1_note_pt: DEFAULT_EXTRA_CONTENT[0].note_pt,
+  extra_card_1_note_en: DEFAULT_EXTRA_CONTENT[0].note_en,
+  extra_card_2_image_url: DEFAULT_EXTRA_CONTENT[1].image_url,
+  extra_card_2_title_pt: DEFAULT_EXTRA_CONTENT[1].title_pt,
+  extra_card_2_title_en: DEFAULT_EXTRA_CONTENT[1].title_en,
+  extra_card_2_desc_pt: DEFAULT_EXTRA_CONTENT[1].desc_pt,
+  extra_card_2_desc_en: DEFAULT_EXTRA_CONTENT[1].desc_en,
+  extra_card_2_note_pt: DEFAULT_EXTRA_CONTENT[1].note_pt,
+  extra_card_2_note_en: DEFAULT_EXTRA_CONTENT[1].note_en,
+  testimonials_title_line1_pt: 'Depoimentos',
+  testimonials_title_line1_en: 'Testimonials',
+  testimonials_title_prefix_pt: 'O que nossos',
+  testimonials_title_prefix_en: 'What our',
+  testimonials_highlight_pt: 'alunos dizem',
+  testimonials_highlight_en: 'students say',
+  certificate_title_prefix_pt: 'Finalize o curso e seja',
+  certificate_title_prefix_en: 'Finish the course and get',
+  certificate_highlight_pt: 'certificado pelo Nava Colorist',
+  certificate_highlight_en: 'certified by Nava Colorist',
+  certificate_image_url_pt: '/certificado.webp',
+  certificate_image_url_en: '/certificado-ingles.webp',
+  faq_title_line1_pt: 'Perguntas',
+  faq_title_line1_en: 'Frequently Asked',
+  faq_highlight_pt: 'Frequentes',
+  faq_highlight_en: 'Questions',
+  faq_subtitle_pt: '',
+  faq_subtitle_en: '',
 };
 
 const normalizeCourseContent = (value) => {
@@ -230,6 +354,21 @@ const normalizeCourseContent = (value) => {
     instructor_students_count_en: String(merged?.instructor_students_count_en || '').trim(),
     instructor_clients_count_pt: String(merged?.instructor_clients_count_pt || '').trim(),
     instructor_clients_count_en: String(merged?.instructor_clients_count_en || '').trim(),
+    instructor_socials: normalizeInstructorSocials(merged?.instructor_socials || COURSE_CONTENT_FALLBACK.instructor_socials),
+    languages_title_pt: String(merged?.languages_title_pt || '').trim(),
+    languages_title_en: String(merged?.languages_title_en || '').trim(),
+    languages_highlight_pt: String(merged?.languages_highlight_pt || '').trim(),
+    languages_highlight_en: String(merged?.languages_highlight_en || '').trim(),
+    languages_note_pt: String(merged?.languages_note_pt || '').trim(),
+    languages_note_en: String(merged?.languages_note_en || '').trim(),
+    available_languages: normalizeAvailableLanguages(merged?.available_languages || COURSE_CONTENT_FALLBACK.available_languages),
+    trailer_url: String(merged?.trailer_url || '').trim(),
+    trailer_title_pt: String(merged?.trailer_title_pt || '').trim(),
+    trailer_title_en: String(merged?.trailer_title_en || '').trim(),
+    trailer_title_line1_pt: String(merged?.trailer_title_line1_pt || '').trim(),
+    trailer_title_line1_en: String(merged?.trailer_title_line1_en || '').trim(),
+    trailer_highlight_pt: String(merged?.trailer_highlight_pt || '').trim(),
+    trailer_highlight_en: String(merged?.trailer_highlight_en || '').trim(),
     highlights_title_pt: mergedTitlePt,
     highlights_title_en: mergedTitleEn,
     highlights_title_line1_pt: String(merged?.highlights_title_line1_pt || '').trim(),
@@ -256,6 +395,58 @@ const normalizeCourseContent = (value) => {
     highlight_4_title_en: String(merged?.highlight_4_title_en || '').trim(),
     highlight_4_desc_pt: String(merged?.highlight_4_desc_pt || '').trim(),
     highlight_4_desc_en: String(merged?.highlight_4_desc_en || '').trim(),
+    student_results_title_line1_pt: String(merged?.student_results_title_line1_pt || '').trim(),
+    student_results_title_line1_en: String(merged?.student_results_title_line1_en || '').trim(),
+    student_results_highlight_pt: String(merged?.student_results_highlight_pt || '').trim(),
+    student_results_highlight_en: String(merged?.student_results_highlight_en || '').trim(),
+    student_results_subtitle_pt: String(merged?.student_results_subtitle_pt || '').trim(),
+    student_results_subtitle_en: String(merged?.student_results_subtitle_en || '').trim(),
+    client_logos_title_pt: String(merged?.client_logos_title_pt || '').trim(),
+    client_logos_title_en: String(merged?.client_logos_title_en || '').trim(),
+    modules_title_line1_pt: String(merged?.modules_title_line1_pt || '').trim(),
+    modules_title_line1_en: String(merged?.modules_title_line1_en || '').trim(),
+    modules_highlight_pt: String(merged?.modules_highlight_pt || '').trim(),
+    modules_highlight_en: String(merged?.modules_highlight_en || '').trim(),
+    modules_subtitle_pt: String(merged?.modules_subtitle_pt || '').trim(),
+    modules_subtitle_en: String(merged?.modules_subtitle_en || '').trim(),
+    extra_content_title_line1_pt: String(merged?.extra_content_title_line1_pt || '').trim(),
+    extra_content_title_line1_en: String(merged?.extra_content_title_line1_en || '').trim(),
+    extra_content_highlight_pt: String(merged?.extra_content_highlight_pt || '').trim(),
+    extra_content_highlight_en: String(merged?.extra_content_highlight_en || '').trim(),
+    extra_content_subtitle_pt: String(merged?.extra_content_subtitle_pt || '').trim(),
+    extra_content_subtitle_en: String(merged?.extra_content_subtitle_en || '').trim(),
+    extra_card_1_image_url: merged?.extra_card_1_image_url || '',
+    extra_card_1_title_pt: String(merged?.extra_card_1_title_pt || '').trim(),
+    extra_card_1_title_en: String(merged?.extra_card_1_title_en || '').trim(),
+    extra_card_1_desc_pt: String(merged?.extra_card_1_desc_pt || '').trim(),
+    extra_card_1_desc_en: String(merged?.extra_card_1_desc_en || '').trim(),
+    extra_card_1_note_pt: String(merged?.extra_card_1_note_pt || '').trim(),
+    extra_card_1_note_en: String(merged?.extra_card_1_note_en || '').trim(),
+    extra_card_2_image_url: merged?.extra_card_2_image_url || '',
+    extra_card_2_title_pt: String(merged?.extra_card_2_title_pt || '').trim(),
+    extra_card_2_title_en: String(merged?.extra_card_2_title_en || '').trim(),
+    extra_card_2_desc_pt: String(merged?.extra_card_2_desc_pt || '').trim(),
+    extra_card_2_desc_en: String(merged?.extra_card_2_desc_en || '').trim(),
+    extra_card_2_note_pt: String(merged?.extra_card_2_note_pt || '').trim(),
+    extra_card_2_note_en: String(merged?.extra_card_2_note_en || '').trim(),
+    testimonials_title_line1_pt: String(merged?.testimonials_title_line1_pt || '').trim(),
+    testimonials_title_line1_en: String(merged?.testimonials_title_line1_en || '').trim(),
+    testimonials_title_prefix_pt: String(merged?.testimonials_title_prefix_pt || '').trim(),
+    testimonials_title_prefix_en: String(merged?.testimonials_title_prefix_en || '').trim(),
+    testimonials_highlight_pt: String(merged?.testimonials_highlight_pt || '').trim(),
+    testimonials_highlight_en: String(merged?.testimonials_highlight_en || '').trim(),
+    certificate_title_prefix_pt: String(merged?.certificate_title_prefix_pt || '').trim(),
+    certificate_title_prefix_en: String(merged?.certificate_title_prefix_en || '').trim(),
+    certificate_highlight_pt: String(merged?.certificate_highlight_pt || '').trim(),
+    certificate_highlight_en: String(merged?.certificate_highlight_en || '').trim(),
+    certificate_image_url_pt: merged?.certificate_image_url_pt || '',
+    certificate_image_url_en: merged?.certificate_image_url_en || '',
+    faq_title_line1_pt: String(merged?.faq_title_line1_pt || '').trim(),
+    faq_title_line1_en: String(merged?.faq_title_line1_en || '').trim(),
+    faq_highlight_pt: String(merged?.faq_highlight_pt || '').trim(),
+    faq_highlight_en: String(merged?.faq_highlight_en || '').trim(),
+    faq_subtitle_pt: String(merged?.faq_subtitle_pt || '').trim(),
+    faq_subtitle_en: String(merged?.faq_subtitle_en || '').trim(),
   };
 };
 
@@ -286,6 +477,8 @@ const normalizeModule = (item, index = 0) => {
     ...item,
     id: item?.id || id(),
     show_in_en: item?.show_in_en !== false,
+    show_in_course: item?.show_in_course !== false,
+    show_in_luts: item?.show_in_luts === true,
     title_pt: String(item?.title_pt || item?.name_pt || `Modulo ${index + 1}`).trim(),
     title_en: String(item?.title_en || item?.name_en || item?.title_pt || `Module ${index + 1}`).trim(),
     description_pt: String(item?.description_pt || '').trim(),
@@ -305,6 +498,8 @@ const normalizeModule = (item, index = 0) => {
 const toModulePayload = (item, index) => ({
   id: item?.id || id(),
   show_in_en: item?.show_in_en !== false,
+  show_in_course: item?.show_in_course !== false,
+  show_in_luts: item?.show_in_luts === true,
   title_pt: String(item?.title_pt || '').trim(),
   title_en: String(item?.title_en || '').trim(),
   description_pt: String(item?.description_pt || '').trim(),
@@ -1042,7 +1237,7 @@ function CourseTab({ data }) {
     <Card className={panel}>
       <CardHeader>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-          <H title="Conteudo do Curso" desc="Hero e secao Conheca seu professor." icon={BookOpen} />
+          <H title="Conteudo do Curso" desc="Edite os textos e blocos principais das paginas do curso." icon={BookOpen} />
           {!isEditing ? (
             <Button className={btnPrimary} onClick={() => setIsEditing(true)}>
               Editar
@@ -1138,7 +1333,189 @@ function CourseTab({ data }) {
               setPt={(v) => setF({ ...f, instructor_clients_count_pt: v })}
               setEn={(v) => setF({ ...f, instructor_clients_count_en: v })}
             />
+            <div className="space-y-3 rounded-lg border border-white/10 bg-black/20 p-3">
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-sm font-semibold text-zinc-100">Links sociais do professor</p>
+                <Button
+                  type="button"
+                  className={btnOutline}
+                  onClick={() =>
+                    setF({
+                      ...f,
+                      instructor_socials: [
+                        ...(Array.isArray(f.instructor_socials) ? f.instructor_socials : []),
+                        { key: id(), name: '', url: '', icon: '' },
+                      ],
+                    })
+                  }
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  Adicionar
+                </Button>
+              </div>
+              {(Array.isArray(f.instructor_socials) ? f.instructor_socials : []).map((social, index) => (
+                <div key={social.key || index} className="rounded-lg border border-white/10 bg-zinc-950/50 p-3 space-y-3">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <F label="Nome" value={social.name || ''} onChange={(e) => setF({ ...f, instructor_socials: f.instructor_socials.map((item, itemIndex) => itemIndex === index ? { ...item, name: e.target.value } : item) })} />
+                    <F label="URL" value={social.url || ''} onChange={(e) => setF({ ...f, instructor_socials: f.instructor_socials.map((item, itemIndex) => itemIndex === index ? { ...item, url: e.target.value } : item) })} />
+                    <F label="Icone (URL)" value={social.icon || ''} onChange={(e) => setF({ ...f, instructor_socials: f.instructor_socials.map((item, itemIndex) => itemIndex === index ? { ...item, icon: e.target.value } : item) })} />
+                  </div>
+                  <div className="flex justify-end">
+                    <Button type="button" className="bg-red-600 text-white hover:bg-red-500" onClick={() => setF({ ...f, instructor_socials: f.instructor_socials.filter((_, itemIndex) => itemIndex !== index) })}>
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
             <p className="text-xs text-zinc-400">Aceita links de YouTube/Vimeo comuns ou de embed.</p>
+          </div>
+
+          <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
+            <p className="text-sm font-semibold text-zinc-100">Secao de idiomas</p>
+            <BI
+              label="Titulo da secao"
+              pt={f.languages_title_pt}
+              en={f.languages_title_en}
+              setPt={(v) => setF({ ...f, languages_title_pt: v })}
+              setEn={(v) => setF({ ...f, languages_title_en: v })}
+            />
+            <BI
+              label="Palavra em destaque"
+              pt={f.languages_highlight_pt}
+              en={f.languages_highlight_en}
+              setPt={(v) => setF({ ...f, languages_highlight_pt: v })}
+              setEn={(v) => setF({ ...f, languages_highlight_en: v })}
+            />
+            <BT
+              label="Observacao da secao"
+              pt={f.languages_note_pt}
+              en={f.languages_note_en}
+              setPt={(v) => setF({ ...f, languages_note_pt: v })}
+              setEn={(v) => setF({ ...f, languages_note_en: v })}
+              rows={3}
+            />
+            <div className="space-y-3 rounded-lg border border-white/10 bg-black/20 p-3">
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-sm font-semibold text-zinc-100">Idiomas cadastrados</p>
+                <Button
+                  type="button"
+                  className={btnOutline}
+                  onClick={() =>
+                    setF({
+                      ...f,
+                      available_languages: [
+                        ...(Array.isArray(f.available_languages) ? f.available_languages : []),
+                        { id: id(), code: '', name_pt: '', name_en: '', available: true, hasSubtitles: true },
+                      ],
+                    })
+                  }
+                >
+                  <Plus className="mr-2 h-4 w-4" />
+                  Idioma
+                </Button>
+              </div>
+              {(Array.isArray(f.available_languages) ? f.available_languages : []).map((lang, index) => (
+                <div key={lang.id || index} className="rounded-lg border border-white/10 bg-zinc-950/50 p-3 space-y-3">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <F label="Sigla" value={lang.code || ''} onChange={(e) => setF({ ...f, available_languages: f.available_languages.map((item, itemIndex) => itemIndex === index ? { ...item, code: e.target.value.toUpperCase() } : item) })} />
+                    <F label="Nome PT" value={lang.name_pt || ''} onChange={(e) => setF({ ...f, available_languages: f.available_languages.map((item, itemIndex) => itemIndex === index ? { ...item, name_pt: e.target.value } : item) })} />
+                    <F label="Nome EN" value={lang.name_en || ''} onChange={(e) => setF({ ...f, available_languages: f.available_languages.map((item, itemIndex) => itemIndex === index ? { ...item, name_en: e.target.value } : item) })} />
+                  </div>
+                  <div className="flex flex-wrap items-center gap-4">
+                    <label className="flex items-center gap-2 text-zinc-200">
+                      <input type="checkbox" className="accent-white" checked={lang.available !== false} onChange={(e) => setF({ ...f, available_languages: f.available_languages.map((item, itemIndex) => itemIndex === index ? { ...item, available: e.target.checked } : item) })} />
+                      Disponivel
+                    </label>
+                    <label className="flex items-center gap-2 text-zinc-200">
+                      <input type="checkbox" className="accent-white" checked={lang.hasSubtitles !== false} onChange={(e) => setF({ ...f, available_languages: f.available_languages.map((item, itemIndex) => itemIndex === index ? { ...item, hasSubtitles: e.target.checked } : item) })} />
+                      Com legenda
+                    </label>
+                    <Button type="button" className="bg-red-600 text-white hover:bg-red-500 ml-auto" onClick={() => setF({ ...f, available_languages: f.available_languages.filter((_, itemIndex) => itemIndex !== index) })}>
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
+            <p className="text-sm font-semibold text-zinc-100">Trailer do curso</p>
+            <F label="URL do video" value={f.trailer_url || ''} onChange={(e) => setF({ ...f, trailer_url: e.target.value })} />
+            <BI
+              label="Titulo do iframe"
+              pt={f.trailer_title_pt}
+              en={f.trailer_title_en}
+              setPt={(v) => setF({ ...f, trailer_title_pt: v })}
+              setEn={(v) => setF({ ...f, trailer_title_en: v })}
+            />
+            <BI
+              label="Linha principal"
+              pt={f.trailer_title_line1_pt}
+              en={f.trailer_title_line1_en}
+              setPt={(v) => setF({ ...f, trailer_title_line1_pt: v })}
+              setEn={(v) => setF({ ...f, trailer_title_line1_en: v })}
+            />
+            <BI
+              label="Palavra ou frase em destaque"
+              pt={f.trailer_highlight_pt}
+              en={f.trailer_highlight_en}
+              setPt={(v) => setF({ ...f, trailer_highlight_pt: v })}
+              setEn={(v) => setF({ ...f, trailer_highlight_en: v })}
+            />
+          </div>
+
+          <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
+            <p className="text-sm font-semibold text-zinc-100">Titulos das secoes da pagina</p>
+            <BI label="Resultados dos alunos / titulo" pt={f.student_results_title_line1_pt} en={f.student_results_title_line1_en} setPt={(v) => setF({ ...f, student_results_title_line1_pt: v })} setEn={(v) => setF({ ...f, student_results_title_line1_en: v })} />
+            <BI label="Resultados dos alunos / destaque" pt={f.student_results_highlight_pt} en={f.student_results_highlight_en} setPt={(v) => setF({ ...f, student_results_highlight_pt: v })} setEn={(v) => setF({ ...f, student_results_highlight_en: v })} />
+            <BT label="Resultados dos alunos / subtitulo" pt={f.student_results_subtitle_pt} en={f.student_results_subtitle_en} setPt={(v) => setF({ ...f, student_results_subtitle_pt: v })} setEn={(v) => setF({ ...f, student_results_subtitle_en: v })} rows={2} />
+            <BI label="Clientes / titulo livre" pt={f.client_logos_title_pt} en={f.client_logos_title_en} setPt={(v) => setF({ ...f, client_logos_title_pt: v })} setEn={(v) => setF({ ...f, client_logos_title_en: v })} />
+            <BI label="Modulos / titulo" pt={f.modules_title_line1_pt} en={f.modules_title_line1_en} setPt={(v) => setF({ ...f, modules_title_line1_pt: v })} setEn={(v) => setF({ ...f, modules_title_line1_en: v })} />
+            <BI label="Modulos / destaque" pt={f.modules_highlight_pt} en={f.modules_highlight_en} setPt={(v) => setF({ ...f, modules_highlight_pt: v })} setEn={(v) => setF({ ...f, modules_highlight_en: v })} />
+            <BT label="Modulos / subtitulo" pt={f.modules_subtitle_pt} en={f.modules_subtitle_en} setPt={(v) => setF({ ...f, modules_subtitle_pt: v })} setEn={(v) => setF({ ...f, modules_subtitle_en: v })} rows={2} />
+            <BI label="Depoimentos / titulo" pt={f.testimonials_title_line1_pt} en={f.testimonials_title_line1_en} setPt={(v) => setF({ ...f, testimonials_title_line1_pt: v })} setEn={(v) => setF({ ...f, testimonials_title_line1_en: v })} />
+            <BI label="Depoimentos / prefixo" pt={f.testimonials_title_prefix_pt} en={f.testimonials_title_prefix_en} setPt={(v) => setF({ ...f, testimonials_title_prefix_pt: v })} setEn={(v) => setF({ ...f, testimonials_title_prefix_en: v })} />
+            <BI label="Depoimentos / destaque" pt={f.testimonials_highlight_pt} en={f.testimonials_highlight_en} setPt={(v) => setF({ ...f, testimonials_highlight_pt: v })} setEn={(v) => setF({ ...f, testimonials_highlight_en: v })} />
+            <BI label="FAQ / titulo" pt={f.faq_title_line1_pt} en={f.faq_title_line1_en} setPt={(v) => setF({ ...f, faq_title_line1_pt: v })} setEn={(v) => setF({ ...f, faq_title_line1_en: v })} />
+            <BI label="FAQ / destaque" pt={f.faq_highlight_pt} en={f.faq_highlight_en} setPt={(v) => setF({ ...f, faq_highlight_pt: v })} setEn={(v) => setF({ ...f, faq_highlight_en: v })} />
+            <BT label="FAQ / subtitulo" pt={f.faq_subtitle_pt} en={f.faq_subtitle_en} setPt={(v) => setF({ ...f, faq_subtitle_pt: v })} setEn={(v) => setF({ ...f, faq_subtitle_en: v })} rows={2} />
+          </div>
+
+          <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
+            <p className="text-sm font-semibold text-zinc-100">Conteudo adicional exclusivo</p>
+            <BI label="Titulo da secao" pt={f.extra_content_title_line1_pt} en={f.extra_content_title_line1_en} setPt={(v) => setF({ ...f, extra_content_title_line1_pt: v })} setEn={(v) => setF({ ...f, extra_content_title_line1_en: v })} />
+            <BI label="Destaque da secao" pt={f.extra_content_highlight_pt} en={f.extra_content_highlight_en} setPt={(v) => setF({ ...f, extra_content_highlight_pt: v })} setEn={(v) => setF({ ...f, extra_content_highlight_en: v })} />
+            <BT label="Subtitulo da secao" pt={f.extra_content_subtitle_pt} en={f.extra_content_subtitle_en} setPt={(v) => setF({ ...f, extra_content_subtitle_pt: v })} setEn={(v) => setF({ ...f, extra_content_subtitle_en: v })} rows={2} />
+            {[1, 2].map((item) => (
+              <div key={item} className="rounded-lg border border-white/10 bg-black/20 p-3 space-y-3">
+                <p className="text-sm font-medium text-zinc-200">Card extra {item}</p>
+                <Upload
+                  label={`Imagem do card ${item}`}
+                  value={f[`extra_card_${item}_image_url`] || ''}
+                  onChange={(v) => setF({ ...f, [`extra_card_${item}_image_url`]: v })}
+                  cropOptions={{
+                    presets: [{ value: 'extra-card', label: 'Card panoramico', aspect: 16 / 9 }],
+                    defaultPreset: 'extra-card',
+                    lockPreset: true,
+                  }}
+                />
+                <BI label={`Titulo do card ${item}`} pt={f[`extra_card_${item}_title_pt`]} en={f[`extra_card_${item}_title_en`]} setPt={(v) => setF({ ...f, [`extra_card_${item}_title_pt`]: v })} setEn={(v) => setF({ ...f, [`extra_card_${item}_title_en`]: v })} />
+                <BT label={`Descricao do card ${item}`} pt={f[`extra_card_${item}_desc_pt`]} en={f[`extra_card_${item}_desc_en`]} setPt={(v) => setF({ ...f, [`extra_card_${item}_desc_pt`]: v })} setEn={(v) => setF({ ...f, [`extra_card_${item}_desc_en`]: v })} rows={3} />
+                <BI label={`Etiqueta do card ${item}`} pt={f[`extra_card_${item}_note_pt`]} en={f[`extra_card_${item}_note_en`]} setPt={(v) => setF({ ...f, [`extra_card_${item}_note_pt`]: v })} setEn={(v) => setF({ ...f, [`extra_card_${item}_note_en`]: v })} />
+              </div>
+            ))}
+          </div>
+
+          <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
+            <p className="text-sm font-semibold text-zinc-100">Certificado</p>
+            <BI label="Prefixo do titulo" pt={f.certificate_title_prefix_pt} en={f.certificate_title_prefix_en} setPt={(v) => setF({ ...f, certificate_title_prefix_pt: v })} setEn={(v) => setF({ ...f, certificate_title_prefix_en: v })} />
+            <BI label="Texto em destaque" pt={f.certificate_highlight_pt} en={f.certificate_highlight_en} setPt={(v) => setF({ ...f, certificate_highlight_pt: v })} setEn={(v) => setF({ ...f, certificate_highlight_en: v })} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Upload label="Imagem do certificado PT" value={f.certificate_image_url_pt || ''} onChange={(v) => setF({ ...f, certificate_image_url_pt: v })} />
+              <Upload label="Imagem do certificado EN" value={f.certificate_image_url_en || ''} onChange={(v) => setF({ ...f, certificate_image_url_en: v })} />
+            </div>
           </div>
 
         </fieldset>
@@ -1250,6 +1627,8 @@ function ModulesTab({ data }) {
   const [editingId, setEditingId] = useState('');
   const [f, setF] = useState({
     show_in_en: true,
+    show_in_course: true,
+    show_in_luts: false,
     title_pt: '',
     title_en: '',
     description_pt: '',
@@ -1283,6 +1662,8 @@ function ModulesTab({ data }) {
 
   const blankForm = () => ({
     show_in_en: true,
+    show_in_course: true,
+    show_in_luts: false,
     title_pt: '',
     title_en: '',
     description_pt: '',
@@ -1298,6 +1679,8 @@ function ModulesTab({ data }) {
     return {
       id: normalized.id,
       show_in_en: normalized.show_in_en !== false,
+      show_in_course: normalized.show_in_course !== false,
+      show_in_luts: normalized.show_in_luts === true,
       title_pt: normalized.title_pt || '',
       title_en: normalized.title_en || '',
       description_pt: normalized.description_pt || '',
@@ -1329,6 +1712,8 @@ function ModulesTab({ data }) {
     return {
       ...base,
       show_in_en: formValue.show_in_en !== false,
+      show_in_course: formValue.show_in_course !== false,
+      show_in_luts: formValue.show_in_luts === true,
       topics_pt: topicsPt,
       topics_en: fallbackEn,
       lessons_pt: topicsPt,
@@ -1386,16 +1771,36 @@ function ModulesTab({ data }) {
       <CardContent className="p-4 sm:p-6 space-y-4">
         <BI label="Titulo *" pt={f.title_pt} en={f.title_en} setPt={(v) => setF({ ...f, title_pt: v })} setEn={(v) => setF({ ...f, title_en: v })} />
         <div className="rounded-lg border border-white/10 bg-zinc-900/50 p-3">
-          <Label className="text-zinc-300 mb-2 block">Exibicao no idioma</Label>
-          <label className="flex items-center gap-2 text-zinc-200">
-            <input
-              type="checkbox"
-              className="accent-white"
-              checked={f.show_in_en !== false}
-              onChange={(e) => setF({ ...f, show_in_en: e.target.checked })}
-            />
-            Mostrar este modulo em ingles
-          </label>
+          <Label className="text-zinc-300 mb-2 block">Exibicao do modulo</Label>
+          <div className="flex flex-col gap-3">
+            <label className="flex items-center gap-2 text-zinc-200">
+              <input
+                type="checkbox"
+                className="accent-white"
+                checked={f.show_in_course !== false}
+                onChange={(e) => setF({ ...f, show_in_course: e.target.checked })}
+              />
+              Mostrar este modulo no produto Curso
+            </label>
+            <label className="flex items-center gap-2 text-zinc-200">
+              <input
+                type="checkbox"
+                className="accent-white"
+                checked={f.show_in_luts === true}
+                onChange={(e) => setF({ ...f, show_in_luts: e.target.checked })}
+              />
+              Mostrar este modulo no produto LUTs
+            </label>
+            <label className="flex items-center gap-2 text-zinc-200">
+              <input
+                type="checkbox"
+                className="accent-white"
+                checked={f.show_in_en !== false}
+                onChange={(e) => setF({ ...f, show_in_en: e.target.checked })}
+              />
+              Mostrar este modulo em ingles
+            </label>
+          </div>
         </div>
         <BT label="Descricao" pt={f.description_pt} en={f.description_en} setPt={(v) => setF({ ...f, description_pt: v })} setEn={(v) => setF({ ...f, description_en: v })} rows={3} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -1450,9 +1855,16 @@ function ModulesTab({ data }) {
                 <div className="flex items-center gap-3 min-w-0">
                   <GripVertical className="w-4 h-4 text-zinc-400 shrink-0" />
                   <div>
-                    <p className="font-medium truncate">{x.title_pt || x.title_en || 'Item'}</p>
-                    <p className="text-xs text-zinc-400">{num(x.lessons_count)} licoes - {num(x.duration_hours)}h</p>
-                  </div>
+                  <p className="font-medium truncate">{x.title_pt || x.title_en || 'Item'}</p>
+                  <p className="text-xs text-zinc-400">
+                    {num(x.lessons_count)} licoes - {num(x.duration_hours)}h
+                    {' • '}
+                    {[
+                      x.show_in_course !== false ? 'Curso' : null,
+                      x.show_in_luts === true ? 'LUTs' : null,
+                    ].filter(Boolean).join(' / ') || 'Oculto'}
+                  </p>
+                </div>
                 </div>
                 <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-end">
                   <ReorderButtons

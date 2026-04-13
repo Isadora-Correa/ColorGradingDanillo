@@ -5,7 +5,7 @@ import SectionBlock from '../common/SectionBlock';
 import SectionTitle from '../common/SectionTitle';
 import { Quote } from 'lucide-react';
 
-export default function TestimonialsSection({ testimonials }) {
+export default function TestimonialsSection({ testimonials, content = {} }) {
   const { language, t } = useLanguage();
 
   if (!testimonials || testimonials.length === 0) return null;
@@ -32,9 +32,9 @@ export default function TestimonialsSection({ testimonials }) {
   return (
     <div>
       <SectionTitle
-        line1={t('Depoimentos', 'Testimonials')}
-        line2Prefix={t('O que nossos', 'What our')}
-        highlight={t('alunos dizem', 'students say')}
+        line1={t(content.testimonials_title_line1_pt || 'Depoimentos', content.testimonials_title_line1_en || 'Testimonials')}
+        line2Prefix={t(content.testimonials_title_prefix_pt || 'O que nossos', content.testimonials_title_prefix_en || 'What our')}
+        highlight={t(content.testimonials_highlight_pt || 'alunos dizem', content.testimonials_highlight_en || 'students say')}
       />
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">

@@ -12,18 +12,32 @@ const AVAILABLE_LANGUAGES = [
   { flag: 'AR', namePt: 'Árabe', nameEn: 'Arabic' },
 ];
 
-export default function LanguagesSection() {
+const normalizeLanguages = (languages = []) =>
+  (Array.isArray(languages) ? languages : [])
+    .map((item, index) => ({
+      id: item?.id || `${item?.code || item?.flag || 'lang'}-${index}`,
+      flag: String(item?.flag || item?.code || '').trim().toUpperCase(),
+      namePt: String(item?.namePt || item?.name_pt || item?.name || '').trim(),
+      nameEn: String(item?.nameEn || item?.name_en || item?.name || '').trim(),
+      available: item?.available !== false,
+      hasSubtitles: item?.hasSubtitles !== false,
+    }))
+    .filter((item) => item.flag && item.available);
+
+export default function LanguagesSection({ content = {} }) {
   const { t, language } = useLanguage();
   const isPt = language === 'pt';
+  const configuredLanguages = normalizeLanguages(content.available_languages);
+  const baseLanguages = configuredLanguages.length > 0 ? configuredLanguages : AVAILABLE_LANGUAGES;
   const langs = isPt
-    ? AVAILABLE_LANGUAGES.filter((lang) => lang.flag === 'PT')
-    : AVAILABLE_LANGUAGES.filter((lang) => lang.flag !== 'PT');
+    ? baseLanguages.filter((lang) => lang.flag === 'PT')
+    : baseLanguages.filter((lang) => lang.flag !== 'PT');
 
   return (
     <SectionBlock gradient>
       <SectionTitle
-        line1={t('Idiomas', 'Languages')}
-        highlight={t('Disponíveis', 'Available')}
+        line1={t(content.languages_title_pt || 'Idiomas', content.languages_title_en || 'Languages')}
+        highlight={t(content.languages_highlight_pt || 'Disponíveis', content.languages_highlight_en || 'Available')}
       />
 
       <div className="overflow-x-auto rounded-xl border border-white/15 bg-transparent">
@@ -51,12 +65,12 @@ export default function LanguagesSection() {
                   </div>
                 </td>
                 <td className="px-2 py-3 text-center md:px-4 md:py-4">
-                  {(isPt ? lang.flag === 'PT' : true) && (
+                  {(isPt ? lang.flag === 'PT' : true) && lang.available !== false && (
                     <Check className="mx-auto h-5 w-5 text-white" />
                   )}
                 </td>
                 <td className="px-2 py-3 text-center md:px-4 md:py-4">
-                  {(isPt ? lang.flag === 'PT' : true) && (
+                  {(isPt ? lang.flag === 'PT' : true) && lang.hasSubtitles !== false && (
                     <Check className="mx-auto h-5 w-5 text-white" />
                   )}
                 </td>
@@ -69,8 +83,8 @@ export default function LanguagesSection() {
       {!isPt ? (
         <p className="mt-4 text-center text-xs text-zinc-500">
           * {t(
-            'Narração em português. Inglês com revisão profissional. Demais idiomas com dublagem em IA utilizando tecnologia líder de mercado.',
-            'English voiceover professionally reviewed. Spanish, Arabic, and French are provided using industry-leading AI dubbing technology.'
+            content.languages_note_pt || 'Narração em português. Inglês com revisão profissional. Demais idiomas com dublagem em IA utilizando tecnologia líder de mercado.',
+            content.languages_note_en || 'English voiceover professionally reviewed. Spanish, Arabic, and French are provided using industry-leading AI dubbing technology.'
           )}
         </p>
       ) : null}

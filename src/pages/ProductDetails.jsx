@@ -216,25 +216,33 @@ function ProductHero({ product, settings, onBack, featureItems, buyLink }) {
   );
 }
 
-function TrailerSection() {
+function productFeatureItems(product, language, fallbackItems) {
+  const dynamic =
+    language === 'pt'
+      ? product?.features_pt || product?.course_highlights_pt
+      : product?.features_en || product?.course_highlights_en;
+  return Array.isArray(dynamic) && dynamic.length > 0 ? dynamic : fallbackItems;
+}
+
+function TrailerSection({ content = {} }) {
   const { t } = useLanguage();
 
   return (
     <SectionBlock gradient>
       <SectionTitle
-        line1={t('Domine o Color Grading', 'Master Color Grading')}
-        highlight={t('do iniciante ao profissional', 'from beginner to professional')}
+        line1={t(content.trailer_title_line1_pt || 'Domine o Color Grading', content.trailer_title_line1_en || 'Master Color Grading')}
+        highlight={t(content.trailer_highlight_pt || 'do iniciante ao profissional', content.trailer_highlight_en || 'from beginner to professional')}
         titleClassName="text-[1.55rem] leading-[1.1] md:text-4xl lg:text-5xl"
       />
 
       <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/40">
         <div className="relative aspect-video w-full">
           <iframe
-            src="https://player.vimeo.com/video/1079126634?title=0&byline=0&portrait=0&badge=0"
+            src={content.trailer_url || 'https://player.vimeo.com/video/1079126634?title=0&byline=0&portrait=0&badge=0'}
             className="absolute inset-0 h-full w-full"
             allow="autoplay; fullscreen; picture-in-picture"
             loading="lazy"
-            title={t('Trailer do curso', 'Course trailer')}
+            title={t(content.trailer_title_pt || 'Trailer do curso', content.trailer_title_en || 'Course trailer')}
           />
         </div>
       </div>
@@ -343,7 +351,7 @@ function LutsInfoSection() {
 
 function CourseDetailPage({ product, settings, courseContent, modules, logos, students, testimonials, beforeAfterItems, beforeAfterLoading, faqs, buyLink }) {
   const { language } = useLanguage();
-  const featureItems = language === 'pt' ? COURSE_HERO_FEATURES.pt : COURSE_HERO_FEATURES.en;
+  const featureItems = productFeatureItems(product, language, language === 'pt' ? COURSE_HERO_FEATURES.pt : COURSE_HERO_FEATURES.en);
 
   return (
     <div className="relative min-h-screen overflow-x-hidden text-white">
@@ -356,32 +364,36 @@ function CourseDetailPage({ product, settings, courseContent, modules, logos, st
       />
 
       <main className="relative mx-auto max-w-6xl space-y-12 px-4 pb-20 md:px-8">
-        <LanguagesSection languages={courseContent.available_languages} />
+        <LanguagesSection content={courseContent} />
 
         {language === 'pt' ? (
-          <TrailerSection />
+          <TrailerSection content={courseContent} />
         ) : (
           <BeforeAfterSlider items={beforeAfterItems} isLoading={beforeAfterLoading} maxItems={2} />
         )}
 
         <CourseHighlightsGallery content={courseContent} />
-        <StudentShowcase students={students} />
+        <StudentShowcase students={students} content={courseContent} />
         <InstructorSection content={courseContent} />
-        {logos.length > 0 ? <ClientLogos logos={logos} /> : null}
+        {logos.length > 0 ? <ClientLogos logos={logos} title={language === 'pt' ? courseContent.client_logos_title_pt : courseContent.client_logos_title_en} /> : null}
         <MidPageBuyButton />
         <SingleBeforeAfterSection />
-        <CourseModules modules={modules} />
-        <ExclusiveAdditionalContentSection />
-        {testimonials.length > 0 ? <TestimonialsSection testimonials={testimonials} /> : null}
+        <CourseModules modules={modules} content={courseContent} productType="course" />
+        <ExclusiveAdditionalContentSection content={courseContent} />
+        {testimonials.length > 0 ? <TestimonialsSection testimonials={testimonials} content={courseContent} /> : null}
         {language === 'en' ? <MidPageBuyButton /> : null}
-        <CertificateSection />
-        <FAQSection faqs={faqs} />
+        <CertificateSection
+          content={courseContent}
+          imageSrc={courseContent.certificate_image_url_pt || '/certificado.webp'}
+          imageSrcEn={courseContent.certificate_image_url_en || '/certificado-ingles.webp'}
+        />
+        <FAQSection faqs={faqs} content={courseContent} />
       </main>
     </div>
   );
 }
 
-function LutsDetailPage({ product, settings, buyLink }) {
+function LutsDetailPage({ product, settings, buyLink, modules, courseContent }) {
   const { language, t } = useLanguage();
   const featureItems = language === 'pt' ? LUTS_HERO_FEATURES.pt : LUTS_HERO_FEATURES.en;
 
@@ -397,6 +409,8 @@ function LutsDetailPage({ product, settings, buyLink }) {
 
       <main className="relative mx-auto max-w-6xl space-y-12 px-4 pb-20 md:px-8">
         <LutsInfoSection />
+
+        <CourseModules modules={modules} content={courseContent} productType="luts" />
 
         <BeforeAfterSlider
           items={LUTS_COMPARE_ITEMS}
@@ -549,7 +563,7 @@ function ProductDetailContent() {
     ? (product.buy_link_brl || product.buy_link_usd)
     : (product.buy_link_usd || product.buy_link_brl);
 
-  return <LutsDetailPage product={product} settings={settings} buyLink={buyLink} />;
+  return <LutsDetailPage product={product} settings={settings} buyLink={buyLink} modules={modules} courseContent={courseContent} />;
 }
 
 export default function ProductDetail() {

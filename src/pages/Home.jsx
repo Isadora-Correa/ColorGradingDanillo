@@ -120,17 +120,17 @@ function HomeContent() {
                 <InstructorSection content={content} />
 
                 {logos.length > 0 && (
-                  <ClientLogos logos={logos} />
+                  <ClientLogos logos={logos} title={t(content.client_logos_title_pt, content.client_logos_title_en)} />
                 )}
 
-                <StudentShowcase students={students} />
+                <StudentShowcase students={students} content={content} />
 
-                <LanguagesSection languages={content.available_languages} />
+                <LanguagesSection content={content} />
 
                 <BuyNowSection label={t('COMPRE AGORA', 'BUY NOW')} />
 
                 {testimonials.length > 0 && (
-                  <TestimonialsSection testimonials={testimonials} />
+                  <TestimonialsSection testimonials={testimonials} content={content} />
                 )}
               </div>
             )}

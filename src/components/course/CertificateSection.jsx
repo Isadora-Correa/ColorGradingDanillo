@@ -3,7 +3,7 @@ import SectionBlock from '../common/SectionBlock';
 import GlowText from '../common/GlowText';
 import { useLanguage } from '../ui/LanguageContext';
 
-export default function CertificateSection({ imageSrc = '/certificado.webp' }) {
+export default function CertificateSection({ imageSrc = '/certificado.webp', imageSrcEn = '/certificado-ingles.webp', content = {} }) {
   const { t, language } = useLanguage();
   const [tilt, setTilt] = useState({ rx: 0, ry: 0, glareX: 50, glareY: 50, active: false });
   const [isMobileDevice, setIsMobileDevice] = useState(false);
@@ -94,13 +94,13 @@ export default function CertificateSection({ imageSrc = '/certificado.webp' }) {
     <SectionBlock gradient>
       <div className="mb-6 text-center md:mb-8">
         <h3 className="mx-auto max-w-4xl text-2xl font-semibold leading-tight text-white md:text-4xl">
-          {t('Finalize o curso e seja', 'Finish the course and get')}{' '}
+          {t(content.certificate_title_prefix_pt || 'Finalize o curso e seja', content.certificate_title_prefix_en || 'Finish the course and get')}{' '}
           <GlowText
             className="font-extrabold"
             gradient="from-[#ff3d77] via-[#9be15d] via-[#00e5ff] to-[#7b61ff]"
             glowColor="rgba(120,220,255,0.42)"
           >
-            {t('certificado pelo Nava Colorist', 'certified by Nava Colorist')}
+            {t(content.certificate_highlight_pt || 'certificado pelo Nava Colorist', content.certificate_highlight_en || 'certified by Nava Colorist')}
           </GlowText>
         </h3>
       </div>
@@ -116,7 +116,7 @@ export default function CertificateSection({ imageSrc = '/certificado.webp' }) {
         >
           <div className="relative overflow-hidden rounded-xl">
             <img
-              src={language === 'en' ? '/certificado-ingles.webp' : imageSrc}
+              src={language === 'en' ? imageSrcEn : imageSrc}
               alt={t('Certificado do curso', 'Course certificate')}
               className="h-auto w-full object-cover"
               loading="lazy"

@@ -3,6 +3,8 @@ import SectionBlock from '../common/SectionBlock';
 import GlowText from '../common/GlowText';
 import { useLanguage } from '../ui/LanguageContext';
 
+const CARD_ASSET_VERSION = '2026-04-13';
+
 const FEATURE_CARDS = [
   {
     id: 'professional',
@@ -37,6 +39,11 @@ const FEATURE_CARDS = [
     descEn: 'Once it is yours, it is always yours. Your color grading guide is available whenever you need it.',
   },
 ];
+
+function withAssetVersion(src = '') {
+  if (!src || !src.startsWith('/') || src.includes('?')) return src;
+  return `${src}?v=${CARD_ASSET_VERSION}`;
+}
 
 function splitTitleInTwoLines(text = '') {
   const normalized = String(text || '').replace(/\s+/g, ' ').trim();
@@ -102,7 +109,7 @@ export default function CourseHighlightsGallery({ content = {} }) {
     const item = index + 1;
     return {
       ...card,
-      image: content[`highlight_${item}_image_url`] || card.image,
+      image: withAssetVersion(content[`highlight_${item}_image_url`] || card.image),
       titlePt: content[`highlight_${item}_title_pt`] || card.titlePt,
       titleEn: content[`highlight_${item}_title_en`] || card.titleEn,
       descPt: content[`highlight_${item}_desc_pt`] || card.descPt,

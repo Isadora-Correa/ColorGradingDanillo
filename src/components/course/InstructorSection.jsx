@@ -26,6 +26,16 @@ const SOCIALS = [
   },
 ];
 
+const normalizeSocials = (items = []) =>
+  (Array.isArray(items) ? items : [])
+    .map((item, index) => ({
+      key: item?.key || item?.name?.toLowerCase?.() || `social-${index}`,
+      name: String(item?.name || '').trim() || `Social ${index + 1}`,
+      url: String(item?.url || '').trim(),
+      icon: String(item?.icon || '').trim(),
+    }))
+    .filter((item) => item.url);
+
 const BIO = {
   pt: [
     'Nava é um colorista profissional que atua em grandes projetos internacionais, colaborando com diretores e fotógrafos em diferentes formatos, de comerciais a séries e filmes.',
@@ -163,12 +173,16 @@ export default function InstructorSection({ content = {} }) {
   ]);
 
   const showreelUrl = useMemo(() => toEmbedUrl(content.instructor_showreel_url), [content.instructor_showreel_url]);
+  const socials = useMemo(() => {
+    const dynamic = normalizeSocials(content.instructor_socials);
+    return dynamic.length > 0 ? dynamic : SOCIALS;
+  }, [content.instructor_socials]);
 
   return (
     <SectionBlock gradient noPadding className="overflow-hidden">
       <div className="relative h-[280px] w-full md:h-[360px] lg:h-[420px]">
         <div className="absolute right-4 top-4 z-20 flex flex-col items-center gap-2 md:right-6 md:top-6">
-          {SOCIALS.map((item) => {
+          {socials.map((item) => {
             const hasIcon = !iconError[item.key];
             return (
               <a

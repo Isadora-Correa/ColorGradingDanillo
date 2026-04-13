@@ -4,6 +4,8 @@ import { useLanguage } from '../ui/LanguageContext';
 import SectionBlock from '../common/SectionBlock';
 import SectionTitle from '../common/SectionTitle';
 
+const CARD_ASSET_VERSION = '2026-04-13';
+
 const EXTRA_CARDS = [
   {
     id: 'fashion-film',
@@ -31,24 +33,46 @@ const EXTRA_CARDS = [
   },
 ];
 
-export default function ExclusiveAdditionalContentSection() {
+function withAssetVersion(src = '') {
+  if (!src || !src.startsWith('/') || src.includes('?')) return src;
+  return `${src}?v=${CARD_ASSET_VERSION}`;
+}
+
+function buildContentCards(content = {}) {
+  return [1, 2].map((item) => {
+    const fallback = EXTRA_CARDS[item - 1];
+    return {
+      ...fallback,
+      image: content[`extra_card_${item}_image_url`] || fallback.image,
+      titlePt: content[`extra_card_${item}_title_pt`] || fallback.titlePt,
+      titleEn: content[`extra_card_${item}_title_en`] || fallback.titleEn,
+      descPt: content[`extra_card_${item}_desc_pt`] || fallback.descPt,
+      descEn: content[`extra_card_${item}_desc_en`] || fallback.descEn,
+      notePt: content[`extra_card_${item}_note_pt`] || fallback.notePt,
+      noteEn: content[`extra_card_${item}_note_en`] || fallback.noteEn,
+    };
+  });
+}
+
+export default function ExclusiveAdditionalContentSection({ content = {} }) {
   const { language, t } = useLanguage();
+  const cards = buildContentCards(content);
 
   if (language === 'en') return null;
 
   return (
     <SectionBlock gradient className="overflow-hidden">
       <SectionTitle
-        line1={t('Conteúdo Adicional', 'Additional Content')}
-        highlight={t('Exclusivo', 'Exclusive')}
+        line1={t(content.extra_content_title_line1_pt || 'Conteúdo Adicional', content.extra_content_title_line1_en || 'Additional Content')}
+        highlight={t(content.extra_content_highlight_pt || 'Exclusivo', content.extra_content_highlight_en || 'Exclusive')}
         subtitle={t(
-          'Módulos extras com workflows de projetos reais.',
-          'Extra modules with real-project workflows.'
+          content.extra_content_subtitle_pt || 'Módulos extras com workflows de projetos reais.',
+          content.extra_content_subtitle_en || 'Extra modules with real-project workflows.'
         )}
       />
 
       <div className="space-y-4 md:space-y-5">
-        {EXTRA_CARDS.map((card, index) => {
+        {cards.map((card, index) => {
           const isRight = card.align === 'right';
 
           return (
@@ -61,7 +85,7 @@ export default function ExclusiveAdditionalContentSection() {
               className="group relative min-h-[340px] overflow-hidden rounded-[28px] border border-white/10 bg-zinc-950/60 md:min-h-[420px]"
             >
               <img
-                src={card.image}
+                src={withAssetVersion(card.image)}
                 alt={t(card.titlePt, card.titleEn)}
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 loading="lazy"
