@@ -58,7 +58,6 @@ export default function ProductCatalog({ products = [], settings = {} }) {
   const { language, t } = useLanguage();
 
   const visibleProducts = products
-    .filter((product) => product.available !== false)
     .filter((product) => (language === 'pt' ? product.show_in_pt !== false : product.show_in_en !== false))
     .sort((a, b) => (a.order || 0) - (b.order || 0));
 

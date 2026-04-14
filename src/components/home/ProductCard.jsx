@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 export default function ProductCard({ product, index }) {
   const { language, t } = useLanguage();
   const navigate = useNavigate();
+  const isAvailable = product.available !== false;
 
   const name = language === 'pt'
     ? (product.name_pt || product.name_en)
@@ -54,7 +55,7 @@ export default function ProductCard({ product, index }) {
       .map((item) => (item.endsWith('.') ? item : `${item}.`));
 
   const handleClick = () => {
-    if (externalLink) {
+    if (externalLink && isAvailable) {
       window.open(externalLink, '_blank');
     } else {
       navigate(`/produto/${product.slug}`);
@@ -68,7 +69,7 @@ export default function ProductCard({ product, index }) {
       viewport={{ once: true }}
       transition={{ duration: 0.45, delay: index * 0.08 }}
       whileHover={{ y: -2 }}
-      className="group relative h-full overflow-hidden rounded-xl border border-white/10 bg-[#0c0d12]/85"
+      className={`group relative h-full overflow-hidden rounded-xl border border-white/10 bg-[#0c0d12]/85 ${!isAvailable ? 'opacity-90' : ''}`}
     >
       <div
         className="relative cursor-pointer bg-gradient-to-b from-white/5 to-transparent"
@@ -122,9 +123,10 @@ export default function ProductCard({ product, index }) {
         <Button
           type="button"
           onClick={handleClick}
-          className="h-10 rounded-full border-2 border-white bg-white px-5 text-sm font-semibold text-black shadow-[inset_0_0_0_1px_rgba(255,255,255,0.28)] hover:bg-zinc-200"
+          disabled={!isAvailable}
+          className="h-10 rounded-full border-2 border-white bg-white px-5 text-sm font-semibold text-black shadow-[inset_0_0_0_1px_rgba(255,255,255,0.28)] hover:bg-zinc-200 disabled:opacity-100 disabled:bg-white disabled:text-black disabled:border-white"
         >
-          {t('Ver detalhes', 'View details')}
+          {isAvailable ? t('Ver detalhes', 'View details') : t('EM BREVE', 'COMING SOON')}
         </Button>
       </div>
     </motion.article>

@@ -125,6 +125,7 @@ function scrollToPurchaseTop() {
 
 function ProductHero({ product, settings, content, onBack, featureItems, buyLink }) {
   const { language, t } = useLanguage();
+  const isAvailable = product?.available !== false;
   const productName = language === 'pt' ? (product.name_pt || product.name_en) : (product.name_en || product.name_pt);
   const heroTitle = product.product_type === 'course'
     ? (language === 'pt' ? (content?.hero_title_pt || productName) : (content?.hero_title_en || productName))
@@ -141,6 +142,9 @@ function ProductHero({ product, settings, content, onBack, featureItems, buyLink
     ? (content?.hero_image_url || productImage)
     : productImage;
   const openCheckout = () => {
+    if (!isAvailable) {
+      return;
+    }
     if (buyLink) {
       window.open(buyLink, '_blank');
       return;
@@ -220,11 +224,12 @@ function ProductHero({ product, settings, content, onBack, featureItems, buyLink
               <Button
                 type="button"
                 onClick={openCheckout}
-                className="h-12 rounded-full border-2 border-white bg-black/40 px-10 text-sm font-bold tracking-[0.18em] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.28),0_10px_35px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-[1.02] hover:bg-black/55 active:scale-[0.98]"
+                disabled={!isAvailable}
+                className="h-12 rounded-full border-2 border-white bg-black/40 px-10 text-sm font-bold tracking-[0.18em] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.28),0_10px_35px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-[1.02] hover:bg-black/55 active:scale-[0.98] disabled:opacity-100 disabled:bg-black/40 disabled:text-white disabled:border-white"
               >
                 <span className="relative inline-flex items-center px-1 py-0.5 leading-none">
                   <span className="absolute -inset-1 rounded-md bg-[linear-gradient(90deg,#ff2f6d_0%,#ff8f1f_20%,#d8ff3a_40%,#31f2a7_60%,#26d8ff_78%,#7a6dff_90%,#ff38bd_100%)] opacity-65 blur-md" />
-                  <span className="relative text-white">{t('COMPRAR AGORA', 'BUY NOW')}</span>
+                  <span className="relative text-white">{isAvailable ? t('COMPRAR AGORA', 'BUY NOW') : t('EM BREVE', 'COMING SOON')}</span>
                 </span>
               </Button>
             </motion.div>
@@ -275,7 +280,7 @@ function TrailerSection({ content = {} }) {
   );
 }
 
-function MidPageBuyButton() {
+function MidPageBuyButton({ disabled = false }) {
   const { t } = useLanguage();
 
   return (
@@ -283,11 +288,12 @@ function MidPageBuyButton() {
       <Button
         type="button"
         onClick={scrollToPurchaseTop}
-        className="h-12 rounded-full border-2 border-white bg-black/40 px-10 text-sm font-bold tracking-[0.18em] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.28),0_10px_35px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-[1.02] hover:bg-black/55 active:scale-[0.98]"
+        disabled={disabled}
+        className="h-12 rounded-full border-2 border-white bg-black/40 px-10 text-sm font-bold tracking-[0.18em] text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.28),0_10px_35px_rgba(0,0,0,0.35)] transition-all duration-300 hover:scale-[1.02] hover:bg-black/55 active:scale-[0.98] disabled:opacity-100 disabled:bg-black/40 disabled:text-white disabled:border-white"
       >
         <span className="relative inline-flex items-center px-1 py-0.5 leading-none">
           <span className="absolute -inset-1 rounded-md bg-[linear-gradient(90deg,#ff2f6d_0%,#ff8f1f_20%,#d8ff3a_40%,#31f2a7_60%,#26d8ff_78%,#7a6dff_90%,#ff38bd_100%)] opacity-65 blur-md" />
-          <span className="relative text-white">{t('COMPRAR AGORA', 'BUY NOW')}</span>
+          <span className="relative text-white">{disabled ? t('EM BREVE', 'COMING SOON') : t('COMPRAR AGORA', 'BUY NOW')}</span>
         </span>
       </Button>
     </div>
@@ -376,6 +382,7 @@ function LutsInfoSection() {
 
 function CourseDetailPage({ product, settings, courseContent, modules, logos, students, testimonials, beforeAfterItems, beforeAfterLoading, faqs, buyLink }) {
   const { language } = useLanguage();
+  const isAvailable = product?.available !== false;
   const featureItems = productFeatureItems(product, language, language === 'pt' ? COURSE_HERO_FEATURES.pt : COURSE_HERO_FEATURES.en);
 
   return (
@@ -402,12 +409,12 @@ function CourseDetailPage({ product, settings, courseContent, modules, logos, st
         <StudentShowcase students={students} content={courseContent} />
         <InstructorSection content={courseContent} />
         {logos.length > 0 ? <ClientLogos logos={logos} title={language === 'pt' ? courseContent.client_logos_title_pt : courseContent.client_logos_title_en} /> : null}
-        <MidPageBuyButton />
+        <MidPageBuyButton disabled={!isAvailable} />
         <SingleBeforeAfterSection />
         <CourseModules modules={modules} content={courseContent} productType="course" />
         <ExclusiveAdditionalContentSection content={courseContent} />
         {testimonials.length > 0 ? <TestimonialsSection testimonials={testimonials} content={courseContent} /> : null}
-        {language === 'en' ? <MidPageBuyButton /> : null}
+        {language === 'en' ? <MidPageBuyButton disabled={!isAvailable} /> : null}
         <CertificateSection
           content={courseContent}
           imageSrc={courseContent.certificate_image_url_pt || '/certificado.webp'}
@@ -421,6 +428,7 @@ function CourseDetailPage({ product, settings, courseContent, modules, logos, st
 
 function LutsDetailPage({ product, settings, buyLink, modules, courseContent }) {
   const { language, t } = useLanguage();
+  const isAvailable = product?.available !== false;
   const featureItems = language === 'pt' ? LUTS_HERO_FEATURES.pt : LUTS_HERO_FEATURES.en;
 
   return (
@@ -471,7 +479,7 @@ function LutsDetailPage({ product, settings, buyLink, modules, courseContent }) 
               )}
             </p>
             <div className="mt-6">
-              <MidPageBuyButton />
+              <MidPageBuyButton disabled={!isAvailable} />
             </div>
           </div>
         </SectionBlock>

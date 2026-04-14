@@ -1024,7 +1024,7 @@ function ProductsTab({ data }) {
   const onNew = () => {
     setOpen(true);
     setEditingId('');
-    setF({ product_type: 'course', show_in_pt: true, show_in_en: true, image_url_pt: '', image_url_en: '' });
+    setF({ product_type: 'course', available: true, show_in_pt: true, show_in_en: true, image_url_pt: '', image_url_en: '' });
   };
 
   const edit = (x) => {
@@ -1124,6 +1124,18 @@ function ProductsTab({ data }) {
             <label className="flex items-center gap-2 text-zinc-200"><input type="checkbox" className="accent-white" checked={f.show_in_en !== false} onChange={(e) => setF({ ...f, show_in_en: e.target.checked })} />English</label>
           </div>
         </div>
+        <div className="rounded-lg border border-white/10 bg-zinc-900/50 p-3">
+          <Label className="text-zinc-300 mb-2 block">Disponibilidade</Label>
+          <label className="flex items-center gap-2 text-zinc-200">
+            <input
+              type="checkbox"
+              className="accent-white"
+              checked={f.available !== false}
+              onChange={(e) => setF({ ...f, available: e.target.checked })}
+            />
+            Produto disponivel para compra
+          </label>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <F label="Preco BRL" type="number" value={f.price_brl || ''} onChange={(e) => setF({ ...f, price_brl: e.target.value })} />
           <F label="Preco USD" type="number" value={f.price_usd || ''} onChange={(e) => setF({ ...f, price_usd: e.target.value })} />
@@ -1181,6 +1193,9 @@ function ProductsTab({ data }) {
                 <div className="min-w-0">
                   <p className="font-medium truncate">{x.name_pt || x.name_en || x.slug || 'Produto'}</p>
                   <p className="text-xs text-zinc-400">{x.product_type || 'course'} ? R$ {num(x.price_brl)} - ${num(x.price_usd)}</p>
+                  <p className={`mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${x.available !== false ? 'text-emerald-400' : 'text-amber-400'}`}>
+                    {x.available !== false ? 'Disponivel' : 'Em breve'}
+                  </p>
                 </div>
               </div>
               <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-end">

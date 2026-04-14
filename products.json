@@ -10,7 +10,7 @@
     "price_usd": 397,
     "image_url": "/course/course-cover-pt.webp",
     "product_type": "course",
-    "available": true,
+    "available": false,
     "show_in_pt": true,
     "show_in_en": true,
     "buy_link_brl": "https://pay.hotmart.com/H99463968S?off=gwgzo4l7&checkoutMode=10",
