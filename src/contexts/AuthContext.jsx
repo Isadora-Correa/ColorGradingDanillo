@@ -4,29 +4,52 @@ import { apiClient } from '@/api/apiClient';
 
 const AuthContext = createContext(null);
 
+const getStoredToken = () => {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
+  try {
+    return window.localStorage.getItem('authToken');
+  } catch {
+    return null;
+  }
+};
+
 export function AuthProvider({ children }) {
-  const [token, setToken] = useState(localStorage.getItem('authToken'));
+  const [token, setToken] = useState(() => getStoredToken());
   const navigate = useNavigate();
 
   useEffect(() => {
     const onExpired = () => {
-      localStorage.removeItem('authToken');
+      if (typeof window !== 'undefined') {
+        window.localStorage.removeItem('authToken');
+      }
       setToken(null);
       navigate('/adm', { replace: true });
     };
+
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+
     window.addEventListener('auth:expired', onExpired);
     return () => window.removeEventListener('auth:expired', onExpired);
   }, [navigate]);
 
   const login = async (username, password, redirectTo = '/adm/painel') => {
     const data = await apiClient.login({ username, password });
-    localStorage.setItem('authToken', data.token);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('authToken', data.token);
+    }
     setToken(data.token);
     navigate(redirectTo, { replace: true });
   };
 
   const logout = (redirectTo = '/adm') => {
-    localStorage.removeItem('authToken');
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem('authToken');
+    }
     setToken(null);
     navigate(redirectTo, { replace: true });
   };
