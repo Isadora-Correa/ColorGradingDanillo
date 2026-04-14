@@ -123,14 +123,23 @@ function scrollToPurchaseTop() {
   if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function ProductHero({ product, settings, onBack, featureItems, buyLink }) {
+function ProductHero({ product, settings, content, onBack, featureItems, buyLink }) {
   const { language, t } = useLanguage();
-  const name = language === 'pt' ? (product.name_pt || product.name_en) : (product.name_en || product.name_pt);
+  const productName = language === 'pt' ? (product.name_pt || product.name_en) : (product.name_en || product.name_pt);
+  const heroTitle = product.product_type === 'course'
+    ? (language === 'pt' ? (content?.hero_title_pt || productName) : (content?.hero_title_en || productName))
+    : productName;
+  const heroSubtitle = product.product_type === 'course'
+    ? (language === 'pt' ? content?.hero_subtitle_pt : content?.hero_subtitle_en)
+    : '';
   const price = language === 'pt' ? product.price_brl : product.price_usd;
   const currency = language === 'pt' ? 'R$' : '$';
-  const detailImage = language === 'pt'
+  const productImage = language === 'pt'
     ? (product.detail_image_url_pt || product.image_url_pt || product.detail_image_url || product.image_url)
     : (product.detail_image_url_en || product.image_url_en || product.detail_image_url || product.image_url);
+  const detailImage = product.product_type === 'course'
+    ? (content?.hero_image_url || productImage)
+    : productImage;
   const openCheckout = () => {
     if (buyLink) {
       window.open(buyLink, '_blank');
@@ -162,8 +171,12 @@ function ProductHero({ product, settings, onBack, featureItems, buyLink }) {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               src={detailImage}
-              alt={name}
-              className="mx-auto h-auto max-h-[34vh] w-full max-w-[900px] object-contain sm:max-h-[46vh] lg:col-span-6 lg:max-h-[66vh]"
+              alt={heroTitle}
+              className={`mx-auto h-auto w-full max-w-[900px] ${
+                product.product_type === 'course'
+                  ? 'max-h-[38vh] rounded-[28px] object-cover object-center sm:max-h-[48vh] lg:col-span-6 lg:max-h-[68vh]'
+                  : 'max-h-[34vh] object-contain sm:max-h-[46vh] lg:col-span-6 lg:max-h-[66vh]'
+              }`}
             />
 
             <motion.div
@@ -177,8 +190,14 @@ function ProductHero({ product, settings, onBack, featureItems, buyLink }) {
               </span>
 
               <h1 className="mb-3 text-3xl font-bold leading-tight tracking-tight md:text-4xl lg:text-5xl">
-                {name}
+                {heroTitle}
               </h1>
+
+              {heroSubtitle ? (
+                <p className="mb-5 max-w-2xl text-base leading-relaxed text-zinc-300 md:text-lg">
+                  {heroSubtitle}
+                </p>
+              ) : null}
 
               <div className="mb-6 flex w-fit items-end gap-3">
                 <span className="text-3xl font-bold text-white lg:text-4xl">
@@ -226,11 +245,15 @@ function productFeatureItems(product, language, fallbackItems) {
 
 function TrailerSection({ content = {} }) {
   const { t } = useLanguage();
-  const line1Pt = content.hero_title_pt || content.trailer_title_line1_pt || 'Domine o Color Grading';
-  const line1En = content.hero_title_en || content.trailer_title_line1_en || 'Master Color Grading';
+  const line1Pt = content.trailer_title_line1_pt || 'Domine o Color Grading';
+  const line1En = content.trailer_title_line1_en || 'Master Color Grading';
+  const trailerTitle = t(content.trailer_title_pt || 'Trailer do curso', content.trailer_title_en || 'Course trailer');
 
   return (
     <SectionBlock gradient>
+      <p className="mb-3 text-center text-xs font-semibold uppercase tracking-[0.24em] text-zinc-400">
+        {trailerTitle}
+      </p>
       <SectionTitle
         line1={t(line1Pt, line1En)}
         highlight={t(content.trailer_highlight_pt || 'do iniciante ao profissional', content.trailer_highlight_en || 'from beginner to professional')}
@@ -244,7 +267,7 @@ function TrailerSection({ content = {} }) {
             className="absolute inset-0 h-full w-full"
             allow="autoplay; fullscreen; picture-in-picture"
             loading="lazy"
-            title={t(content.trailer_title_pt || 'Trailer do curso', content.trailer_title_en || 'Course trailer')}
+            title={trailerTitle}
           />
         </div>
       </div>
@@ -360,6 +383,7 @@ function CourseDetailPage({ product, settings, courseContent, modules, logos, st
       <ProductHero
         product={product}
         settings={settings}
+        content={courseContent}
         onBack={() => window.history.back()}
         featureItems={featureItems}
         buyLink={buyLink}
@@ -404,6 +428,7 @@ function LutsDetailPage({ product, settings, buyLink, modules, courseContent }) 
       <ProductHero
         product={product}
         settings={settings}
+        content={courseContent}
         onBack={() => window.history.back()}
         featureItems={featureItems}
         buyLink={buyLink}

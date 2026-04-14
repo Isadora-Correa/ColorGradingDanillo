@@ -58,8 +58,6 @@ export default function ExclusiveAdditionalContentSection({ content = {} }) {
   const { language, t } = useLanguage();
   const cards = buildContentCards(content);
 
-  if (language === 'en') return null;
-
   return (
     <SectionBlock gradient className="overflow-hidden">
       <SectionTitle
