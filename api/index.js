@@ -6,6 +6,30 @@ import { getDb, isFirebaseConfigured } from './firebaseAdmin.js';
 const READ_ONLY_MESSAGE =
   'Este deploy na Vercel e somente leitura. Para salvar alteracoes do admin, configure o Firebase Firestore e as credenciais do servidor.';
 
+const JSON_FALLBACK_ROOT = process.cwd();
+
+const normalizeRoute = (route) => String(route || '').replace(/^\/+|\/+$/g, '');
+
+const resolveJsonFallbackPath = (route) => {
+  const normalizedRoute = normalizeRoute(route);
+
+  if (!normalizedRoute || normalizedRoute.includes('..') || normalizedRoute.includes('/')) {
+    return null;
+  }
+
+  return path.join(JSON_FALLBACK_ROOT, `${normalizedRoute}.json`);
+};
+
+const readJsonFallback = (route) => {
+  const filePath = resolveJsonFallbackPath(route);
+
+  if (!filePath || !existsSync(filePath)) {
+    return [];
+  }
+
+  return JSON.parse(readFileSync(filePath, 'utf-8'));
+};
+
 const verifyToken = (req) => {
   const authHeader = req.headers.authorization || req.headers.Authorization;
   const token = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
