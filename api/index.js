@@ -115,15 +115,7 @@ export default async function handler(req, res) {
     }
 
     // Fallback para leitura dos JSONs quando o Firebase ainda nao estiver configurado
-    const filePath = path.join(process.cwd(), `${route}.json`);
-
-    if (existsSync(filePath)) {
-      const fileContent = readFileSync(filePath, 'utf8');
-      return res.status(200).json(JSON.parse(fileContent));
-    }
-
-    // Se o arquivo não existir, retornamos [] para o React não quebrar
-    return res.status(200).json([]);
+    return res.status(200).json(readJsonFallback(route));
   } catch (error) {
     // Isso evita o erro 500. Se der qualquer erro, ele loga e manda um array vazio
     console.error("Erro na função:", error);
