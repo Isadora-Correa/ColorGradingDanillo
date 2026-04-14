@@ -384,43 +384,44 @@ function CourseDetailPage({ product, settings, courseContent, modules, logos, st
   const { language } = useLanguage();
   const isAvailable = product?.available !== false;
   const featureItems = productFeatureItems(product, language, language === 'pt' ? COURSE_HERO_FEATURES.pt : COURSE_HERO_FEATURES.en);
+  const safeCourseContent = courseContent || {};
 
   return (
     <div className="relative min-h-screen overflow-x-hidden text-white">
       <ProductHero
         product={product}
         settings={settings}
-        content={courseContent}
+        content={safeCourseContent}
         onBack={() => window.history.back()}
         featureItems={featureItems}
         buyLink={buyLink}
       />
 
       <main className="relative mx-auto max-w-6xl space-y-12 px-4 pb-20 md:px-8">
-        <LanguagesSection content={courseContent} />
+        <LanguagesSection content={safeCourseContent} />
 
         {language === 'pt' ? (
-          <TrailerSection content={courseContent} />
+          <TrailerSection content={safeCourseContent} />
         ) : (
           <BeforeAfterSlider items={beforeAfterItems} isLoading={beforeAfterLoading} maxItems={2} />
         )}
 
-        <CourseHighlightsGallery content={courseContent} />
-        <StudentShowcase students={students} content={courseContent} />
-        <InstructorSection content={courseContent} />
-        {logos.length > 0 ? <ClientLogos logos={logos} title={language === 'pt' ? courseContent.client_logos_title_pt : courseContent.client_logos_title_en} /> : null}
+        <CourseHighlightsGallery content={safeCourseContent} />
+        <StudentShowcase students={students} content={safeCourseContent} />
+        <InstructorSection content={safeCourseContent} />
+        {logos.length > 0 ? <ClientLogos logos={logos} title={language === 'pt' ? safeCourseContent.client_logos_title_pt : safeCourseContent.client_logos_title_en} /> : null}
         <MidPageBuyButton disabled={!isAvailable} />
         <SingleBeforeAfterSection />
-        <CourseModules modules={modules} content={courseContent} productType="course" />
-        <ExclusiveAdditionalContentSection content={courseContent} />
-        {testimonials.length > 0 ? <TestimonialsSection testimonials={testimonials} content={courseContent} /> : null}
+        <CourseModules modules={modules} content={safeCourseContent} productType="course" />
+        <ExclusiveAdditionalContentSection content={safeCourseContent} />
+        {testimonials.length > 0 ? <TestimonialsSection testimonials={testimonials} content={safeCourseContent} /> : null}
         {language === 'en' ? <MidPageBuyButton disabled={!isAvailable} /> : null}
         <CertificateSection
-          content={courseContent}
-          imageSrc={courseContent.certificate_image_url_pt || '/certificado.webp'}
-          imageSrcEn={courseContent.certificate_image_url_en || '/certificado-ingles.webp'}
+          content={safeCourseContent}
+          imageSrc={safeCourseContent.certificate_image_url_pt || '/certificado.webp'}
+          imageSrcEn={safeCourseContent.certificate_image_url_en || '/certificado-ingles.webp'}
         />
-        <FAQSection faqs={faqs} content={courseContent} />
+        <FAQSection faqs={faqs} content={safeCourseContent} />
       </main>
     </div>
   );
@@ -431,13 +432,14 @@ function LutsDetailPage({ product, settings, buyLink, modules, courseContent, be
   const isAvailable = product?.available !== false;
   const featureItems = language === 'pt' ? LUTS_HERO_FEATURES.pt : LUTS_HERO_FEATURES.en;
   const lutsCompareItems = beforeAfterItems.length > 0 ? beforeAfterItems : LUTS_COMPARE_ITEMS;
+  const safeCourseContent = courseContent || {};
 
   return (
     <div className="relative min-h-screen overflow-x-hidden text-white">
       <ProductHero
         product={product}
         settings={settings}
-        content={courseContent}
+        content={safeCourseContent}
         onBack={() => window.history.back()}
         featureItems={featureItems}
         buyLink={buyLink}
@@ -446,7 +448,7 @@ function LutsDetailPage({ product, settings, buyLink, modules, courseContent, be
       <main className="relative mx-auto max-w-6xl space-y-12 px-4 pb-20 md:px-8">
         <LutsInfoSection />
 
-        <CourseModules modules={modules} content={courseContent} productType="luts" />
+        <CourseModules modules={modules} content={safeCourseContent} productType="luts" />
 
         <BeforeAfterSlider
           items={lutsCompareItems}
