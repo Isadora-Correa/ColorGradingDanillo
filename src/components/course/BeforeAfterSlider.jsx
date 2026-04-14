@@ -227,9 +227,7 @@ export default function BeforeAfterSlider({
           normalizeUrl(item?.during_url || item?.during_image_url || item?.duringSrc) ||
           normalizeUrl(item?.after_url || item?.after_image_url || item?.afterSrc) ||
           item?.title_pt ||
-          item?.title_en ||
-          item?.description_pt ||
-          item?.description_en
+          item?.title_en
         );
         if (!hasAnyContent) return null;
 

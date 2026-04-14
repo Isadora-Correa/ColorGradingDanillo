@@ -426,10 +426,11 @@ function CourseDetailPage({ product, settings, courseContent, modules, logos, st
   );
 }
 
-function LutsDetailPage({ product, settings, buyLink, modules, courseContent }) {
+function LutsDetailPage({ product, settings, buyLink, modules, courseContent, beforeAfterItems = [] }) {
   const { language, t } = useLanguage();
   const isAvailable = product?.available !== false;
   const featureItems = language === 'pt' ? LUTS_HERO_FEATURES.pt : LUTS_HERO_FEATURES.en;
+  const lutsCompareItems = beforeAfterItems.length > 0 ? beforeAfterItems : LUTS_COMPARE_ITEMS;
 
   return (
     <div className="relative min-h-screen overflow-x-hidden text-white">
@@ -448,7 +449,7 @@ function LutsDetailPage({ product, settings, buyLink, modules, courseContent }) 
         <CourseModules modules={modules} content={courseContent} productType="luts" />
 
         <BeforeAfterSlider
-          items={LUTS_COMPARE_ITEMS}
+          items={lutsCompareItems}
           labels={[
             { id: 'before', label: 'LOG', mobileLine1: 'LOG', mobileLine2: '' },
             { id: 'during', label: 'REC.709', mobileLine1: 'REC.', mobileLine2: '709' },
@@ -552,6 +553,10 @@ function ProductDetailContent() {
     initialData: [],
   });
 
+  const allBeforeAfterItems = Array.isArray(beforeAfterItems) ? beforeAfterItems : [];
+  const courseBeforeAfterItems = allBeforeAfterItems.filter((item) => item?.show_in_course !== false);
+  const lutsBeforeAfterItems = allBeforeAfterItems.filter((item) => item?.show_in_luts === true);
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#050608] flex items-center justify-center">
@@ -587,7 +592,7 @@ function ProductDetailContent() {
         logos={logos}
         students={students}
         testimonials={testimonials}
-        beforeAfterItems={beforeAfterItems}
+        beforeAfterItems={courseBeforeAfterItems}
         beforeAfterLoading={beforeAfterLoading}
         faqs={faqs}
         buyLink={buyLink}
@@ -599,7 +604,7 @@ function ProductDetailContent() {
     ? (product.buy_link_brl || product.buy_link_usd)
     : (product.buy_link_usd || product.buy_link_brl);
 
-  return <LutsDetailPage product={product} settings={settings} buyLink={buyLink} modules={modules} courseContent={courseContent} />;
+  return <LutsDetailPage product={product} settings={settings} buyLink={buyLink} modules={modules} courseContent={courseContent} beforeAfterItems={lutsBeforeAfterItems} />;
 }
 
 export default function ProductDetail() {

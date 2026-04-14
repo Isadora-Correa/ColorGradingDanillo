@@ -79,8 +79,8 @@ const DEFAULT_BEFORE_AFTER = [
     id: 'default-case-1',
     title_pt: 'Case 01',
     title_en: 'Case 01',
-    description_pt: '',
-    description_en: '',
+    show_in_course: true,
+    show_in_luts: false,
     order: 0,
     before_url: '/beforeafter/1.ANTES.webp',
     during_url: '/beforeafter/1.DURANTE.webp',
@@ -90,8 +90,8 @@ const DEFAULT_BEFORE_AFTER = [
     id: 'default-case-2',
     title_pt: 'Case 02',
     title_en: 'Case 02',
-    description_pt: '',
-    description_en: '',
+    show_in_course: true,
+    show_in_luts: false,
     order: 1,
     before_url: '/beforeafter/3.ANTES.webp',
     during_url: '/beforeafter/3.DURANTE.webp',
@@ -101,31 +101,67 @@ const DEFAULT_BEFORE_AFTER = [
     id: 'default-case-3',
     title_pt: 'Case 03',
     title_en: 'Case 03',
-    description_pt: '',
-    description_en: '',
+    show_in_course: true,
+    show_in_luts: false,
     order: 2,
     before_url: '/beforeafter/4.ANTES.webp',
     during_url: '/beforeafter/4.DURANTE.webp',
     after_url: '/beforeafter/4.DEPOIS.webp',
   },
+  {
+    id: 'default-lut-1',
+    title_pt: 'LUT 01',
+    title_en: 'LUT 01',
+    show_in_course: false,
+    show_in_luts: true,
+    order: 3,
+    before_url: '/beforeafterLuts/1.LOG.webp',
+    during_url: '/beforeafterLuts/1.REC.709.webp',
+    after_url: '/beforeafterLuts/1.FINAL.webp',
+  },
+  {
+    id: 'default-lut-2',
+    title_pt: 'LUT 02',
+    title_en: 'LUT 02',
+    show_in_course: false,
+    show_in_luts: true,
+    order: 4,
+    before_url: '/beforeafterLuts/2.LOG.webp',
+    during_url: '/beforeafterLuts/2.REC.709.webp',
+    after_url: '/beforeafterLuts/2.FINAL.webp',
+  },
+  {
+    id: 'default-lut-3',
+    title_pt: 'LUT 03',
+    title_en: 'LUT 03',
+    show_in_course: false,
+    show_in_luts: true,
+    order: 5,
+    before_url: '/beforeafterLuts/3.LOG.webp',
+    during_url: '/beforeafterLuts/3.REC.709.webp',
+    after_url: '/beforeafterLuts/3.FINAL.webp',
+  },
 ];
 
 const normalizeBeforeAfter = (item, index = 0) => ({
-  ...item,
   id: item?.id || id(),
   title_pt: item?.title_pt || '',
   title_en: item?.title_en || '',
-  description_pt: item?.description_pt || '',
-  description_en: item?.description_en || '',
   order: Number.isFinite(Number(item?.order)) ? Number(item.order) : index,
+  show_in_course: item?.show_in_course !== false,
+  show_in_luts: item?.show_in_luts === true,
   before_url: item?.before_url || item?.before_image_url || '',
   during_url: item?.during_url || item?.during_image_url || item?.before_url || item?.before_image_url || '',
   after_url: item?.after_url || item?.after_image_url || '',
 });
 
 const toBeforeAfterPayload = (item) => ({
-  ...item,
+  id: item?.id || id(),
+  title_pt: item?.title_pt || '',
+  title_en: item?.title_en || '',
   order: num(item?.order, 0),
+  show_in_course: item?.show_in_course !== false,
+  show_in_luts: item?.show_in_luts === true,
   before_url: item?.before_url || '',
   during_url: item?.during_url || '',
   after_url: item?.after_url || '',
@@ -216,12 +252,12 @@ const COURSE_CONTENT_FALLBACK = {
   id: 'main_content',
   hero_title_pt: 'Domine o Color Grading',
   hero_title_en: 'Master Color Grading',
-  hero_subtitle_pt: 'O curso definitivo de Color Grading com DaVinci Resolve que vai transformar a qualidade dos seus videos.',
+  hero_subtitle_pt: 'O curso definitivo de Color Grading com DaVinci Resolve que vai transformar a qualidade dos seus vídeos.',
   hero_subtitle_en: 'The definitive Color Grading course with DaVinci Resolve that will transform the quality of your videos.',
   hero_image_url: '',
   instructor_name: 'Danilo Navarro',
   instructor_bio_pt:
-    'Nava e um colorista profissional que atua em grandes projetos internacionais, colaborando com diretores e fotografos em diferentes formatos, de comerciais a series e filmes.\n\nSeu trabalho e focado em usar a cor como ferramenta narrativa, aplicando workflows reais do mercado para criar imagens com identidade e impacto visual. Ao longo dos anos, assinou projetos para grandes marcas globais, alem de series internacionais, documentarios, curtas e filmes premiados.\n\nHoje, alem de atuar como Colorista Senior, Nava tambem compartilha sua experiencia com videomakers e coloristas que querem elevar o nivel do seu trabalho e dominar o Color Grading de forma criativa, estrategica e profissional.',
+    'Nava é um colorista profissional que atua em grandes projetos internacionais, colaborando com diretores e fotógrafos em diferentes formatos, de comerciais a séries e filmes.\n\nSeu trabalho é focado em usar a cor como ferramenta narrativa, aplicando workflows reais do mercado para criar imagens com identidade e impacto visual. Ao longo dos anos, assinou projetos para grandes marcas globais, além de séries internacionais, documentários, curtas e filmes premiados.\n\nHoje, além de atuar como Colorista Senior, Nava também compartilha sua experiência com videomakers e coloristas que querem elevar o nível do seu trabalho e dominar o Color Grading de forma criativa, estratégica e profissional.',
   instructor_bio_en:
     'Nava is a professional colorist working on major international projects, collaborating with directors and cinematographers across formats, from high-end commercials to series and films.\n\nHis work uses color as a narrative tool, applying real market workflows to create images with identity and visual impact. Over the years, he has delivered projects for global brands, as well as international series, documentaries, shorts and award-winning films.\n\nToday, in addition to working as a Senior Colorist, Nava shares his experience with videomakers and colorists who want to raise the level of their work and master Color Grading creatively, strategically and professionally.',
   instructor_photo_url: '/nava.webp',
@@ -230,7 +266,7 @@ const COURSE_CONTENT_FALLBACK = {
   instructor_career_text_en: '+10 years! Working in audiovisual in international projects.',
   instructor_students_count_pt: '+ de 150 alunos',
   instructor_students_count_en: '150+ students',
-  instructor_clients_count_pt: '+ de 100 comerciais, series e filmes premiados',
+  instructor_clients_count_pt: '+ de 100 comerciais, séries e filmes premiados',
   instructor_clients_count_en: '100+ award-winning commercials, series and films',
   instructor_socials: DEFAULT_INSTRUCTOR_SOCIALS,
   languages_title_pt: 'Idiomas',
@@ -806,7 +842,7 @@ export default function Admin() {
     beforeAfter: useQuery({ queryKey: ['beforeAfter'], queryFn: () => apiClient.get('beforeAfter'), initialData: [] }),
   };
   const menu = useMemo(() => [
-    ['settings', 'Configuracoes', Settings],
+    ['settings', 'Configurações', Settings],
     ['products', 'Produtos', Package],
     ['course', 'Conteudo Curso', BookOpen],
     ['cards', 'Cards', LayoutDashboard],
@@ -929,25 +965,25 @@ function SettingsTab({ data }) {
   return (
     <Card className={panel}>
       <CardHeader>
-        <H title="Configuracoes do Site" desc="Nome e logo continuam travados, mas voce pode editar textos da home." icon={Settings} />
+        <H title="Configurações do Site" desc="Nome e logo continuam travados, mas você pode editar textos da home." icon={Settings} />
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="rounded-xl border border-white/10 bg-zinc-900/50 p-4 text-sm text-zinc-300">
           <p>Nome do site e logo estao bloqueados para edicao.</p>
-          <p className="mt-2 text-zinc-400">Palavras em MAIUSCULA no titulo de produtos ficam destacadas automaticamente na home.</p>
+          <p className="mt-2 text-zinc-400">Palavras em MAIÚSCULA no título de produtos ficam destacadas automaticamente na home.</p>
         </div>
 
         <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
-          <p className="text-sm font-semibold text-zinc-100">Inicio da pagina - Secao de Produtos</p>
+          <p className="text-sm font-semibold text-zinc-100">Início da página - Seção de Produtos</p>
           <BI
-            label="Titulo completo (o sistema separa automaticamente em 2 linhas)"
+            label="Título completo (o sistema separa automaticamente em 2 linhas)"
             pt={f.products_heading_title_pt}
             en={f.products_heading_title_en}
             setPt={(v) => setF({ ...f, products_heading_title_pt: v })}
             setEn={(v) => setF({ ...f, products_heading_title_en: v })}
           />
           <BI
-            label="Subtitulo (1 linha)"
+            label="Subtítulo (1 linha)"
             pt={f.products_heading_subtitle_pt}
             en={f.products_heading_subtitle_en}
             setPt={(v) => setF({ ...f, products_heading_subtitle_pt: v })}
@@ -1112,7 +1148,7 @@ function ProductsTab({ data }) {
     <Card className={panel}>
       <CardContent className="p-4 sm:p-6 space-y-4">
         <BI label="Nome *" pt={f.name_pt} en={f.name_en} setPt={(v) => setF({ ...f, name_pt: v })} setEn={(v) => setF({ ...f, name_en: v })} />
-        <BT label="Descricao" pt={f.description_pt} en={f.description_en} setPt={(v) => setF({ ...f, description_pt: v })} setEn={(v) => setF({ ...f, description_en: v })} />
+        <BT label="Descrição" pt={f.description_pt} en={f.description_en} setPt={(v) => setF({ ...f, description_pt: v })} setEn={(v) => setF({ ...f, description_en: v })} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <F label="Slug *" value={f.slug || ''} onChange={(e) => setF({ ...f, slug: e.target.value })} />
           <F label="Tipo (course/luts) *" value={f.product_type || ''} onChange={(e) => setF({ ...f, product_type: e.target.value })} />
@@ -1120,7 +1156,7 @@ function ProductsTab({ data }) {
         <div className="rounded-lg border border-white/10 bg-zinc-900/50 p-3">
           <Label className="text-zinc-300 mb-2 block">Mostrar no site *</Label>
           <div className="flex flex-col gap-3 sm:flex-row sm:gap-6">
-            <label className="flex items-center gap-2 text-zinc-200"><input type="checkbox" className="accent-white" checked={f.show_in_pt !== false} onChange={(e) => setF({ ...f, show_in_pt: e.target.checked })} />Portugu?s</label>
+            <label className="flex items-center gap-2 text-zinc-200"><input type="checkbox" className="accent-white" checked={f.show_in_pt !== false} onChange={(e) => setF({ ...f, show_in_pt: e.target.checked })} />Português</label>
             <label className="flex items-center gap-2 text-zinc-200"><input type="checkbox" className="accent-white" checked={f.show_in_en !== false} onChange={(e) => setF({ ...f, show_in_en: e.target.checked })} />English</label>
           </div>
         </div>
@@ -1133,16 +1169,16 @@ function ProductsTab({ data }) {
               checked={f.available !== false}
               onChange={(e) => setF({ ...f, available: e.target.checked })}
             />
-            Produto disponivel para compra
+            Produto disponível para compra
           </label>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <F label="Preco BRL" type="number" value={f.price_brl || ''} onChange={(e) => setF({ ...f, price_brl: e.target.value })} />
-          <F label="Preco USD" type="number" value={f.price_usd || ''} onChange={(e) => setF({ ...f, price_usd: e.target.value })} />
+          <F label="Preço BRL" type="number" value={f.price_brl || ''} onChange={(e) => setF({ ...f, price_brl: e.target.value })} />
+          <F label="Preço USD" type="number" value={f.price_usd || ''} onChange={(e) => setF({ ...f, price_usd: e.target.value })} />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <F label="Preco Antigo BRL" type="number" value={f.compare_at_price_brl || ''} onChange={(e) => setF({ ...f, compare_at_price_brl: e.target.value })} />
-          <F label="Preco Antigo USD" type="number" value={f.compare_at_price_usd || ''} onChange={(e) => setF({ ...f, compare_at_price_usd: e.target.value })} />
+          <F label="Preço Antigo BRL" type="number" value={f.compare_at_price_brl || ''} onChange={(e) => setF({ ...f, compare_at_price_brl: e.target.value })} />
+          <F label="Preço Antigo USD" type="number" value={f.compare_at_price_usd || ''} onChange={(e) => setF({ ...f, compare_at_price_usd: e.target.value })} />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <F label="Link Compra BRL *" value={f.buy_link_brl || ''} onChange={(e) => setF({ ...f, buy_link_brl: e.target.value })} />
@@ -1172,7 +1208,7 @@ function ProductsTab({ data }) {
   return (
     <div className="space-y-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <H title="Produtos" desc="Arraste e solte para ordenar o catalogo. Cadastro completo de produtos." icon={Package} />
+        <H title="Produtos" desc="Arraste e solte para ordenar o catálogo. Cadastro completo de produtos." icon={Package} />
         <Button className={btnPrimary} onClick={onNew}><Plus className="w-4 h-4 mr-2" />Novo</Button>
       </div>
 
@@ -1194,7 +1230,7 @@ function ProductsTab({ data }) {
                   <p className="font-medium truncate">{x.name_pt || x.name_en || x.slug || 'Produto'}</p>
                   <p className="text-xs text-zinc-400">{x.product_type || 'course'} ? R$ {num(x.price_brl)} - ${num(x.price_usd)}</p>
                   <p className={`mt-1 text-[11px] font-semibold uppercase tracking-[0.18em] ${x.available !== false ? 'text-emerald-400' : 'text-amber-400'}`}>
-                    {x.available !== false ? 'Disponivel' : 'Em breve'}
+                    {x.available !== false ? 'Disponível' : 'Em breve'}
                   </p>
                 </div>
               </div>
@@ -1232,7 +1268,7 @@ function CourseTab({ data }) {
   const m = useMutation({
     mutationFn: (x) => apiClient.save('courseContent', [x]),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['courseContent'] }),
-    onError: (err) => window.alert(err?.message || 'Falha ao salvar conteudo do curso.'),
+    onError: (err) => window.alert(err?.message || 'Falha ao salvar conteúdo do curso.'),
   });
 
   const onCancelEdit = () => {
@@ -1252,7 +1288,7 @@ function CourseTab({ data }) {
     <Card className={panel}>
       <CardHeader>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-          <H title="Conteudo do Curso" desc="Edite os textos e blocos principais das paginas do curso." icon={BookOpen} />
+          <H title="Conteúdo do Curso" desc="Edite os textos e blocos principais das páginas do curso." icon={BookOpen} />
           {!isEditing ? (
             <Button className={btnPrimary} onClick={() => setIsEditing(true)}>
               Editar
@@ -1274,14 +1310,14 @@ function CourseTab({ data }) {
           <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
             <p className="text-sm font-semibold text-zinc-100">Hero do Curso</p>
             <BI
-              label="Titulo Hero *"
+              label="Título Hero *"
               pt={f.hero_title_pt}
               en={f.hero_title_en}
               setPt={(v) => setF({ ...f, hero_title_pt: v })}
               setEn={(v) => setF({ ...f, hero_title_en: v })}
             />
             <BT
-              label="Subtitulo Hero"
+              label="Subtítulo Hero"
               pt={f.hero_subtitle_pt}
               en={f.hero_subtitle_en}
               setPt={(v) => setF({ ...f, hero_subtitle_pt: v })}
@@ -1387,9 +1423,9 @@ function CourseTab({ data }) {
           </div>
 
           <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
-            <p className="text-sm font-semibold text-zinc-100">Secao de idiomas</p>
+            <p className="text-sm font-semibold text-zinc-100">Seção de idiomas</p>
             <BI
-              label="Titulo da secao"
+              label="Título da seção"
               pt={f.languages_title_pt}
               en={f.languages_title_en}
               setPt={(v) => setF({ ...f, languages_title_pt: v })}
@@ -1403,7 +1439,7 @@ function CourseTab({ data }) {
               setEn={(v) => setF({ ...f, languages_highlight_en: v })}
             />
             <BT
-              label="Observacao da secao"
+              label="Observação da seção"
               pt={f.languages_note_pt}
               en={f.languages_note_en}
               setPt={(v) => setF({ ...f, languages_note_pt: v })}
@@ -1440,7 +1476,7 @@ function CourseTab({ data }) {
                   <div className="flex flex-wrap items-center gap-4">
                     <label className="flex items-center gap-2 text-zinc-200">
                       <input type="checkbox" className="accent-white" checked={lang.available !== false} onChange={(e) => setF({ ...f, available_languages: f.available_languages.map((item, itemIndex) => itemIndex === index ? { ...item, available: e.target.checked } : item) })} />
-                      Disponivel
+                      Disponível
                     </label>
                     <label className="flex items-center gap-2 text-zinc-200">
                       <input type="checkbox" className="accent-white" checked={lang.hasSubtitles !== false} onChange={(e) => setF({ ...f, available_languages: f.available_languages.map((item, itemIndex) => itemIndex === index ? { ...item, hasSubtitles: e.target.checked } : item) })} />
@@ -1457,9 +1493,9 @@ function CourseTab({ data }) {
 
           <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
             <p className="text-sm font-semibold text-zinc-100">Trailer do curso</p>
-            <F label="URL do video" value={f.trailer_url || ''} onChange={(e) => setF({ ...f, trailer_url: e.target.value })} />
+            <F label="URL do vídeo" value={f.trailer_url || ''} onChange={(e) => setF({ ...f, trailer_url: e.target.value })} />
             <BI
-              label="Titulo do iframe"
+              label="Título do iframe"
               pt={f.trailer_title_pt}
               en={f.trailer_title_en}
               setPt={(v) => setF({ ...f, trailer_title_pt: v })}
@@ -1482,27 +1518,27 @@ function CourseTab({ data }) {
           </div>
 
           <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
-            <p className="text-sm font-semibold text-zinc-100">Titulos das secoes da pagina</p>
-            <BI label="Resultados dos alunos / titulo" pt={f.student_results_title_line1_pt} en={f.student_results_title_line1_en} setPt={(v) => setF({ ...f, student_results_title_line1_pt: v })} setEn={(v) => setF({ ...f, student_results_title_line1_en: v })} />
+            <p className="text-sm font-semibold text-zinc-100">Títulos das seções da página</p>
+            <BI label="Resultados dos alunos / título" pt={f.student_results_title_line1_pt} en={f.student_results_title_line1_en} setPt={(v) => setF({ ...f, student_results_title_line1_pt: v })} setEn={(v) => setF({ ...f, student_results_title_line1_en: v })} />
             <BI label="Resultados dos alunos / destaque" pt={f.student_results_highlight_pt} en={f.student_results_highlight_en} setPt={(v) => setF({ ...f, student_results_highlight_pt: v })} setEn={(v) => setF({ ...f, student_results_highlight_en: v })} />
-            <BT label="Resultados dos alunos / subtitulo" pt={f.student_results_subtitle_pt} en={f.student_results_subtitle_en} setPt={(v) => setF({ ...f, student_results_subtitle_pt: v })} setEn={(v) => setF({ ...f, student_results_subtitle_en: v })} rows={2} />
-            <BI label="Clientes / titulo livre" pt={f.client_logos_title_pt} en={f.client_logos_title_en} setPt={(v) => setF({ ...f, client_logos_title_pt: v })} setEn={(v) => setF({ ...f, client_logos_title_en: v })} />
-            <BI label="Modulos / titulo" pt={f.modules_title_line1_pt} en={f.modules_title_line1_en} setPt={(v) => setF({ ...f, modules_title_line1_pt: v })} setEn={(v) => setF({ ...f, modules_title_line1_en: v })} />
-            <BI label="Modulos / destaque" pt={f.modules_highlight_pt} en={f.modules_highlight_en} setPt={(v) => setF({ ...f, modules_highlight_pt: v })} setEn={(v) => setF({ ...f, modules_highlight_en: v })} />
-            <BT label="Modulos / subtitulo" pt={f.modules_subtitle_pt} en={f.modules_subtitle_en} setPt={(v) => setF({ ...f, modules_subtitle_pt: v })} setEn={(v) => setF({ ...f, modules_subtitle_en: v })} rows={2} />
-            <BI label="Depoimentos / titulo" pt={f.testimonials_title_line1_pt} en={f.testimonials_title_line1_en} setPt={(v) => setF({ ...f, testimonials_title_line1_pt: v })} setEn={(v) => setF({ ...f, testimonials_title_line1_en: v })} />
+            <BT label="Resultados dos alunos / subtítulo" pt={f.student_results_subtitle_pt} en={f.student_results_subtitle_en} setPt={(v) => setF({ ...f, student_results_subtitle_pt: v })} setEn={(v) => setF({ ...f, student_results_subtitle_en: v })} rows={2} />
+            <BI label="Clientes / título livre" pt={f.client_logos_title_pt} en={f.client_logos_title_en} setPt={(v) => setF({ ...f, client_logos_title_pt: v })} setEn={(v) => setF({ ...f, client_logos_title_en: v })} />
+            <BI label="Módulos / título" pt={f.modules_title_line1_pt} en={f.modules_title_line1_en} setPt={(v) => setF({ ...f, modules_title_line1_pt: v })} setEn={(v) => setF({ ...f, modules_title_line1_en: v })} />
+            <BI label="Módulos / destaque" pt={f.modules_highlight_pt} en={f.modules_highlight_en} setPt={(v) => setF({ ...f, modules_highlight_pt: v })} setEn={(v) => setF({ ...f, modules_highlight_en: v })} />
+            <BT label="Módulos / subtítulo" pt={f.modules_subtitle_pt} en={f.modules_subtitle_en} setPt={(v) => setF({ ...f, modules_subtitle_pt: v })} setEn={(v) => setF({ ...f, modules_subtitle_en: v })} rows={2} />
+            <BI label="Depoimentos / título" pt={f.testimonials_title_line1_pt} en={f.testimonials_title_line1_en} setPt={(v) => setF({ ...f, testimonials_title_line1_pt: v })} setEn={(v) => setF({ ...f, testimonials_title_line1_en: v })} />
             <BI label="Depoimentos / prefixo" pt={f.testimonials_title_prefix_pt} en={f.testimonials_title_prefix_en} setPt={(v) => setF({ ...f, testimonials_title_prefix_pt: v })} setEn={(v) => setF({ ...f, testimonials_title_prefix_en: v })} />
             <BI label="Depoimentos / destaque" pt={f.testimonials_highlight_pt} en={f.testimonials_highlight_en} setPt={(v) => setF({ ...f, testimonials_highlight_pt: v })} setEn={(v) => setF({ ...f, testimonials_highlight_en: v })} />
-            <BI label="FAQ / titulo" pt={f.faq_title_line1_pt} en={f.faq_title_line1_en} setPt={(v) => setF({ ...f, faq_title_line1_pt: v })} setEn={(v) => setF({ ...f, faq_title_line1_en: v })} />
+            <BI label="FAQ / título" pt={f.faq_title_line1_pt} en={f.faq_title_line1_en} setPt={(v) => setF({ ...f, faq_title_line1_pt: v })} setEn={(v) => setF({ ...f, faq_title_line1_en: v })} />
             <BI label="FAQ / destaque" pt={f.faq_highlight_pt} en={f.faq_highlight_en} setPt={(v) => setF({ ...f, faq_highlight_pt: v })} setEn={(v) => setF({ ...f, faq_highlight_en: v })} />
-            <BT label="FAQ / subtitulo" pt={f.faq_subtitle_pt} en={f.faq_subtitle_en} setPt={(v) => setF({ ...f, faq_subtitle_pt: v })} setEn={(v) => setF({ ...f, faq_subtitle_en: v })} rows={2} />
+            <BT label="FAQ / subtítulo" pt={f.faq_subtitle_pt} en={f.faq_subtitle_en} setPt={(v) => setF({ ...f, faq_subtitle_pt: v })} setEn={(v) => setF({ ...f, faq_subtitle_en: v })} rows={2} />
           </div>
 
           <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
-            <p className="text-sm font-semibold text-zinc-100">Conteudo adicional exclusivo</p>
-            <BI label="Titulo da secao" pt={f.extra_content_title_line1_pt} en={f.extra_content_title_line1_en} setPt={(v) => setF({ ...f, extra_content_title_line1_pt: v })} setEn={(v) => setF({ ...f, extra_content_title_line1_en: v })} />
-            <BI label="Destaque da secao" pt={f.extra_content_highlight_pt} en={f.extra_content_highlight_en} setPt={(v) => setF({ ...f, extra_content_highlight_pt: v })} setEn={(v) => setF({ ...f, extra_content_highlight_en: v })} />
-            <BT label="Subtitulo da secao" pt={f.extra_content_subtitle_pt} en={f.extra_content_subtitle_en} setPt={(v) => setF({ ...f, extra_content_subtitle_pt: v })} setEn={(v) => setF({ ...f, extra_content_subtitle_en: v })} rows={2} />
+            <p className="text-sm font-semibold text-zinc-100">Conteúdo adicional exclusivo</p>
+            <BI label="Título da seção" pt={f.extra_content_title_line1_pt} en={f.extra_content_title_line1_en} setPt={(v) => setF({ ...f, extra_content_title_line1_pt: v })} setEn={(v) => setF({ ...f, extra_content_title_line1_en: v })} />
+            <BI label="Destaque da seção" pt={f.extra_content_highlight_pt} en={f.extra_content_highlight_en} setPt={(v) => setF({ ...f, extra_content_highlight_pt: v })} setEn={(v) => setF({ ...f, extra_content_highlight_en: v })} />
+            <BT label="Subtítulo da seção" pt={f.extra_content_subtitle_pt} en={f.extra_content_subtitle_en} setPt={(v) => setF({ ...f, extra_content_subtitle_pt: v })} setEn={(v) => setF({ ...f, extra_content_subtitle_en: v })} rows={2} />
             {[1, 2].map((item) => (
               <div key={item} className="rounded-lg border border-white/10 bg-black/20 p-3 space-y-3">
                 <p className="text-sm font-medium text-zinc-200">Card extra {item}</p>
@@ -1511,13 +1547,13 @@ function CourseTab({ data }) {
                   value={f[`extra_card_${item}_image_url`] || ''}
                   onChange={(v) => setF({ ...f, [`extra_card_${item}_image_url`]: v })}
                   cropOptions={{
-                    presets: [{ value: 'extra-card', label: 'Card panoramico', aspect: 16 / 9 }],
+                    presets: [{ value: 'extra-card', label: 'Card panorâmico', aspect: 16 / 9 }],
                     defaultPreset: 'extra-card',
                     lockPreset: true,
                   }}
                 />
-                <BI label={`Titulo do card ${item}`} pt={f[`extra_card_${item}_title_pt`]} en={f[`extra_card_${item}_title_en`]} setPt={(v) => setF({ ...f, [`extra_card_${item}_title_pt`]: v })} setEn={(v) => setF({ ...f, [`extra_card_${item}_title_en`]: v })} />
-                <BT label={`Descricao do card ${item}`} pt={f[`extra_card_${item}_desc_pt`]} en={f[`extra_card_${item}_desc_en`]} setPt={(v) => setF({ ...f, [`extra_card_${item}_desc_pt`]: v })} setEn={(v) => setF({ ...f, [`extra_card_${item}_desc_en`]: v })} rows={3} />
+                <BI label={`Título do card ${item}`} pt={f[`extra_card_${item}_title_pt`]} en={f[`extra_card_${item}_title_en`]} setPt={(v) => setF({ ...f, [`extra_card_${item}_title_pt`]: v })} setEn={(v) => setF({ ...f, [`extra_card_${item}_title_en`]: v })} />
+                <BT label={`Descrição do card ${item}`} pt={f[`extra_card_${item}_desc_pt`]} en={f[`extra_card_${item}_desc_en`]} setPt={(v) => setF({ ...f, [`extra_card_${item}_desc_pt`]: v })} setEn={(v) => setF({ ...f, [`extra_card_${item}_desc_en`]: v })} rows={3} />
                 <BI label={`Etiqueta do card ${item}`} pt={f[`extra_card_${item}_note_pt`]} en={f[`extra_card_${item}_note_en`]} setPt={(v) => setF({ ...f, [`extra_card_${item}_note_pt`]: v })} setEn={(v) => setF({ ...f, [`extra_card_${item}_note_en`]: v })} />
               </div>
             ))}
@@ -1525,7 +1561,7 @@ function CourseTab({ data }) {
 
           <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
             <p className="text-sm font-semibold text-zinc-100">Certificado</p>
-            <BI label="Prefixo do titulo" pt={f.certificate_title_prefix_pt} en={f.certificate_title_prefix_en} setPt={(v) => setF({ ...f, certificate_title_prefix_pt: v })} setEn={(v) => setF({ ...f, certificate_title_prefix_en: v })} />
+            <BI label="Prefixo do título" pt={f.certificate_title_prefix_pt} en={f.certificate_title_prefix_en} setPt={(v) => setF({ ...f, certificate_title_prefix_pt: v })} setEn={(v) => setF({ ...f, certificate_title_prefix_en: v })} />
             <BI label="Texto em destaque" pt={f.certificate_highlight_pt} en={f.certificate_highlight_en} setPt={(v) => setF({ ...f, certificate_highlight_pt: v })} setEn={(v) => setF({ ...f, certificate_highlight_en: v })} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Upload label="Imagem do certificado PT" value={f.certificate_image_url_pt || ''} onChange={(v) => setF({ ...f, certificate_image_url_pt: v })} />
@@ -1571,7 +1607,7 @@ function CardsTab({ data }) {
     <Card className={panel}>
       <CardHeader>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-          <H title="Cards" desc="Edite titulo da secao e os 4 cards de destaque." icon={LayoutDashboard} />
+          <H title="Cards" desc="Edite título da seção e os 4 cards de destaque." icon={LayoutDashboard} />
           {!isEditing ? (
             <Button className={btnPrimary} onClick={() => setIsEditing(true)}>
               Editar
@@ -1591,9 +1627,9 @@ function CardsTab({ data }) {
       <CardContent className="space-y-6">
         <fieldset disabled={!isEditing} className={!isEditing ? 'opacity-95' : ''}>
           <div className="rounded-xl border border-white/10 bg-zinc-900/40 p-4 space-y-4">
-            <p className="text-sm font-semibold text-zinc-100">Titulo da secao</p>
+            <p className="text-sm font-semibold text-zinc-100">Título da seção</p>
             <BI
-              label="Titulo completo (o site separa automaticamente em 2 linhas)"
+              label="Título completo (o site separa automaticamente em 2 linhas)"
               pt={f.highlights_title_pt}
               en={f.highlights_title_en}
               setPt={(v) => setF({ ...f, highlights_title_pt: v })}
@@ -1615,14 +1651,14 @@ function CardsTab({ data }) {
                 }}
               />
               <BI
-                label={`Titulo (Card ${item})`}
+                label={`Título (Card ${item})`}
                 pt={f[`highlight_${item}_title_pt`]}
                 en={f[`highlight_${item}_title_en`]}
                 setPt={(v) => setF({ ...f, [`highlight_${item}_title_pt`]: v })}
                 setEn={(v) => setF({ ...f, [`highlight_${item}_title_en`]: v })}
               />
               <BT
-                label={`Descricao (Card ${item})`}
+                label={`Descrição (Card ${item})`}
                 pt={f[`highlight_${item}_desc_pt`]}
                 en={f[`highlight_${item}_desc_en`]}
                 setPt={(v) => setF({ ...f, [`highlight_${item}_desc_pt`]: v })}
@@ -1659,7 +1695,7 @@ function ModulesTab({ data }) {
   const m = useMutation({
     mutationFn: (x) => apiClient.save('modules', x),
     onSuccess: () => qc.invalidateQueries({ queryKey: ['modules'] }),
-    onError: (err) => window.alert(err?.message || 'Falha ao salvar modulos.'),
+    onError: (err) => window.alert(err?.message || 'Falha ao salvar módulos.'),
   });
 
   const items = useMemo(
@@ -1784,9 +1820,9 @@ function ModulesTab({ data }) {
   const renderForm = () => (
     <Card className={panel}>
       <CardContent className="p-4 sm:p-6 space-y-4">
-        <BI label="Titulo *" pt={f.title_pt} en={f.title_en} setPt={(v) => setF({ ...f, title_pt: v })} setEn={(v) => setF({ ...f, title_en: v })} />
+        <BI label="Título *" pt={f.title_pt} en={f.title_en} setPt={(v) => setF({ ...f, title_pt: v })} setEn={(v) => setF({ ...f, title_en: v })} />
         <div className="rounded-lg border border-white/10 bg-zinc-900/50 p-3">
-          <Label className="text-zinc-300 mb-2 block">Exibicao do modulo</Label>
+          <Label className="text-zinc-300 mb-2 block">Exibição do módulo</Label>
           <div className="flex flex-col gap-3">
             <label className="flex items-center gap-2 text-zinc-200">
               <input
@@ -1795,7 +1831,7 @@ function ModulesTab({ data }) {
                 checked={f.show_in_course !== false}
                 onChange={(e) => setF({ ...f, show_in_course: e.target.checked })}
               />
-              Mostrar este modulo no produto Curso
+              Mostrar este módulo no produto Curso
             </label>
             <label className="flex items-center gap-2 text-zinc-200">
               <input
@@ -1804,7 +1840,7 @@ function ModulesTab({ data }) {
                 checked={f.show_in_luts === true}
                 onChange={(e) => setF({ ...f, show_in_luts: e.target.checked })}
               />
-              Mostrar este modulo no produto LUTs
+              Mostrar este módulo no produto LUTs
             </label>
             <label className="flex items-center gap-2 text-zinc-200">
               <input
@@ -1813,11 +1849,11 @@ function ModulesTab({ data }) {
                 checked={f.show_in_en !== false}
                 onChange={(e) => setF({ ...f, show_in_en: e.target.checked })}
               />
-              Mostrar este modulo em ingles
+              Mostrar este módulo em inglês
             </label>
           </div>
         </div>
-        <BT label="Descricao" pt={f.description_pt} en={f.description_en} setPt={(v) => setF({ ...f, description_pt: v })} setEn={(v) => setF({ ...f, description_en: v })} rows={3} />
+        <BT label="Descrição" pt={f.description_pt} en={f.description_en} setPt={(v) => setF({ ...f, description_pt: v })} setEn={(v) => setF({ ...f, description_en: v })} rows={3} />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <F label="Licoes *" type="number" min="0" value={f.lessons_count || 0} onChange={(e) => setF({ ...f, lessons_count: e.target.value })} />
           <F label="Duracao (h) *" type="number" min="0" value={f.duration_hours || 0} onChange={(e) => setF({ ...f, duration_hours: e.target.value })} />
@@ -1846,7 +1882,7 @@ function ModulesTab({ data }) {
     <div className="space-y-6">
       <div className="space-y-4">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <H title="Modulos" desc="Titulo, descricao, licoes e topicos (PT/EN). Arraste para ordenar." icon={BookOpen} />
+          <H title="Módulos" desc="Título, descrição, lições e tópicos (PT/EN). Arraste para ordenar." icon={BookOpen} />
           <Button className={btnPrimary} onClick={onNew}>
             <Plus className="w-4 h-4 mr-2" />
             Novo
@@ -1872,7 +1908,7 @@ function ModulesTab({ data }) {
                   <div>
                   <p className="font-medium truncate">{x.title_pt || x.title_en || 'Item'}</p>
                   <p className="text-xs text-zinc-400">
-                    {num(x.lessons_count)} licoes - {num(x.duration_hours)}h
+                    {num(x.lessons_count)} lições - {num(x.duration_hours)}h
                     {' • '}
                     {[
                       x.show_in_course !== false ? 'Curso' : null,
@@ -2465,11 +2501,13 @@ function FaqTab({ data }) {
 function BeforeAfterTab({ data }) {
   const qc = useQueryClient();
   const [open, setOpen] = useState(false);
+  const [editingId, setEditingId] = useState('');
+  const [savingForm, setSavingForm] = useState(false);
   const [f, setF] = useState({
+    show_in_course: true,
+    show_in_luts: false,
     title_pt: '',
     title_en: '',
-    description_pt: '',
-    description_en: '',
     before_url: '',
     during_url: '',
     after_url: '',
@@ -2503,6 +2541,21 @@ function BeforeAfterTab({ data }) {
     m.mutate(DEFAULT_BEFORE_AFTER.map((x) => toBeforeAfterPayload(x)));
   }, [data, m.isPending]);
 
+  useEffect(() => {
+    if (m.isPending) return;
+    if (!Array.isArray(data) || data.length === 0) return;
+
+    const normalizedItems = data.map((x, index) => normalizeBeforeAfter(x, index));
+    const existingIds = new Set(normalizedItems.map((item) => item.id));
+    const missingDefaults = DEFAULT_BEFORE_AFTER.filter((item) => !existingIds.has(item.id));
+    const hasLegacyDescriptionFields = data.some((item) => 'description_pt' in (item || {}) || 'description_en' in (item || {}));
+
+    if (missingDefaults.length === 0 && !hasLegacyDescriptionFields) return;
+
+    const nextItems = [...normalizedItems, ...missingDefaults.map((item) => normalizeBeforeAfter(item))];
+    persist(nextItems);
+  }, [data, m.isPending]);
+
   const persist = (nextItems, opts = {}) => {
     const withOrder = nextItems.map((x, index) => toBeforeAfterPayload({ ...x, order: index }));
     m.mutate(withOrder, opts);
@@ -2510,35 +2563,50 @@ function BeforeAfterTab({ data }) {
 
   const onNew = () => {
     setF({
+      show_in_course: true,
+      show_in_luts: false,
       title_pt: '',
       title_en: '',
-      description_pt: '',
-      description_en: '',
       before_url: '',
       during_url: '',
       after_url: '',
     });
     setOpen(true);
+    setEditingId('');
   };
 
   const onEdit = (x) => {
     const item = normalizeBeforeAfter(x);
     setF(item);
     setOpen(true);
+    setEditingId(item.id);
   };
 
   const onDelete = (xid) => {
     persist(items.filter((x) => x.id !== xid));
   };
 
-  const onSave = () => {
+  const onSave = async () => {
+    if (savingForm) return;
     const item = normalizeBeforeAfter(f, items.length);
     const next = f.id ? items.map((x) => (x.id === f.id ? item : x)) : [...items, item];
-    persist(next, {
-      onSuccess: () => {
-        setOpen(false);
-      },
-    });
+    try {
+      setSavingForm(true);
+      await m.mutateAsync(next.map((x, index) => toBeforeAfterPayload({ ...x, order: index })));
+      setOpen(false);
+      setEditingId('');
+      setF({
+        show_in_course: true,
+        show_in_luts: false,
+        title_pt: '',
+        title_en: '',
+        before_url: '',
+        during_url: '',
+        after_url: '',
+      });
+    } finally {
+      setSavingForm(false);
+    }
   };
 
   const onDropAt = (targetId) => {
@@ -2577,59 +2645,156 @@ function BeforeAfterTab({ data }) {
 
       <div className="grid gap-3">
         {items.map((x, index) => (
-          <div
-            key={x.id}
-            draggable
-            onDragStart={() => setDragId(x.id)}
-            onDragOver={(e) => e.preventDefault()}
-            onDrop={() => onDropAt(x.id)}
-            className="rounded-xl border border-white/10 bg-[#0d1117] p-4 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between"
-          >
-            <div className="flex items-center gap-3 min-w-0">
-              <GripVertical className="w-4 h-4 text-zinc-400 shrink-0" />
-              <div>
-                <p className="font-medium truncate">{x.title_pt || x.title_en || 'Item'}</p>
-                <p className="text-xs text-zinc-400">Posicao {num(x.order, 0) + 1}</p>
+          <div key={x.id} className="space-y-3">
+            <div
+              draggable
+              onDragStart={() => setDragId(x.id)}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={() => onDropAt(x.id)}
+              className="rounded-xl border border-white/10 bg-[#0d1117] p-4 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <GripVertical className="w-4 h-4 text-zinc-400 shrink-0" />
+                <div>
+                  <p className="font-medium truncate">{x.title_pt || x.title_en || 'Item'}</p>
+                  <p className="text-xs text-zinc-400">
+                    Posição {num(x.order, 0) + 1}
+                    {' • '}
+                    {[
+                      x.show_in_course !== false ? 'Curso' : null,
+                      x.show_in_luts === true ? 'LUTs' : null,
+                    ].filter(Boolean).join(' / ') || 'Oculto'}
+                  </p>
+                </div>
+              </div>
+              <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-end">
+                <ReorderButtons
+                  index={index}
+                  total={items.length}
+                  onMove={(toIndex) => onMoveItem(index, toIndex)}
+                  disabled={m.isPending}
+                />
+                <div className="flex gap-2">
+                  <Button className={btnOutline} onClick={() => onEdit(x)}>
+                    Editar
+                  </Button>
+                  <Button className="bg-red-600 text-white hover:bg-red-500" onClick={() => onDelete(x.id)} disabled={m.isPending}>
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </div>
               </div>
             </div>
-            <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-end">
-              <ReorderButtons
-                index={index}
-                total={items.length}
-                onMove={(toIndex) => onMoveItem(index, toIndex)}
-                disabled={m.isPending}
-              />
-              <div className="flex gap-2">
-                <Button className={btnOutline} onClick={() => onEdit(x)}>
-                  Editar
-                </Button>
-                <Button className="bg-red-600 text-white hover:bg-red-500" onClick={() => onDelete(x.id)} disabled={m.isPending}>
-                  <Trash2 className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
+            {open && editingId === x.id ? (
+              <Card className={panel}>
+                <CardContent className="p-4 sm:p-6 space-y-4">
+                  <BI
+                    label="Título *"
+                    pt={f.title_pt}
+                    en={f.title_en}
+                    setPt={(v) => setF({ ...f, title_pt: v })}
+                    setEn={(v) => setF({ ...f, title_en: v })}
+                  />
+                  <div className="rounded-lg border border-white/10 bg-zinc-900/50 p-3">
+                    <Label className="text-zinc-300 mb-2 block">Exibição do Antes / Depois</Label>
+                    <div className="flex flex-col gap-3">
+                      <label className="flex items-center gap-2 text-zinc-200">
+                        <input
+                          type="checkbox"
+                          className="accent-white"
+                          checked={f.show_in_course !== false}
+                          onChange={(e) => setF({ ...f, show_in_course: e.target.checked })}
+                        />
+                        Mostrar este item no produto Curso
+                      </label>
+                      <label className="flex items-center gap-2 text-zinc-200">
+                        <input
+                          type="checkbox"
+                          className="accent-white"
+                          checked={f.show_in_luts === true}
+                          onChange={(e) => setF({ ...f, show_in_luts: e.target.checked })}
+                        />
+                        Mostrar este item no produto LUTs
+                      </label>
+                    </div>
+                  </div>
+                  <Upload
+                    label="Imagem Antes *"
+                    value={f.before_url || ''}
+                    onChange={(v) => setF({ ...f, before_url: v })}
+                    cropOptions={{
+                      presets: [{ value: 'before-after', label: 'Antes/Depois 16:9', aspect: 16 / 9 }],
+                      defaultPreset: 'before-after',
+                      lockPreset: true,
+                    }}
+                  />
+                  <Upload
+                    label="Imagem Durante *"
+                    value={f.during_url || ''}
+                    onChange={(v) => setF({ ...f, during_url: v })}
+                    cropOptions={{
+                      presets: [{ value: 'before-after', label: 'Antes/Depois 16:9', aspect: 16 / 9 }],
+                      defaultPreset: 'before-after',
+                      lockPreset: true,
+                    }}
+                  />
+                  <Upload
+                    label="Imagem Depois *"
+                    value={f.after_url || ''}
+                    onChange={(v) => setF({ ...f, after_url: v })}
+                    cropOptions={{
+                      presets: [{ value: 'before-after', label: 'Antes/Depois 16:9', aspect: 16 / 9 }],
+                      defaultPreset: 'before-after',
+                      lockPreset: true,
+                    }}
+                  />
+                  <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
+                    <Button className={btnOutline} onClick={() => { setOpen(false); setEditingId(''); }}>
+                      Cancelar
+                    </Button>
+                    <Button className={btnPrimary} onClick={onSave} disabled={savingForm}>
+                      {savingForm ? 'Salvando...' : 'Salvar'}
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ) : null}
           </div>
         ))}
       </div>
 
-      {open ? (
+      {open && !editingId ? (
         <Card className={panel}>
           <CardContent className="p-4 sm:p-6 space-y-4">
             <BI
-              label="Titulo *"
+              label="Título *"
               pt={f.title_pt}
               en={f.title_en}
               setPt={(v) => setF({ ...f, title_pt: v })}
               setEn={(v) => setF({ ...f, title_en: v })}
             />
-            <BT
-              label="Descricao"
-              pt={f.description_pt}
-              en={f.description_en}
-              setPt={(v) => setF({ ...f, description_pt: v })}
-              setEn={(v) => setF({ ...f, description_en: v })}
-              rows={3}
-            />
+            <div className="rounded-lg border border-white/10 bg-zinc-900/50 p-3">
+              <Label className="text-zinc-300 mb-2 block">Exibição do Antes / Depois</Label>
+              <div className="flex flex-col gap-3">
+                <label className="flex items-center gap-2 text-zinc-200">
+                  <input
+                    type="checkbox"
+                    className="accent-white"
+                    checked={f.show_in_course !== false}
+                    onChange={(e) => setF({ ...f, show_in_course: e.target.checked })}
+                  />
+                  Mostrar este item no produto Curso
+                </label>
+                <label className="flex items-center gap-2 text-zinc-200">
+                  <input
+                    type="checkbox"
+                    className="accent-white"
+                    checked={f.show_in_luts === true}
+                    onChange={(e) => setF({ ...f, show_in_luts: e.target.checked })}
+                  />
+                  Mostrar este item no produto LUTs
+                </label>
+              </div>
+            </div>
             <Upload
               label="Imagem Antes *"
               value={f.before_url || ''}
@@ -2661,11 +2826,11 @@ function BeforeAfterTab({ data }) {
               }}
             />
             <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
-              <Button className={btnOutline} onClick={() => setOpen(false)}>
+              <Button className={btnOutline} onClick={() => { setOpen(false); setEditingId(''); }}>
                 Cancelar
               </Button>
-              <Button className={btnPrimary} onClick={onSave} disabled={m.isPending}>
-                {m.isPending ? 'Salvando...' : 'Salvar'}
+              <Button className={btnPrimary} onClick={onSave} disabled={savingForm}>
+                {savingForm ? 'Salvando...' : 'Salvar'}
               </Button>
             </div>
           </CardContent>
