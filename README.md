@@ -26,14 +26,25 @@ Exemplo:
 
 ## Deploy
 
-O deploy atual na Vercel funciona bem para servir o site e ler os JSONs, mas nao e um bom lugar para persistir edicoes do painel, porque o filesystem da funcao serverless nao deve ser usado como banco de dados.
+O deploy na Vercel pode servir o site e, com Firebase configurado, persistir as edicoes do painel no Firestore.
 
-Se o objetivo e o cliente entrar no admin e salvar alteracoes de verdade, o caminho correto e:
+Variaveis de ambiente necessarias no deploy:
 
-1. Hospedar um backend Node/Express com escrita em disco ou banco de dados
-2. Ou manter o frontend na Vercel e mover a API para outro servidor/banco
+- `ADMIN_USER`
+- `ADMIN_PASSWORD`
+- `JWT_SECRET`
+- `FIREBASE_PROJECT_ID`
+- `FIREBASE_CLIENT_EMAIL`
+- `FIREBASE_PRIVATE_KEY`
 
-Se voce for usar Hostinger com Node habilitado, esse projeto fica bem mais adequado para o painel administrativo.
+O valor de `FIREBASE_PRIVATE_KEY` deve ser colado na Vercel com as quebras de linha escapadas como `\n`.
+
+Para enviar o conteudo atual dos arquivos `.json` para o Firestore pela primeira vez:
+
+- preencha as variaveis do Firebase no `.env`
+- rode `npm run firebase:seed`
+
+Se o Firebase nao estiver configurado, a API da Vercel continua em modo somente leitura e faz fallback para os arquivos `.json`.
 
 
 ## Build
