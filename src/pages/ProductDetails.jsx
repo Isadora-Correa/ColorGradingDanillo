@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
@@ -302,11 +302,11 @@ function SingleBeforeAfterSection() {
       items={[
         {
           id: 'course-extra-1',
-          title_pt: 'Case 03',
-          title_en: 'Case 03',
-          beforeSrc: '/beforeafter/3.ANTES.webp',
-          duringSrc: '/beforeafter/3.DURANTE.webp',
-          afterSrc: '/beforeafter/3.DEPOIS.webp',
+          title_pt: 'Case 04',
+          title_en: 'Case 04',
+          beforeSrc: '/beforeafter/4.ANTES.webp',
+          duringSrc: '/beforeafter/4.DURANTE.webp',
+          afterSrc: '/beforeafter/4.DEPOIS.webp',
         },
       ]}
       maxItems={1}
@@ -483,8 +483,9 @@ function LutsDetailPage({ product, settings, buyLink, modules, courseContent }) 
 function ProductDetailContent() {
   const navigate = useNavigate();
   const { language, t } = useLanguage();
+  const { slug: routeSlug } = useParams();
   const [searchParams] = useSearchParams();
-  const productSlug = searchParams.get('slug');
+  const productSlug = routeSlug || searchParams.get('slug');
 
   const { data: product, isLoading } = useQuery({
     queryKey: ['product', productSlug],

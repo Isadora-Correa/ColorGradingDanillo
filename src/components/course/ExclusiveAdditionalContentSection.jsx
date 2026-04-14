@@ -55,18 +55,19 @@ function buildContentCards(content = {}) {
 }
 
 export default function ExclusiveAdditionalContentSection({ content = {} }) {
-  const { language, t } = useLanguage();
+  const { language } = useLanguage();
   const cards = buildContentCards(content);
+
+  if (language !== 'pt') {
+    return null;
+  }
 
   return (
     <SectionBlock gradient className="overflow-hidden">
       <SectionTitle
-        line1={t(content.extra_content_title_line1_pt || 'Conteúdo Adicional', content.extra_content_title_line1_en || 'Additional Content')}
-        highlight={t(content.extra_content_highlight_pt || 'Exclusivo', content.extra_content_highlight_en || 'Exclusive')}
-        subtitle={t(
-          content.extra_content_subtitle_pt || 'Módulos extras com workflows de projetos reais.',
-          content.extra_content_subtitle_en || 'Extra modules with real-project workflows.'
-        )}
+        line1={content.extra_content_title_line1_pt || 'Conteúdo Adicional'}
+        highlight={content.extra_content_highlight_pt || 'Exclusivo'}
+        subtitle={content.extra_content_subtitle_pt || 'Módulos extras com workflows de projetos reais.'}
       />
 
       <div className="space-y-4 md:space-y-5">
@@ -84,7 +85,7 @@ export default function ExclusiveAdditionalContentSection({ content = {} }) {
             >
               <img
                 src={withAssetVersion(card.image)}
-                alt={t(card.titlePt, card.titleEn)}
+                alt={card.titlePt}
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 loading="lazy"
                 decoding="async"
@@ -107,14 +108,14 @@ export default function ExclusiveAdditionalContentSection({ content = {} }) {
                 <div className={`max-w-[520px] ${isRight ? 'text-right' : 'text-left'}`}>
                   {card.notePt ? (
                     <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-zinc-300/80">
-                      {t(card.notePt, card.noteEn)}
+                      {card.notePt}
                     </p>
                   ) : null}
                   <h3 className="mb-3 text-3xl font-semibold leading-[1.02] tracking-tight text-white md:text-5xl">
-                    {t(card.titlePt, card.titleEn)}
+                    {card.titlePt}
                   </h3>
                   <p className="max-w-xl text-sm leading-relaxed text-zinc-200/90 md:text-base">
-                    {t(card.descPt, card.descEn)}
+                    {card.descPt}
                   </p>
                 </div>
               </div>

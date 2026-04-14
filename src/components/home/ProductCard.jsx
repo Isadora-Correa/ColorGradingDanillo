@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../ui/LanguageContext';
 import { ExternalLink } from 'lucide-react';
-import { createPageUrl } from '@/utils';
 import { Button } from '@/components/ui/button';
 
 export default function ProductCard({ product, index }) {
@@ -58,7 +57,7 @@ export default function ProductCard({ product, index }) {
     if (externalLink) {
       window.open(externalLink, '_blank');
     } else {
-      navigate(createPageUrl('ProductDetail') + '?slug=' + product.slug);
+      navigate(`/produto/${product.slug}`);
     }
   };
 

@@ -5,6 +5,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
 import Admin from './pages/Admin.tsx';
 import AdminLogin from './pages/AdminLogin';
+import ProductDetail from './pages/ProductDetails';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -45,6 +46,11 @@ const AppRoutes = () => {
           }
         />
       ))}
+      <Route path="/produto/:slug" element={
+        <LayoutWrapper currentPageName="ProductDetail">
+          <ProductDetail />
+        </LayoutWrapper>
+      } />
       <Route path="/adm" element={<AdminEntryRoute />} />
       <Route path="/adm/login" element={<AdminLogin />} />
       <Route
