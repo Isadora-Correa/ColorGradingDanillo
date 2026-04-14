@@ -226,11 +226,13 @@ function productFeatureItems(product, language, fallbackItems) {
 
 function TrailerSection({ content = {} }) {
   const { t } = useLanguage();
+  const line1Pt = content.hero_title_pt || content.trailer_title_line1_pt || 'Domine o Color Grading';
+  const line1En = content.hero_title_en || content.trailer_title_line1_en || 'Master Color Grading';
 
   return (
     <SectionBlock gradient>
       <SectionTitle
-        line1={t(content.trailer_title_line1_pt || 'Domine o Color Grading', content.trailer_title_line1_en || 'Master Color Grading')}
+        line1={t(line1Pt, line1En)}
         highlight={t(content.trailer_highlight_pt || 'do iniciante ao profissional', content.trailer_highlight_en || 'from beginner to professional')}
         titleClassName="text-[1.55rem] leading-[1.1] md:text-4xl lg:text-5xl"
       />
