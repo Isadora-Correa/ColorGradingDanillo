@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../ui/LanguageContext';
 import { ExternalLink } from 'lucide-react';
@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 
 export default function ProductCard({ product, index }) {
   const { language, t } = useLanguage();
+  const location = useLocation();
   const navigate = useNavigate();
   const isAvailable = product.available !== false;
 
@@ -58,7 +59,11 @@ export default function ProductCard({ product, index }) {
     if (externalLink && isAvailable) {
       window.open(externalLink, '_blank');
     } else {
-      navigate(`/produto/${product.slug}`);
+      navigate(`/produto/${product.slug}`, {
+        state: {
+          from: `${location.pathname}${location.search}${location.hash}`,
+        },
+      });
     }
   };
 

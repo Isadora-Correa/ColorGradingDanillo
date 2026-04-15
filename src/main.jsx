@@ -4,6 +4,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import App from '@/App.jsx';
 import { AuthProvider } from '@/contexts/AuthContext';
 import AppErrorBoundary from '@/components/common/AppErrorBoundary';
+import ScrollToTop from '@/components/common/ScrollToTop';
 import '@/index.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -15,6 +16,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           v7_relativeSplatPath: true,
         }}
       >
+        <ScrollToTop />
         <AuthProvider>
           <App />
         </AuthProvider>

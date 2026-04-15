@@ -51,7 +51,7 @@ const stageFromValue = (value) => {
   return 'after';
 };
 
-function ComparePanel({ item, tabs }) {
+function ComparePanel({ item, tabs, priority = false }) {
   const [activeTab, setActiveTab] = useState('before');
   const [sliderX, setSliderX] = useState(STAGE_POSITIONS.before);
   const [isDragging, setIsDragging] = useState(false);
@@ -71,6 +71,36 @@ function ComparePanel({ item, tabs }) {
     setActiveTab('before');
     setSliderX(STAGE_POSITIONS.before);
   }, [item.id]);
+
+  useEffect(() => {
+    const urls = Array.from(new Set(Object.values(sources).filter(Boolean)));
+    if (urls.length === 0 || typeof window === 'undefined') {
+      return undefined;
+    }
+
+    const preload = () => {
+      urls.forEach((src) => {
+        const image = new window.Image();
+        image.decoding = 'async';
+        image.loading = 'eager';
+        image.src = src;
+      });
+    };
+
+    if (priority) {
+      preload();
+      return undefined;
+    }
+
+    const idleCallback = window.requestIdleCallback;
+    if (typeof idleCallback === 'function') {
+      const id = idleCallback(preload, { timeout: 1200 });
+      return () => window.cancelIdleCallback?.(id);
+    }
+
+    const timeoutId = window.setTimeout(preload, 250);
+    return () => window.clearTimeout(timeoutId);
+  }, [priority, sources]);
 
   const updateFromClientX = (clientX) => {
     if (!trackRef.current) return;
@@ -150,8 +180,9 @@ function ComparePanel({ item, tabs }) {
           src={currentImage}
           alt={`${activeTab} stage`}
           className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-          loading="eager"
-          decoding="auto"
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : 'auto'}
+          decoding="async"
         />
 
         <div className="absolute inset-y-0 z-10" style={{ left: `${sliderX}%` }}>
@@ -295,6 +326,7 @@ export default function BeforeAfterSlider({
           key={item.id || index}
           item={item}
           tabs={tabs}
+          priority={index === 0}
         />
       ))}
     </SectionBlock>

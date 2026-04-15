@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
@@ -380,7 +380,7 @@ function LutsInfoSection() {
   );
 }
 
-function CourseDetailPage({ product, settings, courseContent, modules, logos, students, testimonials, beforeAfterItems, beforeAfterLoading, faqs, buyLink }) {
+function CourseDetailPage({ product, settings, courseContent, modules, logos, students, testimonials, beforeAfterItems, beforeAfterLoading, faqs, buyLink, onBack }) {
   const { language } = useLanguage();
   const isAvailable = product?.available !== false;
   const featureItems = productFeatureItems(product, language, language === 'pt' ? COURSE_HERO_FEATURES.pt : COURSE_HERO_FEATURES.en);
@@ -392,7 +392,7 @@ function CourseDetailPage({ product, settings, courseContent, modules, logos, st
         product={product}
         settings={settings}
         content={safeCourseContent}
-        onBack={() => window.history.back()}
+        onBack={onBack}
         featureItems={featureItems}
         buyLink={buyLink}
       />
@@ -427,7 +427,7 @@ function CourseDetailPage({ product, settings, courseContent, modules, logos, st
   );
 }
 
-function LutsDetailPage({ product, settings, buyLink, modules, courseContent, beforeAfterItems = [] }) {
+function LutsDetailPage({ product, settings, buyLink, modules, courseContent, beforeAfterItems = [], onBack }) {
   const { language, t } = useLanguage();
   const isAvailable = product?.available !== false;
   const featureItems = language === 'pt' ? LUTS_HERO_FEATURES.pt : LUTS_HERO_FEATURES.en;
@@ -440,7 +440,7 @@ function LutsDetailPage({ product, settings, buyLink, modules, courseContent, be
         product={product}
         settings={settings}
         content={safeCourseContent}
-        onBack={() => window.history.back()}
+        onBack={onBack}
         featureItems={featureItems}
         buyLink={buyLink}
       />
@@ -493,10 +493,16 @@ function LutsDetailPage({ product, settings, buyLink, modules, courseContent, be
 
 function ProductDetailContent() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { language, t } = useLanguage();
   const { slug: routeSlug } = useParams();
   const [searchParams] = useSearchParams();
   const productSlug = routeSlug || searchParams.get('slug');
+  const returnTo = typeof location.state?.from === 'string' && location.state.from ? location.state.from : '/';
+
+  const handleBack = () => {
+    navigate(returnTo, { replace: true });
+  };
 
   const { data: product, isLoading } = useQuery({
     queryKey: ['product', productSlug],
@@ -598,6 +604,7 @@ function ProductDetailContent() {
         beforeAfterLoading={beforeAfterLoading}
         faqs={faqs}
         buyLink={buyLink}
+        onBack={handleBack}
       />
     );
   }
@@ -606,7 +613,7 @@ function ProductDetailContent() {
     ? (product.buy_link_brl || product.buy_link_usd)
     : (product.buy_link_usd || product.buy_link_brl);
 
-  return <LutsDetailPage product={product} settings={settings} buyLink={buyLink} modules={modules} courseContent={courseContent} beforeAfterItems={lutsBeforeAfterItems} />;
+  return <LutsDetailPage product={product} settings={settings} buyLink={buyLink} modules={modules} courseContent={courseContent} beforeAfterItems={lutsBeforeAfterItems} onBack={handleBack} />;
 }
 
 export default function ProductDetail() {
