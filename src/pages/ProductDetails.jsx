@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Check } from 'lucide-react';
@@ -493,15 +493,13 @@ function LutsDetailPage({ product, settings, buyLink, modules, courseContent, be
 
 function ProductDetailContent() {
   const navigate = useNavigate();
-  const location = useLocation();
   const { language, t } = useLanguage();
   const { slug: routeSlug } = useParams();
   const [searchParams] = useSearchParams();
   const productSlug = routeSlug || searchParams.get('slug');
-  const returnTo = typeof location.state?.from === 'string' && location.state.from ? location.state.from : '/';
 
   const handleBack = () => {
-    navigate(returnTo, { replace: true });
+    navigate('/', { replace: true });
   };
 
   const { data: product, isLoading } = useQuery({
