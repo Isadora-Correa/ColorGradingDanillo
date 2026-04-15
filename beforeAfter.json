@@ -3,17 +3,17 @@
     "id": "ba-1",
     "title_pt": "Case 01",
     "title_en": "Case 01",
-    "before_url": "/beforeafter/1.ANTES.webp",
-    "during_url": "/beforeafter/1.DURANTE.webp",
-    "after_url": "/beforeafter/1.DEPOIS.webp",
+    "before_url": "/beforeafter/1.ANTES.jpg",
+    "during_url": "/beforeafter/1.DURANTE.jpg",
+    "after_url": "/beforeafter/1.DEPOIS.jpg",
     "order": 0,
     "description_pt": "",
     "description_en": "",
     "show_in_course": true,
     "show_in_luts": false,
-    "before_image_url": "/beforeafter/1.ANTES.webp",
-    "during_image_url": "/beforeafter/1.DURANTE.webp",
-    "after_image_url": "/beforeafter/1.DEPOIS.webp"
+    "before_image_url": "/beforeafter/1.ANTES.jpg",
+    "during_image_url": "/beforeafter/1.DURANTE.jpg",
+    "after_image_url": "/beforeafter/1.DEPOIS.jpg"
   },
   {
     "id": "ba-2",
@@ -40,12 +40,12 @@
     "description_pt": "",
     "description_en": "",
     "order": 2,
-    "before_url": "/beforeafter/1.ANTES.webp",
-    "during_url": "/beforeafter/1.DURANTE.webp",
-    "after_url": "/beforeafter/1.DEPOIS.webp",
-    "before_image_url": "/beforeafter/1.ANTES.webp",
-    "during_image_url": "/beforeafter/1.DURANTE.webp",
-    "after_image_url": "/beforeafter/1.DEPOIS.webp"
+    "before_url": "/beforeafter/1.ANTES.jpg",
+    "during_url": "/beforeafter/1.DURANTE.jpg",
+    "after_url": "/beforeafter/1.DEPOIS.jpg",
+    "before_image_url": "/beforeafter/1.ANTES.jpg",
+    "during_image_url": "/beforeafter/1.DURANTE.jpg",
+    "after_image_url": "/beforeafter/1.DEPOIS.jpg"
   },
   {
     "id": "default-case-2",

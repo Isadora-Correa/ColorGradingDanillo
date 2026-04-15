@@ -17,9 +17,9 @@ const DEFAULT_COMPARE_SETS = [
     id: 'set-1',
     title_pt: 'Case 01',
     title_en: 'Case 01',
-    beforeSrc: '/beforeafter/1.ANTES.webp',
-    duringSrc: '/beforeafter/1.DURANTE.webp',
-    afterSrc: '/beforeafter/1.DEPOIS.webp',
+    beforeSrc: '/beforeafter/1.ANTES.jpg',
+    duringSrc: '/beforeafter/1.DURANTE.jpg',
+    afterSrc: '/beforeafter/1.DEPOIS.jpg',
   },
   {
     id: 'set-2',
@@ -51,7 +51,7 @@ const stageFromValue = (value) => {
   return 'after';
 };
 
-function ComparePanel({ item, tabs, priority = false }) {
+function ComparePanel({ item, tabs }) {
   const [activeTab, setActiveTab] = useState('before');
   const [sliderX, setSliderX] = useState(STAGE_POSITIONS.before);
   const [isDragging, setIsDragging] = useState(false);
@@ -71,36 +71,6 @@ function ComparePanel({ item, tabs, priority = false }) {
     setActiveTab('before');
     setSliderX(STAGE_POSITIONS.before);
   }, [item.id]);
-
-  useEffect(() => {
-    const urls = Array.from(new Set(Object.values(sources).filter(Boolean)));
-    if (urls.length === 0 || typeof window === 'undefined') {
-      return undefined;
-    }
-
-    const preload = () => {
-      urls.forEach((src) => {
-        const image = new window.Image();
-        image.decoding = 'async';
-        image.loading = 'eager';
-        image.src = src;
-      });
-    };
-
-    if (priority) {
-      preload();
-      return undefined;
-    }
-
-    const idleCallback = window.requestIdleCallback;
-    if (typeof idleCallback === 'function') {
-      const id = idleCallback(preload, { timeout: 1200 });
-      return () => window.cancelIdleCallback?.(id);
-    }
-
-    const timeoutId = window.setTimeout(preload, 250);
-    return () => window.clearTimeout(timeoutId);
-  }, [priority, sources]);
 
   const updateFromClientX = (clientX) => {
     if (!trackRef.current) return;
@@ -180,9 +150,8 @@ function ComparePanel({ item, tabs, priority = false }) {
           src={currentImage}
           alt={`${activeTab} stage`}
           className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-          loading={priority ? 'eager' : 'lazy'}
-          fetchPriority={priority ? 'high' : 'auto'}
-          decoding="async"
+          loading="eager"
+          decoding="auto"
         />
 
         <div className="absolute inset-y-0 z-10" style={{ left: `${sliderX}%` }}>
@@ -326,7 +295,6 @@ export default function BeforeAfterSlider({
           key={item.id || index}
           item={item}
           tabs={tabs}
-          priority={index === 0}
         />
       ))}
     </SectionBlock>

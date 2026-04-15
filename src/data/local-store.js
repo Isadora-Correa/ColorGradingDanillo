@@ -395,9 +395,9 @@ const defaultData = {
       title_en: 'Case 01',
       show_in_course: true,
       show_in_luts: false,
-      before_url: '/beforeafter/1.ANTES.webp',
-      during_url: '/beforeafter/1.DURANTE.webp',
-      after_url: '/beforeafter/1.DEPOIS.webp',
+      before_url: '/beforeafter/1.ANTES.jpg',
+      during_url: '/beforeafter/1.DURANTE.jpg',
+      after_url: '/beforeafter/1.DEPOIS.jpg',
       order: 0,
     },
     {

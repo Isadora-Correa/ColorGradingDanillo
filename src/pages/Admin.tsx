@@ -82,9 +82,9 @@ const DEFAULT_BEFORE_AFTER = [
     show_in_course: true,
     show_in_luts: false,
     order: 0,
-    before_url: '/beforeafter/1.ANTES.webp',
-    during_url: '/beforeafter/1.DURANTE.webp',
-    after_url: '/beforeafter/1.DEPOIS.webp',
+    before_url: '/beforeafter/1.ANTES.jpg',
+    during_url: '/beforeafter/1.DURANTE.jpg',
+    after_url: '/beforeafter/1.DEPOIS.jpg',
   },
   {
     id: 'default-case-2',
