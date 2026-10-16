@@ -2,6 +2,6 @@
   "version": 2,
   "redirects": [
     { "source": "/produto/luts", "destination": "https://navacolorist.podia.com/nava-luts", "permanent": true },
-    { "source": "/(.*)", "destination": "https://navacolor.com/#founder-top", "permanent": true }
+    { "source": "/(.*)", "destination": "https://navacolor.com/", "permanent": true }
   ]
 }
